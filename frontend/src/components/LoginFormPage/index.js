@@ -37,16 +37,18 @@ const LoginFormPage = () => {
   if (currentUser) return <Redirect to="/" />;
 
   return (
-    <div id="login-form">
-    <h1>Login</h1>
-    <form onSubmit={handleLogin}>
-      <ul>
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-      <input placeholder="Username or Email:" value={credential} onChange={e => setCredential(e.target.value)} />
-      <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
-      <input type="submit" value="Log In" />
-    </form>
+    <div className="splash-background">
+      <div id="login-form">
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <ul>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>
+        <input placeholder="Username or Email:" value={credential} onChange={e => setCredential(e.target.value)} />
+        <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="submit" value="Log In" />
+      </form>
+      </div>
     </div>
   )
 }

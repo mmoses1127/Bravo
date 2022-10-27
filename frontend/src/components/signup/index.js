@@ -35,18 +35,22 @@ const SignupFormPage = () => {
   if (currentUser) return <Redirect to="/" />;
 
   return (
-    <div id="signup-form">
-      <h1>Sign Up Form</h1>
-      <ul>
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-        <button>Sign Up</button>
-      </form>
+    <div className="splash-background">
+      <div className="panel-registration">
+      <div id="signup-form">
+        <h1>Sign Up Form</h1>
+        <ul>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+          <button>Sign Up</button>
+        </form>
+      </div>
+      </div>
     </div>
   )
 }
