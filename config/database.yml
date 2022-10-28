@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: bravo_production
-  username: bravo
-  password: <%= ENV["BRAVO_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
