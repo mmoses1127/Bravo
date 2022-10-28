@@ -10,7 +10,7 @@ function App() {
     <>
       <Navigation />
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <HomePage />
         </Route>        
         <Route path="/login">
@@ -18,6 +18,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <SignupFormPage />
+        </Route>
+        <Route path="/dashboard">
+          <RideIndex />
         </Route>
       </Switch>
     </>
