@@ -73,7 +73,25 @@ li {
 	list-style: none;
 }
 
+button {
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #cc4200;
+	border-color: #cc4200;
+}
+
+.avatar-image {
+	border-radius: 50%;
+}
+
 #disclaimer {
   width: 200px;
 	display: inline-block;
+}
+
+.panel-registration button {
+		width: 107%;
+		margin: 10px;
 }

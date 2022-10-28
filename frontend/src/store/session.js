@@ -1,14 +1,13 @@
-import csrfFetch from './csrf.js'
+import csrfFetch from './csrf.js';
 
 const ADD_USER = 'ADD_USER';
 const REMOVE_USER = 'REMOVE_USER';
 
 export const signup = inputs => async dispatch => {
-  let {username, email, password} = inputs;
+  let {email, password} = inputs;
   let res = await csrfFetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({
-      username,
       email,
       password
     })

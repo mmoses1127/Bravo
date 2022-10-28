@@ -32,7 +32,6 @@ const ProfileButton = ({user}) => {
       <button onClick={openMenu}> <i className="fa-solid fa-jet-fighter-up"></i> </button>
 
       {showMenu && (<ul>
-        <li>{user.username}</li>
         <li>{user.email}</li>
         <li>
           <button onClick={logoutHandler}>Log Out</button>

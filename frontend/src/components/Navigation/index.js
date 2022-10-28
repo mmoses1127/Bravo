@@ -12,10 +12,10 @@ const user = useSelector(state => state.session.user);
     return (
 
       <div id='nav-bar'>
-        <div class='nav-item'>
+        <div className='nav-item'>
         <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
         </div>
-        <div class='nav-item'>
+        <div className='nav-item'>
         <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
         </div>
       </div>
@@ -24,14 +24,14 @@ const user = useSelector(state => state.session.user);
   } else {
     return (
       <div id='nav-bar'>
-        <div class='nav-item'>
+        <div className='nav-item'>
         <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
         </div>
         <div id="nav-main">
           
         </div>
-        <div class='nav-item'>
-        <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
+        <div className='nav-item'>
+        <ProfileButton user={user}/>
         </div>
       </div>
 

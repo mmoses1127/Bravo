@@ -33,6 +33,10 @@ const LoginFormPage = () => {
     // setPassword('');
   }
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.login({credential: 'demo@user.io', password: 'password'}));
+  };
 
   if (currentUser) return <Redirect to="/" />;
 
@@ -41,14 +45,15 @@ const LoginFormPage = () => {
       <div className="panel-registration">
         <h1>Login</h1>
         <div id="login-form">
-        <form onSubmit={handleLogin}>
-          <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-          <input placeholder="Email:" value={credential} onChange={e => setCredential(e.target.value)} />
-          <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
-          <button>Log In</button>
-        </form>
+          <form onSubmit={handleLogin}>
+            <ul>
+              {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
+            <input placeholder="Email:" value={credential} onChange={e => setCredential(e.target.value)} />
+            <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
+            <button>Log In</button>
+          </form>
+          <button onClick={demoLogin}>Demo Login</button>
         </div>
       </div>
     </div>

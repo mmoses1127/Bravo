@@ -16,7 +16,7 @@
 #
 class Ride < ApplicationRecord
 
-  validates: :date_time, :title, :athlete_id, :distance, :moving_time, presence: true
+  validates :date_time, :title, :athlete_id, :distance, :moving_time, presence: true
   
   belongs_to :athlete,
     class_name: :User

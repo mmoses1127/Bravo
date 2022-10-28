@@ -4,6 +4,8 @@ import React from 'react';
 import SignupFormPage from './components/signup';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
+import Dashboard from './components/Dashboard';
+
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
           <SignupFormPage />
         </Route>
         <Route path="/dashboard">
-          <RideIndex />
+          <Dashboard />
         </Route>
       </Switch>
     </>

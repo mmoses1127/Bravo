@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signup } from "../../store/session";
+import { signup, login } from "../../store/session";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,7 +9,6 @@ const SignupFormPage = () => {
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const currentUser = useSelector(state => state.session.user);
@@ -18,7 +17,7 @@ const SignupFormPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(signup({username, email, password}))
+    return dispatch(signup({email, password}))
     .catch(async (res) => {
       let data;
       try {
@@ -33,6 +32,11 @@ const SignupFormPage = () => {
     });
   };
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({credential: 'demo@user.io', password: 'password'}));
+  };
+
   if (currentUser) return <Redirect to="/" />;
 
   return (
@@ -45,10 +49,10 @@ const SignupFormPage = () => {
           </ul>
           <form onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            {/* <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} /> */}
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
             <button>Sign Up</button>
+            <button onClick={demoLogin}>Demo Login</button>
           </form>
         </div>
         <div id="disclaimer">
