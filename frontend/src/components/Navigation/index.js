@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import { NavLink } from "react-router-dom";
 import stravaLogo from "../../assets/strava_logo.svg";
+import './Navigation.css';
 
 
 const Navigation = () => {
@@ -11,8 +12,12 @@ const user = useSelector(state => state.session.user);
     return (
 
       <div id='nav-bar'>
+        <div class='nav-item'>
         <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
+        </div>
+        <div class='nav-item'>
         <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
+        </div>
       </div>
 
       // <ul>

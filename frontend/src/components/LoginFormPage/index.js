@@ -38,16 +38,18 @@ const LoginFormPage = () => {
 
   return (
     <div className="splash-background">
-      <div id="login-form">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <ul>
-          {errors.map(error => <li key={error}>{error}</li>)}
-        </ul>
-        <input placeholder="Username or Email:" value={credential} onChange={e => setCredential(e.target.value)} />
-        <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
-        <input type="submit" value="Log In" />
-      </form>
+      <div className="panel-registration">
+        <h1>Login</h1>
+        <div id="login-form">
+        <form onSubmit={handleLogin}>
+          <ul>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>
+          <input placeholder="Email:" value={credential} onChange={e => setCredential(e.target.value)} />
+          <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
+          <button>Log In</button>
+        </form>
+        </div>
       </div>
     </div>
   )

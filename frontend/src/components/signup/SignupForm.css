@@ -4,17 +4,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
   font-size: 14px;
   line-height: 18px;
-  background: rgba(0,0,0,0.75);
   color: #fff;
+  width: 100%;
+  margin: 0px;
 
-}
-
-h1 {
-  font-size: 40px;
-  font-weight: bold;
 }
 
 body {
@@ -40,7 +35,32 @@ input {
   border-radius: 4px;
   padding: 5px;
   text-align: center;
+  border: 1px solid #949494;
+  background: rgba(0,0,0,0.5);
+  color: #CCC;
+  text-align: left;
 }
+
+.panel-registration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  margin: 60px auto;
+  width: 400px;
+  border-radius: 3px;
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#signup-form button {
+  width: 107%;
+}
+
 
 
 

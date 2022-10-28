@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signup } from "../../store/session";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import './SignupForm.css'
 
 const SignupFormPage = () => {
@@ -37,19 +38,28 @@ const SignupFormPage = () => {
   return (
     <div className="splash-background">
       <div className="panel-registration">
-      <div id="signup-form">
-        <h1>Sign Up Form</h1>
-        <ul>
-          {errors.map(error => <li key={error}>{error}</li>)}
-        </ul>
-        <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-          <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-          <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-          <button>Sign Up</button>
-        </form>
-      </div>
+        <h1>Join Strava today,<br></br> it's Free.</h1>
+        <div id="signup-form">
+          <ul>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>
+          <form onSubmit={handleSubmit}>
+            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+            {/* <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} /> */}
+            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+            <button>Sign Up</button>
+          </form>
+        </div>
+        <div id="disclaimer">
+          <p>
+            By signing up for Strava, you agree to the Terms of Service. View our Privacy Policy.
+          </p>
+          <br></br>
+          <p>
+            Already a Member? <Link to={`/login`}>Log in</Link> 
+          </p>
+        </div>
       </div>
     </div>
   )
