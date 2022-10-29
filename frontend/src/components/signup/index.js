@@ -34,7 +34,7 @@ const SignupFormPage = () => {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(login({credential: 'demo@user.io', password: 'password'}));
+    dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
 
   if (currentUser) return <Redirect to="/" />;

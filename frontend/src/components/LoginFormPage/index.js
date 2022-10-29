@@ -9,14 +9,14 @@ const LoginFormPage = () => {
 
   const dispatch = useDispatch();
   const currentUser = useSelector(state => (state.session.user));
-  const [credential, setCredential] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({credential, password}))
+    return dispatch(sessionActions.login({email, password}))
     .catch(async (res) => {
       let data;
       try {
@@ -29,13 +29,11 @@ const LoginFormPage = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
-    // setCredential('');
-    // setPassword('');
-  }
+  };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.login({credential: 'demo@user.io', password: 'password'}));
+    dispatch(sessionActions.login({email: 'demo@user.io', password: 'password'}));
   };
 
   if (currentUser) return <Redirect to="/" />;
@@ -49,7 +47,7 @@ const LoginFormPage = () => {
             <ul>
               {errors.map(error => <li key={error}>{error}</li>)}
             </ul>
-            <input placeholder="Email:" value={credential} onChange={e => setCredential(e.target.value)} />
+            <input placeholder="Email:" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
             <button>Log In</button>
           </form>
