@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { logout} from "../../store/session";
+import avatar from "../../assets/mtb1.jpg"
 
 
 const ProfileButton = ({user}) => {
@@ -29,7 +30,7 @@ const ProfileButton = ({user}) => {
 
   return (
     <>
-      <button onClick={openMenu}> <i className="fa-solid fa-jet-fighter-up"></i> </button>
+      <img class="avatar-image" onClick={openMenu} src={avatar} alt="Avatar"/>
 
       {showMenu && (<ul>
         <li>{user.email}</li>
