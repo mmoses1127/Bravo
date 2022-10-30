@@ -21,6 +21,20 @@ time, mark, audio, video {
 	box-sizing: border-box;
 }
 
+body {
+	font-size: 14px;
+	line-height: 18px;
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column;
+}
+
+#root {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column;
+}
+
 element {
   --strava-orange: #fc5200;
   --warm-gray: #949494;
@@ -35,6 +49,24 @@ button {
 	padding: 6px 16px;
 	height: auto;
 }
+
+.clear-button {
+	background-color: transparent;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	border: none;
+	color: black;
+
+}
+
 
 #root {
 	width: 100%;
@@ -99,3 +131,10 @@ button:hover {
 		width: 107%;
 		margin: 10px;
 }
+
+h2, h3 {
+	font-size: 22px;
+	line-height: 28px;
+	font-weight: 600;
+}
+

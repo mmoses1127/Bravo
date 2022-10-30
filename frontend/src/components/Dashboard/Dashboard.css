@@ -1,0 +1,40 @@
+body {
+background-color: #f7f7fa;
+}
+.page-container {
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+
+}
+
+.page-container > * {
+  margin: 15px;
+}
+
+.profile-column {
+  width: 25%;
+}
+
+#ride-index {
+  width: 50%;
+}
+
+.announcements-column {
+  width: 25%;
+}
+
+.feed-card {
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
+	box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
+	margin-bottom: 12px;
+	position: relative;
+	padding: 10px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: start;
+}

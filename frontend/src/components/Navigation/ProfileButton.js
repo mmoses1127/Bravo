@@ -35,9 +35,9 @@ const ProfileButton = ({user}) => {
 
   return (
     <>
-    <div onClick={openMenu} class="profile-drop-down">
-      <img class="avatar-image" src={avatar} alt="Avatar"/>
-      <i class="fa-solid fa-angle-down"></i>
+    <div onClick={openMenu} className="profile-drop-down">
+      <img className="avatar-image" src={avatar} alt="Avatar"/>
+      <i className="fa-solid fa-angle-down"></i>
     </div>
     {showMenu && (<ul>
       <li><Link to={`/profile`}>Profile</Link></li>

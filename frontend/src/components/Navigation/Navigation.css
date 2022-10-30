@@ -1,12 +1,24 @@
+#nav-container {
+  border-bottom: 1px solid #f0f0f5;
+  display: flex;
+  justify-content: center;
+}
+
 #nav-bar {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: 55px;
   padding-left: 16px;
   padding-right: 16px;
-  width: 100%;
+  width: 80%;
+  /* margin-right: 200px;
+  margin-left: 200px; */
+}
+
+#landing-page {
+  margin: 50px;
 }
 
 .profile-drop-down {

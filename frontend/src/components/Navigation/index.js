@@ -6,17 +6,18 @@ import './Navigation.css';
 
 
 const Navigation = () => {
-const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
 
   if (!user) {
     return (
-
-      <div id='nav-bar'>
-        <div className='nav-item'>
-        <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
-        </div>
-        <div className='nav-item'>
-        <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
+      <div id="nav-container">
+        <div id='nav-bar'>
+          <div className='nav-item'>
+          <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
+          </div>
+          <div className='nav-item'>
+          <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
+          </div>
         </div>
       </div>
     );
