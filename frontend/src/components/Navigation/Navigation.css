@@ -8,3 +8,24 @@
   padding-right: 16px;
   width: 100%;
 }
+
+.profile-drop-down {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-drop-down > i {
+  padding: 10px
+}
+
+.profile-drop-down a {
+  color: black;
+  padding: 10px
+}
+
+ul {
+  position: relative;
+  top: 80px;
+}
