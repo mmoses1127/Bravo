@@ -32,9 +32,44 @@ background-color: #f7f7fa;
 	margin-bottom: 12px;
 	position: relative;
 	padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.feed-card * {
+  margin: 0;
+  padding: 0;
 }
 
 .card-header {
   display: flex;
   justify-content: start;
+}
+
+.card-body-main {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.map-container {
+  width: 100%;
+  padding: 5px;
+  height: 250px;
+  background-color: red;
+}
+
+.photo-container {
+  width: 100%;
+  padding: 5px;
+  height: 250px;
+  background-color: red;
+  display: flex;
+}
+
+.secondary-photos {
+  width: 70px;
+  height: 70px;
+  padding: 4px;
 }
