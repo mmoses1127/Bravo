@@ -36,7 +36,7 @@ export const getRide = rideId => (state) => {
 }
 
 export const fetchRides = () => async dispatch => {
-  const res = await csrfFetch(`api/rides`);
+  const res = await csrfFetch(`/api/rides`);
 
   if (res.ok) {
     const rides = await res.json();
@@ -45,7 +45,7 @@ export const fetchRides = () => async dispatch => {
 };
 
 export const fetchRide = (rideId) => async dispatch => {
-  const res = await csrfFetch(`api/rides/${rideId}`);
+  const res = await csrfFetch(`/api/rides/${rideId}`);
 
   if (res.ok) {
     const ride = await res.json();
@@ -54,7 +54,7 @@ export const fetchRide = (rideId) => async dispatch => {
 };
 
 export const deleteRide = (rideId) => async dispatch => {
-  const res = await csrfFetch(`api/rides/${rideId}`, {
+  const res = await csrfFetch(`/api/rides/${rideId}`, {
     method: 'DELETE'
   });
 
@@ -64,9 +64,8 @@ export const deleteRide = (rideId) => async dispatch => {
 };
 
 export const createRide = (ride) => async dispatch => {
-  const res = await csrfFetch(`api/rides`, {
+  const res = await csrfFetch(`/api/rides`, {
     method: 'POST',
-    headers: {'Content-Type': '/application/json'},
     body: JSON.stringify(ride)
   });
 
@@ -77,9 +76,8 @@ export const createRide = (ride) => async dispatch => {
 };
 
 export const updateRide = (ride) => async dispatch => {
-  const res = await csrfFetch(`api/rides/${ride.id}`, {
+  const res = await csrfFetch(`/api/rides/${ride.id}`, {
     method: 'PATCH',
-    headers: {'Content-Type': '/application/json'},
     body: JSON.stringify(ride)
   });
 

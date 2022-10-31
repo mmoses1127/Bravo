@@ -31,16 +31,12 @@ const Navigation = () => {
           <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
           </div>
           <div id="nav-main">
-            <div className='nav-dropdown'>
+            {/* <div className='nav-dropdown'> */}
               <ProfileButton user={user}/>
             {/* <button className="dropdown"></button> */}
-            </div>
-            <div className='nav-dropdown'>
+            {/* <div className='nav-dropdown'> */}
               {/* <button className="dropdown" id="add-ride-button"> */}
-              <AddRideButton>
-
-              </AddRideButton>
-            </div>
+              <AddRideButton />
           </div>
         </div>
       </div>

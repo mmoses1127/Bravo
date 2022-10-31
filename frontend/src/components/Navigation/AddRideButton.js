@@ -1,11 +1,15 @@
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const AddRideButton = () => {
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
-    // if (showMenu) return;
     setShowMenu(true);
   };
 
@@ -13,24 +17,17 @@ const AddRideButton = () => {
     setShowMenu(false)
   };
 
-  // const logoutHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(logout());
-  // }
 
   return (
 
-    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down">
+    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down, nav-dropdown">
 
       <button className="dropdown" id="add-ride-button">
         <i className="fa-solid fa-plus"></i>
       </button>
 
       {showMenu && (<ul>
-        <li><Link to={`/profile`}>Profile</Link></li>
-        <li>
-          <button onClick={logoutHandler}>Log Out</button>
-        </li>
+        <li onClick={() => history.push(`/create-ride`)}>Create Ride</li>
       </ul>
       )}
 

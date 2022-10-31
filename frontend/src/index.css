@@ -163,3 +163,24 @@ h2, h3 {
 textarea {
 	width: 250px;
 }
+
+.profile-drop-down > * {
+
+}
+
+.profile-drop-down ul {
+	border: 1px solid #dfdfe8;
+	background-color: #fff;
+	position: absolute;
+	top: 38px;
+	right: 0px
+}
+
+.profile-drop-down li {
+	background-color: #fff;
+	border-bottom: 1px solid #dfdfe8;
+	height: 50px;
+	width: 120px;
+	display: block;
+	text-align: center;
+}

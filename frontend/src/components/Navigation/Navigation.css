@@ -40,7 +40,6 @@
 
 ul {
   position: relative;
-  top: 80px;
 }
 
 #nav-main {
@@ -60,6 +59,7 @@ ul {
   display: inline-block;
   padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
 }
 
 .nav-dropdown:hover {
@@ -81,4 +81,8 @@ ul {
 #add-ride-button:hover {
   background-color: #fc5200;
   color: white;
+}
+
+.nav-bar-component {
+  height: 100%;
 }

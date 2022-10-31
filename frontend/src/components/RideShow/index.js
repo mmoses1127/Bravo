@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getRide } from "../../store/rides";
+import { getRide, fetchRide } from "../../store/rides";
 import RideIndexItem from "../Dashboard/RideIndexItem";
-import { fetchRides, getRides } from "../../store/rides";
 
 
 
@@ -12,11 +11,11 @@ const RideShow = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(fetchRides());
+    dispatch(fetchRide(rideId));
   }, []);
   
-  const rides = useSelector(getRides);
-  console.log(rides)
+  const ride = useSelector(getRide);
+  console.log(ride)
 
   return (
     <div className="page-container">
