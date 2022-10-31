@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
 import RideForm from './components/RideForm';
+import RideShow from './components/RideShow';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/create-ride">
           <RideForm />
+        </Route>
+        <Route path="/activities/:rideId">
+          <RideShow/>
         </Route>
       </Switch>
     </>

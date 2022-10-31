@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import './RideForm.css'
 
 const RideForm = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [elevation, setElevation] = useState('');
@@ -23,7 +24,9 @@ const RideForm = () => {
       description,
       distance,
       duration,
-      elevation
+      elevation,
+      athlete_id: user.id,
+      dateTime: Date()
     };
 
     dispatch(createRide(newRide))
