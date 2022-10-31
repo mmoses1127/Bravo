@@ -8,12 +8,7 @@ import { fetchUser } from '../../store/users';
 const RideIndexItem = ({ride}) => {
   const dispatch = useDispatch();
   const athlete_id = ride.athlete_id;
-<<<<<<< HEAD
-  const athlete = useSelector((state) => state.users[athlete_id]);
-  console.log(ride)
-=======
   // const athlete = useSelector((state) => state.users[athlete_id]);
->>>>>>> working_rides_fetch_2
 
   useEffect(() => {
     dispatch(fetchUser(athlete_id));
