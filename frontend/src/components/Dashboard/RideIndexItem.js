@@ -24,7 +24,7 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="card-body">
         <div className="activity-symbol">
-          <i class="fa-light fa-bicycle"></i>
+          <i className="fa-light fa-bicycle"></i>
         </div>
         <div className="card-body-main">
           <h3>Ride Title</h3>

@@ -24,15 +24,22 @@ const Navigation = () => {
 
   } else {
     return (
-      <div id='nav-bar'>
-        <div className='nav-item'>
-        <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
-        </div>
-        <div id="nav-main">
-          
-        </div>
-        <div className='nav-item'>
-        <ProfileButton user={user}/>
+      <div id="nav-container">
+        <div id='nav-bar'>
+          <div className='main-logo'>
+          <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
+          </div>
+          <div id="nav-main">
+            <div className='nav-dropdown'>
+              <ProfileButton user={user}/>
+            {/* <button className="dropdown"></button> */}
+            </div>
+            <div className='nav-dropdown'>
+              <button className="dropdown" id="add-ride-button">
+                <i className="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

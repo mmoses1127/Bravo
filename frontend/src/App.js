@@ -5,6 +5,7 @@ import SignupFormPage from './components/signup';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
+import RideForm from './components/RideForm';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/create-ride">
+          <RideForm />
         </Route>
       </Switch>
     </>

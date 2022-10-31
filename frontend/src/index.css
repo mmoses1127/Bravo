@@ -138,3 +138,28 @@ h2, h3 {
 	font-weight: 600;
 }
 
+.dropdown {
+	background: transparent;
+	border-top: none;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid transparent;
+	transition: none;
+}
+
+.inline-inputs input, textarea{
+	background-color: white;
+  border: 1px solid #dfdfe8;
+  border-radius: 0;
+  color: black;
+  font-size: 15px;
+  margin-top: 16px;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 100px;
+}
+
+textarea {
+	width: 250px;
+}

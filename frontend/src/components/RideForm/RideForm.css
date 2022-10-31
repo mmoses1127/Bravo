@@ -1,0 +1,57 @@
+.ride-entry-fields {
+  display: flex;
+  justify-items: left;
+  border-bottom: 1px solid #dfdfe8;
+  width: 100%;
+}
+
+.ride-entry-fields > * {
+  margin: 15px;
+  width: 200px;
+}
+
+body {
+  background-color: white;
+}
+
+h1 { 
+  background-color: white;
+  margin-bottom: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+fieldset {
+  display: inline-block;
+}
+
+a {
+  color: #007FB6;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.form-submit-area {
+  margin: 10px;
+}
+
+.form-submit-area > * {
+  margin: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#manual-entry {
+  width: 80%;
+}
