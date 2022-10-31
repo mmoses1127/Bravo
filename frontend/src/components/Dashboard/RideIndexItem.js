@@ -19,7 +19,7 @@ const RideIndexItem = ({ride}) => {
       <div className="card-header">
         <img className="avatar-image" src={smallLogo} alt="Avatar" />
         <div className="card-header-text">
-          <h5>{athlete.email}</h5>
+          <h5>Ride Title</h5>
           <br></br>
           <p>Relative Time | Location</p>
         </div>
