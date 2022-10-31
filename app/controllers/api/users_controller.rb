@@ -7,10 +7,14 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save 
       login!(@user)
-      render :show
+      # render :show
+      render `/dashboard`
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity;
     end
+  end
+
+  def show
   end
 
   private

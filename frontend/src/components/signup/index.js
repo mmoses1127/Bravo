@@ -44,9 +44,9 @@ const SignupFormPage = () => {
       <div className="panel-registration">
         <h1>Join Strava today,<br></br> it's Free.</h1>
         <div id="signup-form">
-          <ul>
+          {<ul>
             {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
+          </ul>}
           <form onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />

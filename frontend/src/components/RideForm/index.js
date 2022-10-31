@@ -14,10 +14,12 @@ const RideForm = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [errors, setErrors] = useState([]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors([]);
 
     const newRide = {
       title,
@@ -29,14 +31,30 @@ const RideForm = () => {
       dateTime: Date()
     };
 
-    dispatch(createRide(newRide))
-  }
+    return dispatch(createRide(newRide))
+    .catch(async (res) => {
+      let data;
+      try {
+        // .clone() essentially allows you to read the response body twice
+        data = await res.clone().json();
+      } catch {
+        data = await res.text(); // Will hit this case if the server is down
+      }
+      if (data?.errors) setErrors(data.errors);
+      else if (data) setErrors([data]);
+      else setErrors([res.statusText]);
+    });
+  };
+
 
 
   return (
     <div className='page-container'>
       <h1>Manual Entry</h1>
       <div id="manual-entry">
+        <ul>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>
         <form onSubmit={handleSubmit}>
           <div className='ride-entry-fields'>
             <fieldset>

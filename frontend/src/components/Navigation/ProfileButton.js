@@ -13,7 +13,6 @@ const ProfileButton = ({user}) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
-    // if (showMenu) return;
     setShowMenu(true);
   };
 
@@ -21,18 +20,10 @@ const ProfileButton = ({user}) => {
     setShowMenu(false)
   };
 
-  // useEffect(() => {
-  //   if (!showMenu) return;
-
-  //   document.addEventListener('click', closeMenu);
-
-  //   return () => document.removeEventListener('click', closeMenu)
-  // }, [showMenu])
-
   const logoutHandler = (e) => {
     e.preventDefault();
     dispatch(logout());
-  }
+  };
 
 
   return (
@@ -48,7 +39,7 @@ const ProfileButton = ({user}) => {
       )}
     </div>
 
-  )
-}
+  );
+};
 
 export default ProfileButton;

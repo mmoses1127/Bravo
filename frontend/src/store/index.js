@@ -7,7 +7,7 @@ import usersReducer from './users';
 const rootReducer = combineReducers ({
   session: sessionReducer,
   rides: ridesReducer,
-  // users: usersReducer
+  users: usersReducer
 });
 
 let enhancer;
