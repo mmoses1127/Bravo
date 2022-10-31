@@ -13,12 +13,12 @@ export const signup = inputs => async dispatch => {
     })
   })
   let data = await res.json();
-  storeCurrentUser(data.user);
-  dispatch(addCurrentUser(data.user));
+  storeCurrentUser(data);
+  dispatch(addCurrentUser(data));
 };
 
 export const logout = () => async dispatch => {
-  const res = await csrfFetch(`api/session`, {
+  const res = await csrfFetch(`/api/session`, {
     method: 'DELETE'
   });
 
@@ -32,7 +32,7 @@ export const logout = () => async dispatch => {
 export const addCurrentUser = (user) => {
   return ({
     type: ADD_USER,
-    payload: user
+    user
   });
 };
 
@@ -46,8 +46,8 @@ export const restoreSession = () => async dispatch => {
   let res = await csrfFetch('/api/session');
   storeCSRFToken(res);
   let data = await res.json();
-  storeCurrentUser(data.user);
-  dispatch(addCurrentUser(data.user));
+  storeCurrentUser(data);
+  dispatch(addCurrentUser(data));
   return res;
 }
 
@@ -74,8 +74,8 @@ export const login = (user) => async (dispatch) => {
     })
   });
   let data = await res.json();
-  dispatch(addCurrentUser(data.user));
-  storeCurrentUser(data.user)
+  storeCurrentUser(data)
+  dispatch(addCurrentUser(data));
   return res;
 }
 
@@ -85,7 +85,7 @@ const initialState = { user: user}
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER:
-      return { ...state, user: action.payload }
+      return { ...state, user: action.user }
     case REMOVE_USER:
       return { ...state, user: null}
     default:
