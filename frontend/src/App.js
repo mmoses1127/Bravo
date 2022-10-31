@@ -30,10 +30,10 @@ function App() {
         <Route path="/create-ride">
           <RideForm />
         </Route>
-        <Route path="/activities/:rideId">
+        <Route path="/rides/:rideId">
           <RideShow/>
         </Route>
-        <Route path="/activities/:rideId/edit">
+        <Route path="/rides/:rideId/edit">
           <RideEdit/>
         </Route>
       </Switch>

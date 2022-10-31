@@ -3,6 +3,7 @@ import ProfileButton from "./ProfileButton";
 import { NavLink } from "react-router-dom";
 import stravaLogo from "../../assets/strava_logo.svg";
 import './Navigation.css';
+import AddRideButton from "./AddRideButton";
 
 
 const Navigation = () => {
@@ -35,9 +36,10 @@ const Navigation = () => {
             {/* <button className="dropdown"></button> */}
             </div>
             <div className='nav-dropdown'>
-              <button className="dropdown" id="add-ride-button">
-                <i className="fa-solid fa-plus"></i>
-              </button>
+              {/* <button className="dropdown" id="add-ride-button"> */}
+              <AddRideButton>
+
+              </AddRideButton>
             </div>
           </div>
         </div>

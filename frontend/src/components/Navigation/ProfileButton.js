@@ -11,7 +11,7 @@ const ProfileButton = ({user}) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
-    if (showMenu) return;
+    // if (showMenu) return;
     setShowMenu(true);
   };
 
@@ -19,13 +19,13 @@ const ProfileButton = ({user}) => {
     setShowMenu(false)
   };
 
-  useEffect(() => {
-    if (!showMenu) return;
+  // useEffect(() => {
+  //   if (!showMenu) return;
 
-    document.addEventListener('click', closeMenu);
+  //   document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener('click', closeMenu)
-  }, [showMenu])
+  //   return () => document.removeEventListener('click', closeMenu)
+  // }, [showMenu])
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -34,19 +34,20 @@ const ProfileButton = ({user}) => {
 
 
   return (
-    <>
-    <div onClick={openMenu} className="profile-drop-down">
-      <img className="avatar-image" src={avatar} alt="Avatar"/>
-      <i className="fa-solid fa-angle-down"></i>
+    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down">
+      <div>
+        <img className="avatar-image" src={avatar} alt="Avatar"/>
+        <i className="fa-solid fa-angle-down"></i>
+      </div>
+      {showMenu && (<ul>
+        <li><Link to={`/profile`}>Profile</Link></li>
+        <li>
+          <button onClick={logoutHandler}>Log Out</button>
+        </li>
+      </ul>
+      )}
     </div>
-    {showMenu && (<ul>
-      <li><Link to={`/profile`}>Profile</Link></li>
-      <li>
-        <button onClick={logoutHandler}>Log Out</button>
-      </li>
-    </ul>
-    )}
-    </>
+
   )
 }
 
