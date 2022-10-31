@@ -1,1 +1,1 @@
-json.extract! @ride, :id, :title, :description, :elevation, :moving_time, :distance, :athlete_id
+json.extract! @ride, :id, :title, :description, :elevation, :duration, :distance, :athlete_id

@@ -29,7 +29,7 @@ ApplicationRecord.transaction do
     description: "Legs were a bit tired, so took it easy. Autumn colors starting to come out.",
     athlete_id: 1,
     distance: 25.4,
-    moving_time: "1:42:46",
+    duration: 6231,
     elevation: 587,
     # GPXFile: "./assets/gpx/annadel24334.gpx"
   });
@@ -40,7 +40,7 @@ ApplicationRecord.transaction do
     description: "Easy spin after a tough race weekend.",
     athlete_id: 3,
     distance: 13.6,
-    moving_time: "1:13:26",
+    duration: 2956,
     elevation: 287,
     # GPXFile: "./assets/gpx/recovery42343.gpx"
   });
@@ -51,7 +51,7 @@ ApplicationRecord.transaction do
     description: "Big climb and epic descent.",
     athlete_id: 1,
     distance: 39.0,
-    moving_time: "2:54:03",
+    duration: 4000,
     elevation: 1201,
     # GPXFile: "./assets/gpx/jlondon42334.gpx"
   });

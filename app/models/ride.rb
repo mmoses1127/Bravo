@@ -8,15 +8,15 @@
 #  description  :string
 #  athlete_id   :bigint
 #  distance     :float            not null
-#  moving_time  :time             not null
 #  elevation    :float
 #  gpx_file_url :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  duration     :integer          not null
 #
 class Ride < ApplicationRecord
 
-  validates :date_time, :title, :athlete_id, :distance, :moving_time, presence: true
+  validates :date_time, :title, :athlete_id, :distance, :duration, presence: true
   
   belongs_to :athlete,
     class_name: :User
