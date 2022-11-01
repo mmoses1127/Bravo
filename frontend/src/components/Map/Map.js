@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
- 
+import './Map.css';
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibW1vc2VzMTEyNyIsImEiOiJjbDl5cWtkdnAwN2pwM3BrbnZsNTZzZHIzIn0.5DYp57TWNGkULiO3KhdVbg';
 
 const Map = () => {
@@ -22,7 +23,7 @@ const Map = () => {
   });
 
   return (
-    <div>
+    <div className="outer-map-container">
     <div ref={mapContainer} className="map-container" />
     </div>
     );
