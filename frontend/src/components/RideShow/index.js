@@ -5,6 +5,7 @@ import { getRide, fetchRide } from "../../store/rides";
 import RideIndexItem from "../Dashboard/RideIndexItem";
 import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
+import Map from "../Map/Map";
 
 
 
@@ -66,7 +67,9 @@ const RideShow = () => {
           </ul>
         </div>
       </div>
-      <div className="ride-show-map"></div>
+      <div className="ride-show-map">
+        <Map />
+      </div>
       <div className="ride-show-elevation"></div>
     </div>
   )
