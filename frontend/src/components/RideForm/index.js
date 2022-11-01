@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import './RideForm.css'
-import { useHistory } from 'react-router-dom';
 
 const RideForm = () => {
   const history = useHistory();
@@ -18,10 +17,10 @@ const RideForm = () => {
   const [time, setTime] = useState('');
   const [errors, setErrors] = useState([]);
 
-  // const handleClick = aysnc (e) => {
-  //   await handleSubmit(e);
-  //   history.push(`/rides/${}`);
-  // }
+  const handleClick = async (e) => {
+    await handleSubmit(e);
+    history.push(`/`);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +60,7 @@ const RideForm = () => {
         {/* <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
         </ul> */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleClick}>
           <div className='ride-entry-fields'>
             <fieldset>
               <legend>Distance</legend>

@@ -73,6 +73,7 @@ export const createRide = (ride) => async dispatch => {
   if (res.ok) {
     const newRide = await res.json();
     dispatch(addRide(newRide));
+    return newRide;
   };
 };
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { updateRide, getRide, fetchRide } from '../../store/rides';
 import '../RideForm/RideForm.css';
 
 const RideEdit = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const {rideId} = useParams();
@@ -23,8 +24,12 @@ const RideEdit = () => {
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
-  }, [])
+  }, []);
 
+  const handleClick = async (e) => {
+    await handleSubmit(e);
+    history.push(`/`);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +53,7 @@ const RideEdit = () => {
     <div className='page-container'>
       <h1>Manual Entry</h1>
       <div id="manual-entry">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleClick}>
           <div className='ride-entry-fields'>
             <fieldset>
               <legend>Distance</legend>
