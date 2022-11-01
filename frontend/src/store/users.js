@@ -21,7 +21,7 @@ export const getUsers = (state) => {
 };
 
 export const getUser = userId => (state) => {
-  if (!state.users) return null;
+  // if (!state.users) return null;
   return state.users[userId];
 }
 

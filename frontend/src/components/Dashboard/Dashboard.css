@@ -80,3 +80,11 @@ background-color: #f7f7fa;
   height: 70px;
   padding: 4px;
 }
+
+.profile-image {
+	border-radius: 50%;
+	background-color: aqua;
+	height: 90px;
+	width: 90px;
+	object-fit: cover;
+}

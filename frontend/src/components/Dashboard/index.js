@@ -7,6 +7,7 @@ import { getRides } from "../../store/rides";
 import { Redirect } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
+import avatar from "../../assets/mtb1.jpg";
 
 
 const Dashboard = () => {
@@ -14,17 +15,21 @@ const Dashboard = () => {
   const rides = useSelector(getRides);
   const currentSessionUser = useSelector(state => state.session.user);
   const user = useSelector(getUser(1));
-
+  
   useEffect(() => {
-    dispatch(fetchRides());
     dispatch(fetchUsers());
+    dispatch(fetchRides());
   }, []);
+  
+  console.log(user)
 
   if (!currentSessionUser) {
     return (
-      <Redirect to={`/`}/>
-    )
-  };
+      <Redirect to="/"/>
+      )
+    };
+  
+  if (!user) return null;
 
   return (
     <>
@@ -32,7 +37,9 @@ const Dashboard = () => {
       <div className="profile-column">
         <div className="profile-container">
           <div className="profile-top">
-            <div className="profile-image-container"></div>
+            <div className="profile-image-container">
+              <img className="profile-image" src={avatar}/>
+            </div>
             <h1>{user.name}</h1>
             <ul className="profile-stats-container">
               <li className="profile-stat"></li>
