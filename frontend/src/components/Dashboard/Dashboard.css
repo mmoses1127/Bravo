@@ -2,8 +2,11 @@ body, #root {
 background-color: #f7f7fa;
 }
 .page-container-dash {
-  margin-left: 100px;
-  margin-right: 100px;
+  padding: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
   display: flex;
   flex-direction: row;
 }
@@ -12,14 +15,32 @@ background-color: #f7f7fa;
   margin: 15px;
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
+	box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
+	margin-bottom: 12px;
+}
+
+.profile-top {
+  display: inline-block;
+}
+
 .profile-column {
   width: 30%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .profile-column > * {
   width: 100%;
+  padding-top: 24px;
+  margin-top: 64px;
 }
 
 #ride-index {
@@ -84,7 +105,38 @@ background-color: #f7f7fa;
 .profile-image {
 	border-radius: 50%;
 	background-color: aqua;
-	height: 90px;
-	width: 90px;
+	height: 120px;
+	width: 120px;
 	object-fit: cover;
+  position: relative;
+  bottom: 80px;
+}
+
+.profile-image-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 40px;
+}
+
+.profile-stats-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.profile-tab {
+  text-align: center;
+}
+
+.profile-num {
+  text-align: center;
+}
+
+.feed-header {
+  margin-top: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 64px;
 }

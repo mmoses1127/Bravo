@@ -21,15 +21,11 @@ const Dashboard = () => {
     dispatch(fetchRides());
   }, []);
   
-  console.log(user)
-
   if (!currentSessionUser) {
     return (
       <Redirect to="/"/>
       )
     };
-  
-  if (!user) return null;
 
   return (
     <>
@@ -40,11 +36,20 @@ const Dashboard = () => {
             <div className="profile-image-container">
               <img className="profile-image" src={avatar}/>
             </div>
-            <h1>{user.name}</h1>
+            <h1>{user?.name}</h1>
             <ul className="profile-stats-container">
-              <li className="profile-stat"></li>
-              <li className="profile-stat"></li>
-              <li className="profile-stat"></li>
+              <li className="profile-stat">
+                <p className='profile-tab'>Following</p>
+                <h3 className='profile-num'>7</h3>
+              </li>
+              <li className="profile-stat">
+                <p className='profile-tab'>Followers</p>
+                <h3 className='profile-num'>5</h3>
+              </li>
+              <li className="profile-stat">
+                <p className='profile-tab'>Rides</p>
+                <h3 className='profile-num'>4</h3>
+              </li>
             </ul>
           </div>
           <div className="profilebottom"></div>

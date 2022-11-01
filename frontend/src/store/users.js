@@ -39,7 +39,6 @@ export const fetchUsers = () => async dispatch => {
 
   if(res.ok) {
     const users = await res.json();
-    console.log(`inside fetchusers users is ${users}`)
     dispatch(addUsers(users))
   };
 };
