@@ -14,21 +14,30 @@ const RideForm = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [dateTime, setDateTime] = useState(`2022-02-02 017:02:36 UTC`);
   const [errors, setErrors] = useState([]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+    console.log(typeof date);
+    console.log(typeof time);
+    
+    setDateTime(`2022-02-02 017:02:36 UTC`);
+    // setDateTime(`date`);
+    // setDateTime(`${date} 0${time}:00 UTC`);
 
-    const newRide = {
+    console.log(dateTime)
+
+    let newRide = {
       title,
       description,
       distance,
       duration,
       elevation,
       athlete_id: user.id,
-      dateTime: Date()
+      date_time: `${date} 0${time}:00 UTC`
     };
 
     return dispatch(createRide(newRide))
@@ -52,9 +61,9 @@ const RideForm = () => {
     <div className='page-container'>
       <h1>Manual Entry</h1>
       <div id="manual-entry">
-        <ul>
+        {/* <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
-        </ul>
+        </ul> */}
         <form onSubmit={handleSubmit}>
           <div className='ride-entry-fields'>
             <fieldset>

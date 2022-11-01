@@ -35,7 +35,7 @@ function App() {
         </Route>
         <Route path="/rides/:rideId/edit">
           <RideEdit/>
-        </Route>
+        </Route>        
       </Switch>
     </>
   );
