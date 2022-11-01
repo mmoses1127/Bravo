@@ -14,9 +14,12 @@ const RideEdit = () => {
   const [elevation, setElevation] = useState(ride.elevation);
   const [title, setTitle] = useState(ride.title);
   const [description, setDescription] = useState(ride.description);
-  const [date, setDate] = useState(ride.date);
-  const [time, setTime] = useState(ride.time);
-  console.log('hey')
+  const [date, setDate] = useState(ride.dateTime.slice(0,10));
+  const [time, setTime] = useState(ride.dateTime.slice(11,16));
+  // const [date, setDate] = useState('');
+  // const [time, setTime] = useState('');
+
+  console.log(ride.dateTime)
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
@@ -27,6 +30,7 @@ const RideEdit = () => {
     e.preventDefault();
 
     const newRide = {
+      id: ride.id,
       title,
       description,
       distance,

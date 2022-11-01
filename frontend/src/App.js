@@ -7,7 +7,7 @@ import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
 import RideForm from './components/RideForm';
 import RideShow from './components/RideShow';
-import RideEdit from './components/RideEdit/RideEdit';
+import RideEdit from './components/RideEdit';
 
 
 function App() {
@@ -30,12 +30,12 @@ function App() {
         <Route path="/create-ride">
           <RideForm />
         </Route>
-        <Route path="/rides/:rideId">
-          <RideShow/>
-        </Route>
         <Route path="/rides/:rideId/edit">
           <RideEdit/>
         </Route>        
+        <Route path="/rides/:rideId">
+          <RideShow/>
+        </Route>
       </Switch>
     </>
   );

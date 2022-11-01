@@ -9,10 +9,11 @@ import avatar from "../../assets/mtb1.jpg";
 
 
 const RideShow = () => {
+  const currentUser = useSelector(state => Object.values(state.session.user)[0])
+  console.log(currentUser)
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));
-  console.log(ride)
   useEffect(() => {
     dispatch(fetchRide(rideId));
   }, []);
@@ -26,7 +27,9 @@ const RideShow = () => {
       <div className="ride-show-header">
         <h2>{ride.username} - {ride.title}</h2>
         <div className="social-header">
+          {ride.athleteId === currentUser.id && 
           <Link to={`/rides/${rideId}/edit`} ><i className="fa-solid fa-pencil"></i></Link>
+          }
         </div>
       </div>
       <div className="ride-show-main">
