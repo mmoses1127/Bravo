@@ -39,6 +39,7 @@ body {
 element {
   --strava-orange: #fc5200;
   --warm-gray: #949494;
+	--cool-gray: #dfdfe8;
 }
 
 button {

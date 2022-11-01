@@ -1,6 +1,7 @@
-body, #root {
-background-color: #f7f7fa;
-}
+/* body, #root {
+background-color:
+} */
+
 .page-container-dash {
   padding: 10px;
   padding-top: 10px;
@@ -9,10 +10,13 @@ background-color: #f7f7fa;
   padding-left: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  background-color: #f7f7fa;
+  width: 100%;
 }
 
 .page-container-dash > * {
-  margin: 15px;
+  margin: 30px;
 }
 
 .profile-container {
