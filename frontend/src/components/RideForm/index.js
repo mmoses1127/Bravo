@@ -14,21 +14,12 @@ const RideForm = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [dateTime, setDateTime] = useState(`2022-02-02 017:02:36 UTC`);
   const [errors, setErrors] = useState([]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log(typeof date);
-    console.log(typeof time);
-    
-    setDateTime(`2022-02-02 017:02:36 UTC`);
-    // setDateTime(`date`);
-    // setDateTime(`${date} 0${time}:00 UTC`);
-
-    console.log(dateTime)
 
     let newRide = {
       title,

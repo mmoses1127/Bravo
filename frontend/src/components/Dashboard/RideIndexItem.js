@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import smallLogo from '../../assets/small_logo.svg';
-import { getRide } from '../../store/rides';
-import { fetchUser } from '../../store/users';
+import { Link } from 'react-router-dom';
 
 
-const RideIndexItem = ({ride, athlete}) => {
-  const dispatch = useDispatch();
+const RideIndexItem = ({ride}) => {
   const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
 
 
@@ -25,7 +21,7 @@ const RideIndexItem = ({ride, athlete}) => {
           <i className="fa-light fa-bicycle"></i>
         </div>
         <div className="card-body-main">
-          <h3>{ride.title}</h3>
+          <h3><Link to={`/rides/${ride.id}`}>{ride.title}</Link></h3>
           <div className="card-body-text">
             <ul className="stats">
               <li>

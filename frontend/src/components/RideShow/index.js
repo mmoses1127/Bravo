@@ -3,27 +3,66 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getRide, fetchRide } from "../../store/rides";
 import RideIndexItem from "../Dashboard/RideIndexItem";
+import './RideShow.css';
+import avatar from "../../assets/mtb1.jpg";
 
 
 
 const RideShow = () => {
   const {rideId} = useParams();
   const dispatch = useDispatch();
-  
+  const ride = useSelector(getRide(rideId));
+  console.log(ride)
   useEffect(() => {
     dispatch(fetchRide(rideId));
   }, []);
   
-  const ride = useSelector(getRide);
+  if (!ride) return null;
+
+  const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
 
   return (
-    <div className="page-container">
+    <div className="page-container-show">
       <div className="ride-show-header">
-        <h2>hiii</h2>
-        <div className="social-header"></div>
-          <Link to={`/activities/${rideId}/edit`} ><i className="fa-solid fa-pencil"></i></Link>
+        <h2>{ride.username} - {ride.title}</h2>
+        <div className="social-header">
+          <Link to={`/rides/${rideId}/edit`} ><i className="fa-solid fa-pencil"></i></Link>
+        </div>
       </div>
-      <div className="ride-show-main"></div>
+      <div className="ride-show-main">
+        <div className="show-main-box">
+          <div className="profile-show-image-container">
+            <img className="profile-show-image" src={avatar} alt='Profile Image'></img>
+          </div>
+          <div className="show-main-text-img">
+            <div className="show-main-text">
+              <p>{ride.dateTime}</p>
+              <h2>{ride.title}</h2>
+            </div>
+            <div className="show-main-img">
+              <img className="small-square-image-box"></img>
+              <img className="small-square-image-box"></img>
+              <img className="small-square-image-box"></img>
+            </div>
+          </div>
+        </div>
+        <div className="show-main-box">
+          <ul className="inline-stats-container">
+            <li className="show-stat">
+              <h3>{ride.distance} km</h3>
+              <h2>Distance</h2>
+            </li>
+            <li className="show-stat">
+              <h3>{parsedDuration}</h3>
+              <h2>Moving Time</h2>
+            </li>
+            <li className="show-stat">
+              <h3>{ride.elevation}</h3>
+              <h2>Elevation</h2>
+              </li>
+          </ul>
+        </div>
+      </div>
       <div className="ride-show-map"></div>
       <div className="ride-show-elevation"></div>
     </div>

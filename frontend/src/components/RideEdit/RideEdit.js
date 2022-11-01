@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { updateRide, getRide } from '../../store/rides';
+import { updateRide, getRide, fetchRide } from '../../store/rides';
 import '../RideForm/RideForm.css';
 
 const RideEdit = () => {
@@ -16,6 +16,11 @@ const RideEdit = () => {
   const [description, setDescription] = useState(ride.description);
   const [date, setDate] = useState(ride.date);
   const [time, setTime] = useState(ride.time);
+  console.log('hey')
+
+  useEffect(() => {
+    dispatch(fetchRide(rideId));
+  }, [])
 
 
   const handleSubmit = (e) => {
@@ -28,11 +33,11 @@ const RideEdit = () => {
       duration,
       elevation,
       athlete_id: user.id,
-      dateTime: Date()
+      date_time: `${date} 0${time}:00 UTC`
     };
 
-    dispatch(updateRide(newRide))
-  }
+    dispatch(updateRide(newRide));
+  };
 
 
   return (
@@ -106,7 +111,7 @@ const RideEdit = () => {
           </div>
 
           <div className='form-submit-area'>
-            <button>Create</button>
+            <button>Update</button>
             <Link to={`/dashboard`}>Cancel</Link>
 
           </div>

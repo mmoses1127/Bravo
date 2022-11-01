@@ -140,3 +140,12 @@ background-color: #f7f7fa;
   padding-bottom: 12px;
   height: 64px;
 }
+
+.page-container-dash a {
+  color: black;
+}
+
+.page-container-dash a:hover {
+  color: black;
+  text-decoration: none;
+}
