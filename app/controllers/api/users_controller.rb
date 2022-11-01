@@ -22,6 +22,15 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+    if @users
+      render :index
+    else
+      render json: { errors: @users.errors.full_messages }, status: :unprocessable_entity;
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password)

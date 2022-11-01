@@ -15,7 +15,7 @@ const RideIndexItem = ({ride, athlete}) => {
       <div className="card-header">
         <img className="avatar-image" src={smallLogo} alt="Avatar" />
         <div className="card-header-text">
-          <h5>{ride.email}</h5>
+          <h5>{ride.username}</h5>
           <br></br>
           <p>{ride.dateTime}</p>
         </div>

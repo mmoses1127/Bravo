@@ -6,21 +6,21 @@ import { useSelector } from "react-redux";
 import { getRides } from "../../store/rides";
 import { Redirect } from "react-router-dom";
 import "./Dashboard.css";
-import { fetchUsers } from "../../store/users";
+import { fetchUser, fetchUsers, getUser } from "../../store/users";
 
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
-  const currentUser = useSelector(state => state.session.user);
-  const users = useSelector(state => state.users)
+  const currentSessionUser = useSelector(state => state.session.user);
+  const user = useSelector(getUser(1));
 
   useEffect(() => {
     dispatch(fetchRides());
-    // dispatch(fetchUsers());
+    dispatch(fetchUsers());
   }, []);
 
-  if (!currentUser) {
+  if (!currentSessionUser) {
     return (
       <Redirect to={`/`}/>
     )
@@ -33,7 +33,7 @@ const Dashboard = () => {
         <div className="profile-container">
           <div className="profile-top">
             <div className="profile-image-container"></div>
-            <h1>{currentUser.name}</h1>
+            <h1>{user.name}</h1>
             <ul className="profile-stats-container">
               <li className="profile-stat"></li>
               <li className="profile-stat"></li>

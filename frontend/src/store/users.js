@@ -15,8 +15,18 @@ const addUsers = users => {
   })
 };
 
+export const getUsers = (state) => {
+  if (!state.users) return [];
+  return Object.values(state.users);
+};
+
+export const getUser = userId => (state) => {
+  if (!state.users) return null;
+  return state.users[userId];
+}
+
 export const fetchUser = userId => async dispatch => {
-  const res = await fetch(`api/users/${userId}`);
+  const res = await fetch(`/api/users/${userId}`);
 
   if(res.ok) {
     const user = await res.json();
@@ -25,10 +35,11 @@ export const fetchUser = userId => async dispatch => {
 };
 
 export const fetchUsers = () => async dispatch => {
-  const res = await fetch(`api/users/`);
+  const res = await fetch(`/api/users/`);
 
   if(res.ok) {
     const users = await res.json();
+    console.log(`inside fetchusers users is ${users}`)
     dispatch(addUsers(users))
   };
 };
