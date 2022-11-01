@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import './RideForm.css'
+import { useHistory } from 'react-router-dom';
 
 const RideForm = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => Object.values(state.session.user)[0]);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [elevation, setElevation] = useState('');
@@ -16,6 +18,10 @@ const RideForm = () => {
   const [time, setTime] = useState('');
   const [errors, setErrors] = useState([]);
 
+  // const handleClick = aysnc (e) => {
+  //   await handleSubmit(e);
+  //   history.push(`/rides/${}`);
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
