@@ -4,11 +4,12 @@ const ADD_USER = 'ADD_USER';
 const REMOVE_USER = 'REMOVE_USER';
 
 export const signup = inputs => async dispatch => {
-  let {email, password} = inputs;
+  let {email, name, password} = inputs;
   let res = await csrfFetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({
       email,
+      name,
       password
     })
   })

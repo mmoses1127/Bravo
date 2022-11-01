@@ -1,28 +1,37 @@
-body {
+body, #root {
 background-color: #f7f7fa;
 }
-.page-container {
+.page-container-dash {
   margin-left: 100px;
   margin-right: 100px;
   display: flex;
-
+  flex-direction: row;
 }
 
-.page-container > * {
+.page-container-dash > * {
   margin: 15px;
 }
 
 .profile-column {
-  width: 25%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-column > * {
+  width: 100%;
 }
 
 #ride-index {
   width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
-.announcements-column {
-  width: 25%;
-}
+/* .announcements-column {
+  width: 2%;
+  display: flex;
+} */
 
 .feed-card {
 	background-color: #fff;
@@ -57,19 +66,17 @@ background-color: #f7f7fa;
   width: 100%;
   padding: 5px;
   height: 250px;
-  background-color: red;
 }
 
 .photo-container {
   width: 100%;
   padding: 5px;
   height: 250px;
-  background-color: red;
   display: flex;
 }
 
 .secondary-photos {
-  width: 70px;
+  /* width: 70px; */
   height: 70px;
   padding: 4px;
 }

@@ -5,23 +5,19 @@ import { getRide } from '../../store/rides';
 import { fetchUser } from '../../store/users';
 
 
-const RideIndexItem = ({ride}) => {
+const RideIndexItem = ({ride, athlete}) => {
   const dispatch = useDispatch();
-  const athleteId = ride.athleteId;
-  // const athlete = useSelector((state) => state.users[athlete_id]);
+  const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
 
-  useEffect(() => {
-    dispatch(fetchUser(athleteId));
-  }, []);
 
   return (
     <div className="feed-card">
       <div className="card-header">
         <img className="avatar-image" src={smallLogo} alt="Avatar" />
         <div className="card-header-text">
-          <h5>Ride Title</h5>
+          <h5>{ride.email}</h5>
           <br></br>
-          <p>Relative Time | Location</p>
+          <p>{ride.dateTime}</p>
         </div>
       </div>
       <div className="card-body">
@@ -29,20 +25,20 @@ const RideIndexItem = ({ride}) => {
           <i className="fa-light fa-bicycle"></i>
         </div>
         <div className="card-body-main">
-          <h3>Ride Title</h3>
+          <h3>{ride.title}</h3>
           <div className="card-body-text">
             <ul className="stats">
               <li>
                 <p>Distance</p>
-                <h4>25.0</h4>
+                <h4>{ride.distance}</h4>
               </li>
               <li>
                 <p>Elev Gain</p>
-                <h4>300 m</h4>
+                <h4>{ride.elevation}</h4>
               </li>
               <li>
-                <p>Time</p>
-                <h4>2h 9m</h4>
+                <p>Duration</p>
+                <h4>{parsedDuration}</h4>
               </li>
             </ul>
           </div>

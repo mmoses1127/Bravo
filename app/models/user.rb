@@ -9,6 +9,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  avatar_image    :string           default("https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/323_Strava_logo-512.png")
+#  name            :string           not null
 #
 class User < ApplicationRecord
   has_secure_password
@@ -16,6 +17,7 @@ class User < ApplicationRecord
   before_validation :ensure_session_token
   
   validates :email, :session_token, presence: true, uniqueness: true
+  validates :name, presence: true, length: { in: 3..255 }
   validates :email, length: { in: 3..255 }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { in: 6..255 }, allow_nil: true
 

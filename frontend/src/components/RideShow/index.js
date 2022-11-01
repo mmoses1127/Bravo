@@ -15,7 +15,6 @@ const RideShow = () => {
   }, []);
   
   const ride = useSelector(getRide);
-  console.log(ride)
 
   return (
     <div className="page-container">
