@@ -36,8 +36,22 @@ export const getRide = rideId => (state) => {
   return state.rides[rideId];
 }
 
+export const getMyRides = (state) => {
+  if (!state.rides) return [];
+  return Object.values(state.rides);
+}
+
 export const fetchRides = () => async dispatch => {
-  const res = await csrfFetch(`/api/rides`);
+  const res = await fetch(`/api/rides`);
+
+  if (res.ok) {
+    const rides = await res.json();
+    dispatch(addRides(rides))
+  };
+};
+
+export const fetchMyRides = (userId) => async dispatch => {
+  const res = await fetch(`/api/users/${userId}/rides`);
 
   if (res.ok) {
     const rides = await res.json();

@@ -1,24 +1,35 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchRides } from "../../store/rides";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRides, fetchMyRides } from "../../store/rides";
 import RideIndexItem from "./RideIndexItem";
-import { useSelector } from "react-redux";
 import { getRides } from "../../store/rides";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
-
+import smallLogo from "../../assets/small_logo.svg";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
+  const [showMenu, setShowMenu] = useState(false);
+  const {userId} = useParams();
+  console.log(userId)
+
+
+  const openMenu = () => {
+    setShowMenu(true);
+  };
+
+  const closeMenu = () => {
+    setShowMenu(false)
+  };
 
   useEffect(() => {
     dispatch(fetchUsers());
-    dispatch(fetchRides());
+    userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
   }, []);
   
   if (!currentUser) {
@@ -60,10 +71,30 @@ const Dashboard = () => {
       <div id="ride-index">
         <div className="feed-header">
           <div className="dropdown" id="feed-filter">
-            <button className="clear-button">
-              <h2>Following</h2>
+            <button onMouseEnter={openMenu} onMouseLeave={closeMenu} className="clear-button">
+              <h3>{userId ? 'My Rides' : 'Following'}</h3>
               <span><i className="fa-solid fa-angle-down"></i></span>
             </button>
+            {showMenu && 
+            <ul>
+              <li></li>
+            </ul>
+            }
+          </div>
+        </div>
+        <div className="dashboard-top-header, feed-card">
+          <div className="dash-top-section">
+            <div className="dash-top-left-image"></div>
+            <div className="dash-top-right-image"></div>
+          </div>
+          <div className="dash-bottom-section">
+            <div className="dash-bottom-logo">
+              <img className="small-logo" src={smallLogo} />
+            </div>
+            <div className="dash-bottom-text">
+              <h3>Strava Welcomes All</h3>
+              <p>Running, biking, and all the rest. Get out there!</p>
+            </div>
           </div>
         </div>
         {rides.map(ride => <RideIndexItem ride={Object.values(ride)[0]}/>)}

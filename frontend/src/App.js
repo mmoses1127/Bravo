@@ -37,8 +37,8 @@ function App() {
         <Route path="/rides/:rideId">
           <RideShow/>
         </Route>
-        <Route path="/map">
-          <Map/>
+        <Route path="/dashboard/users/:userId/rides">
+          <Dashboard/>
         </Route>
       </Switch>
     </>

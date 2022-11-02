@@ -17,9 +17,6 @@ const RideEdit = () => {
   const [description, setDescription] = useState(ride.description);
   const [date, setDate] = useState(ride.dateTime.slice(0,10));
   const [time, setTime] = useState(ride.dateTime.slice(11,16));
-  // const [date, setDate] = useState('');
-  // const [time, setTime] = useState('');
-
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
