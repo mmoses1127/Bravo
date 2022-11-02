@@ -8,13 +8,14 @@ import { Redirect } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
+import { getCurrentUser } from "../../store/session";
 
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
-  const currentUser = useSelector(state => state.session.user[1]);
-  
+  const currentUser = useSelector(getCurrentUser);
+
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchRides());

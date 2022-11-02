@@ -1,7 +1,12 @@
 import csrfFetch from './csrf.js';
 
-const ADD_USER = 'ADD_USER';
-const REMOVE_USER = 'REMOVE_USER';
+const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
+const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
+
+export const getCurrentUser = (state = {}) => {
+  if (state.session.user) return Object.values(state.session.user)[0];
+  return null;
+}
 
 export const signup = inputs => async dispatch => {
   let {email, name, password} = inputs;
@@ -32,14 +37,14 @@ export const logout = () => async dispatch => {
 
 export const addCurrentUser = (user) => {
   return ({
-    type: ADD_USER,
+    type: ADD_CURRENT_USER,
     user
   });
 };
 
 export const removeCurrentUser = () => {
   return ({
-    type: REMOVE_USER,
+    type: REMOVE_CURRENT_USER,
   });
 };
 
@@ -85,9 +90,9 @@ const initialState = { user: user}
 
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_USER:
+    case ADD_CURRENT_USER:
       return { ...state, user: action.user }
-    case REMOVE_USER:
+    case REMOVE_CURRENT_USER:
       return { ...state, user: null}
     default:
       return state;

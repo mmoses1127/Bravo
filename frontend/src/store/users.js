@@ -1,9 +1,9 @@
-export const ADD_USER_VIEW = 'ADD_USER_VIEW';
+export const ADD_USER = 'ADD_USER';
 export const ADD_USERS = 'ADD_USERS';
 
 const addUserView = user => {
   return ({
-    type: ADD_USER_VIEW,
+    type: ADD_USER,
     user
   })
 };
@@ -47,7 +47,7 @@ const usersReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_USERS:
       return action.users;
-    case ADD_USER_VIEW:
+    case ADD_USER:
       return {...state, [action.user.id]: action.user}
     default:
       return state;
