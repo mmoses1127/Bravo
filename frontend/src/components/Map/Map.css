@@ -19,3 +19,7 @@
   margin: 12px;
   border-radius: 4px;
 }
+
+.mapboxgl-canvas {
+  height: 400px;
+}
