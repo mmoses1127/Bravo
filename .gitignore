@@ -26,4 +26,5 @@
 
 .env.development.local
 
+# Ignore public files
 /public

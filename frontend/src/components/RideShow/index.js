@@ -11,7 +11,6 @@ import Map from "../Map/Map";
 
 const RideShow = () => {
   const currentUser = useSelector(state => Object.values(state.session.user)[0])
-  console.log(currentUser)
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));

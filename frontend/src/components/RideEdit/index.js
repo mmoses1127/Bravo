@@ -20,7 +20,6 @@ const RideEdit = () => {
   // const [date, setDate] = useState('');
   // const [time, setTime] = useState('');
 
-  console.log(ride.dateTime)
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
