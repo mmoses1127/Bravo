@@ -13,15 +13,14 @@ import avatar from "../../assets/mtb1.jpg";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
-  const currentSessionUser = useSelector(state => state.session.user);
-  const user = useSelector(getUser(1));
+  const currentUser = useSelector(state => state.session.user[1]);
   
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchRides());
   }, []);
   
-  if (!currentSessionUser) {
+  if (!currentUser) {
     return (
       <Redirect to="/"/>
       )
@@ -36,7 +35,7 @@ const Dashboard = () => {
             <div className="profile-image-container">
               <img className="profile-image" src={avatar}/>
             </div>
-            <h1>{user?.name}</h1>
+            <h1>{currentUser?.name}</h1>
             <ul className="profile-stats-container">
               <li className="profile-stat">
                 <p className='profile-tab'>Following</p>

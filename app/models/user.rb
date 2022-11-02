@@ -21,6 +21,13 @@ class User < ApplicationRecord
   validates :email, length: { in: 3..255 }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { in: 6..255 }, allow_nil: true
 
+  has_many :rides,
+    foreign_key: :athlete_id,
+    class_name: :Ride
+
+  has_one_attached :profile_pic
+
+
   def self.find_by_credentials(email, password)
     user = nil
     user = User.find_by(email: email)
