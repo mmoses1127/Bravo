@@ -5,6 +5,12 @@ import Map from '../Map/Map';
 
 const RideIndexItem = ({ride}) => {
   const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
+  const parsedDate = new Date(ride.dateTime)
+  const longDate = parsedDate.toLocaleString([], {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  })
+
 
 
   return (
@@ -13,8 +19,7 @@ const RideIndexItem = ({ride}) => {
         <img className="avatar-image" src={smallLogo} alt="Avatar" />
         <div className="card-header-text">
           <h5>{ride.username}</h5>
-          <br></br>
-          <p>{ride.dateTime}</p>
+          <p>{longDate}</p>
         </div>
       </div>
       <div className="card-body">
