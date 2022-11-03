@@ -6,11 +6,12 @@ import RideIndexItem from "../Dashboard/RideIndexItem";
 import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
+import { getCurrentUser } from "../../store/session";
 
 
 
 const RideShow = () => {
-  const currentUser = useSelector(state => Object.values(state.session.user)[0])
+  const currentUser = useSelector(getCurrentUser);
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));

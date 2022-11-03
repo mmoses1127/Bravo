@@ -4,12 +4,13 @@ import { NavLink } from "react-router-dom";
 import stravaLogo from "../../assets/strava_logo.svg";
 import './Navigation.css';
 import AddRideButton from "./AddRideButton";
+import { getCurrentUser } from "../../store/session";
 
 
 const Navigation = () => {
-  const user = useSelector(state => state.session.user);
+  const currentUser = useSelector(getCurrentUser);
 
-  if (!user) {
+  if (!currentUser) {
     return (
       <div id="nav-container">
         <div id='nav-bar'>
@@ -32,7 +33,7 @@ const Navigation = () => {
           </div>
           <div id="nav-main">
             {/* <div className='nav-dropdown'> */}
-              <ProfileButton user={user}/>
+              <ProfileButton user={currentUser}/>
             {/* <button className="dropdown"></button> */}
             {/* <div className='nav-dropdown'> */}
               {/* <button className="dropdown" id="add-ride-button"> */}

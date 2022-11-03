@@ -10,7 +10,6 @@ const UserShow = () => {
   const dispatch = useDispatch();
   const {userId} = useParams();
   const user = useSelector(getUser(userId));
-  console.log(user)
 
   useEffect(() => {
     dispatch(fetchUser(userId));

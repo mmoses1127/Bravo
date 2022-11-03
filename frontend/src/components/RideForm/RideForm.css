@@ -14,7 +14,7 @@ body {
   background-color: white;
 }
 
-h1 { 
+.title-header { 
   background-color: white;
   margin-bottom: 0;
 }
@@ -45,7 +45,7 @@ a:hover {
   margin: 10px;
 }
 
-form {
+.rideform-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

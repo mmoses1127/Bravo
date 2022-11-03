@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signup, login } from "../../store/session";
+import { signup, login, getCurrentUser } from "../../store/session";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const SignupFormPage = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const currentUser = useSelector(state => state.session.user);
+  const currentUser = useSelector(getCurrentUser);
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
@@ -38,7 +38,7 @@ const SignupFormPage = () => {
     dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser !== null) return <Redirect to="/" />;
 
   return (
     <div className="splash-background">

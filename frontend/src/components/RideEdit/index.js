@@ -49,7 +49,7 @@ const RideEdit = () => {
     <div className='page-container'>
       <h1>Manual Entry</h1>
       <div id="manual-entry">
-        <form onSubmit={handleClick}>
+        <form className="rideform-form" onSubmit={handleClick}>
           <div className='ride-entry-fields'>
             <fieldset>
               <legend>Distance</legend>

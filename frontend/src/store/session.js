@@ -4,8 +4,11 @@ const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 
 export const getCurrentUser = (state = {}) => {
-  if (state.session.user) return Object.values(state.session.user)[0];
-  return null;
+  if (state.session.user) {
+    return state.session.user;
+  } else {
+    return null;
+  }
 }
 
 export const signup = inputs => async dispatch => {
@@ -29,8 +32,8 @@ export const logout = () => async dispatch => {
   });
 
   if (res.ok) {
-    dispatch(removeCurrentUser());
     storeCurrentUser(null);
+    dispatch(removeCurrentUser());
     return res;
   }
 }
@@ -52,8 +55,8 @@ export const restoreSession = () => async dispatch => {
   let res = await csrfFetch('/api/session');
   storeCSRFToken(res);
   let data = await res.json();
-  storeCurrentUser(data);
-  dispatch(addCurrentUser(data));
+  storeCurrentUser(data.user);
+  dispatch(addCurrentUser(data.user));
   return res;
 }
 
@@ -63,7 +66,7 @@ export const storeCurrentUser = (user) => {
   } else {
     sessionStorage.removeItem("currentUser");
   }
-}
+};
 
 export const storeCSRFToken = (res) => {
   const token = res.headers.get('X-CSRF-Token');
@@ -81,6 +84,7 @@ export const login = (user) => async (dispatch) => {
   });
   let data = await res.json();
   storeCurrentUser(data)
+  console.log(data)
   dispatch(addCurrentUser(data));
   return res;
 }

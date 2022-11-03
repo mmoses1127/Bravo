@@ -9,6 +9,7 @@ import RideForm from './components/RideForm';
 import RideShow from './components/RideShow';
 import RideEdit from './components/RideEdit';
 import UserShow from './components/UserShow';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <UserShow/>
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 }

@@ -55,12 +55,12 @@ const RideForm = () => {
 
   return (
     <div className='page-container'>
-      <h1>Manual Entry</h1>
+      <h1 className='title-header'>Manual Entry</h1>
       <div id="manual-entry">
         {/* <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
         </ul> */}
-        <form onSubmit={handleClick}>
+        <form className="rideform-form" onSubmit={handleClick}>
           <div className='ride-entry-fields'>
             <fieldset>
               <legend>Distance</legend>

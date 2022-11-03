@@ -36,6 +36,24 @@ body {
 	align-items: center;
 }
 
+footer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.footer-box {
+	margin: 20px;
+}
+
+.footer-box i {
+	font-size: 50px;
+}
+
+.footer-icon {
+	color: #fc5200;
+}
+
 element {
   --strava-orange: #fc5200;
   --warm-gray: #949494;
@@ -128,11 +146,6 @@ button:hover {
 #disclaimer {
   width: 200px;
 	display: inline-block;
-}
-
-.panel-registration button {
-		width: 107%;
-		margin: 10px;
 }
 
 h2, h3 {

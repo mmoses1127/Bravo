@@ -29,8 +29,8 @@ const Dashboard = () => {
     dispatch(fetchUsers());
     userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
   }, []);
-  
-  if (!currentUser) {
+
+  if (currentUser === null) {
     return (
       <Redirect to="/"/>
       )
@@ -82,10 +82,14 @@ const Dashboard = () => {
             }
           </div>
         </div>
-        <div className="dashboard-top-header, feed-card">
+        <div className="dashboard-top-header">
           <div className="dash-top-section">
-            <div className="dash-top-left-image"></div>
-            <div className="dash-top-right-image"></div>
+            <div className="dash-top-left-image">
+              <img className="dashboard-banner-image" src="https://www.honolulumarathon.org/wp-content/uploads/2019/10/strava-logo-2016-600x351.png" alt="Mountain Bikers"/>
+            </div>
+            <div className="dash-top-right-image">
+              <img className="dashboard-banner-image" src="https://www.rei.com/dam/content_team_080317_61569_mountain_biking_beginners_lg.jpg" alt="Mountain Bikers"/>
+            </div>
           </div>
           <div className="dash-bottom-section">
             <div className="dash-bottom-logo">

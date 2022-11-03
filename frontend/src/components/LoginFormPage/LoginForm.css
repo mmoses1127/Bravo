@@ -1,4 +1,4 @@
-
+/* 
 
 #login-form {
   display: flex;
@@ -62,7 +62,7 @@ input {
   margin-right: 50px;
 } */
 
-#login-form button {
+/* #login-form button {
   width: 107%;
 }
 
@@ -70,6 +70,4 @@ h1 {
   background-color: rgba(0,0,0,0.85);
   margin: 0;
   width: 100%;
-}
-
-
+} */

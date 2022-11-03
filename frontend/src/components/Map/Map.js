@@ -15,16 +15,8 @@ const Map = () => {
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
   const draw = new MapboxDraw();
-  console.log(draw)
   
-  
-  
-  console.log(map)
-  
-  
-
-  
-  
+ 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({

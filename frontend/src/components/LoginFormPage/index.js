@@ -8,7 +8,7 @@ import './LoginForm.css';
 const LoginFormPage = () => {
 
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => (state.session.user));
+  const currentUser = useSelector(sessionActions.getCurrentUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -36,7 +36,7 @@ const LoginFormPage = () => {
     dispatch(sessionActions.login({email: 'demo@user.io', password: 'password'}));
   };
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser !== null) return <Redirect to="/" />;
 
   return (
     <div className="splash-background">
@@ -50,8 +50,8 @@ const LoginFormPage = () => {
             <input placeholder="Email:" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
             <button>Log In</button>
+            <button onClick={demoLogin}>Demo Login</button>
           </form>
-          <button onClick={demoLogin}>Demo Login</button>
         </div>
       </div>
     </div>
