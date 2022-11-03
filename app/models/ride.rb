@@ -22,7 +22,7 @@ class Ride < ApplicationRecord
     class_name: :User
 
   has_many :kudos,
-    foreign_key: :ride_id
+    foreign_key: :ride_id,
     class_name: :Kudo
 
   # has_many :comments,

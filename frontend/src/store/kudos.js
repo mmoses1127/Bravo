@@ -35,18 +35,45 @@ export const fetchKudos = () => async dispatch => {
   const res = await fetch(`api/kudos`);
 
   if (res.ok) {
-    const kudos = res.json();
+    const kudos = await res.json();
     dispatch(addAllKudos());
   };
 };
 
 export const createKudo = (kudo) => async dispatch => {
   const res = await csrfFetch(`api/kudos`, {
-    method: ''
+    method: 'POST',
+    headers: {'Content-Typee': 'application/json'},
+    body: JSON.stringify(kudo)
   });
 
   if (res.ok) {
-
+    const newKudo = await res.json();
+    dispatch(addKudo(newKudo))
   }
 };
 
+export const deleteKudo = (kudoId) => async dispatch => {
+  const res = await csrfFetch(`api/kudos/${kudoId}`);
+
+  if (res.ok) {
+    dispatch(removeKudo(kudoId));
+  }
+};
+
+const kudosReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_ALL_KUDOS:
+      return action.kudos;
+    case ADD_KUDO:
+      return {...state, [action.kudo.id]: action.kudo};
+    case REMOVE_KUDO:
+      let newState = {...state};
+      delete newState[action.kudoId];
+      return newState;
+    default:
+      return state;
+  }
+};
+
+export default kudosReducer;

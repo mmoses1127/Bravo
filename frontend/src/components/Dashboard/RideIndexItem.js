@@ -16,6 +16,10 @@ const RideIndexItem = ({ride}) => {
 
   };
 
+  const handleComment = () => {
+    
+  }
+
 
   return (
     <div className="feed-card">
