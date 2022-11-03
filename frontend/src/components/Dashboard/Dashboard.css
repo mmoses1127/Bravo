@@ -106,12 +106,12 @@ background-color:
 .card-header {
   display: flex;
   justify-content: start;
-  padding: 10px;
+  /* padding: 10px; */
   height: 60px;
 }
 
 .card-header * {
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .activity-symbol {
