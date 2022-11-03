@@ -81,11 +81,39 @@
   object-fit: cover;
   height: 100px;
   width: 100px;
+  margin: 10px;
 }
+
+.ride-show-header-left * {
+  margin-right: 8px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* .show-main-text h2 {
+  font-size: 28px;
+  line-height: 34px;
+} */
 
 .small-square-image-box {
   width: 70px;
   height: 70px;
   background-color: aquamarine;
   margin: 5px;
+}
+
+.show-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.inline-stats-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.show-stat h3 {
+  font-size: 28px;
+  font-weight: 300;
 }

@@ -32,7 +32,7 @@ const ProfileButton = ({user}) => {
         <img className="avatar-image" src={avatar} alt="Avatar"/>
         <i className="fa-solid fa-angle-down"></i>
       </div>
-      {showMenu && (<ul>
+      {showMenu && (<ul className='dropdown-list'>
         <li className="dropdown-item" onClick={() => history.push(`/profile`)}>Profile</li>
         <li className="dropdown-item" onClick={logoutHandler}>Log Out</li>
       </ul>

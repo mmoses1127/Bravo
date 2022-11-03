@@ -181,13 +181,17 @@ background-color:
 
 .dash-top-left-image {
   width: 40%;
-  background-color: pink;
+  background-image: url("https://www.honolulumarathon.org/wp-content/uploads/2019/10/strava-logo-2016-600x351.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .dash-top-right-image {
   width: 60%;
-  background-color: blue;
-  overflow: hidden;
+  background-image: url("https://www.rei.com/dam/content_team_080317_61569_mountain_biking_beginners_lg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .dash-top-section {
@@ -205,6 +209,8 @@ background-color:
 }
 
 .dash-bottom-logo {
+  display: flex;
+  justify-content: center;
   width: 30%;
   padding-left: 10px;
   padding-right: 10px;
@@ -222,7 +228,6 @@ background-color:
   padding: 5px;
   border-radius: 50%;
   border: 2px solid #dfdfe8;
-  margin: 10px;
 }
 
 .clear-button {

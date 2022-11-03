@@ -51,13 +51,15 @@ ul {
 }
 
 .nav-dropdown {
+  height: 100%;
   box-sizing: border-box;
   border-top: 1px solid white;
   border-left: 1px solid white;
   border-right: 1px solid white;
   border-bottom: 1px solid white;
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;
@@ -85,5 +87,7 @@ ul {
 }
 
 .nav-bar-component {
+  display: flex;
+  align-items: center;
   height: 100%;
 }

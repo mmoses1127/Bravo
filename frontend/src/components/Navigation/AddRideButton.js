@@ -26,7 +26,7 @@ const AddRideButton = () => {
         <i className="fa-solid fa-plus"></i>
       </button>
 
-      {showMenu && (<ul>
+      {showMenu && (<ul className='dropdown-list'>
         <li className="dropdown-item" onClick={() => history.push(`/create-ride`)}>Create Ride</li>
       </ul>
       )}

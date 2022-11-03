@@ -44,7 +44,7 @@ const SignupFormPage = () => {
     <div className="splash-background">
       <div className="panel-registration">
         <h1>Join Strava today,<br></br> it's Free.</h1>
-        <div id="signup-form">
+        <div className="signup-form">
           {<ul>
             {errors.map(error => <li key={error}>{error}</li>)}
           </ul>}

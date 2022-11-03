@@ -42,11 +42,11 @@ const LoginFormPage = () => {
     <div className="splash-background">
       <div className="panel-registration">
         <h1>Login</h1>
-        <div id="login-form">
+        <div className="signup-form">
+          <ul>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>
           <form onSubmit={handleLogin}>
-            <ul>
-              {errors.map(error => <li key={error}>{error}</li>)}
-            </ul>
             <input placeholder="Email:" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
             <button>Log In</button>

@@ -15,24 +15,29 @@ const RideShow = () => {
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));
+  
+  useEffect(() => {
+    dispatch(fetchRide(rideId));
+  }, []);
+  
+  if (!ride) return null;
+  
   const parsedDateTime = new Date(ride.dateTime)
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
 
-  useEffect(() => {
-    dispatch(fetchRide(rideId));
-  }, []);
-  
-  if (!ride) return null;
-
-  const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
+  // const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
+  const parsedDuration = `${Math.floor(ride.duration / 3600)}:${Math.floor((ride.duration % 3600) / 60)}`;
 
   return (
     <div className="page-container-show">
       <div className="ride-show-header">
-        <h2>{ride.username} - {ride.title}</h2>
+        <div className="ride-show-header-left">
+          <img src="https://d3nn82uaxijpm6.cloudfront.net/assets/svg/badges_multicolor_summit_small-a9f1366377ea9bcfb95dd73917f97b674a8c64d9f00bb029d58c23730158b328.svg" alt="Strava Badge" />
+          <h2>{ride.username} - Ride</h2>
+        </div>
         <div className="social-header">
           {ride.athleteId === currentUser.id && 
           <Link to={`/rides/${rideId}/edit`} ><i className="fa-solid fa-pencil"></i></Link>
@@ -60,15 +65,15 @@ const RideShow = () => {
           <ul className="inline-stats-container">
             <li className="show-stat">
               <h3>{ride.distance} km</h3>
-              <h2>Distance</h2>
+              <p>Distance</p>
             </li>
             <li className="show-stat">
               <h3>{parsedDuration}</h3>
-              <h2>Moving Time</h2>
+              <p>Moving Time</p>
             </li>
             <li className="show-stat">
               <h3>{ride.elevation}</h3>
-              <h2>Elevation</h2>
+              <p>Elevation</p>
               </li>
           </ul>
         </div>

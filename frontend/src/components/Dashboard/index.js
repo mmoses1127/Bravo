@@ -74,7 +74,7 @@ const Dashboard = () => {
               <span><i className="fa-solid fa-angle-down"></i></span>
             </button>
             {showMenu && 
-            <ul>
+            <ul className='dropdown-list'>
               <li className="dropdown-item">
                 {userId ? 'Following' : 'My Rides'}
               </li>
@@ -85,10 +85,8 @@ const Dashboard = () => {
         <div className="dashboard-top-header">
           <div className="dash-top-section">
             <div className="dash-top-left-image">
-              <img className="dashboard-banner-image" src="https://www.honolulumarathon.org/wp-content/uploads/2019/10/strava-logo-2016-600x351.png" alt="Mountain Bikers"/>
             </div>
             <div className="dash-top-right-image">
-              <img className="dashboard-banner-image" src="https://www.rei.com/dam/content_team_080317_61569_mountain_biking_beginners_lg.jpg" alt="Mountain Bikers"/>
             </div>
           </div>
           <div className="dash-bottom-section">
