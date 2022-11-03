@@ -16,15 +16,17 @@ const RideIndexItem = ({ride}) => {
   return (
     <div className="feed-card">
       <div className="card-header">
-        <img className="avatar-image" src={ride.profilePicUrl} alt="Avatar" />
+        <div className='avatar-container'>
+          <img className="avatar-image-medium" src={ride.profilePicUrl} alt="Avatar" />
+        </div>
         <div className="card-header-text">
-          <h5>{ride.username}</h5>
+          <h4>{ride.username}</h4>
           <p>{longDate}</p>
         </div>
       </div>
       <div className="card-body">
         <div className="activity-symbol">
-          <i className="fa-light fa-bicycle"></i>
+          <i class="fa-solid fa-bicycle"></i>
         </div>
         <div className="card-body-main">
           <h3><Link to={`/rides/${ride.id}`}>{ride.title}</Link></h3>

@@ -88,15 +88,57 @@ background-color:
   align-items: flex-start;
 }
 
+.card-header-text h4 {
+  font-weight: 600;
+}
+
+.avatar-container {
+  width: 80px;
+}
+
+.avatar-image-medium {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+}
+
 .card-header {
   display: flex;
   justify-content: start;
+  padding: 10px;
+  height: 60px;
 }
 
-.card-body-main {
+.card-header * {
+  margin-right: 10px;
+}
+
+.activity-symbol {
+  display: flex;
+  width: 80px;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.card-body {
+  padding: 10px;
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: flex-start;
+}
+
+.card-body-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.card-body-text {
+  width: 100%;
 }
 
 .map-container {
@@ -126,6 +168,16 @@ background-color:
 	object-fit: cover;
   position: relative;
   bottom: 80px;
+  box-shadow: 0px 8px 24px rgb(13 13 18 / 16%);
+}
+
+.profile-bottom {
+  border-top: 1px solid #dfdfe8;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .profile-image-container {
@@ -135,11 +187,27 @@ background-color:
   height: 40px;
 }
 
+.stats {
+  display: flex;
+  justify-content: start;
+}
+
+.stats li {
+  margin: 15px;
+}
+
+.stats h4 {
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 400;
+}
+
 .profile-stats-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 10px;
+  padding: 20px;
+  padding-top: 0px;
 }
 
 .profile-tab {
@@ -214,6 +282,34 @@ background-color:
   width: 30%;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.feed-dropdown-list {
+  display: block;
+  min-width: 160px;
+  top: 54px;
+  left: unset !important;
+  right: 0 !important;
+  background-color: #fff;
+  /* position: absolute; */
+  max-height: 445px;
+  /* min-height: 80px; */
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+  top: 100%;
+  /* white-space: nowrap; */
+  border: 1px solid #dfdfe8;
+  border-top: none;
+  z-index: 30;
+  padding: 0;
+  margin: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  /* padding-inline-start: 40px; */
+}
+
+.feed-filter {
+  width: 150px;
 }
 
 .dash-bottom-text {

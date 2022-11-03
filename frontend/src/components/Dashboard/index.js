@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRides, fetchMyRides } from "../../store/rides";
 import RideIndexItem from "./RideIndexItem";
 import { getRides } from "../../store/rides";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
@@ -11,6 +11,7 @@ import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
 
 const Dashboard = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
@@ -30,11 +31,16 @@ const Dashboard = () => {
     userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
   }, []);
 
+  
   if (currentUser === null) {
     return (
       <Redirect to="/"/>
       )
     };
+    
+  const handleRedirect = () => {
+    userId ? history.push(`/dashboard`) : history.push(`/dashboard/users/${currentUser.id}/rides`);
+  };
 
   return (
     <>
@@ -61,21 +67,27 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
-          <div className="profilebottom"></div>
+          <div className="profile-bottom">
+            <div><p>Latest Activity</p></div>
+            <div>
+              <h4>Morning Ride | July 7, 2022</h4>
+              <p></p>
+            </div>
+          </div>
         </div>
         <div className="my-links-container"></div>
         <div className="my-links-container"></div>
       </div>
       <div id="ride-index">
         <div className="feed-header">
-          <div className="dropdown" id="feed-filter">
-            <button onMouseEnter={openMenu} onMouseLeave={closeMenu} className="clear-button">
+          <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="feed-filter">
+            <button className="clear-button">
               <h3>{userId ? 'My Rides' : 'Following'}</h3>
               <span><i className="fa-solid fa-angle-down"></i></span>
             </button>
             {showMenu && 
-            <ul className='dropdown-list'>
-              <li className="dropdown-item">
+            <ul className='feed-dropdown-list'>
+              <li onClick={handleRedirect} className="dropdown-item">
                 {userId ? 'Following' : 'My Rides'}
               </li>
             </ul>
