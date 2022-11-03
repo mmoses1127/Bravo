@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Link } from "react-router-dom";
-import { getRide, fetchRide } from "../../store/rides";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { getRide, fetchRide, deleteRide } from "../../store/rides";
 import RideIndexItem from "../Dashboard/RideIndexItem";
 import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
 
-const handleDelete = () => {
-  alert('Are you sure? Deleting an activity cannot be undone')
-}
+
 
 const RideShow = () => {
+  const history = useHistory();
   const currentUser = useSelector(getCurrentUser);
   const {rideId} = useParams();
   const dispatch = useDispatch();
@@ -23,6 +22,14 @@ const RideShow = () => {
   }, []);
   
   if (!ride) return null;
+
+  const handleDelete = () => {
+    // alert('Are you sure? Deleting an activity cannot be undone')
+    if (window.confirm('Are you sure? Deleting a ride cannot be undone.')) {
+      dispatch(deleteRide(rideId));
+      history.push(`/dashboard`);
+    };
+  };
   
   const parsedDateTime = new Date(ride.dateTime)
   const longDate = parsedDateTime.toLocaleString([], {
