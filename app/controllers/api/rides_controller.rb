@@ -4,19 +4,12 @@ class Api::RidesController < ApplicationController
 
   def index
     if params[:user_id]
-      puts 'here'
-      puts params[:user_id]
       @rides = Ride.where(athlete: params[:user_id])
     else
       @rides = Ride.all
       render :index      
     end
   end
-
-  # def my_index
-  #   @rides = Ride.all.where(athlete_id = 1)
-  #   render :index
-  # end
 
   def show
     @ride = Ride.find_by(id: params[:id])

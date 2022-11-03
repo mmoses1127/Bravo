@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_01_220001) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_204033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_220001) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "kudos", force: :cascade do |t|
+    t.bigint "giver_id", null: false
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id", "ride_id"], name: "index_kudos_on_giver_id_and_ride_id", unique: true
+    t.index ["giver_id"], name: "index_kudos_on_giver_id"
+    t.index ["ride_id"], name: "index_kudos_on_ride_id"
+  end
+
   create_table "rides", force: :cascade do |t|
     t.datetime "date_time", null: false
     t.string "title", null: false
@@ -70,5 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_220001) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "kudos", "rides"
+  add_foreign_key "kudos", "users", column: "giver_id"
   add_foreign_key "rides", "users", column: "athlete_id"
 end

@@ -21,9 +21,9 @@ class Ride < ApplicationRecord
   belongs_to :athlete,
     class_name: :User
 
-  # has_many :kudos,
-  #   foreign_key: :ride_id
-  #   class_name: :Kudo
+  has_many :kudos,
+    foreign_key: :ride_id
+    class_name: :Kudo
 
   # has_many :comments,
   #   foreign_key: :ride_id,

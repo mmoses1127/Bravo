@@ -10,7 +10,11 @@ const RideIndexItem = ({ride}) => {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
+  
 
+  const handleKudo = () => {
+
+  };
 
 
   return (
@@ -64,8 +68,18 @@ const RideIndexItem = ({ride}) => {
           </div>
         </div>
       </div>
-      <div className="card-footer">
-        
+      <div className="comments-and-messages">
+        <div className='kudos-summary'>
+
+        </div>
+        <div className='social-buttons'>
+          <button onClick={handleKudo} className='social-button'>
+            <i class="fa-solid fa-thumbs-up"></i>
+            </button>
+          <button onClick={handleComment} className='social-button'>
+            <i class="fa-regular fa-message"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

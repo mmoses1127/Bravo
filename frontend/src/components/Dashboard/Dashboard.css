@@ -348,3 +348,20 @@ background-color:
   background-color: white;
   box-shadow: 4px 4px 20px rgb(13 13 18 / 8%), -1px -1px 8px rgb(13 13 18 / 2%);
 }
+
+.social-button {
+  background-color: #f0f0f5;
+  border: 1px solid #f0f0f5;
+  color: #494950;
+  margin-left: 4px;
+  padding: 8px 12px;
+}
+
+.social-button:hover {
+  background-color: #fff;
+  border: 1px solid #f0f0f5;
+}
+
+.social-button i {
+  font-size: 14px;
+}
