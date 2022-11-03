@@ -123,6 +123,26 @@ background-color:
   /* margin-right: 10px; */
 }
 
+.delete-button {
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+}
+
+.delete-button:hover {
+  background-color: transparent;
+  border: none;
+}
+
+.edit-link {
+  display: flex;
+  align-items: center;
+}
+
+.edit-link:hover {
+  text-decoration: none;
+}
+
 .activity-symbol {
   display: flex;
   width: 100px;

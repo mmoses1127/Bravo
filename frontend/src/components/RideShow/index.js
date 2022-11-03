@@ -8,7 +8,9 @@ import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
 
-
+const handleDelete = () => {
+  alert('Are you sure? Deleting an activity cannot be undone')
+}
 
 const RideShow = () => {
   const currentUser = useSelector(getCurrentUser);
@@ -40,7 +42,10 @@ const RideShow = () => {
         </div>
         <div className="social-header">
           {ride.athleteId === currentUser.id && 
-          <Link to={`/rides/${rideId}/edit`} ><i className="fa-solid fa-pencil"></i></Link>
+          <>
+            <button className="delete-button" onClick={handleDelete}><i className="fa-solid fa-trash"/></button>
+            <Link className='edit-link' to={`/rides/${rideId}/edit`}><i className="fa-solid fa-pencil"></i></Link>
+          </>
           }
         </div>
       </div>
