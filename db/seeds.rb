@@ -1,6 +1,9 @@
+require 'open-uri'
+
 ApplicationRecord.transaction do 
   puts "Destroying tables..."
   # Unnecessary if using `rails db:seed:replant`
+  Ride.destroy_all
   User.destroy_all
 
   puts "Resetting primary keys..."
@@ -8,21 +11,42 @@ ApplicationRecord.transaction do
   ApplicationRecord.connection.reset_pk_sequence!('users')
 
   puts "Creating users..."
+  # Create profile pics for seeding users
+  pic_1 = URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/profile_1.jpg')
+  
+  profile_pics = [
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210530_160249.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190238(2).jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210605_130446.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210701_190934.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_191312598.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210711_195635.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190328.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210513_180408.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210716_175550.jpg'), 
+    URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190714.jpg')
+  ]
+  
   # Create one user with an easy to remember username, email, and password:
-  User.create!( 
+  user1 = User.create!( 
     email: 'demo@user.io',
     name: 'Derek Demoman', 
     password: 'password'
   )
+  user1.profile_pic.attach(io: pic_1, filename: 'profile_pic')
 
   # More users
-  10.times do 
-    User.create!({
+  i = 0
+  while i < 10
+    user = User.create!({
       email: Faker::Internet.unique.email,
       name: Faker::Name.unique.name,
       password: 'password'
     }) 
+    user.profile_pic.attach(io: profile_pics[i], filename: 'profile_pic')
+    i += 1
   end
+
 
   # rides
   Ride.create!({

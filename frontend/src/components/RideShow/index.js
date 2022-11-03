@@ -14,6 +14,12 @@ const RideShow = () => {
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));
+  const parsedDateTime = new Date(ride.dateTime)
+  const longDate = parsedDateTime.toLocaleString([], {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
   useEffect(() => {
     dispatch(fetchRide(rideId));
   }, []);
@@ -39,7 +45,7 @@ const RideShow = () => {
           </div>
           <div className="show-main-text-img">
             <div className="show-main-text">
-              <p>{ride.dateTime}</p>
+              <p>{longDate}</p>
               <h2>{ride.title}</h2>
             </div>
             <div className="show-main-img">

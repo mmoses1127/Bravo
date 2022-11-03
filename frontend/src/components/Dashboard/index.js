@@ -43,7 +43,7 @@ const Dashboard = () => {
         <div className="profile-container">
           <div className="profile-top">
             <div className="profile-image-container">
-              <img className="profile-image" src={avatar}/>
+              <img className="profile-image" src={currentUser.profilePicUrl}/>
             </div>
             <h1>{currentUser?.name}</h1>
             <ul className="profile-stats-container">
