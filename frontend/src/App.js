@@ -25,6 +25,9 @@ function App() {
         <Route path="/signup">
           <SignupFormPage />
         </Route>
+        <Route path="/dashboard/users/:userId/rides">
+          <Dashboard/>
+        </Route>
         <Route path="/dashboard">
           <Dashboard />
         </Route>
@@ -36,9 +39,6 @@ function App() {
         </Route>        
         <Route path="/rides/:rideId">
           <RideShow/>
-        </Route>
-        <Route path="/dashboard/users/:userId/rides">
-          <Dashboard/>
         </Route>
       </Switch>
     </>

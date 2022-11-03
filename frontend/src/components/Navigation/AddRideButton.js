@@ -27,7 +27,7 @@ const AddRideButton = () => {
       </button>
 
       {showMenu && (<ul>
-        <li onClick={() => history.push(`/create-ride`)}>Create Ride</li>
+        <li className="dropdown-item" onClick={() => history.push(`/create-ride`)}>Create Ride</li>
       </ul>
       )}
 

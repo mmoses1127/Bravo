@@ -33,8 +33,8 @@ const ProfileButton = ({user}) => {
         <i className="fa-solid fa-angle-down"></i>
       </div>
       {showMenu && (<ul>
-        <li onClick={() => history.push(`/profile`)}>Profile</li>
-        <li onClick={logoutHandler}>Log Out</li>
+        <li className="dropdown-item" onClick={() => history.push(`/profile`)}>Profile</li>
+        <li className="dropdown-item" onClick={logoutHandler}>Log Out</li>
       </ul>
       )}
     </div>

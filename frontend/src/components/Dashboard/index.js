@@ -16,8 +16,6 @@ const Dashboard = () => {
   const currentUser = useSelector(getCurrentUser);
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
-  console.log(userId)
-
 
   const openMenu = () => {
     setShowMenu(true);
@@ -77,7 +75,9 @@ const Dashboard = () => {
             </button>
             {showMenu && 
             <ul>
-              <li></li>
+              <li className="dropdown-item">
+                {userId ? 'Following' : 'My Rides'}
+              </li>
             </ul>
             }
           </div>
@@ -99,8 +99,6 @@ const Dashboard = () => {
         </div>
         {rides.map(ride => <RideIndexItem ride={Object.values(ride)[0]}/>)}
       </div>
-      {/* <div className="announcements-column"></div> */}
-
     </div>
     </>
   );

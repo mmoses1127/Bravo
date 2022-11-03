@@ -182,3 +182,21 @@ textarea {
 	display: block;
 	text-align: center;
 }
+
+.dropdown-item {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	float: left;
+	min-width: 160px;
+	/* padding: 5px 0; */
+	/* margin: 2px 0 0; */
+	list-style: none;
+	font-size: 14px;
+	background-color: #fff;
+	/* border: 1px solid #ccc; */
+	-webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+	box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+	color: black;
+}
