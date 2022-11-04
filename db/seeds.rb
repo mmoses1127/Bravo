@@ -59,7 +59,15 @@ ApplicationRecord.transaction do
     elevation: 587,
     # GPXFile: "./assets/gpx/annadel24334.gpx"
   });
+<<<<<<< HEAD
 
+=======
+  ride_1.photos.attach([
+    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210525_190321.jpg'), filename: 'ride_pic'},
+    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1623156396310.jpg'), filename: 'ride_pic'},
+    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1627389574997-29.jpg'), filename: 'ride_pic'}
+  ]);
+>>>>>>> seeds
 
   ride_2 = Ride.create!({
     date_time: "2022-03-13 015:12:36 UTC",

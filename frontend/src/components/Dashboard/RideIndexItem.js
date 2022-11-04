@@ -20,6 +20,7 @@ const RideIndexItem = ({ride}) => {
     
   }
 
+  console.log(ride.photoUrls)
 
   return (
     <div className="feed-card">
@@ -62,7 +63,7 @@ const RideIndexItem = ({ride}) => {
         </div>
         <div className="photo-container">
           <div className="secondary-photo">
-            {ride.photoUrl && <img src={ride.photoUrl}/>}
+            {(ride.photoUrls.length !== 0) && <img className='ride-photo-thumb' src={ride.photoUrls[0]}/>}
           </div>
           <div className="secondary-photo">
             
