@@ -31,7 +31,7 @@ const Dashboard = () => {
     dispatch(fetchUsers());
     dispatch(fetchKudos());
     userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
-  }, []);
+  }, [userId]);
 
   
   if (currentUser === null) {
