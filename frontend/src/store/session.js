@@ -84,7 +84,6 @@ export const login = (user) => async (dispatch) => {
   });
   let data = await res.json();
   storeCurrentUser(data)
-  console.log(data)
   dispatch(addCurrentUser(data));
   return res;
 }

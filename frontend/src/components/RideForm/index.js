@@ -62,7 +62,10 @@ const RideForm = () => {
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
     newRide.append('ride[athleteId]', currentUser.id);
     if (photoFiles) {
-      newRide.append('ride[photos]', photoFiles[0]);
+      photoFiles.forEach(photoFile => {
+        newRide.append('ride[photos][]', photoFile);
+
+      });
     };
 
     return dispatch(createRide(newRide))
@@ -81,7 +84,7 @@ const RideForm = () => {
   };
 
   const handleFile = (e) => {
-    const files = e.currentTarget.files;
+    const files = Object.values(e.currentTarget.files);
     setPhotoFiles(files);
   };
 
