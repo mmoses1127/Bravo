@@ -81,7 +81,7 @@ export const deleteRide = (rideId) => async dispatch => {
 export const createRide = (ride) => async dispatch => {
   const res = await csrfFetch(`/api/rides`, {
     method: 'POST',
-    body: JSON.stringify(ride)
+    body: ride
   });
 
   if (res.ok) {

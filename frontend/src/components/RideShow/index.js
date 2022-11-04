@@ -30,7 +30,8 @@ const RideShow = () => {
       history.push(`/dashboard`);
     };
   };
-  
+
+  let parsedDuration;
   const parsedDateTime = new Date(ride.dateTime)
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
@@ -38,7 +39,12 @@ const RideShow = () => {
   });
 
   // const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
-  const parsedDuration = `${Math.floor(ride.duration / 3600)}:${Math.floor((ride.duration % 3600) / 60)}`;
+  if (ride) {
+    const hours = Math.floor(ride.duration / 3600);
+    let mins = Math.floor((ride.duration % 3600) / 60);
+    if (mins < 10) mins = '0' + mins;
+    parsedDuration = `${hours}:${mins}`;
+  }
 
   return (
     <div className="page-container-show">
@@ -65,6 +71,7 @@ const RideShow = () => {
             <div className="show-main-text">
               <p>{longDate}</p>
               <h2>{ride.title}</h2>
+              <p>{ride.description}</p>
             </div>
             <div className="show-main-img">
               <img className="small-square-image-box"></img>

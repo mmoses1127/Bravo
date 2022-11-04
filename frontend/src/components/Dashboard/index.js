@@ -111,7 +111,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {rides.map(ride => <RideIndexItem ride={Object.values(ride)[0]}/>)}
+        {rides.reverse().map(ride => <RideIndexItem ride={Object.values(ride)[0]}/>)}
       </div>
     </div>
     </>

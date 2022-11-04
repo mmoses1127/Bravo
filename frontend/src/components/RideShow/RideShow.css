@@ -34,7 +34,7 @@
 }
 
 .ride-show-main {
-  height: 200px;
+  /* height: 200px; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -51,7 +51,7 @@
 .show-main-box {
   display: flex;
   width: 50%;
-  border-left: 1px solid #dfdfe8;
+  border-right: 1px solid #dfdfe8;
   align-items: center;
   padding: 10px;
 }

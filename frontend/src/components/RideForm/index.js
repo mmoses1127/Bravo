@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { createRide } from '../../store/rides';
-import './RideForm.css'
+import { getCurrentUser } from '../../store/session';
+import './RideForm.css';
 
 const RideForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(state => Object.values(state.session.user)[0]);
+  const currentUser = useSelector(getCurrentUser);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [elevation, setElevation] = useState('');
@@ -16,24 +17,52 @@ const RideForm = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [errors, setErrors] = useState([]);
+  const [photoFiles, setPhotoFiles] = useState([]);
 
   const handleClick = async (e) => {
     await handleSubmit(e);
     history.push(`/`);
   }
 
-  const handleSubmit = (e) => {
+  // const handleSubmit2 = () => {
+  //   e.preventDefault();
+  //   const newRide = new FormData();
+  //   formData.append('ride[title]', title);
+  //   formData.append('ride[distance]', distance);
+  //   formData.append('ride[description]', description);
+  //   formData.append('ride[duration]', duration);
+  //   formData.append('ride[elevation]', elevation);
+  //   formData.append('ride[date_time]', `${date} 0${time}:00 UTC`);
+  //   formData.append('ride[athleteId]', currentUser.id);
+  //   if (photoFiles) {
+  //     formData.append('post[photos]', photoFile[0]);
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
 
-    let newRide = {
-      title,
-      description,
-      distance,
-      duration,
-      elevation,
-      athlete_id: user.id,
-      date_time: `${date} 0${time}:00 UTC`
+    // let newRide = {
+    //   title,
+    //   description,
+    //   distance,
+    //   duration,
+    //   elevation,
+    //   athlete_id: currentUser.id,
+    //   date_time: `${date} 0${time}:00 UTC`
+    // };
+
+    const newRide = new FormData();
+    newRide.append('ride[title]', title);
+    newRide.append('ride[distance]', distance);
+    newRide.append('ride[description]', description);
+    newRide.append('ride[duration]', duration);
+    newRide.append('ride[elevation]', elevation);
+    newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
+    newRide.append('ride[athleteId]', currentUser.id);
+    if (photoFiles) {
+      newRide.append('ride[photos]', photoFiles[0]);
     };
 
     return dispatch(createRide(newRide))
@@ -51,7 +80,12 @@ const RideForm = () => {
     });
   };
 
+  const handleFile = (e) => {
+    const files = e.currentTarget.files;
+    setPhotoFiles(files);
+  };
 
+  console.log(photoFiles)
 
   return (
     <div className='page-container'>
@@ -121,6 +155,17 @@ const RideForm = () => {
               <div className='inline-inputs'>
                 <label>
                   <textarea rows='1' cols='60' onChange={e => setDescription(e.target.value)} value={description} />
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div className='ride-entry-fields'>
+            <fieldset>
+              <legend>Photos</legend>
+              <div className='photo-upload-zone'>
+                <label>
+                  <input type='file' onChange={handleFile} multiple></input>
                 </label>
               </div>
             </fieldset>

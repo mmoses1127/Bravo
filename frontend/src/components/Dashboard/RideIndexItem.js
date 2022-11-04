@@ -34,7 +34,7 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="card-body">
         <div className="activity-symbol">
-          <i class="fa-solid fa-bicycle"></i>
+          <i className="fa-solid fa-bicycle"></i>
         </div>
         <div className="card-body-main">
           <h3><Link to={`/rides/${ride.id}`}>{ride.title}</Link></h3>
@@ -62,7 +62,7 @@ const RideIndexItem = ({ride}) => {
         </div>
         <div className="photo-container">
           <div className="secondary-photo">
-
+            {ride.photoUrl && <img src={ride.photoUrl}/>}
           </div>
           <div className="secondary-photo">
             
@@ -78,10 +78,10 @@ const RideIndexItem = ({ride}) => {
         </div>
         <div className='social-buttons'>
           <button onClick={handleKudo} className='social-button'>
-            <i class="fa-solid fa-thumbs-up"></i>
+            <i className="fa-solid fa-thumbs-up"></i>
             </button>
           <button onClick={handleComment} className='social-button'>
-            <i class="fa-regular fa-message"></i>
+            <i className="fa-regular fa-message"></i>
           </button>
         </div>
       </div>
