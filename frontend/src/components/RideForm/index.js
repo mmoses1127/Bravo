@@ -88,8 +88,6 @@ const RideForm = () => {
     setPhotoFiles(files);
   };
 
-  console.log(photoFiles)
-
   return (
     <div className='page-container'>
       <h1 className='title-header'>Manual Entry</h1>

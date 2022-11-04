@@ -27,12 +27,12 @@ profile_pics = [
 ]
 
 # Create one user with an easy to remember username, email, and password:
-user1 = User.create!( 
+demo_user = User.create!( 
   email: 'demo@user.io',
   name: 'Derek Demoman', 
   password: 'password'
 )
-user1.profile_pic.attach(io: pic_1, filename: 'profile_pic')
+demo_user.profile_pic.attach(io: pic_1, filename: 'profile_pic')
 
 # More users
 i = 0
@@ -89,6 +89,29 @@ ride_3 = Ride.create!({
   elevation: 1201,
   # GPXFile: "./assets/gpx/jlondon42334.gpx"
 })
+
+# Create kudos
+Kudo.create!({
+  giver_id: 1,
+  ride_id: ride_2.id
+})
+
+Kudo.create!({
+  giver_id: demo_user.id,
+  ride_id: ride_1.id
+})
+
+Kudo.create!({
+  giver_id: 4,
+  ride_id: ride_3.id
+})
+
+Kudo.create!({
+  giver_id: 8,
+  ride_id: ride_2.id
+})
+
+
 
 puts "Done!"
 

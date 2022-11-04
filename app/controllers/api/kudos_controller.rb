@@ -1,6 +1,6 @@
-class KudosController < ApplicationController
+class Api::KudosController < ApplicationController
 
-  before_action :require_logged_in, only: [create, destroy]
+  before_action :require_logged_in, only: [:create, :destroy]
 
   def create
     @ride = Ride.find_by(id: params[:kudo][:ride_id])
@@ -17,7 +17,8 @@ class KudosController < ApplicationController
   # end
 
   def index
-    @kudos = Kudo.all.where(ride_id: params[:kudo][:ride_id])
+    # @kudos = Kudo.all.where(ride_id: params[:kudo][:ride_id])
+    @kudos = Kudo.all
     if @kudos
       render :index
     else

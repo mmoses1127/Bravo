@@ -32,11 +32,12 @@ export const getKudos = (state = {}) => {
 };
 
 export const fetchKudos = () => async dispatch => {
+  console.log('hi from fetch kudos')
   const res = await fetch(`api/kudos`);
 
   if (res.ok) {
     const kudos = await res.json();
-    dispatch(addAllKudos());
+    dispatch(addAllKudos(kudos));
   };
 };
 

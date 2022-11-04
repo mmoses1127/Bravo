@@ -9,6 +9,7 @@ import { fetchUser, fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
+import { fetchKudos } from "../../store/kudos";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -28,6 +29,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(fetchKudos());
     userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
   }, []);
 

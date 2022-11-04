@@ -1,24 +1,35 @@
 import smallLogo from '../../assets/small_logo.svg';
 import { Link } from 'react-router-dom';
 import Map from '../Map/Map';
+import { deleteKudo, getKudos } from '../../store/kudos';
+import { useSelector } from 'react-redux';
 
 
 const RideIndexItem = ({ride}) => {
   const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
-  const parsedDateTime = new Date(ride.dateTime)
+  const parsedDateTime = new Date(ride.dateTime);
+  const kudos = useSelector(getKudos);
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
   
 
-  const handleKudo = () => {
+  const giveKudo = () => {
 
+  };
+
+  const removeKudo = () => {
+    dispatchEvent(deleteKudo())
   };
 
   const handleComment = () => {
     
-  }
+  };
+
+  const kudoButtonMaker = () => {
+
+  };
 
   return (
     <div className="feed-card">
@@ -62,7 +73,6 @@ const RideIndexItem = ({ride}) => {
         {ride.photoUrls && 
           
           <div className="photos-container">
-            {console.log(ride.photoUrls)}
             {ride.photoUrls.slice(0, 2).map(photoUrl => (
               <div className='thumb-container'>
                 <img className='photo-thumb' src={photoUrl}/>
@@ -74,10 +84,10 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="comments-and-messages">
         <div className='kudos-summary'>
-
+          <h3>Placeholder</h3>
         </div>
         <div className='social-buttons'>
-          <button onClick={handleKudo} className='social-button'>
+          <button className='social-button'>
             <i className="fa-solid fa-thumbs-up"></i>
             </button>
           <button onClick={handleComment} className='social-button'>
