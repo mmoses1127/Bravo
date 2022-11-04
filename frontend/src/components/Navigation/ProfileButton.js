@@ -1,16 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { logout} from "../../store/session";
 import avatar from "../../assets/mtb1.jpg";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-
+import { getCurrentUser } from "../../store/session";
 
 const ProfileButton = ({user}) => {
 
   const history = useHistory();  
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const currentUser = useSelector(getCurrentUser)
 
   const openMenu = () => {
     setShowMenu(true);
@@ -29,7 +30,7 @@ const ProfileButton = ({user}) => {
   return (
     <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down, nav-dropdown">
       <div className='nav-bar-component'>
-        <img className="avatar-image" src={avatar} alt="Avatar"/>
+        <img className="avatar-image" src={currentUser.profilePicUrl} alt="Avatar"/>
         <i className="fa-solid fa-angle-down"></i>
       </div>
       {showMenu && (<ul className='dropdown-list'>
