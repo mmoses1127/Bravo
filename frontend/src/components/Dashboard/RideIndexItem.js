@@ -20,8 +20,6 @@ const RideIndexItem = ({ride}) => {
     
   }
 
-  console.log(ride.photoUrls)
-
   return (
     <div className="feed-card">
       <div className="card-header">
@@ -61,17 +59,18 @@ const RideIndexItem = ({ride}) => {
         <div className="map-container">
           <Link to={`/rides/${ride.id}`}><img alt='static Mapbox map of the San Francisco bay area' src='https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.337798,37.810550,9.67,0.00,0.00/1000x600@2x?access_token=pk.eyJ1IjoibW1vc2VzMTEyNyIsImEiOiJjbDl5cWtkdnAwN2pwM3BrbnZsNTZzZHIzIn0.5DYp57TWNGkULiO3KhdVbg' /></Link>
         </div>
-        <div className="photo-container">
-          <div className="secondary-photo">
-            {(ride.photoUrls.length !== 0) && <img className='ride-photo-thumb' src={ride.photoUrls[0]}/>}
+        {ride.photoUrls && 
+          
+          <div className="photos-container">
+            {console.log(ride.photoUrls)}
+            {ride.photoUrls.map(photoUrl => (
+              <div className='thumb-container'>
+                <img className='photo-thumb' src={photoUrl}/>
+              </div>
+            ))}
           </div>
-          <div className="secondary-photo">
-            
-          </div>
-          <div className="secondary-photo">
-            
-          </div>
-        </div>
+        }
+
       </div>
       <div className="comments-and-messages">
         <div className='kudos-summary'>
