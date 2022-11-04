@@ -59,7 +59,7 @@ ApplicationRecord.transaction do
     elevation: 587,
     # GPXFile: "./assets/gpx/annadel24334.gpx"
   });
-  ride_1.photos.attach[]
+
 
   ride_2 = Ride.create!({
     date_time: "2022-03-13 015:12:36 UTC",
