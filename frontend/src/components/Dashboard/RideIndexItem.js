@@ -63,7 +63,7 @@ const RideIndexItem = ({ride}) => {
           
           <div className="photos-container">
             {console.log(ride.photoUrls)}
-            {ride.photoUrls.map(photoUrl => (
+            {ride.photoUrls.slice(0, 2).map(photoUrl => (
               <div className='thumb-container'>
                 <img className='photo-thumb' src={photoUrl}/>
               </div>

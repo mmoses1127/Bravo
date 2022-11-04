@@ -64,28 +64,6 @@ ride_1.photos.attach([
   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1627389574997-29.jpg'), filename: 'ride_pic'}
 ])
 
-<<<<<<< HEAD
-  # rides
-  ride_1 = Ride.create!({
-    date_time: "2022-02-02 017:02:36 UTC",
-    title: "Big loop in Annadel Park",
-    description: "Legs were a bit tired, so took it easy. Autumn colors starting to come out.",
-    athlete_id: 1,
-    distance: 25.4,
-    duration: 6231,
-    elevation: 587,
-    # GPXFile: "./assets/gpx/annadel24334.gpx"
-  });
-<<<<<<< HEAD
-
-=======
-  ride_1.photos.attach([
-    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210525_190321.jpg'), filename: 'ride_pic'},
-    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1623156396310.jpg'), filename: 'ride_pic'},
-    {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1627389574997-29.jpg'), filename: 'ride_pic'}
-  ]);
->>>>>>> seeds
-=======
 ride_2 = Ride.create!({
   date_time: "2022-03-13 015:12:36 UTC",
   title: "Recovery ride with Justin",
@@ -100,7 +78,6 @@ ride_2.photos.attach([
   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210716_175550.jpg'), filename: 'ride_pic'},
   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210717_201312.jpg'), filename: 'ride_pic'}
 ])
->>>>>>> seeds
 
 ride_3 = Ride.create!({
   date_time: "2022-05-21 012:48:01 UTC",
