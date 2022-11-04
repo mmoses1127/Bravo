@@ -1,4 +1,4 @@
-class KudoController < ApplicationController
+class KudosController < ApplicationController
 
   before_action :require_logged_in, only: [create, destroy]
 
@@ -12,9 +12,9 @@ class KudoController < ApplicationController
     end
   end
 
-  def destroy
-    @kudo = 
-  end
+  # def destroy
+  #   @kudo = 
+  # end
 
   def index
     @kudos = Kudo.all.where(ride_id: params[:kudo][:ride_id])

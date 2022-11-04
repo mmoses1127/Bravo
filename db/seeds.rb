@@ -49,7 +49,7 @@ ApplicationRecord.transaction do
 
 
   # rides
-  Ride.create!({
+  ride_1 = Ride.create!({
     date_time: "2022-02-02 017:02:36 UTC",
     title: "Big loop in Annadel Park",
     description: "Legs were a bit tired, so took it easy. Autumn colors starting to come out.",
@@ -59,8 +59,9 @@ ApplicationRecord.transaction do
     elevation: 587,
     # GPXFile: "./assets/gpx/annadel24334.gpx"
   });
+  ride_1.photos.attach[]
 
-  Ride.create!({
+  ride_2 = Ride.create!({
     date_time: "2022-03-13 015:12:36 UTC",
     title: "Recovery ride with Justin",
     description: "Easy spin after a tough race weekend.",
@@ -71,7 +72,7 @@ ApplicationRecord.transaction do
     # GPXFile: "./assets/gpx/recovery42343.gpx"
   });
 
-  Ride.create!({
+  ride_3 = Ride.create!({
     date_time: "2022-05-21 012:48:01 UTC",
     title: "To the peak of Jack London",
     description: "Big climb and epic descent.",
