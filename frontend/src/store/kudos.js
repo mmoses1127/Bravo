@@ -28,11 +28,10 @@ const removeKudo = (kudoId) => {
 
 export const getKudos = (state = {}) => {
   if (!state.kudos) return [];
-  return state.kudos;
+  return Object.values(state.kudos);
 };
 
 export const fetchKudos = () => async dispatch => {
-  console.log('hi from fetch kudos')
   const res = await fetch(`api/kudos`);
 
   if (res.ok) {

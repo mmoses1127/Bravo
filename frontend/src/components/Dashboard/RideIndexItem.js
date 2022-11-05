@@ -1,26 +1,36 @@
 import smallLogo from '../../assets/small_logo.svg';
 import { Link } from 'react-router-dom';
 import Map from '../Map/Map';
-import { deleteKudo, getKudos } from '../../store/kudos';
-import { useSelector } from 'react-redux';
+import { createKudo, deleteKudo, getKudos } from '../../store/kudos';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentUser } from '../../store/session';
 
 
 const RideIndexItem = ({ride}) => {
+  const dispatch = useDispatch();
   const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
+  const currentUser = useSelector(getCurrentUser);
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
+  let myKudo = kudos.filter(kudo => kudo['giverId'] === currentUser.id && kudo['rideId'] === ride.id)
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
   
+  console.log(myKudo)
 
-  const giveKudo = () => {
-
+  const giveKudo = (e) => {
+    e.preventDefault();
+    dispatch(createKudo({
+      giver_id: currentUser.id,
+      ride_id: ride.id
+    }))
   };
 
-  const removeKudo = () => {
-    dispatchEvent(deleteKudo())
+  const removeKudo = (e) => {
+    e.preventDefault();
+    dispatch(deleteKudo(myKudo.id))
   };
 
   const handleComment = () => {
@@ -28,7 +38,20 @@ const RideIndexItem = ({ride}) => {
   };
 
   const kudoButtonMaker = () => {
-
+    if (myKudo.length > 0) {
+      myKudo = myKudo[0];
+      return (
+        <button onClick={removeKudo} className='social-button'>
+          <i className="fa-solid fa-thumbs-up orange"></i>
+        </button>
+      )
+    } else {
+      return (
+        <button onClick={giveKudo} className='social-button'>
+          <i className="fa-solid fa-thumbs-up"></i>
+        </button>
+      )
+    };
   };
 
   return (
@@ -87,9 +110,7 @@ const RideIndexItem = ({ride}) => {
           <h3>Placeholder</h3>
         </div>
         <div className='social-buttons'>
-          <button className='social-button'>
-            <i className="fa-solid fa-thumbs-up"></i>
-            </button>
+          {kudoButtonMaker()}
           <button onClick={handleComment} className='social-button'>
             <i className="fa-regular fa-message"></i>
           </button>
