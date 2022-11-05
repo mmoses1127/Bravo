@@ -36,9 +36,11 @@ export const getRide = rideId => (state) => {
   return state.rides[rideId];
 }
 
-export const getMyRides = (state) => {
+export const getUserRides = userId => (state) => {
   if (!state.rides) return [];
-  return Object.values(state.rides);
+  return Object.values(state.rides).filter(ride => (
+    ride.athleteId === userId
+  ));
 }
 
 export const fetchRides = () => async dispatch => {

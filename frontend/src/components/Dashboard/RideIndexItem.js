@@ -19,8 +19,6 @@ const RideIndexItem = ({ride}) => {
     timeStyle: 'short',
   });
   
-  console.log(myKudo)
-
   const giveKudo = (e) => {
     e.preventDefault();
     dispatch(createKudo({

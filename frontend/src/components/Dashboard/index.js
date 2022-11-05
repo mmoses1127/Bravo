@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRides, fetchMyRides } from "../../store/rides";
 import RideIndexItem from "./RideIndexItem";
-import { getRides } from "../../store/rides";
+import { getRides, getUserRides } from "../../store/rides";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
@@ -16,8 +16,10 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
+  const currentUserRides = useSelector(getUserRides(currentUser.id))
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
+  console.log(currentUserRides)
 
   const openMenu = () => {
     setShowMenu(true);
@@ -65,7 +67,7 @@ const Dashboard = () => {
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Rides</p>
-                <h3 className='profile-num'>4</h3>
+                <h3 className='profile-num'>{currentUserRides.length}</h3>
               </li>
             </ul>
           </div>
