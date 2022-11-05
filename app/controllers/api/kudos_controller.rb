@@ -5,20 +5,24 @@ class Api::KudosController < ApplicationController
   def create
     @ride = Ride.find_by(id: params[:kudo][:ride_id])
     @kudo = Kudo.new(kudo_params)
+    # @kudos = Kudo.all
     if @kudo.save!
-      render `api/rides/index`
+      render :show
     else
       render json: { errors: @kudo.errors.full_messages }, status: :unprocessable_entity;
     end
   end
 
-  # def destroy
-  #   @kudo = 
-  # end
+  def destroy
+    @kudo = Kudo.find_by(id: params[:id])
+    @kudo.destroy!
+    @kudos = Kudo.all
+    render :index
+  end
 
   def index
     # @kudos = Kudo.all.where(ride_id: params[:kudo][:ride_id])
-    @kudos = Kudo.all
+    @kudos = Kudo.all 
     if @kudos
       render :index
     else

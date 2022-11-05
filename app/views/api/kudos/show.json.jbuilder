@@ -1,0 +1,1 @@
+json.extract! @kudo, :id, :giver_id, :ride_id

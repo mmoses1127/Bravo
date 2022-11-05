@@ -54,7 +54,9 @@ export const createKudo = (kudo) => async dispatch => {
 };
 
 export const deleteKudo = (kudoId) => async dispatch => {
-  const res = await csrfFetch(`api/kudos/${kudoId}`);
+  const res = await csrfFetch(`api/kudos/${kudoId}`,{
+    method: 'DELETE'
+  });
 
   if (res.ok) {
     dispatch(removeKudo(kudoId));
