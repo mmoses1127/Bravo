@@ -19,7 +19,7 @@ const RideShow = () => {
   
   useEffect(() => {
     dispatch(fetchRide(rideId));
-  }, []);
+  }, [rideId]);
   
   if (!ride) return null;
 
@@ -74,9 +74,11 @@ const RideShow = () => {
               <p>{ride.description}</p>
             </div>
             <div className="show-main-img">
-              <img className="small-square-image-box"></img>
-              <img className="small-square-image-box"></img>
-              <img className="small-square-image-box"></img>
+              {ride.photoUrls.slice(0, 5).map(photoUrl => (
+                <div className='small-square-thumb-box'>
+                  <img className='photo-thumb' src={photoUrl}/>
+                </div>
+              ))}
             </div>
           </div>
         </div>

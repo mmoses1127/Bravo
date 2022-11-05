@@ -82,6 +82,7 @@
   height: 100px;
   width: 100px;
   margin: 10px;
+  margin-left: 0;
 }
 
 .ride-show-header-left * {
@@ -116,4 +117,10 @@
 .show-stat h3 {
   font-size: 28px;
   font-weight: 300;
+}
+
+.small-square-thumb-box {
+  width: 64px;
+  height: 64px;
+  margin-right: 5px;
 }
