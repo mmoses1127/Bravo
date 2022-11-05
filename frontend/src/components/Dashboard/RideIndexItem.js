@@ -12,7 +12,8 @@ const RideIndexItem = ({ride}) => {
   const currentUser = useSelector(getCurrentUser);
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
-  let myKudo = kudos.filter(kudo => kudo['giverId'] === currentUser.id && kudo['rideId'] === ride.id)
+  const rideKudos = kudos.filter(kudo => kudo['rideId'] === ride.id);
+  let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id)
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -107,7 +108,8 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="comments-and-messages">
         <div className='kudos-summary'>
-          <h3>Placeholder</h3>
+          <div className='kudos-pics'></div>
+          <p>{rideKudos.length > 0 ? `${rideKudos.length} kudos` : `Be the first to give Kudos!`}</p>
         </div>
         <div className='social-buttons'>
           {kudoButtonMaker()}
