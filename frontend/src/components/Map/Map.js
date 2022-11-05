@@ -71,45 +71,47 @@ const Map = () => {
     ]
   });
 
-  // Use the coordinates you drew to make the Map Matching API request
-  function updateRoute() {
-    // Set the profile
-    const profile = 'cycling';
-    // Get the coordinates that were drawn on the map
-    const data = draw.getAll();
-    const lastFeature = data.features.length - 1;
-    const coords = data.features[lastFeature].geometry.coordinates;
-    // Format the coordinates
-    const newCoords = coords.join(';');
-    // Set the radius for each coordinate pair to 25 meters
-    const radius = coords.map(() => 25);
-    getMatch(newCoords, radius, profile);
-  }
+//   // Use the coordinates you drew to make the Map Matching API request
+//   function updateRoute() {
+//     // Set the profile
+//     const profile = 'cycling';
+//     // Get the coordinates that were drawn on the map
+//     const data = draw.getAll();
+//     const lastFeature = data.features.length - 1;
+//     const coords = data.features[lastFeature].geometry.coordinates;
+//     // Format the coordinates
+//     const newCoords = coords.join(';');
+//     // Set the radius for each coordinate pair to 25 meters
+//     const radius = coords.map(() => 25);
+//     getMatch(newCoords, radius, profile);
+//   }
 
-  // Make a Map Matching request
-  async function getMatch(coordinates, radius, profile) {
-  // Separate the radiuses with semicolons
-    const radiuses = radius.join(';');
-  // Create the query
-    const query = await fetch(
-      `https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`,
-      { method: 'GET' }
-    );
-    const response = await query.json();
-  // Handle errors
-    if (response.code !== 'Ok') {
-      alert(
-        `${response.code} - ${response.message}.\n\nFor more information: https://docs.mapbox.com/api/navigation/map-matching/#map-matching-api-errors`
-      );
-      return;
-    }
-  // Get the coordinates from the response
-    const coords = response.matchings[0].geometry;
-    console.log(coords);
-  // Code from the next step will go here
-}
+//   // Make a Map Matching request
+//   async function getMatch(coordinates, radius, profile) {
+//   // Separate the radiuses with semicolons
+//     const radiuses = radius.join(';');
+//   // Create the query
+//     const query = await fetch(
+//       `https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`,
+//       { method: 'GET' }
+//     );
+//     const response = await query.json();
+//   // Handle errors
+//     if (response.code !== 'Ok') {
+//       alert(
+//         `${response.code} - ${response.message}.\n\nFor more information: https://docs.mapbox.com/api/navigation/map-matching/#map-matching-api-errors`
+//       );
+//       return;
+//     }
+//   // Get the coordinates from the response
+//     const coords = response.matchings[0].geometry;
+//     console.log(coords);
+//   // Code from the next step will go here
+// }
 
 
+// map.current.on('draw.create', updateRoute);
+// map.current.on('draw.update', updateRoute);
 
 
 
@@ -126,10 +128,7 @@ const Map = () => {
     
   });
   
-  if (!map.current) return null;
   
-  map.current.on('draw.create', updateRoute);
-  map.current.on('draw.update', updateRoute);
 
   return (
     <div className="outer-map-container">

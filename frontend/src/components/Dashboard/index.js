@@ -20,7 +20,6 @@ const Dashboard = () => {
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
   const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id)
-  console.log(latestActivity)
   const openMenu = () => {
     setShowMenu(true);
   };

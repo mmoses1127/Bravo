@@ -13,6 +13,7 @@ const RideIndexItem = ({ride}) => {
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
   const rideKudos = kudos.filter(kudo => kudo['rideId'] === ride.id);
+  console.log(rideKudos)
   let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id)
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
@@ -106,7 +107,16 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="comments-and-messages">
         <div className='kudos-summary'>
-          <div className='kudos-pics'></div>
+          <div className='kudos-pics'>
+            {rideKudos.length > 0 && 
+              rideKudos.map(kudo => { return (
+                <div className='tiny-kudo-wrapper'>
+                  <img className='tiny-kudo-giver' src={kudo.profilePicUrl}/>
+                </div>
+              )
+              })
+            }
+          </div>
           <p>{rideKudos.length > 0 ? `${rideKudos.length} kudos` : `Be the first to give Kudos!`}</p>
         </div>
         <div className='social-buttons'>
