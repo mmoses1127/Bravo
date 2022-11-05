@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import { getCurrentUser } from '../../store/session';
+import EditMap from './EditMap';
 import './RideForm.css';
 
 const RideForm = () => {
@@ -24,34 +25,10 @@ const RideForm = () => {
     history.push(`/`);
   }
 
-  // const handleSubmit2 = () => {
-  //   e.preventDefault();
-  //   const newRide = new FormData();
-  //   formData.append('ride[title]', title);
-  //   formData.append('ride[distance]', distance);
-  //   formData.append('ride[description]', description);
-  //   formData.append('ride[duration]', duration);
-  //   formData.append('ride[elevation]', elevation);
-  //   formData.append('ride[date_time]', `${date} 0${time}:00 UTC`);
-  //   formData.append('ride[athleteId]', currentUser.id);
-  //   if (photoFiles) {
-  //     formData.append('post[photos]', photoFile[0]);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-
-    // let newRide = {
-    //   title,
-    //   description,
-    //   distance,
-    //   duration,
-    //   elevation,
-    //   athlete_id: currentUser.id,
-    //   date_time: `${date} 0${time}:00 UTC`
-    // };
 
     const newRide = new FormData();
     newRide.append('ride[title]', title);

@@ -2,11 +2,19 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getRide, fetchRide, deleteRide } from "../../store/rides";
-import RideIndexItem from "../Dashboard/RideIndexItem";
 import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
+import {
+  LineChart,
+  ResponsiveContainer,
+  Legend, Tooltip,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid
+} from 'recharts';
 
 
 
@@ -46,6 +54,39 @@ const RideShow = () => {
     parsedDuration = `${hours}:${mins}`;
   }
 
+  let pdata = [
+    {
+        name: 'MongoDb',
+        student: 11,
+        fees: 120
+    },
+    {
+        name: 'Javascript',
+        student: 15,
+        fees: 12
+    },
+    {
+        name: 'PHP',
+        student: 5,
+        fees: 10
+    },
+    {
+        name: 'Java',
+        student: 10,
+        fees: 5
+    },
+    {
+        name: 'C#',
+        student: 9,
+        fees: 4
+    },
+    {
+        name: 'C++',
+        student: 10,
+        fees: 8
+    },
+];
+
   return (
     <div className="page-container-show">
       <div className="ride-show-header">
@@ -74,9 +115,9 @@ const RideShow = () => {
               <p>{ride.description}</p>
             </div>
             <div className="show-main-img">
-              {ride.photoUrls.slice(0, 5).map(photoUrl => (
+              {ride.photoUrls?.slice(0, 5).map(photoUrl => (
                 <div className='small-square-thumb-box'>
-                  <img className='photo-thumb' src={photoUrl}/>
+                  <img className='photo-thumb' alt='RIde Photo' src={photoUrl}/>
                 </div>
               ))}
             </div>
@@ -102,7 +143,20 @@ const RideShow = () => {
       <div className="ride-show-map">
         <Map />
       </div>
-      <div className="ride-show-elevation"></div>
+      <div className="ride-show-elevation">
+        <ResponsiveContainer width="100%" >
+          <LineChart data={pdata}>
+              <CartesianGrid />
+              <XAxis dataKey="distance" interval={'preserveStartEnd'} />
+              {/* <YAxis dataKey="elevation" interval={'preserveStartEnd'} /> */}
+              <YAxis />
+              {/* <Legend /> */}
+              <Tooltip />
+              <Line dataKey="student"
+                  stroke="red" activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   )
 };

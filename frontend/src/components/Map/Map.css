@@ -23,3 +23,14 @@
 .mapboxgl-canvas {
   height: 400px;
 }
+
+.info-box {
+  position: absolute;
+  margin: 20px;
+  width: 25%;
+  top: 0;
+  bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  overflow-y: scroll;
+}
