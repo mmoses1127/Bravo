@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRides, fetchMyRides } from "../../store/rides";
 import RideIndexItem from "./RideIndexItem";
-import { getRides, getUserRides } from "../../store/rides";
+import { getRides, getUserRides, getLatestRide, fetchRides, fetchMyRides } from "../../store/rides";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
-import { fetchKudos } from "../../store/kudos";
+import { fetchKudos, getKudos } from "../../store/kudos";
 
 const Dashboard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
-  const currentUserRides = useSelector(getUserRides(currentUser.id))
+  const currentUserRides = useSelector(getUserRides(currentUser.id));
+  const latestActivity = getLatestRide(currentUserRides);
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
-  console.log(currentUserRides)
-
+  const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id)
+  console.log(latestActivity)
   const openMenu = () => {
     setShowMenu(true);
   };
@@ -62,8 +62,8 @@ const Dashboard = () => {
                 <h3 className='profile-num'>7</h3>
               </li>
               <li className="profile-stat">
-                <p className='profile-tab'>Followers</p>
-                <h3 className='profile-num'>5</h3>
+                <p className='profile-tab'>Kudos</p>
+                <h3 className='profile-num'>{myKudos.length}</h3>
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Rides</p>
@@ -74,7 +74,7 @@ const Dashboard = () => {
           <div className="profile-bottom">
             <div><p>Latest Activity</p></div>
             <div>
-              <h4>Morning Ride | July 7, 2022</h4>
+              <h4>{latestActivity ? Object.values(latestActivity)[0].title : 'No Recent Activity'}</h4>
               <p></p>
             </div>
           </div>

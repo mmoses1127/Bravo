@@ -20,6 +20,8 @@ background-color:
 }
 
 .profile-container {
+  position:sticky;
+  top: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +37,7 @@ background-color:
 }
 
 .profile-column {
+  min-width: 250px;
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -48,6 +51,7 @@ background-color:
 }
 
 #ride-index {
+  min-width: 425px;
   width: 50%;
   display: flex;
   flex-direction: column;

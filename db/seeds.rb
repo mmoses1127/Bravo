@@ -46,7 +46,7 @@ while i < 10
   i += 1
 end
 
-
+puts "Creating rides..."
 # rides
 ride_1 = Ride.create!({
   date_time: "2022-02-02 017:02:36 UTC",
@@ -90,6 +90,7 @@ ride_3 = Ride.create!({
   # GPXFile: "./assets/gpx/jlondon42334.gpx"
 })
 
+puts "Creating kudos..."
 # Create kudos
 Kudo.create!({
   giver_id: 1,

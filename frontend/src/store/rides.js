@@ -39,9 +39,15 @@ export const getRide = rideId => (state) => {
 export const getUserRides = userId => (state) => {
   if (!state.rides) return [];
   return Object.values(state.rides).filter(ride => (
-    ride.athleteId === userId
+    Object.values(ride)[0].athleteId === userId
   ));
-}
+};
+
+export const getLatestRide = rides => {
+  return rides.sort((a, b) => {
+    return a.dateTime > b.dateTime
+  })[0];
+};
 
 export const fetchRides = () => async dispatch => {
   const res = await fetch(`/api/rides`);
