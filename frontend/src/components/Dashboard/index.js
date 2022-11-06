@@ -77,9 +77,19 @@ const Dashboard = () => {
               <p></p>
             </div>
           </div>
+        <div className="my-links-container">
+          <div className="links-bar">
+            <div className="links-item">
+              <h3>Project Repo</h3>
+              <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
+            </div>
+            <div className="links-item">
+              <h3>Michael's Github</h3>
+              <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
+            </div>
+          </div>
         </div>
-        <div className="my-links-container"></div>
-        <div className="my-links-container"></div>
+        </div>
       </div>
       <div id="ride-index">
         <div className="feed-header">
