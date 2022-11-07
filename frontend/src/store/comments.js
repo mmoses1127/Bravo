@@ -40,5 +40,4 @@ export const fetchComments = (comments) => async dispatch => {
 };
 
 export const createComment = (comment) => async dispatch => {
-  
 }
