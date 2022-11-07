@@ -15,7 +15,7 @@ const CommentForm = ({rideId}) => {
 
     let newComment = {
       body: body,
-      giver_id: currentUser.id,
+      commenter_id: currentUser.id,
       ride_id: rideId
     }
     dispatch(createComment(newComment))

@@ -1,8 +1,9 @@
 class Api::CommentsController < ApplicationController
 
   def create
-    @comment = Comment.new
+    @comment = Comment.new(comment_params)
     if @comment.save!
+      @comments = Comment.all
       render :index
     else
       render json: {errors: @comment.errors.full_messages}, status: :unprocessable_entity
