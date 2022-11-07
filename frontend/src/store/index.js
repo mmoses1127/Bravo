@@ -4,12 +4,14 @@ import sessionReducer from './session';
 import ridesReducer from './rides';
 import usersReducer from './users';
 import kudosReducer from './kudos';
+import commentsReducer from './comments';
 
 const rootReducer = combineReducers ({
   session: sessionReducer,
   rides: ridesReducer,
   users: usersReducer,
-  kudos: kudosReducer
+  kudos: kudosReducer,
+  comments: commentsReducer
 });
 
 let enhancer;

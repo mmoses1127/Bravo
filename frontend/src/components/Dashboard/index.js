@@ -9,6 +9,7 @@ import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
+import RideComments from "../RideComments";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -124,7 +125,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {rides.reverse().map(ride => <RideIndexItem ride={Object.values(ride)[0]}/>)}
+        {rides.reverse().map(ride => <RideIndexItem key={ride.id} ride={Object.values(ride)[0]}/>)}
       </div>
     </div>
     </>

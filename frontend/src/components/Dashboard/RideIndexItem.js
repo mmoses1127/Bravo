@@ -4,6 +4,9 @@ import Map from '../Map/Map';
 import { createKudo, deleteKudo, getKudos } from '../../store/kudos';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../store/session';
+import RideComments from '../RideComments';
+import { useState } from 'react';
+import CommentForm from '../RideComments/CommentForm';
 
 
 const RideIndexItem = ({ride}) => {
@@ -13,8 +16,8 @@ const RideIndexItem = ({ride}) => {
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
   const rideKudos = kudos.filter(kudo => kudo['rideId'] === ride.id);
-  console.log(rideKudos)
-  let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id)
+  let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id);
+  const [showCommentForm, setShowCommentForm] = useState(false);
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -33,8 +36,9 @@ const RideIndexItem = ({ride}) => {
     dispatch(deleteKudo(myKudo.id))
   };
 
-  const handleComment = () => {
-    
+  const handleComment = (e) => {
+    e.preventDefault();
+    setShowCommentForm(!showCommentForm);
   };
 
   const kudoButtonMaker = () => {
@@ -110,7 +114,7 @@ const RideIndexItem = ({ride}) => {
           <div className='kudos-pics'>
             {rideKudos.length > 0 && 
               rideKudos.map(kudo => { return (
-                <div className='tiny-kudo-wrapper'>
+                <div key={kudo.id} className='tiny-kudo-wrapper'>
                   <img className='tiny-kudo-giver' src={kudo.profilePicUrl}/>
                 </div>
               )
@@ -126,6 +130,8 @@ const RideIndexItem = ({ride}) => {
           </button>
         </div>
       </div>
+      {<RideComments ride={ride}/>}
+      {showCommentForm && <CommentForm rideId={ride.id}/>}
     </div>
   );
 
