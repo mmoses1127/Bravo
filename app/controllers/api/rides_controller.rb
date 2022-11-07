@@ -24,7 +24,7 @@ class Api::RidesController < ApplicationController
       render :show
     else
       # render json: { errors: ['Your inputs were not valid.']}, status: 422
-      render json: { errors: @ride.errors.full_messages }, status: :unprocessable_entity;
+      render json: { errors: @ride.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class Api::RidesController < ApplicationController
     if @ride.update!(ride_params)
       render :show
     else
-      render json: { errors: @ride.errors.full_messages }, status: :unprocessable_entity;
+      render json: { errors: @ride.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -42,7 +42,7 @@ class Api::RidesController < ApplicationController
     if @ride.destroy!
       render 'api/rides/index'
     else
-      render json: { errors: ['Cannot delete ride'] }, status: :unprocessable_entity;
+      render json: { errors: ['Cannot delete ride'] }, status: :unprocessable_entity
     end
   end
 
