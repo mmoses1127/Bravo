@@ -74,7 +74,7 @@ const Dashboard = () => {
           <div className="profile-bottom">
             <div><p>Latest Activity</p></div>
             <div>
-              <h4>{latestActivity ? Object.values(latestActivity)[0].title : 'No Recent Activity'}</h4>
+              <h4>{latestActivity ? latestActivity[0].title : 'No Recent Activity'}</h4>
               <p></p>
             </div>
           </div>
@@ -125,7 +125,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {rides.reverse().map(ride => <RideIndexItem key={ride.id} ride={Object.values(ride)[0]}/>)}
+        {rides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
       </div>
     </div>
     </>

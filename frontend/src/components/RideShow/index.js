@@ -115,8 +115,8 @@ const RideShow = () => {
               <p>{ride.description}</p>
             </div>
             <div className="show-main-img">
-              {ride.photoUrls?.slice(0, 5).map(photoUrl => (
-                <div className='small-square-thumb-box'>
+              {ride.photoUrls?.slice(0, 5).map((photoUrl, i) => (
+                <div key={i} className='small-square-thumb-box'>
                   <img className='photo-thumb' alt='RIde Photo' src={photoUrl}/>
                 </div>
               ))}
