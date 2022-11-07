@@ -1,0 +1,40 @@
+.comment-profile-pic {
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+}
+
+.ride-comment-item {
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.comment-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comments-field {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.comment-item-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-profile-pic-box {
+  margin-right: 10px;
+}
+
+.ride-comment-item p {
+  margin: 0;
+}
+
+.strong {
+  font-weight: 600;
+}

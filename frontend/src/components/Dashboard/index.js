@@ -10,6 +10,7 @@ import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
 import RideComments from "../RideComments";
+import { fetchComments } from "../../store/comments";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -32,6 +33,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchKudos());
+    dispatch(fetchComments());
     userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
   }, [userId]);
 

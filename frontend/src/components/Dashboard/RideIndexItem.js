@@ -7,6 +7,7 @@ import { getCurrentUser } from '../../store/session';
 import RideComments from '../RideComments';
 import { useState } from 'react';
 import CommentForm from '../RideComments/CommentForm';
+import { getRideComments } from '../../store/comments';
 
 
 const RideIndexItem = ({ride}) => {
@@ -16,6 +17,7 @@ const RideIndexItem = ({ride}) => {
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
   const rideKudos = kudos.filter(kudo => kudo['rideId'] === ride.id);
+  const rideComments = useSelector(getRideComments(ride.id));
   let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const longDate = parsedDateTime.toLocaleString([], {
@@ -121,7 +123,7 @@ const RideIndexItem = ({ride}) => {
               })
             }
           </div>
-          <p>{rideKudos.length > 0 ? `${rideKudos.length} kudos` : `Be the first to give Kudos!`}</p>
+          <p>{rideKudos.length > 0 ? `${rideKudos.length} kudos` : `Be the first to give Kudos!`} {rideComments.length > 0 && `| ${rideComments.length} comments`} </p>
         </div>
         <div className='social-buttons'>
           {kudoButtonMaker()}
