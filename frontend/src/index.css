@@ -21,6 +21,10 @@ time, mark, audio, video {
 	box-sizing: border-box;
 }
 
+::selection {
+	background-color: #fc5200;
+}
+
 body {
 	font-size: 14px;
 	line-height: 18px;

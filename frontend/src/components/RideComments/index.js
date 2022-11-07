@@ -6,8 +6,6 @@ import { getRideComments } from "../../store/comments";
 const RideComments = ({ride}) => {
   const thisRideComments = useSelector(getRideComments(ride.id));
   
-  console.log(`ride id is ${ride.id} and its ride comments are ${useSelector(getRideComments(ride.id))}`)
-
   return (
     <div className="comments-field">
       {thisRideComments.length > 0 && thisRideComments.map(comment => {

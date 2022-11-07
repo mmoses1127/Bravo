@@ -7,7 +7,8 @@ import { getCurrentUser } from '../../store/session';
 import RideComments from '../RideComments';
 import { useState } from 'react';
 import CommentForm from '../RideComments/CommentForm';
-import { getRideComments } from '../../store/comments';
+import { getRideComments, fetchComments } from '../../store/comments';
+import { useEffect } from 'react';
 
 
 const RideIndexItem = ({ride}) => {

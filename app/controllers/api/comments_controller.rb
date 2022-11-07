@@ -4,7 +4,7 @@ class Api::CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     if @comment.save!
       @comments = Comment.all
-      render :index
+      render :show
     else
       render json: {errors: @comment.errors.full_messages}, status: :unprocessable_entity
     end

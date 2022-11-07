@@ -38,3 +38,57 @@
 .strong {
   font-weight: 600;
 }
+
+.comment-form-container {
+  display: flex;  
+  width: 100%;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.comment-text-area {
+  background-color: #f7f7fa;
+  letter-spacing: inherit;
+  height: 60px;
+  overflow: auto;
+  border: 1px solid transparent;
+  color: #000;
+  height: 100%;
+  line-height: 1.5em;
+  min-height: 50px;
+  padding: 6px 4px 4px;
+  resize: none;
+  min-width: 200px;
+  border-radius: 2px;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.comment-text-label {
+  width: 80%;
+}
+
+.comment-text-area:focus {
+  border: 1px solid transparent;
+}
+
+.post-button {
+  background-color: transparent;
+  border: none;
+  color: #dfdfe8;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 15px;
+}
+
+.post-button:hover {
+  background-color: rgba(252,82,0,.1);
+  color: #fc5200;
+}

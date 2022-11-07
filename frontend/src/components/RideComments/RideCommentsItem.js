@@ -2,7 +2,6 @@ import moment from 'moment'
 import './RideComments.css'
 
 const RideCommentsItem = ({comment}) => {
-  const date = 2
 
   return (
     <div className="ride-comment-item">

@@ -29,7 +29,7 @@ export const getComments = (state = {}) => {
 export const getRideComments = (rideId) => (state = {}) => {
   if (!state.comments) return [];
   return Object.values(state.comments).filter(comment => {
-    return comment.ride_id = rideId;
+    return comment.rideId === rideId;
   });
 };
 
