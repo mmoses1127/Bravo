@@ -257,8 +257,8 @@ background-color:
   color: black;
 }
 
-.page-container-dash a:hover {
-  color: black;
+.blue-link:hover {
+  color: #005b83;
   text-decoration: none;
 }
 

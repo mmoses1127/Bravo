@@ -25,8 +25,6 @@ const RideIndexItem = ({ride}) => {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
-
-  console.log(ride)
   
   const giveKudo = (e) => {
     e.preventDefault();
@@ -70,7 +68,7 @@ const RideIndexItem = ({ride}) => {
           <img className="avatar-image-medium" src={ride.profilePicUrl} alt="Avatar" />
         </div>
         <div className="card-header-text">
-          <h4>{ride.username}</h4>
+          <h4><Link className='blue-link' to={`/users/${ride.athleteId}`}>{ride.username}</Link></h4>
           <p>{longDate}</p>
         </div>
       </div>
@@ -79,7 +77,7 @@ const RideIndexItem = ({ride}) => {
           <i className="fa-solid fa-bicycle"></i>
         </div>
         <div className="card-body-main">
-          <h3><Link to={`/rides/${ride.id}`}>{ride.title}</Link></h3>
+          <h3><Link className='blue-link' to={`/rides/${ride.id}`}>{ride.title}</Link></h3>
           <div className="card-body-text">
             <ul className="stats">
               <li>

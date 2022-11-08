@@ -45,7 +45,11 @@ export const getUserRides = userId => (state) => {
 
 export const getLatestRide = userRides => {
   return userRides.sort((a, b) => {
-    return a.dateTime > b.dateTime
+    if (a.dateTime > b.dateTime) {
+      return -1
+    } else {
+      return 1
+    }
   })[0];
 };
 
