@@ -58,7 +58,7 @@ export const fetchRides = () => async dispatch => {
   };
 };
 
-export const fetchMyRides = (userId) => async dispatch => {
+export const fetchUserRides = (userId) => async dispatch => {
   const res = await fetch(`/api/users/${userId}/rides`);
 
   if (res.ok) {

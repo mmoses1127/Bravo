@@ -26,15 +26,20 @@ profile_pics = [
   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190714.jpg')
 ]
 
+
 # Create one user with an easy to remember username, email, and password:
+puts "Creating demo user..."
 demo_user = User.create!( 
   email: 'demo@user.io',
   name: 'Derek Demoman', 
   password: 'password'
 )
+puts "Attaching photo for demo user..."
 demo_user.profile_pic.attach(io: pic_1, filename: 'profile_pic')
 
 # More users
+puts "Creating more users..."
+
 i = 0
 while i < 10
   user = User.create!({
@@ -42,12 +47,16 @@ while i < 10
     name: Faker::Name.unique.name,
     password: 'password'
   }) 
+  puts "Attaching photo..."
   user.profile_pic.attach(io: profile_pics[i], filename: 'profile_pic')
   i += 1
+puts "Completed a user"
+
 end
 
-puts "Creating rides..."
 # rides
+puts "Creating rides..."
+
 ride_1 = Ride.create!({
   date_time: "2022-02-02 017:02:36 UTC",
   title: "Big loop in Annadel Park",
@@ -90,8 +99,24 @@ ride_3 = Ride.create!({
   # GPXFile: "./assets/gpx/jlondon42334.gpx"
 })
 
-puts "Creating kudos..."
+ride_4 = Ride.create!({
+  date_time: "2022-11-5 012:19:01 UTC",
+  title: "Cruising through the hills",
+  description: "Toughest ride I've done in a while. I didn't bring enough food, so i Bonked super hard. I'll prepare better next time.",
+  athlete_id: 5,
+  distance: 99.6,
+  duration: 3500,
+  elevation: 1946,
+  # GPXFile: "./assets/gpx/jlondon42334.gpx"
+})
+ride_4.photos.attach([
+  {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_191312598.jpg'), filename: 'ride_pic'},
+  {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_184256270.jpg'), filename: 'ride_pic'}
+])
+
 # Create kudos
+puts "Creating kudos..."
+
 Kudo.create!({
   giver_id: 1,
   ride_id: ride_2.id
@@ -112,6 +137,41 @@ Kudo.create!({
   ride_id: ride_2.id
 })
 
+# Create comments
+puts "creating comments..."
+
+Comment.create!({
+  commenter_id: 3,
+  ride_id: 2,
+  body: 'How often do you shave your legs?'
+})
+
+Comment.create!({
+  commenter_id: 3,
+  ride_id: 2,
+  body: 'How often do you shave your legs?'
+})
+
+Comment.create!({
+  commenter_id: 6,
+  ride_id: 2,
+  body: 'Can you bring me next time?'
+})
+Comment.create!({
+  commenter_id: 8,
+  ride_id: 2,
+  body: 'Did you steal my bike? It looks just like mine that got taken last week!'
+})
+Comment.create!({
+  commenter_id: 8,
+  ride_id: 1,
+  body: 'Please call me before you go on this ride again! Awesome!'
+})
+Comment.create!({
+  commenter_id: 4,
+  ride_id: 1,
+  body: 'You taking PEDs? So fast!'
+})
 
 
 puts "Done!"

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RideIndexItem from "./RideIndexItem";
-import { getRides, getUserRides, getLatestRide, fetchRides, fetchMyRides } from "../../store/rides";
+import { getRides, getUserRides, getLatestRide, fetchRides, fetchUserRides } from "../../store/rides";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUser, fetchUsers, getUser } from "../../store/users";
@@ -10,7 +10,7 @@ import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
 import RideComments from "../RideComments";
-import { fetchComments } from "../../store/comments";
+import { fetchComments, getComments } from "../../store/comments";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -21,7 +21,8 @@ const Dashboard = () => {
   const latestActivity = getLatestRide(currentUserRides);
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
-  const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id)
+  const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id);
+  const myComments = useSelector(getComments).filter(comment => comment.commenterId === currentUser.id)
   const openMenu = () => {
     setShowMenu(true);
   };
@@ -34,7 +35,7 @@ const Dashboard = () => {
     dispatch(fetchUsers());
     dispatch(fetchKudos());
     dispatch(fetchComments());
-    userId ? dispatch(fetchMyRides(currentUser.id)) : dispatch(fetchRides());
+    userId ? dispatch(fetchUserRides(currentUser.id)) : dispatch(fetchRides());
   }, [userId]);
 
   
@@ -43,6 +44,8 @@ const Dashboard = () => {
       <Redirect to="/"/>
       )
     };
+
+  console.log(myComments)
     
   const handleRedirect = () => {
     userId ? history.push(`/dashboard`) : history.push(`/dashboard/users/${currentUser.id}/rides`);
@@ -60,8 +63,8 @@ const Dashboard = () => {
             <h1>{currentUser?.name}</h1>
             <ul className="profile-stats-container">
               <li className="profile-stat">
-                <p className='profile-tab'>Following</p>
-                <h3 className='profile-num'>7</h3>
+                <p className='profile-tab'>Comments</p>
+                <h3 className='profile-num'>{myComments.length}</h3>
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Kudos</p>
@@ -98,13 +101,13 @@ const Dashboard = () => {
         <div className="feed-header">
           <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="feed-filter">
             <button className="clear-button">
-              <h3>{userId ? 'My Rides' : 'Following'}</h3>
+              <h3>{userId ? 'My Rides' : 'All Rides'}</h3>
               <span><i className="fa-solid fa-angle-down"></i></span>
             </button>
             {showMenu && 
             <ul className='feed-dropdown-list'>
               <li onClick={handleRedirect} className="dropdown-item">
-                {userId ? 'Following' : 'My Rides'}
+                {userId ? 'All Rides' : 'My Rides'}
               </li>
             </ul>
             }

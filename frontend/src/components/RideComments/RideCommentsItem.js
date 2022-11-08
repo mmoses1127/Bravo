@@ -2,7 +2,6 @@ import moment from 'moment'
 import './RideComments.css'
 
 const RideCommentsItem = ({comment}) => {
-
   return (
     <div className="ride-comment-item">
       <div className='comment-item-left'>
@@ -15,7 +14,7 @@ const RideCommentsItem = ({comment}) => {
         </div>
       </div>
       <div className="comment-time">
-        <p>{moment(comment.created_at).fromNow()}</p>
+        <p>{moment(comment.createdAt).fromNow()}</p>
       </div>
     </div>
   )

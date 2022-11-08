@@ -1,6 +1,6 @@
 class Api::KudosController < ApplicationController
 
-  before_action :require_logged_in, only: [:create, :destroy]
+  # before_action :require_logged_in, only: [:create, :destroy]
 
   def create
     @ride = Ride.find_by(id: params[:kudo][:ride_id])

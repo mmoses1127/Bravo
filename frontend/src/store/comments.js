@@ -23,7 +23,7 @@ const removeComment = (commentId) => ({
 
 export const getComments = (state = {}) => {
   if (!state.comments) return [];
-  return state.comments;
+  return Object.values(state.comments);
 };
 
 export const getRideComments = (rideId) => (state = {}) => {
