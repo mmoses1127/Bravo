@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RideIndexItem from "./RideIndexItem";
 import { getRides, getUserRides, getLatestRide, fetchRides, fetchUserRides } from "../../store/rides";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { Redirect, useParams, useHistory, Link } from "react-router-dom";
 import "./Dashboard.css";
-import { fetchUser, fetchUsers, getUser } from "../../store/users";
+import { fetchUsers } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
@@ -18,7 +18,7 @@ const Dashboard = () => {
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
   const currentUserRides = useSelector(getUserRides(currentUser.id));
-  const latestActivity = getLatestRide(currentUserRides);
+  const latestRide = getLatestRide(currentUserRides);
   const [showMenu, setShowMenu] = useState(false);
   const {userId} = useParams();
   const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id);
@@ -44,8 +44,6 @@ const Dashboard = () => {
       <Redirect to="/"/>
       )
     };
-
-  console.log(myComments)
     
   const handleRedirect = () => {
     userId ? history.push(`/dashboard`) : history.push(`/dashboard/users/${currentUser.id}/rides`);
@@ -77,9 +75,9 @@ const Dashboard = () => {
             </ul>
           </div>
           <div className="profile-bottom">
-            <div><p>Latest Activity</p></div>
+            <div><p>Latest Ride</p></div>
             <div>
-              <h4>{latestActivity ? latestActivity[0].title : 'No Recent Activity'}</h4>
+              <h4>{latestRide ? <Link to={`/rides/${latestRide.id}`}>{latestRide.title} | {new Date(latestRide.dateTime).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}</Link> : 'No Recent Ride'}</h4>
               <p></p>
             </div>
           </div>
@@ -89,10 +87,10 @@ const Dashboard = () => {
               <h3>Project Repo</h3>
               <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
             </div>
-            <div className="links-item">
+            {/* <div className="links-item">
               <h3>Michael's Github</h3>
               <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
-            </div>
+            </div> */}
           </div>
         </div>
         </div>

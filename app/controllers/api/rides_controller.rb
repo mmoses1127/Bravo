@@ -1,6 +1,6 @@
 class Api::RidesController < ApplicationController
 
-  before_action :require_logged_in, only: [:show, :create, :update, :destroy]
+  # before_action :require_logged_in, only: [:show, :create, :update, :destroy]
 
   def index
     if params[:user_id]
