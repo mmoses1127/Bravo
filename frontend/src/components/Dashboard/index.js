@@ -4,7 +4,7 @@ import RideIndexItem from "./RideIndexItem";
 import { getRides, getUserRides, getLatestRide, fetchRides, fetchUserRides } from "../../store/rides";
 import { Redirect, useParams, useHistory, Link } from "react-router-dom";
 import "./Dashboard.css";
-import { fetchUsers } from "../../store/users";
+import { fetchUsers, getUser } from "../../store/users";
 import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
@@ -13,16 +13,18 @@ import RideComments from "../RideComments";
 import { fetchComments, getComments } from "../../store/comments";
 
 const Dashboard = () => {
+  const {userId} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const rides = useSelector(getRides);
   const currentUser = useSelector(getCurrentUser);
-  const currentUserRides = useSelector(getUserRides(currentUser.id));
-  const latestRide = getLatestRide(currentUserRides);
+  const user = useSelector(getUser(userId));
+  const profileUser = user? user : currentUser;
+  const userRides = useSelector(getUserRides(profileUser.id));
+  const latestRide = getLatestRide(userRides);
+  const userKudos = useSelector(getKudos).filter(kudo => kudo.giverId === profileUser.id);
+  const userComments = useSelector(getComments).filter(comment => comment.commenterId === profileUser.id)
   const [showMenu, setShowMenu] = useState(false);
-  const {userId} = useParams();
-  const  myKudos = useSelector(getKudos).filter(kudo => kudo.giverId === currentUser.id);
-  const myComments = useSelector(getComments).filter(comment => comment.commenterId === currentUser.id)
   const openMenu = () => {
     setShowMenu(true);
   };
@@ -35,7 +37,7 @@ const Dashboard = () => {
     dispatch(fetchUsers());
     dispatch(fetchKudos());
     dispatch(fetchComments());
-    userId ? dispatch(fetchUserRides(currentUser.id)) : dispatch(fetchRides());
+    userId ? dispatch(fetchUserRides(userId)) : dispatch(fetchRides());
   }, [userId]);
 
   
@@ -46,7 +48,7 @@ const Dashboard = () => {
     };
     
   const handleRedirect = () => {
-    userId ? history.push(`/dashboard`) : history.push(`/dashboard/users/${currentUser.id}/rides`);
+    userId ? history.push(`/dashboard`) : history.push(`/users/${currentUser.id}`);
   };
 
   return (
@@ -56,21 +58,21 @@ const Dashboard = () => {
         <div className="profile-container">
           <div className="profile-top">
             <div className="profile-image-container">
-              <img className="profile-image" src={currentUser.profilePicUrl}/>
+              <img className="profile-image" src={user ? user.profilePicUrl : profileUser.profilePicUrl}/>
             </div>
-            <h1>{currentUser?.name}</h1>
+            <h1>{user ? user.name : profileUser.name}</h1>
             <ul className="profile-stats-container">
               <li className="profile-stat">
                 <p className='profile-tab'>Comments</p>
-                <h3 className='profile-num'>{myComments.length}</h3>
+                <h3 className='profile-num'>{userComments.length}</h3>
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Kudos</p>
-                <h3 className='profile-num'>{myKudos.length}</h3>
+                <h3 className='profile-num'>{userKudos.length}</h3>
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Rides</p>
-                <h3 className='profile-num'>{currentUserRides.length}</h3>
+                <h3 className='profile-num'>{userRides.length}</h3>
               </li>
             </ul>
           </div>
@@ -99,13 +101,13 @@ const Dashboard = () => {
         <div className="feed-header">
           <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="feed-filter">
             <button className="clear-button">
-              <h3>{userId ? 'My Rides' : 'All Rides'}</h3>
+              <h3>{userId ? 'User Rides' : 'All Rides'}</h3>
               <span><i className="fa-solid fa-angle-down"></i></span>
             </button>
             {showMenu && 
             <ul className='feed-dropdown-list'>
               <li onClick={handleRedirect} className="dropdown-item">
-                {userId ? 'All Rides' : 'My Rides'}
+                {userId ? 'All Rides' : 'User Rides'}
               </li>
             </ul>
             }

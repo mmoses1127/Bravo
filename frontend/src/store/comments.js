@@ -34,7 +34,7 @@ export const getRideComments = (rideId) => (state = {}) => {
 };
 
 export const fetchComments = (comments) => async dispatch => {
-  const res = await fetch(`api/comments`);
+  const res = await fetch(`/api/comments`);
 
   if (res.ok) {
     const comments = await res.json();
@@ -43,7 +43,7 @@ export const fetchComments = (comments) => async dispatch => {
 };
 
 export const createComment = (comment) => async dispatch => {
-  const res = await csrfFetch(`api/comments`, {
+  const res = await csrfFetch(`/api/comments`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(comment)
@@ -56,7 +56,7 @@ export const createComment = (comment) => async dispatch => {
 };
 
 export const deleteComment = (commentId) => async dispatch => {
-  const res = await csrfFetch(`api/comments`, {
+  const res = await csrfFetch(`/api/comments`, {
     method: 'DELETE'
   });
 

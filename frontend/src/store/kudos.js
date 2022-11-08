@@ -32,7 +32,7 @@ export const getKudos = (state = {}) => {
 };
 
 export const fetchKudos = () => async dispatch => {
-  const res = await fetch(`api/kudos`);
+  const res = await fetch(`/api/kudos`);
 
   if (res.ok) {
     const kudos = await res.json();
@@ -41,9 +41,8 @@ export const fetchKudos = () => async dispatch => {
 };
 
 export const createKudo = (kudo) => async dispatch => {
-  const res = await csrfFetch(`api/kudos`, {
+  const res = await csrfFetch(`/api/kudos`, {
     method: 'POST',
-    headers: {'Content-Typee': 'application/json'},
     body: JSON.stringify(kudo)
   });
 
@@ -54,7 +53,7 @@ export const createKudo = (kudo) => async dispatch => {
 };
 
 export const deleteKudo = (kudoId) => async dispatch => {
-  const res = await csrfFetch(`api/kudos/${kudoId}`,{
+  const res = await csrfFetch(`/api/kudos/${kudoId}`,{
     method: 'DELETE'
   });
 

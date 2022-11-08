@@ -25,6 +25,8 @@ const RideIndexItem = ({ride}) => {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
+
+  console.log(ride)
   
   const giveKudo = (e) => {
     e.preventDefault();

@@ -38,7 +38,7 @@ const SignupFormPage = () => {
     dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
 
-  if (currentUser !== null) return <Redirect to="/" />;
+  if (currentUser !== null) return <Redirect to={`/users/${currentUser.id}`} />;
 
   return (
     <div className="splash-background">

@@ -1,4 +1,4 @@
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, useParams} from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import React from 'react';
 import SignupFormPage from './components/signup';
@@ -10,9 +10,14 @@ import RideShow from './components/RideShow';
 import RideEdit from './components/RideEdit';
 import UserShow from './components/UserShow';
 import Footer from './components/Footer';
+import { useSelector } from 'react-redux';
+import { getCurrentUser } from './store/session';
 
 
 function App() {
+  const currentUser = useSelector(getCurrentUser);
+  const {userId} = useParams();
+
   return (
     <>
       <Navigation />
@@ -26,12 +31,12 @@ function App() {
         <Route path="/signup">
           <SignupFormPage />
         </Route>
-        <Route path="/dashboard/users/:userId/rides">
+        <Route path="/dashboard">
           <Dashboard/>
         </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
+        {/* <Route path="/dashboard">
+          <Dashboard userId={currentUser.id}/>
+        </Route> */}
         <Route path="/create-ride">
           <RideForm />
         </Route>
@@ -42,7 +47,7 @@ function App() {
           <RideShow/>
         </Route>
         <Route path="/users/:userId">
-          <UserShow/>
+          <Dashboard/>
         </Route>
       </Switch>
       <Footer />
