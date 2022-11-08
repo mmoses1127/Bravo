@@ -23,7 +23,8 @@ class User < ApplicationRecord
 
   has_many :rides,
     foreign_key: :athlete_id,
-    class_name: :Ride
+    class_name: :Ride,
+    dependent: :destroy
 
   has_one_attached :profile_pic
 
