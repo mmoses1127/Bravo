@@ -1,17 +1,28 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import { useDispatch } from "react-redux";
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW1vc2VzMTEyNyIsImEiOiJjbDl5cWtkdnAwN2pwM3BrbnZsNTZzZHIzIn0.5DYp57TWNGkULiO3KhdVbg';
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = () => {
-
+  
+  const dispatch = useDispatch();
+  const [routeCoords, setRouteCoords] = useState([]);
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
+  let coords;
+  
+  const setRoute = (e) => {
+    e.preventDefault();
+    setRouteCoords(coords);
+    console.log(routeCoords)
+  };
+
   const draw = new MapboxDraw({
     // Instead of showing all the draw tools, show only the line string and delete tools.
     displayControlsDefault: false,
@@ -35,7 +46,7 @@ const Map = () => {
           'line-color': '#438EE4',
           'line-dasharray': [0.2, 2],
           'line-width': 4,
-          'line-opacity': 0.7
+          'line-opacity': 0.3
         }
       },
       // Style the vertex point halos.
@@ -49,7 +60,7 @@ const Map = () => {
           ['!=', 'mode', 'static']
         ],
         paint: {
-          'circle-radius': 12,
+          'circle-radius': 1,
           'circle-color': '#FFF'
         }
       },
@@ -71,50 +82,80 @@ const Map = () => {
     ]
   });
 
-//   // Use the coordinates you drew to make the Map Matching API request
-//   function updateRoute() {
-//     // Set the profile
-//     const profile = 'cycling';
-//     // Get the coordinates that were drawn on the map
-//     const data = draw.getAll();
-//     const lastFeature = data.features.length - 1;
-//     const coords = data.features[lastFeature].geometry.coordinates;
-//     // Format the coordinates
-//     const newCoords = coords.join(';');
-//     // Set the radius for each coordinate pair to 25 meters
-//     const radius = coords.map(() => 25);
-//     getMatch(newCoords, radius, profile);
-//   }
+  // Use the coordinates you drew to make the Map Matching API request
+  function updateRoute() {
+    // Set the profile
+    const profile = 'cycling';
+    // Get the coordinates that were drawn on the map
+    const data = draw.getAll();
+    const lastFeature = data.features.length - 1;
+    const coords = data.features[lastFeature].geometry.coordinates;
+    // Format the coordinates
+    const newCoords = coords.join(';');
+    // Set the radius for each coordinate pair to 50 meters
+    const radius = coords.map(() => 50);
+    getMatch(newCoords, radius, profile);
+  }
 
-//   // Make a Map Matching request
-//   async function getMatch(coordinates, radius, profile) {
-//   // Separate the radiuses with semicolons
-//     const radiuses = radius.join(';');
-//   // Create the query
-//     const query = await fetch(
-//       `https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`,
-//       { method: 'GET' }
-//     );
-//     const response = await query.json();
-//   // Handle errors
-//     if (response.code !== 'Ok') {
-//       alert(
-//         `${response.code} - ${response.message}.\n\nFor more information: https://docs.mapbox.com/api/navigation/map-matching/#map-matching-api-errors`
-//       );
-//       return;
-//     }
-//   // Get the coordinates from the response
-//     const coords = response.matchings[0].geometry;
-//     console.log(coords);
-//   // Code from the next step will go here
-// }
+  // Make a Map Matching request
+  async function getMatch(coordinates, radius, profile) {
+  // Separate the radiuses with semicolons
+    const radiuses = radius.join(';');
+  // Create the query
+    const query = await fetch(
+      `https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`,
+      { method: 'GET' }
+    );
+    const response = await query.json();
+  // Handle errors
+    if (response.code !== 'Ok') {
+      alert(
+        `The mapping program has thrown the following error: ${response.code} - ${response.message}.\n\nFor more information: https://docs.mapbox.com/api/navigation/map-matching/#map-matching-api-errors`
+      );
+      return;
+    }
+  // Get the coordinates from the response
+    coords = response.matchings[0].geometry;
+    console.log(coords);
+  // Code from the next step will go here
+    addRoute(coords);
+  }
 
+  // debugger
 
-// map.current.on('draw.create', updateRoute);
-// map.current.on('draw.update', updateRoute);
-
-
-
+  // Draw the Map Matching route as a new layer on the map
+function addRoute(coords) {
+  // If a route is already loaded, remove it
+  if (map.current.getSource('route')) {
+    map.current.removeLayer('route');
+    map.current.removeSource('route');
+  } else {
+    // Add a new layer to the map
+    map.current.addLayer({
+      id: 'route',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: coords
+        }
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': 'red',
+        'line-width': 6,
+        'line-opacity': 0.7
+      }
+    });
+  }
+}
+  
+  
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
@@ -125,15 +166,17 @@ const Map = () => {
     });
     
     map.current.addControl(draw, 'top-left');
-    
+    map.current.on('draw.create', updateRoute);
+    map.current.on('draw.update', updateRoute);
   });
   
-  
-
   return (
     <div className="outer-map-container">
       
       <div ref={mapContainer} className="map-container" />
+      {coords && 
+        <button className="set-route-button" onClick={setRoute}>Set Route</button>
+      }
     </div>
     );
 

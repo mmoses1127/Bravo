@@ -34,9 +34,6 @@ function App() {
         <Route path="/dashboard">
           <Dashboard/>
         </Route>
-        {/* <Route path="/dashboard">
-          <Dashboard userId={currentUser.id}/>
-        </Route> */}
         <Route path="/create-ride">
           <RideForm />
         </Route>
