@@ -143,7 +143,7 @@ const RideForm = () => {
               <legend>Photos</legend>
               <div className='photo-upload-zone'>
                 <label>
-                  <input type='file' onChange={handleFile} multiple></input>
+                  <input className='file-input' type='file' onChange={handleFile} multiple></input>
                 </label>
               </div>
             </fieldset>

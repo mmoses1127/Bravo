@@ -55,3 +55,10 @@ a:hover {
 #manual-entry {
   width: 80%;
 }
+
+.file-input {
+  background-color: #fc5200;
+  color:white;
+  margin-left: 5px;
+  border: none;
+}

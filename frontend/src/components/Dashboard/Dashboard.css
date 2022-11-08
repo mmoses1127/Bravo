@@ -291,16 +291,19 @@ background-color:
 }
 
 .dash-top-section {
-  height: 125px;
+  height: 130px;
   width: 100%;
   display: flex;
   flex-direction: row;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 5px;
 }
 
 .dash-bottom-section {
   display: flex;
   padding: 10px;
-  height: 100px;
+  height: 120px;
   width: 100%;
 }
 
@@ -351,7 +354,6 @@ background-color:
 .small-logo {
   padding: 5px;
   border-radius: 50%;
-  border: 2px solid #dfdfe8;
 }
 
 .clear-button {
