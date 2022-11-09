@@ -14,7 +14,7 @@ const Map = () => {
   const map = useRef(null);
   const [lng, setLng] = useState(-71.057198);
   const [lat, setLat] = useState(42.360446);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(13);
 
   // const setRoute = (e) => {
   //   e.preventDefault();
@@ -94,6 +94,7 @@ const Map = () => {
     // Set the radius for each coordinate pair to 50 meters
     const radius = coords.map(() => 50);
     getMatch(newCoords, radius, profile);
+    
   }
 
   // Make a Map Matching request
@@ -185,4 +186,4 @@ const Map = () => {
 
 };
 
-export default Map;
+export default Map; 

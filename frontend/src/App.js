@@ -12,6 +12,9 @@ import UserShow from './components/UserShow';
 import Footer from './components/Footer';
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from './store/session';
+import Map from './components/Map/Map';
+import { RideMap } from './components/RideMap';
+import RideMapWrapper from './components/RideMap';
 
 
 function App() {
@@ -45,6 +48,9 @@ function App() {
         </Route>
         <Route path="/users/:userId">
           <Dashboard/>
+        </Route>
+        <Route path="/map">
+          <RideMapWrapper/>
         </Route>
       </Switch>
       <Footer />

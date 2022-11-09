@@ -53,7 +53,7 @@ a:hover {
 }
 
 #manual-entry {
-  width: 80%;
+  width: 100%;
 }
 
 .file-input {
@@ -61,4 +61,13 @@ a:hover {
   color:white;
   margin-left: 5px;
   border: none;
+}
+
+.route-creation-area {
+  margin: 30px 0;
+  width: 100%;
+}
+
+.show-map-button {
+  margin-bottom: 30px;
 }

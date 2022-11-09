@@ -34,3 +34,13 @@
   background-color: #fff;
   overflow-y: scroll;
 }
+
+.mapboxgl-canvas {
+  width: 100%;
+  height: auto;
+}
+
+.google-map-container {
+  height: 600px;
+  width: 800px;
+}

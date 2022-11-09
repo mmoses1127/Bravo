@@ -5,6 +5,7 @@ import { createRide } from '../../store/rides';
 import { getCurrentUser } from '../../store/session';
 import EditMap from './EditMap';
 import './RideForm.css';
+import Map from '../Map/Map';
 
 const RideForm = () => {
   const history = useHistory();
@@ -19,6 +20,7 @@ const RideForm = () => {
   const [time, setTime] = useState('');
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
+  const [showMap, setShowMap] = useState();
 
   const handleClick = async (e) => {
     await handleSubmit(e);
@@ -147,6 +149,11 @@ const RideForm = () => {
                 </label>
               </div>
             </fieldset>
+          </div>
+
+          <div className='route-creation-area'>
+            <button className='show-map-button'>Optional: Map Route Creation</button>
+            <Map/>
           </div>
 
           <div className='form-submit-area'>
