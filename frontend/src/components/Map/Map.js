@@ -9,12 +9,13 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 const Map = () => {
   
   const dispatch = useDispatch();
-  const [routeCoords, setRouteCoords] = useState(3);
+  const [routeCoords, setRouteCoords] = useState([]);
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-71.057198);
   const [lat, setLat] = useState(42.360446);
   const [zoom, setZoom] = useState(12);
+  const [elevation, setElevation] = useState([])
 
   // const setRoute = (e) => {
   //   e.preventDefault();
@@ -81,6 +82,14 @@ const Map = () => {
     ]
   });
 
+  const iterateElevation = (points) => {
+    console.log(points)
+    const elev = points.map(point => {
+      return map.current.queryTerrainElevation({lng: point[0], lat: point[1]})
+    });
+    return elev;
+  }
+
   // Use the coordinates you drew to make the Map Matching API request
   function updateRoute() {
     // Set the profile
@@ -115,11 +124,12 @@ const Map = () => {
     }
   // Get the coordinates from the response
     const coords = response.matchings[0].geometry;
-  // Save coordinates to state variable and add route 
+  // Save coordinates to state variable and add route
+    setRouteCoords(coords['coordinates']);
+    setElevation(iterateElevation(coords['coordinates']))
     addRoute(coords);
-  }
+  };
 
-  // debugger
 
   // Draw the Map Matching route as a new layer on the map
   function addRoute(coords) {
@@ -174,6 +184,16 @@ const Map = () => {
     map.current.on('draw.update', updateRoute);
     map.current.on('draw.delete', removeRoute);
   }, [map.current]);
+
+  let elevation2;
+  const coordinate = [-122.420679, 37.772537];
+  if (map.current) {
+    elevation2 = map.current.queryTerrainElevation(coordinate);
+
+  }
+  
+  console.log(elevation2)
+
   
   return (
     <div className="outer-map-container">
