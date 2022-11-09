@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@turf/turf": "^6.5.0",
+    "axios": "^0.24.0",
     "google-map-react": "^2.2.0",
     "javascript-time-ago": "^2.5.9",
     "mapbox-gl": "^2.9.2",

@@ -68,6 +68,25 @@ a:hover {
   width: 100%;
 }
 
-.show-map-button {
-  margin-bottom: 30px;
+.page-container-map-entry {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.rideform-form-map {
+  width: 45%;
+  border: 1px solid #dfdfe8;
+  padding: 10px;
+}
+
+.outer-map-container {
+  width: 55%;
+  margin-right: 20px;
+}
+
+.map-textarea {
+  padding: 10px;
 }
