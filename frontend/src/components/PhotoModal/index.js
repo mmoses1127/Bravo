@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
-import LoginForm from './LoginForm';
+import './Modal.css'
 
-function PhotoModal() {
-  const [showModal, setShowModal] = useState(false);
+function PhotoModal({ride, closeModal}) {
+  const [showModal, setShowModal] = useState(true);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const switchPreviousPhoto = () => {
+    setPhotoIndex((Math.abs(photoIndex - 1)) % ride.photoUrls.length)
+  };
+
+  const switchNextPhoto = () => {
+    setPhotoIndex((photoIndex + 1) % ride.photoUrls.length)
+  }
+
+  if (!ride) return null;
+
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <p>HEYYYYYYYYYYYYYYYY</p>
+        <Modal onClose={(e) => closeModal(e)}>
+          <div className='photo-modal-box'>
+            <button onClick={() => switchPreviousPhoto()} className='next-button'><i className="fa-solid fa-chevron-left"/></button>
+            <img className='photo-in-modal' src={ride.photoUrls[photoIndex]} alt='Ride Image' />
+            <button onClick={() => switchNextPhoto()} className='next-button'><i className="fa-solid fa-chevron-right"/></button>
+          </div>
         </Modal>
       )}
     </>

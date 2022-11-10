@@ -11,17 +11,23 @@ import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
 import RideComments from "../RideComments";
 import { fetchComments, getComments } from "../../store/comments";
+import PhotoModal from "../PhotoModal";
 
 const Dashboard = () => {
   const {userId} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const rides = useSelector(getRides);
+  let rides = useSelector(getRides);
+  console.log(userId)
+  let userRides = useSelector(getUserRides(userId));
+  console.log(userRides)
+  const kudos = useSelector(getKudos);
+  const comments = useSelector(getComments);
   const currentUser = useSelector(getCurrentUser);
   const user = useSelector(getUser(userId));
   const profileUser = user? user : currentUser;
-  const userRides = useSelector(getUserRides(profileUser.id));
-  const latestRide = getLatestRide(userRides);
+  const currentUserRides = useSelector(getUserRides(profileUser.id));
+  const latestRide = getLatestRide(currentUserRides);
   const userKudos = useSelector(getKudos).filter(kudo => kudo.giverId === profileUser.id);
   const userComments = useSelector(getComments).filter(comment => comment.commenterId === profileUser.id)
   const [showMenu, setShowMenu] = useState(false);
@@ -34,10 +40,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchUsers());
-    dispatch(fetchKudos());
-    dispatch(fetchComments());
-    userId ? dispatch(fetchUserRides(userId)) : dispatch(fetchRides());
+    if (rides.length < 1) {dispatch(fetchRides())};
+    if (user?.length < 1) dispatch(fetchUsers());
+    if (kudos?.length < 1) dispatch(fetchKudos());
+    if (comments?.length < 1) dispatch(fetchComments());
   }, [userId]);
 
   
@@ -72,7 +78,7 @@ const Dashboard = () => {
               </li>
               <li className="profile-stat">
                 <p className='profile-tab'>Rides</p>
-                <h3 className='profile-num'>{userRides.length}</h3>
+                <h3 className='profile-num'>{currentUserRides.length}</h3>
               </li>
             </ul>
           </div>
@@ -86,6 +92,7 @@ const Dashboard = () => {
         <div className="my-links-container">
           <div className="links-bar">
             <div className="links-item">
+              <PhotoModal />
               <h3>Project Repo</h3>
               <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
             </div>
@@ -130,7 +137,8 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {rides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
+        {userId && userRides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
+        {!userId && rides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
       </div>
     </div>
     </>

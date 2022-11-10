@@ -17,10 +17,13 @@ const CreateRideMap = () => {
   const [polyline, setPolyline] = useState('');
   const [pathPoints, setPathPoints] = useState('');
   const [elevationArray, setElevationArray] = useState([])
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  let today = new Date().toISOString().slice(0, 10);
+  let now = (new Date()).toLocaleTimeString().slice(0,4);
+  if (now.length < 5) now = '0' + now
+  const [date, setDate] = useState(today);
+  const [time, setTime] = useState(now);
   const [elevation, setElevation] = useState(0);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);

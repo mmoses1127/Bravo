@@ -1,0 +1,31 @@
+.photo-modal-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.photo-in-modal {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+#modal {
+  z-index: 9999;
+}
+
+#modal-content {
+  background-color: transparent;
+}
+
+.next-button {
+  border: none;
+  background-color: transparent;
+  color: #dfdfe8;
+  font-size: 30px;
+}
+
+.next-button:hover {
+  background-color: transparent;
+}

@@ -11,12 +11,11 @@ export const RideMap = ({passUpMapData}) => {
   const [polyline, setPolyline] = useState('');
   const [duration, setDuration] = useState(0);
   const [pathPoints, setPathPoints] = useState([]);
-  const [elevationArray, setElevationArray] = useState();
+  const [elevationArray, setElevationArray] = useState([]);
 
   useEffect(() => {
     if (!map) {
-      setMap(new window.google.maps.Map(mapRef.current, {zoom: 9, center: {lat: 40.783254, lng: -73.974529}}
-    ))
+      setMap(new window.google.maps.Map(mapRef.current, {zoom: 9, center: {lat: 40.783254, lng: -73.974529}}))
     }
     
   }, [mapRef]);
@@ -28,14 +27,15 @@ export const RideMap = ({passUpMapData}) => {
       path: points,
       samples: 40,
     }));
-    setElevationArray(elev[`results`].map(result => {
+    await setElevationArray(elev[`results`].map(result => {
       return result[`elevation`];
     }));
+    
   };
 
   const calcElevation = (elevationArray) => {
     let totalClimbing = 0;
-    for (let i = 0; i < elevationArray.length - 2; i++) {
+    for (let i = 0; i < elevationArray.length - 1; i++) {
       if (elevationArray[i] < elevationArray[i+1]) {
         totalClimbing += elevationArray[i+1] - elevationArray[i]
       };
@@ -116,15 +116,16 @@ export const RideMap = ({passUpMapData}) => {
               const pathPointSet = response.routes[0].overview_path;
               
               setDistance(totalDistance);
-              console.log(totalDistance, distance)
               setPolyline(poly);
               setDuration(totalDuration);
               setPathPoints(pathPointSet);
+              // console.log("pathpoints", pathPoints)
+              // console.log("pathpointset", pathPointSet)
               directionsRenderer.setDirections(response);
           }
       }); 
       
-      passUpMapData(distance, duration, polyline, elevationArray, elevation);
+      // passUpMapData(distance, duration, polyline, elevationArray, elevation);
 
   };
 
@@ -132,13 +133,26 @@ export const RideMap = ({passUpMapData}) => {
 
     if (coords.length > 1) {
         renderPath();
-        console.log(distance)
-        calcElevationArray(pathPoints);
-        if (elevationArray && elevationArray.length > 1) calcElevation(elevationArray);
+        // calcElevationArray(pathPoints);
+        // if (elevationArray && elevationArray.length > 1) calcElevation(elevationArray);
     } 
 
   }, [coords])
 
+  useEffect(() => {
+    calcElevationArray(pathPoints);
+    // console.log('updating elev data with', pathPoints )
+  }, [pathPoints])
+
+  useEffect(() => {
+    console.log("array before calc",elevationArray)
+    calcElevation(elevationArray);
+  }, [elevationArray])
+
+  useEffect(() => {
+    passUpMapData(distance, duration, polyline, elevationArray, elevation);
+    console.log('elev', elevation)
+  }, [distance, duration, polyline, elevationArray, elevation])
 
 
   return (

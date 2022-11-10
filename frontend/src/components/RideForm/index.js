@@ -9,13 +9,16 @@ const RideForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
-  const [elevation, setElevation] = useState('');
-  const [title, setTitle] = useState('');
+  const [distance, setDistance] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [elevation, setElevation] = useState(0);
+  const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  let today = new Date().toISOString().slice(0, 10);
+  let now = (new Date()).toLocaleTimeString().slice(0,4);
+  if (now.length < 5) now = '0' + now
+  const [date, setDate] = useState(today);
+  const [time, setTime] = useState(now);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
 

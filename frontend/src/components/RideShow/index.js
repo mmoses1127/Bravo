@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getRide, fetchRide, deleteRide } from "../../store/rides";
@@ -6,6 +6,7 @@ import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
+import PhotoModal from "../PhotoModal";
 import RideShowMapWrapper from "./RideShowMap";
 import {
   LineChart,
@@ -27,9 +28,10 @@ const RideShow = () => {
   const {rideId} = useParams();
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));
+  const [openModal, setOpenModal] = useState(false);
   
   useEffect(() => {
-    dispatch(fetchRide(rideId));
+    if (ride.length < 1) dispatch(fetchRide(rideId));
   }, [rideId]);
   
   if (!ride) return null;
@@ -41,6 +43,16 @@ const RideShow = () => {
       history.push(`/dashboard`);
     };
   };
+
+  const showPhotoModal = (e) => {
+    e.preventDefault();
+    setOpenModal(true);
+  };
+
+  const closeModal = (e) => {
+    e.preventDefault();
+    setOpenModal(false)
+  }
 
   let parsedDuration;
   const parsedDateTime = new Date(ride.dateTime)
@@ -57,54 +69,23 @@ const RideShow = () => {
     parsedDuration = `${hours}:${mins}`;
   }
 
-  let elevationData = ride.gpsPoints.map((elevation, i) => {
-    return {altitude: elevation, index: i}
-  })
-
-  console.log(elevationData)
-
-  let pdata = [
-    {
-        name: 'MongoDb',
-        student: 11,
-        fees: 120
-    },
-    {
-        name: 'Javascript',
-        student: 15,
-        fees: 12
-    },
-    {
-        name: 'PHP',
-        student: 5,
-        fees: 10
-    },
-    {
-        name: 'Java',
-        student: 10,
-        fees: 5
-    },
-    {
-        name: 'C#',
-        student: 9,
-        fees: 4
-    },
-    {
-        name: 'C++',
-        student: 10,
-        fees: 8
-    },
-];
+  let elevationData;
+  if (ride.gpsPoints) {
+    elevationData = ride.gpsPoints.map((elevation, i) => {
+      return {altitude: elevation, index: i}
+    })
+  }
 
   return (
     <div className="page-container-show">
+      {openModal && < PhotoModal ride={ride} closeModal={closeModal}/>}
       <div className="ride-show-header">
         <div className="ride-show-header-left">
           <img src="https://d3nn82uaxijpm6.cloudfront.net/assets/svg/badges_multicolor_summit_small-a9f1366377ea9bcfb95dd73917f97b674a8c64d9f00bb029d58c23730158b328.svg" alt="Strava Badge" />
           <h2>{ride.username} - Ride</h2>
         </div>
         <div className="social-header">
-          {ride.athleteId === currentUser.id && 
+          {currentUser && ride.athleteId === currentUser.id && 
           <>
             <button className="delete-button" onClick={handleDelete}><i className="fa-solid fa-trash"/></button>
             <Link className='edit-link' to={`/rides/${rideId}/edit`}><i className="fa-solid fa-pencil"></i></Link>
@@ -126,7 +107,7 @@ const RideShow = () => {
             <div className="show-main-img">
               {ride.photoUrls?.slice(0, 5).map((photoUrl, i) => (
                 <div key={i} className='small-square-thumb-box'>
-                  <img className='photo-thumb' alt='RIde Photo' src={photoUrl}/>
+                  <img onClick={showPhotoModal} className='photo-thumb' alt='RIde Photo' src={photoUrl}/>
                 </div>
               ))}
             </div>
@@ -152,19 +133,21 @@ const RideShow = () => {
       <div className="ride-show-map">
         <RideShowMapWrapper coords={ride.pathPoints}/>
       </div>
-      <div className="ride-show-elevation">
-        <ResponsiveContainer width="100%" >
-          <AreaChart data={elevationData} margin={{top: 10}}>
-              <CartesianGrid />
-              <XAxis dataKey="index"  />
-              {/* <YAxis dataKey="altitude" interval={'preserveStartEnd'} /> */}
-              <YAxis padding={{ top: 30 }}/>
-              <Tooltip />
-              <Area type="monotone" dataKey="altitude" fill="gray" stroke="gray"
-                  activeDot={{ r: 8 }} />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+      {elevationData && 
+        <div className="ride-show-elevation">
+          <ResponsiveContainer width="100%" >
+            <AreaChart data={elevationData} margin={{top: 10}}>
+                <CartesianGrid />
+                <XAxis dataKey="index"  />
+                {/* <YAxis dataKey="altitude" interval={'preserveStartEnd'} /> */}
+                <YAxis padding={{ top: 30 }}/>
+                <Tooltip />
+                <Area type="monotone" dataKey="altitude" fill="gray" stroke="gray"
+                    activeDot={{ r: 8 }} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      }
     </div>
   )
 };

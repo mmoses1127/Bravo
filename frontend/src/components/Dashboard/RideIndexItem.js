@@ -9,6 +9,7 @@ import { useState } from 'react';
 import CommentForm from '../RideComments/CommentForm';
 import { getRideComments, fetchComments } from '../../store/comments';
 import { useEffect } from 'react';
+import PhotoModal from '../PhotoModal';
 
 
 const RideIndexItem = ({ride}) => {
@@ -21,10 +22,21 @@ const RideIndexItem = ({ride}) => {
   const rideComments = useSelector(getRideComments(ride.id));
   let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id);
   const [showCommentForm, setShowCommentForm] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const longDate = parsedDateTime.toLocaleString([], {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
+
+  const showPhotoModal = (e) => {
+    e.preventDefault();
+    setOpenModal(true);
+  };
+
+  const closeModal = (e) => {
+    e.preventDefault();
+    setOpenModal(false)
+  }
   
   const giveKudo = (e) => {
     e.preventDefault();
@@ -63,6 +75,7 @@ const RideIndexItem = ({ride}) => {
 
   return (
     <div className="feed-card">
+      {/* <PhotoModal ride={ride} closeModal={closeModal}/> */}
       <div className="card-header">
         <div className='avatar-container'>
           <img className="avatar-image-medium" src={ride.profilePicUrl} alt="Avatar" />
