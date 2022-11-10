@@ -233,7 +233,6 @@ const RideMapMapbox = () => {
     });
 
     let elev_string = JSON.stringify(elev.data);
-    console.log(elev_string)
   }
 
   // fetchElev();

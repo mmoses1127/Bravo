@@ -1,14 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-export const RideMap = ({passUpDistance, passUpDuration}) => {
+export const RideMap = ({passUpMapData}) => {
   const [map, setMap] = useState(null);
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState([]);
   const [coords, setCoords] = useState([]);
   const [distance, setDistance] = useState(0);
   const [polyline, setPolyline] = useState("");
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState(0);
+  const [pathPoints, setPathPoints] = useState([]);
 
   useEffect(() => {
     if (!map) {
@@ -71,7 +72,6 @@ export const RideMap = ({passUpDistance, passUpDuration}) => {
       
       directionsService.route(request, (response, status) => {
           if (status === 'OK') {
-            console.log(response)
               const poly = response.routes[0].overview_polyline
               
               const distanceArray = response.routes[0].legs;
@@ -87,17 +87,22 @@ export const RideMap = ({passUpDistance, passUpDuration}) => {
                   let value = dur.duration.value;
                   totalDuration += value;
 
-              })
+                  
+                })
 
+              const pathPointSet = response.routes[0].overview_path;
+                
               setDistance(totalDistance);
               setPolyline(poly);
               setDuration(totalDuration);
+              setPathPoints(pathPointSet);
               directionsRenderer.setDirections(response);
           }
       }); 
       
-      passUpDistance(distance);
-      passUpDuration(duration);
+      // passUpDistance(distance);
+      // passUpDuration(duration);
+      passUpMapData(distance, duration, polyline, pathPoints);
 
   };
 
@@ -121,11 +126,11 @@ export const RideMap = ({passUpDistance, passUpDuration}) => {
 
 
 
-const RideMapWrapper = ({passUpDistance, passUpDuration}) => {
+const RideMapWrapper = ({passUpMapData}) => {
 
   return (
     <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <RideMap passUpDistance={passUpDistance} passUpDuration={passUpDuration}/>
+      <RideMap passUpMapData={passUpMapData}/>
     </Wrapper>
   )
 };

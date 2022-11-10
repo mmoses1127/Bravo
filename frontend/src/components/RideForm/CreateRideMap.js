@@ -14,6 +14,8 @@ const CreateRideMap = () => {
   const currentUser = useSelector(getCurrentUser);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
+  const [polyline, setPolyline] = useState('');
+  const [pathPoints, setPathPoints] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -25,16 +27,23 @@ const CreateRideMap = () => {
 
   const handleClick = async (e) => {
     await handleSubmit(e);
-    history.push(`/`);
+    // history.push(`/`);
   }
 
-  const passUpDistance = (currentDistance) => {
-    setDistance(Math.round(currentDistance * 10) / 10);
-  };
+  // const passUpDistance = (currentDistance) => {
+  //   setDistance(Math.round(currentDistance * 10) / 10);
+  // };
 
-  const passUpDuration = (currentDuration) => {
-    setDuration(Math.round(currentDuration * 10) / 10);
-  };
+  // const passUpDuration = (currentDuration) => {
+  //   setDuration(Math.round(currentDuration * 10) / 10);
+  // };
+
+  const passUpMapData = (distance = 0, duration = 0, polyline = {}, pathPoints = []) => {
+    setDistance(Math.round(distance * 10) / 10);
+    setDuration(Math.round(duration * 10) / 10);
+    setPolyline(polyline);
+    setPathPoints(pathPoints);
+  }
 
 
   const handleSubmit = async (e) => {
@@ -46,6 +55,8 @@ const CreateRideMap = () => {
     newRide.append('ride[distance]', distance);
     newRide.append('ride[description]', description);
     newRide.append('ride[duration]', duration);
+    console.log(polyline)
+    newRide.append('ride[polyline]', polyline);
     newRide.append('ride[elevation]', elevation);
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
     newRide.append('ride[athleteId]', currentUser.id);
@@ -126,7 +137,7 @@ const CreateRideMap = () => {
               <legend>Duration (mins)</legend>
               <div className='inline-inputs'>
                 <label>
-                  <input disbled type='number' value={duration / 60} />
+                  <input disabled type='number' value={Math.round(duration / 60 * 10) / 10} />
                 </label>
               </div>
             </fieldset>
@@ -178,7 +189,7 @@ const CreateRideMap = () => {
       <div className="outer-map-container">
         {/* <div ref={mapContainer} className="map-container" /> */}
         {/* <button className="set-route-button">Set Route</button> */}
-        <RideMapWrapper passUpDistance={passUpDistance} passUpDuration={passUpDuration}/>
+        <RideMapWrapper passUpMapData={passUpMapData} />
       </div>
     </div>
 
