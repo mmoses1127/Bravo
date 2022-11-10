@@ -98,9 +98,8 @@ const RideIndexItem = ({ride}) => {
       </div>
       <div className="card-media">
         <div className="map-container">
-          {/* <Link to={`/rides/${ride.id}`}><img alt='static Mapbox map of the San Francisco bay area' src='https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.337798,37.810550,9.67,0.00,0.00/1000x600@2x?access_token=pk.eyJ1IjoibW1vc2VzMTEyNyIsImEiOiJjbDl5cWtkdnAwN2pwM3BrbnZsNTZzZHIzIn0.5DYp57TWNGkULiO3KhdVbg' /></Link> */}
           {
-            ride.polyline && <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?size=500x250&path=color:0xf55142FF|enc:${ride.polyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
+            ride.polyline && <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?scale=2&size=500x250&path=color:0xf55142FF|enc:${ride.polyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
           }
         </div>
         {ride.photoUrls && 

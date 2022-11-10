@@ -12,8 +12,8 @@ const CreateRideMap = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentUser = useSelector(getCurrentUser);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  const [distance, setDistance] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [polyline, setPolyline] = useState('');
   const [pathPoints, setPathPoints] = useState('');
   const [elevationArray, setElevationArray] = useState([])
@@ -21,7 +21,7 @@ const CreateRideMap = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [elevation, setElevation] = useState('');
+  const [elevation, setElevation] = useState(0);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
   let returnedRide;
@@ -39,12 +39,14 @@ const CreateRideMap = () => {
   //   setDuration(Math.round(currentDuration * 10) / 10);
   // };
 
-  const passUpMapData = (distance = 0, duration = 0, polyline = {}, pathPoints = [], elevationArray = []) => {
+  const passUpMapData = (distance = 0, duration = 0, polyline = {}, elevationArray = [], elevation = 0) => {
     setDistance(Math.round(distance * 10) / 10);
     setDuration(Math.round(duration * 10) / 10);
     setPolyline(polyline);
     setPathPoints(pathPoints);
     setElevationArray(elevationArray);
+    setElevation(elevation)
+    console.log(elevationArray)
   };
 
 
@@ -57,7 +59,6 @@ const CreateRideMap = () => {
     newRide.append('ride[distance]', distance);
     newRide.append('ride[description]', description);
     newRide.append('ride[duration]', duration);
-    console.log(elevationArray)
     newRide.append('ride[gps_points]', elevationArray);
     newRide.append('ride[polyline]', polyline);
     newRide.append('ride[elevation]', elevation);
@@ -110,10 +111,10 @@ const CreateRideMap = () => {
             </fieldset>
 
             <fieldset>
-              <legend>Elevation</legend>
+              <legend>Elevation (m)</legend>
               <div className='inline-inputs'>
                 <label>
-                  <input disabled type='number' value={elevation} />
+                  <input disabled type='number' value={Math.round(elevation * 10) / 10} />
                 </label>
               </div>
             </fieldset>
@@ -137,7 +138,7 @@ const CreateRideMap = () => {
             </fieldset>            
 
             <fieldset>
-              <legend>Duration (mins)</legend>
+              <legend>Estimated Duration (mins)</legend>
               <div className='inline-inputs'>
                 <label>
                   <input disabled type='number' value={Math.round(duration / 60 * 10) / 10} />

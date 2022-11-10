@@ -28,7 +28,14 @@ const removeRide = (rideId) => {
 
 export const getRides = (state) => {
   if (!state.rides) return [];
-  return Object.values(state.rides);
+  let unsortedRides = Object.values(state.rides);
+  return unsortedRides.sort((a, b) => {
+    if (a.dateTime > b.dateTime) {
+      return -1
+    } else {
+      return 1
+    }
+  })
 };
 
 export const getRide = rideId => (state) => {
