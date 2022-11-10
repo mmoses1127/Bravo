@@ -8,7 +8,6 @@ export const RideMap = ({mapOptions}) => {
   const [coords, setCoords] = useState([]);
   const [dis, setDistance] = useState(0);
   const [polyline, setPolyline] = useState("");
-  const directionsRenderer = useRef(null);
 
   useEffect(() => {
     if (!map) {
@@ -27,12 +26,18 @@ export const RideMap = ({mapOptions}) => {
         const marker = new window.google.maps.Marker({
           position: location,
           map: map,
+          icon: {
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 4.5,
+            fillColor: "red",
+            fillOpacity: 0.8,
+            strokeWeight: 0
+        }
         });
         setMarkers(marks => [...marks, marker])
       };
 
       window.google.maps.event.addListener(map, "click", (event) => {
-        console.log(event.latLng)
         setCoords(allCoords => [...allCoords, event.latLng])
         addMarker(event.latLng, map);
       });
@@ -40,8 +45,8 @@ export const RideMap = ({mapOptions}) => {
     
   }, [map]) ;
   
-  directionsRenderer.current = new window.google.maps.DirectionsRenderer();
-  if (map) directionsRenderer.current.setMap(map.current);
+  const directionsRenderer = new window.google.maps.DirectionsRenderer({suppressMarkers: true});
+  directionsRenderer.setMap(map);
   const directionsService = new window.google.maps.DirectionsService();
   
   const renderPath = () => {
@@ -64,7 +69,6 @@ export const RideMap = ({mapOptions}) => {
       
       directionsService.route(request, (response, status) => {
           if (status === 'OK') {
-              console.log(response)
               // const distanceArray = response.routes[0].legs;
               // const poly = response.routes[0].overview_polyline
               // let totalDistance = 0;
@@ -75,7 +79,7 @@ export const RideMap = ({mapOptions}) => {
 
               // setDistance(totalDistance);
               // setPolyline(poly);
-              directionsRenderer.current.setDirections(response);
+              directionsRenderer.setDirections(response);
           }
       }); 
       // directionsRenderer.current.setMap(map.current);
@@ -89,9 +93,7 @@ export const RideMap = ({mapOptions}) => {
     }
   }, [coords])
 
-  console.log(coords[0])
 
-  // console.log('google literal', new window.google.maps.LatLng(40, 40))
 
   return (
     <div className="google-map-container" ref={mapRef}>Map</div>
