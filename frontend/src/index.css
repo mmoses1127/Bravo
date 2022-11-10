@@ -47,11 +47,11 @@ footer {
 }
 
 .footer-box {
-	margin: 20px;
+	margin: 0 20px;
 }
 
 .footer-box i {
-	font-size: 50px;
+	font-size: 30px;
 }
 
 .footer-icon {

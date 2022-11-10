@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import { getCurrentUser } from '../../store/session';
-import EditMap from './CreateRideMap';
 import './RideForm.css';
-import Map from '../Map/Map';
 
 const RideForm = () => {
   const history = useHistory();

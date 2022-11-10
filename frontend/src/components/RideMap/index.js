@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-export const RideMap = ({mapOptions}) => {
+export const RideMap = ({passUpDistance, passUpDuration}) => {
   const [map, setMap] = useState(null);
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState([]);
   const [coords, setCoords] = useState([]);
-  const [dis, setDistance] = useState(0);
+  const [distance, setDistance] = useState(0);
   const [polyline, setPolyline] = useState("");
+  const [duration, setDuration] = useState(0)
 
   useEffect(() => {
     if (!map) {
@@ -19,6 +20,7 @@ export const RideMap = ({mapOptions}) => {
 
 
   
+
   useEffect(() => {
     if (map) {
 
@@ -62,30 +64,43 @@ export const RideMap = ({mapOptions}) => {
       const request = {
           origin: coords[0],
           destination: coords[coords.length - 1],
-          travelMode: 'WALKING',
-          unitSystem: window.google.maps.UnitSystem.IMPERIAL,
+          travelMode: 'BICYCLING',
+          unitSystem: window.google.maps.UnitSystem.METRIC,
           waypoints: midpoints
       }
       
       directionsService.route(request, (response, status) => {
           if (status === 'OK') {
-              // const distanceArray = response.routes[0].legs;
-              // const poly = response.routes[0].overview_polyline
-              // let totalDistance = 0;
-              // distanceArray.forEach(dis => {
-              //     let stringNum = dis.distance.text.split(" ")[0];
-              //     totalDistance += parseFloat(stringNum);
-              // })
+            console.log(response)
+              const poly = response.routes[0].overview_polyline
+              
+              const distanceArray = response.routes[0].legs;
+              let totalDistance = 0;
+              distanceArray.forEach(dis => {
+                  let value = dis.distance.value / 1000;
+                  totalDistance += value;
+              })
 
-              // setDistance(totalDistance);
-              // setPolyline(poly);
+              const durationArray = response.routes[0].legs;
+              let totalDuration = 0;
+              durationArray.forEach(dur => {
+                  let value = dur.duration.value;
+                  totalDuration += value;
+
+              })
+
+              setDistance(totalDistance);
+              setPolyline(poly);
+              setDuration(totalDuration);
               directionsRenderer.setDirections(response);
           }
       }); 
-      // directionsRenderer.current.setMap(map.current);
       
+      passUpDistance(distance);
+      passUpDuration(duration);
 
-  }
+  };
+
   useEffect(() => {
 
     if (coords.length > 1) {
@@ -106,11 +121,11 @@ export const RideMap = ({mapOptions}) => {
 
 
 
-const RideMapWrapper = () => {
+const RideMapWrapper = ({passUpDistance, passUpDuration}) => {
 
   return (
     <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <RideMap />
+      <RideMap passUpDistance={passUpDistance} passUpDuration={passUpDuration}/>
     </Wrapper>
   )
 };
