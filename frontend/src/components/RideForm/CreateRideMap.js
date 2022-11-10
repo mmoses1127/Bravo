@@ -16,6 +16,7 @@ const CreateRideMap = () => {
   const [duration, setDuration] = useState('');
   const [polyline, setPolyline] = useState('');
   const [pathPoints, setPathPoints] = useState('');
+  const [elevationArray, setElevationArray] = useState([])
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -38,12 +39,13 @@ const CreateRideMap = () => {
   //   setDuration(Math.round(currentDuration * 10) / 10);
   // };
 
-  const passUpMapData = (distance = 0, duration = 0, polyline = {}, pathPoints = []) => {
+  const passUpMapData = (distance = 0, duration = 0, polyline = {}, pathPoints = [], elevationArray = []) => {
     setDistance(Math.round(distance * 10) / 10);
     setDuration(Math.round(duration * 10) / 10);
     setPolyline(polyline);
     setPathPoints(pathPoints);
-  }
+    setElevationArray(elevationArray);
+  };
 
 
   const handleSubmit = async (e) => {
@@ -55,7 +57,8 @@ const CreateRideMap = () => {
     newRide.append('ride[distance]', distance);
     newRide.append('ride[description]', description);
     newRide.append('ride[duration]', duration);
-    console.log(polyline)
+    console.log(elevationArray)
+    newRide.append('ride[gps_points]', elevationArray);
     newRide.append('ride[polyline]', polyline);
     newRide.append('ride[elevation]', elevation);
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);

@@ -6,8 +6,11 @@ import './RideShow.css';
 import avatar from "../../assets/mtb1.jpg";
 import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
+import RideShowMapWrapper from "./RideShowMap";
 import {
   LineChart,
+  AreaChart,
+  Area,
   ResponsiveContainer,
   Legend, Tooltip,
   Line,
@@ -53,6 +56,12 @@ const RideShow = () => {
     if (mins < 10) mins = '0' + mins;
     parsedDuration = `${hours}:${mins}`;
   }
+
+  let elevationData = ride.gpsPoints.map((elevation, i) => {
+    return {altitude: elevation, index: i}
+  })
+
+  console.log(elevationData)
 
   let pdata = [
     {
@@ -141,20 +150,19 @@ const RideShow = () => {
         </div>
       </div>
       <div className="ride-show-map">
-        <Map coords={ride.gps_points}/>
+        <RideShowMapWrapper coords={ride.pathPoints}/>
       </div>
       <div className="ride-show-elevation">
         <ResponsiveContainer width="100%" >
-          <LineChart data={pdata}>
+          <AreaChart data={elevationData} margin={{top: 10}}>
               <CartesianGrid />
-              <XAxis dataKey="distance" interval={'preserveStartEnd'} />
-              {/* <YAxis dataKey="elevation" interval={'preserveStartEnd'} /> */}
-              <YAxis />
-              {/* <Legend /> */}
+              <XAxis dataKey="index"  />
+              {/* <YAxis dataKey="altitude" interval={'preserveStartEnd'} /> */}
+              <YAxis padding={{ top: 30 }}/>
               <Tooltip />
-              <Line dataKey="student"
-                  stroke="red" activeDot={{ r: 8 }} />
-          </LineChart>
+              <Area type="monotone" dataKey="altitude" fill="gray" stroke="gray"
+                  activeDot={{ r: 8 }} />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>

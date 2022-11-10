@@ -41,8 +41,8 @@
 }
 
 .google-map-container {
-  height: 600px;
-  width: 800px;
+  height: 100%;
+  width: 100%;
 }
 
 .outer-map-container-show {

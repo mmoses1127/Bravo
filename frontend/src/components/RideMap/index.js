@@ -10,6 +10,7 @@ export const RideMap = ({passUpMapData}) => {
   const [polyline, setPolyline] = useState("");
   const [duration, setDuration] = useState(0);
   const [pathPoints, setPathPoints] = useState([]);
+  const [elevationArray, setElevationArray] = useState();
 
   useEffect(() => {
     if (!map) {
@@ -20,7 +21,17 @@ export const RideMap = ({passUpMapData}) => {
   }, [mapRef]);
 
 
-  
+  const calcElevation = async (points) => {
+    const elevator = new window.google.maps.ElevationService();
+
+    let elev = await (elevator.getElevationAlongPath({
+      path: points,
+      samples: 40,
+    }));
+    setElevationArray(elev[`results`].map(result => {
+      return result[`elevation`];
+    }));
+  };
 
   useEffect(() => {
     if (map) {
@@ -102,7 +113,7 @@ export const RideMap = ({passUpMapData}) => {
       
       // passUpDistance(distance);
       // passUpDuration(duration);
-      passUpMapData(distance, duration, polyline, pathPoints);
+      passUpMapData(distance, duration, polyline, pathPoints, elevationArray);
 
   };
 
@@ -110,7 +121,10 @@ export const RideMap = ({passUpMapData}) => {
 
     if (coords.length > 1) {
         renderPath();
-    }
+        calcElevation(pathPoints);
+        console.log(elevationArray)
+    } 
+
   }, [coords])
 
 
