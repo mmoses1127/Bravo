@@ -32,60 +32,66 @@ export const RideMap = ({mapOptions}) => {
       };
 
       window.google.maps.event.addListener(map, "click", (event) => {
-        setCoords(allCoords => [...allCoords, [event.latLng]])
+        console.log(event.latLng)
+        setCoords(allCoords => [...allCoords, event.latLng])
         addMarker(event.latLng, map);
       });
     };
-
+    
   }, [map]) ;
+  
+  directionsRenderer.current = new window.google.maps.DirectionsRenderer();
+  if (map) directionsRenderer.current.setMap(map.current);
+  const directionsService = new window.google.maps.DirectionsService();
+  
+  const renderPath = () => {
+      let midpoints = []
+      for(let i = 1; i < coords.length - 1; i++) {
+        let point = coords[i];
+        let wayPoint = {};
+          wayPoint['location'] = new window.google.maps.LatLng(point);
+          midpoints.push(wayPoint);
+          wayPoint = {}
+      }
 
+      const request = {
+          origin: coords[0],
+          destination: coords[coords.length - 1],
+          travelMode: 'WALKING',
+          unitSystem: window.google.maps.UnitSystem.IMPERIAL,
+          waypoints: midpoints
+      }
+      
+      directionsService.route(request, (response, status) => {
+          if (status === 'OK') {
+              console.log(response)
+              // const distanceArray = response.routes[0].legs;
+              // const poly = response.routes[0].overview_polyline
+              // let totalDistance = 0;
+              // distanceArray.forEach(dis => {
+              //     let stringNum = dis.distance.text.split(" ")[0];
+              //     totalDistance += parseFloat(stringNum);
+              // })
+
+              // setDistance(totalDistance);
+              // setPolyline(poly);
+              directionsRenderer.current.setDirections(response);
+          }
+      }); 
+      // directionsRenderer.current.setMap(map.current);
+      
+
+  }
   useEffect(() => {
-    const renderPath = () => {
-        let midpoints = []
-        for(let i = 1; i < coords.length - 1; i++) {
-            let point = coords[i];
-            let wayPoint = {};
-            wayPoint['location'] = new window.google.maps.LatLng(point);
-            midpoints.push(wayPoint);
-            wayPoint = {}
-            console.log(midpoints)
-        }
-
-        const request = {
-            origin: new window.google.maps.LatLng([coords[0]]),
-            destination: new window.google.maps.LatLng(coords[coords.length - 1]),
-            travelMode: 'WALKING',
-            unitSystem: window.google.maps.UnitSystem.IMPERIAL,
-            waypoints: midpoints
-        }
-
-        directionsRenderer.current = new window.google.maps.DirectionsRenderer({ map: map });
-        const directionsService = new window.google.maps.DirectionsService();
-        directionsService.route(request, function(response, status) {
-            if (status === 'OK') {
-                const distanceArray = response.routes[0].legs;
-                const poly = response.routes[0].overview_polyline
-                let totalDistance = 0;
-                distanceArray.forEach(dis => {
-                    let stringNum = dis.distance.text.split(" ")[0];
-                    totalDistance += parseFloat(stringNum);
-                })
-                setDistance(totalDistance);
-                setPolyline(poly)
-                directionsRenderer.current.setDirections(response);
-            }
-        }); 
-        directionsRenderer.current.setMap(map.current);
-
-    }
 
     if (coords.length > 1) {
         renderPath();
     }
   }, [coords])
 
-  console.log(coords)
-  // console.log(new window.google.maps.LatLng(40, 40))
+  console.log(coords[0])
+
+  // console.log('google literal', new window.google.maps.LatLng(40, 40))
 
   return (
     <div className="google-map-container" ref={mapRef}>Map</div>
@@ -109,3 +115,5 @@ const RideMapWrapper = () => {
 
 
 export default RideMapWrapper;
+
+

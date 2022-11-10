@@ -134,7 +134,6 @@ const CreateRideMap = () => {
     // console.log(elevation)
     // Get total distance of route
     const calcDistance = (coords) => {
-      console.log(coords)
       let totalDistance = 0;
       for (let i = 0; i < coords.length - 1; i++) {
         totalDistance += turf.distance(coords[i], coords[i+1], {units: 'kilometers'});
@@ -224,14 +223,14 @@ const CreateRideMap = () => {
 
   // }
 
-  // const fetchElev = async () => {
-  //   let elev = await fetch(`https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536%2C-104.9847034&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`, {
-  //     headers: { 'Access-Control-Allow-Origin': '*' }
-  //   });
+  const fetchElev = async () => {
+    let elev = await fetch(`https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536%2C-104.9847034&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    });
 
-  //   let elev_string = JSON.stringify(elev.data);
-  //   console.log(elev_string)
-  // }
+    let elev_string = JSON.stringify(elev.data);
+    console.log(elev_string)
+  }
 
   // fetchElev();
 
@@ -250,7 +249,6 @@ const CreateRideMap = () => {
   // .catch(function (error) {
   //   console.log(error);
   // });
-  
 
   // RIDE FORM SECTION
 
@@ -264,6 +262,7 @@ const CreateRideMap = () => {
   const [time, setTime] = useState('');
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
+  let returnedRide;
 
   const handleClick = async (e) => {
     await handleSubmit(e);
@@ -283,6 +282,7 @@ const CreateRideMap = () => {
     newRide.append('ride[elevation]', elevation);
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
     newRide.append('ride[athleteId]', currentUser.id);
+    console.log(routeCoords)
     newRide.append('ride[gps_points]', routeCoords);
     if (photoFiles) {
       photoFiles.forEach(photoFile => {
@@ -290,7 +290,7 @@ const CreateRideMap = () => {
       });
     };
 
-    return dispatch(createRide(newRide))
+    returnedRide = dispatch(createRide(newRide))
     .catch(async (res) => {
       let data;
       try {

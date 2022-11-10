@@ -141,7 +141,7 @@ const RideShow = () => {
         </div>
       </div>
       <div className="ride-show-map">
-        <Map />
+        <Map coords={ride.gps_points}/>
       </div>
       <div className="ride-show-elevation">
         <ResponsiveContainer width="100%" >

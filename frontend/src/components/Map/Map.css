@@ -44,3 +44,7 @@
   height: 600px;
   width: 800px;
 }
+
+.outer-map-container-show {
+  width: 100%;
+}

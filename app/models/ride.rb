@@ -32,6 +32,7 @@ class Ride < ApplicationRecord
     dependent: :destroy
 
   has_many_attached :photos
+  has_one_attached :line_string
 
 
 end

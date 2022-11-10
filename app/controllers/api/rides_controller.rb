@@ -49,7 +49,7 @@ class Api::RidesController < ApplicationController
   private
 
   def ride_params
-    params.require(:ride).permit(:date_time, :athlete_id, :title, :description, :distance, :duration, :elevation, :gpx_points, photos: [])
+    params.require(:ride).permit(:date_time, :athlete_id, :title, :description, :distance, :duration, :elevation, :gps_points, photos: [])
   end
 
 end
