@@ -5,6 +5,7 @@ import stravaLogo from "../../assets/strava_logo.svg";
 import './Navigation.css';
 import AddRideButton from "./AddRideButton";
 import { getCurrentUser } from "../../store/session";
+import bravoLogo from '../../assets/bravo_logo.png';
 
 
 const Navigation = () => {
@@ -15,7 +16,7 @@ const Navigation = () => {
       <div id="nav-container">
         <div id='nav-bar'>
           <div className='nav-item'>
-          <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
+          <NavLink exact to="/"><img className='top-logo' src={bravoLogo} alt="Strava Logo" /></NavLink>
           </div>
           <div className='nav-item'>
           <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
@@ -29,7 +30,7 @@ const Navigation = () => {
       <div id="nav-container">
         <div id='nav-bar'>
           <div className='main-logo'>
-          <NavLink exact to="/"><img src={stravaLogo} alt="Strava Logo" /></NavLink>
+          <NavLink exact to="/"><img className='top-logo' src={bravoLogo} alt="Strava Logo" /></NavLink>
           </div>
           <div id="nav-main">
             {/* <div className='nav-dropdown'> */}

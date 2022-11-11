@@ -2,9 +2,9 @@ require 'open-uri'
 
 puts "Destroying tables..."
 # Unnecessary if using `rails db:seed:replant`
-Ride.destroy_all
 Kudo.destroy_all
 Comment.destroy_all
+Ride.destroy_all
 User.destroy_all
 
 puts "Resetting primary keys..."

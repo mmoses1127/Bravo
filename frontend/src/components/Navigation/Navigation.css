@@ -91,3 +91,8 @@ ul {
   align-items: center;
   height: 100%;
 }
+
+.top-logo {
+  height: 100px;
+  width: auto;
+}
