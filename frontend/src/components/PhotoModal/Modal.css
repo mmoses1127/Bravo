@@ -1,7 +1,7 @@
 .photo-modal-box {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background-color: transparent;
 }
 
@@ -12,7 +12,12 @@
 }
 
 #modal {
-  z-index: 9999;
+  z-index: 1000
+}
+
+#modal-content {
+  z-index: 1000;
+  width: 700px;
 }
 
 #modal-content {
@@ -20,12 +25,26 @@
 }
 
 .next-button {
+  position: absolute;
+  top: 1000;
+  bottom: 1000;
+  right: 0;
   border: none;
-  background-color: transparent;
+  background-color: black;
+  opacity: 0.2;
   color: #dfdfe8;
   font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 0;
+}
+
+.left-button {
+  left: 0;
 }
 
 .next-button:hover {
-  background-color: transparent;
+  opacity: 0.4;
+  background-color: black;
+  color: white
 }

@@ -9,7 +9,6 @@ import configureStore from './store';
 import csrfFetch from './store/csrf';
 import * as sessionActions from './store/session';
 import { ModalProvider } from "./context/Modal";
-// import { login } from './store/session';
 
 const store = configureStore();
 
@@ -41,7 +40,6 @@ const renderApplicaton = () => {
 }
 
 if(sessionStorage.getItem('X-CSRF-Token') === null || sessionStorage.getItem('currentUser') === null){
-  // store.dispatch(sessionActions.restoreSession()).then(renderApplicaton);
   store.dispatch(sessionActions.restoreSession()).then(renderApplicaton);
 } else {
   renderApplicaton();

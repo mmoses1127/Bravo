@@ -1,35 +1,32 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RideIndexItem from "./RideIndexItem";
-import { getRides, getUserRides, getLatestRide, fetchRides, fetchUserRides } from "../../store/rides";
+import { getRides, getUserRides, getLatestRide, fetchRides } from "../../store/rides";
 import { Redirect, useParams, useHistory, Link } from "react-router-dom";
 import "./Dashboard.css";
 import { fetchUsers, getUser } from "../../store/users";
-import avatar from "../../assets/mtb1.jpg";
 import { getCurrentUser } from "../../store/session";
 import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
-import RideComments from "../RideComments";
 import { fetchComments, getComments } from "../../store/comments";
 import PhotoModal from "../PhotoModal";
 
 const Dashboard = () => {
-  const {userId} = useParams();
+  let {userId} = useParams();
+  userId = parseInt(userId)
   const history = useHistory();
   const dispatch = useDispatch();
   let rides = useSelector(getRides);
-  console.log(userId)
   let userRides = useSelector(getUserRides(userId));
-  console.log(userRides)
   const kudos = useSelector(getKudos);
   const comments = useSelector(getComments);
   const currentUser = useSelector(getCurrentUser);
   const user = useSelector(getUser(userId));
   const profileUser = user? user : currentUser;
-  const currentUserRides = useSelector(getUserRides(profileUser.id));
+  const currentUserRides = useSelector(getUserRides(profileUser?.id));
   const latestRide = getLatestRide(currentUserRides);
-  const userKudos = useSelector(getKudos).filter(kudo => kudo.giverId === profileUser.id);
-  const userComments = useSelector(getComments).filter(comment => comment.commenterId === profileUser.id)
+  const userKudos = useSelector(getKudos).filter(kudo => kudo?.giverId === profileUser?.id);
+  const userComments = useSelector(getComments).filter(comment => comment.commenterId === profileUser?.id)
   const [showMenu, setShowMenu] = useState(false);
   const openMenu = () => {
     setShowMenu(true);
@@ -40,8 +37,8 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (rides.length < 1) {dispatch(fetchRides())};
-    if (user?.length < 1) dispatch(fetchUsers());
+    dispatch(fetchUsers());
+    if (rides.length < 2) {dispatch(fetchRides())};
     if (kudos?.length < 1) dispatch(fetchKudos());
     if (comments?.length < 1) dispatch(fetchComments());
   }, [userId]);
@@ -137,7 +134,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {userId && userRides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
+        {userId > 0 && userRides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
         {!userId && rides.map(ride => <RideIndexItem key={ride.id} ride={ride}/>)}
       </div>
     </div>

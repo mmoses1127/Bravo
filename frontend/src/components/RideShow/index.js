@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link, useHistory, Redirect } from "react-router-dom";
 import { getRide, fetchRide, deleteRide } from "../../store/rides";
 import './RideShow.css';
-import avatar from "../../assets/mtb1.jpg";
-import Map from "../Map/Map";
 import { getCurrentUser } from "../../store/session";
 import PhotoModal from "../PhotoModal";
 import RideShowMapWrapper from "./RideShowMap";
@@ -29,10 +27,13 @@ const RideShow = () => {
   const dispatch = useDispatch();
   const ride = useSelector(getRide(rideId));
   const [openModal, setOpenModal] = useState(false);
+
   
   useEffect(() => {
-    if (ride.length < 1) dispatch(fetchRide(rideId));
+    dispatch(fetchRide(rideId));
   }, [rideId]);
+  
+  if (currentUser === null) return <Redirect to={`/`} />;
   
   if (!ride) return null;
 
@@ -72,7 +73,7 @@ const RideShow = () => {
   let elevationData;
   if (ride.gpsPoints) {
     elevationData = ride.gpsPoints.map((elevation, i) => {
-      return {altitude: elevation, index: i}
+      return {elevation: Math.round(elevation * 10) / 10, index: i}
     })
   }
 
@@ -96,7 +97,7 @@ const RideShow = () => {
       <div className="ride-show-main">
         <div className="show-main-box">
           <div className="profile-show-image-container">
-            <img className="profile-show-image" src={avatar} alt='Profile Image'></img>
+            <img className="profile-show-image" src={ride.profilePicUrl} alt='Profile Image'></img>
           </div>
           <div className="show-main-text-img">
             <div className="show-main-text">
@@ -123,26 +124,29 @@ const RideShow = () => {
               <h3>{parsedDuration}</h3>
               <p>Moving Time</p>
             </li>
+            {ride.elevation && 
             <li className="show-stat">
-              <h3>{ride.elevation}</h3>
+              <h3>{Math.round(ride.elevation * 10) / 10}</h3>
               <p>Elevation</p>
               </li>
+            }
           </ul>
         </div>
       </div>
       <div className="ride-show-map">
-        <RideShowMapWrapper coords={ride.pathPoints}/>
+        {ride.gpsPoints &&
+          <RideShowMapWrapper ride={ride} coords={ride.pathPoints}/>
+        }
       </div>
-      {elevationData && 
+      {elevationData?.length > 0 && 
         <div className="ride-show-elevation">
           <ResponsiveContainer width="100%" >
-            <AreaChart data={elevationData} margin={{top: 10}}>
+            <AreaChart data={elevationData} margin={{top: 10, right: 30}}>
                 <CartesianGrid />
-                <XAxis dataKey="index"  />
-                {/* <YAxis dataKey="altitude" interval={'preserveStartEnd'} /> */}
-                <YAxis padding={{ top: 30 }}/>
+                <XAxis tick={false}/>
+                <YAxis padding={{ top: 50 }}/>
                 <Tooltip />
-                <Area type="monotone" dataKey="altitude" fill="gray" stroke="gray"
+                <Area type="monotone" dataKey="elevation" fill="gray" stroke="gray"
                     activeDot={{ r: 8 }} />
             </AreaChart>
           </ResponsiveContainer>

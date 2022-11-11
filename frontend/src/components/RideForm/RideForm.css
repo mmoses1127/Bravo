@@ -91,3 +91,8 @@ a:hover {
 .map-textarea {
   padding: 10px;
 }
+
+.stat-entry-bottom {
+  display: flex;
+  align-items: center;
+}

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import { getCurrentUser } from '../../store/session';
 import './RideForm.css';
@@ -29,9 +29,11 @@ const CreateRideMap = () => {
   const [photoFiles, setPhotoFiles] = useState([]);
   let returnedRide;
 
+  if (currentUser === null) return <Redirect to={`/`} />;
+
   const handleClick = async (e) => {
-    await handleSubmit(e);
-    // history.push(`/`);
+    let ride = await handleSubmit(e);
+    history.push(`/rides/${ride.id}`);
   }
 
   // const passUpDistance = (currentDistance) => {
@@ -43,13 +45,12 @@ const CreateRideMap = () => {
   // };
 
   const passUpMapData = (distance = 0, duration = 0, polyline = {}, elevationArray = [], elevation = 0) => {
-    setDistance(Math.round(distance * 10) / 10);
-    setDuration(Math.round(duration * 10) / 10);
+    setDistance(distance);
+    setDuration(duration);
     setPolyline(polyline);
     setPathPoints(pathPoints);
     setElevationArray(elevationArray);
-    setElevation(elevation)
-    console.log(elevationArray)
+    setElevation(elevation * 10 / 10)
   };
 
 
@@ -67,7 +68,6 @@ const CreateRideMap = () => {
     newRide.append('ride[elevation]', elevation);
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
     newRide.append('ride[athleteId]', currentUser.id);
-    // newRide.append('ride[gps_points]', routeCoords);
     if (photoFiles) {
       photoFiles.forEach(photoFile => {
         newRide.append('ride[photos][]', photoFile);
@@ -87,6 +87,8 @@ const CreateRideMap = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
+
+    return returnedRide
   };
 
   const handleFile = (e) => {
@@ -117,7 +119,7 @@ const CreateRideMap = () => {
               <legend>Elevation (m)</legend>
               <div className='inline-inputs'>
                 <label>
-                  <input disabled type='number' value={Math.round(elevation * 10) / 10} />
+                  <input disabled type='number' value={elevation} />
                 </label>
               </div>
             </fieldset>
@@ -144,7 +146,7 @@ const CreateRideMap = () => {
               <legend>Estimated Duration (mins)</legend>
               <div className='inline-inputs'>
                 <label>
-                  <input disabled type='number' value={Math.round(duration / 60 * 10) / 10} />
+                  <input disabled type='number' value={duration} />
                 </label>
               </div>
             </fieldset>
@@ -163,7 +165,7 @@ const CreateRideMap = () => {
           </fieldset>
 
           <fieldset>
-            <legend>Description</legend>
+            <legend >Description</legend>
             <div className='inline-inputs'>
               <label>
                 <textarea className='map-textarea' rows='1' cols='60' onChange={e => setDescription(e.target.value)} value={description} />

@@ -4,7 +4,7 @@ const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 
 export const getCurrentUser = (state = {}) => {
-  if (state.session.user) {
+  if (state.session && state.session.user) {
     return state.session.user;
   } else {
     return null;

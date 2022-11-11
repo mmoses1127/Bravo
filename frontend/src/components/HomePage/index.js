@@ -12,9 +12,9 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     e.preventDefault();
-    dispatch(login({email: 'demo@user.io', password: 'password'}));
+    await dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
 
   const currentUser = useSelector(getCurrentUser);

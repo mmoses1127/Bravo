@@ -92,6 +92,10 @@ background-color:
   align-items: flex-start;
 }
 
+.card-media {
+  width: 100%;
+}
+
 .card-header-text {
   display: flex;
   flex-direction: column;
@@ -230,12 +234,20 @@ background-color:
   font-weight: 400;
 }
 
+.profile-top h1 {
+  text-align: center;
+}
+
 .profile-stats-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 20px;
   padding-top: 0px;
+}
+
+.profile-stat {
+  margin: 10px;
 }
 
 .profile-tab {
@@ -410,6 +422,7 @@ background-color:
 
 .thumb-container {
   width: 49%;
+  height: 200px;
 }
 
 .photo-thumb {
@@ -417,6 +430,7 @@ background-color:
   height: 100%;
   object-fit: cover;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .comments-and-messages {

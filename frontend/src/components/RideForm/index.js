@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { createRide } from '../../store/rides';
 import { getCurrentUser } from '../../store/session';
 import './RideForm.css';
@@ -22,9 +22,11 @@ const RideForm = () => {
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
 
+  if (currentUser === null) return <Redirect to={`/`} />;
+
   const handleClick = async (e) => {
-    await handleSubmit(e);
-    history.push(`/`);
+    let ride = await handleSubmit(e);
+    history.push(`/rides/${ride.id}`);
   }
 
 
@@ -47,7 +49,7 @@ const RideForm = () => {
       });
     };
 
-    return dispatch(createRide(newRide))
+    let returnedRide = dispatch(createRide(newRide))
     .catch(async (res) => {
       let data;
       try {
@@ -60,6 +62,8 @@ const RideForm = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
+
+    return returnedRide;
   };
 
   const handleFile = (e) => {

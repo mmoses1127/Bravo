@@ -14,7 +14,11 @@
   border-bottom: 1px solid #dfdfe8;
 }
 
-.page-container-show * {
+.ride-show-header {
+  display: flex;
+}
+
+.ride-show-header > * {
   display: flex;
 }
 

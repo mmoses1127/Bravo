@@ -1,5 +1,4 @@
 import csrfFetch from './csrf.js';
-import { Redirect } from 'react-router-dom';
 
 export const ADD_RIDES = `ADD_RIDES`;
 export const ADD_RIDE = `ADD_RIDE`;
@@ -45,9 +44,17 @@ export const getRide = rideId => (state) => {
 
 export const getUserRides = userId => (state) => {
   if (!state.rides) return [];
-  return Object.values(state.rides).filter(ride => (
+  let unsortedRides = Object.values(state.rides).filter(ride => (
     ride.athleteId === userId
   ));
+  return unsortedRides.sort((a, b) => {
+    if (a.dateTime > b.dateTime) {
+      return -1
+    } else {
+      return 1
+    }
+  });
+  
 };
 
 export const getLatestRide = userRides => {

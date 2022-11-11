@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import './Modal.css'
 
@@ -22,7 +22,7 @@ function PhotoModal({ride, closeModal}) {
       {showModal && (
         <Modal onClose={(e) => closeModal(e)}>
           <div className='photo-modal-box'>
-            <button onClick={() => switchPreviousPhoto()} className='next-button'><i className="fa-solid fa-chevron-left"/></button>
+            <button onClick={() => switchPreviousPhoto()} className='next-button left-button'><i className="fa-solid fa-chevron-left"/></button>
             <img className='photo-in-modal' src={ride.photoUrls[photoIndex]} alt='Ride Image' />
             <button onClick={() => switchNextPhoto()} className='next-button'><i className="fa-solid fa-chevron-right"/></button>
           </div>

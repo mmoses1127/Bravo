@@ -1,4 +1,4 @@
-import { createComment, fetchComments } from "../../store/comments";
+import { createComment } from "../../store/comments";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUser } from "../../store/session";

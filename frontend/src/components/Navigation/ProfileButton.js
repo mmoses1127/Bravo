@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { logout} from "../../store/session";
-import avatar from "../../assets/mtb1.jpg";
-import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { getCurrentUser } from "../../store/session";
 
@@ -21,9 +19,10 @@ const ProfileButton = ({user}) => {
     setShowMenu(false)
   };
 
-  const logoutHandler = (e) => {
+  const logoutHandler = async (e) => {
     e.preventDefault();
-    dispatch(logout());
+    await dispatch(logout());
+    history.push(`/`);
   };
 
 

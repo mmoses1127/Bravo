@@ -11,10 +11,13 @@
 #  avatar_image    :string           default("https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/323_Strava_logo-512.png")
 #  name            :string           not null
 #
+
 class User < ApplicationRecord
+  require 'open-uri'
+
   has_secure_password
 
-  before_validation :ensure_session_token
+  before_validation :ensure_session_token, :generate_default_pic
   
   validates :email, :session_token, presence: true, uniqueness: true
   validates :name, presence: true, length: { in: 3..255 }
@@ -46,6 +49,13 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  def generate_default_pic
+    unless self.profile_pic.attached?
+      file = URI.open("https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/wheelie.jpg")
+      self.profile_pic.attach(io: file, filename: "default")
+    end
+  end
+
   private
   def generate_unique_session_token
     while true
@@ -58,3 +68,5 @@ class User < ApplicationRecord
     self.session_token ||= generate_unique_session_token
   end
 end
+
+

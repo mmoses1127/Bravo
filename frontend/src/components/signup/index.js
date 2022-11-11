@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { signup, login, getCurrentUser } from "../../store/session";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import './SignupForm.css'
 
 const SignupFormPage = () => {
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -15,10 +16,10 @@ const SignupFormPage = () => {
   const currentUser = useSelector(getCurrentUser);
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(signup({email, password}))
+    await dispatch(signup({email, password, name}))
     .catch(async (res) => {
       let data;
       try {
@@ -33,9 +34,9 @@ const SignupFormPage = () => {
     });
   };
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     e.preventDefault();
-    dispatch(login({email: 'demo@user.io', password: 'password'}));
+    await dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
 
   if (currentUser !== null) return <Redirect to={`/users/${currentUser.id}`} />;

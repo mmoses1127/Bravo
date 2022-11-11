@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { Wrapper, geometry } from "@googlemaps/react-wrapper";
+import './Map.css'
 
 export const RideMap = ({passUpMapData}) => {
   const [map, setMap] = useState(null);
@@ -15,7 +16,7 @@ export const RideMap = ({passUpMapData}) => {
 
   useEffect(() => {
     if (!map) {
-      setMap(new window.google.maps.Map(mapRef.current, {zoom: 9, center: {lat: 40.783254, lng: -73.974529}}))
+      setMap(new window.google.maps.Map(mapRef.current, {streetViewControl: false, zoom: 12, center: {lat: 37.773972, lng: -122.431297}}))
     }
     
   }, [mapRef]);
@@ -40,7 +41,7 @@ export const RideMap = ({passUpMapData}) => {
         totalClimbing += elevationArray[i+1] - elevationArray[i]
       };
     };
-    setElevation(totalClimbing);
+    setElevation(Math.round(totalClimbing * 10) / 10);
   };
 
   useEffect(() => {
@@ -115,43 +116,35 @@ export const RideMap = ({passUpMapData}) => {
 
               const pathPointSet = response.routes[0].overview_path;
               
-              setDistance(totalDistance);
+              setDistance(Math.round(totalDistance * 10) / 10);
               setPolyline(poly);
-              setDuration(totalDuration);
+              setDuration(Math.round(totalDuration / 60 * 10) / 10);
               setPathPoints(pathPointSet);
-              // console.log("pathpoints", pathPoints)
-              // console.log("pathpointset", pathPointSet)
+
               directionsRenderer.setDirections(response);
           }
       }); 
       
-      // passUpMapData(distance, duration, polyline, elevationArray, elevation);
-
   };
 
   useEffect(() => {
 
     if (coords.length > 1) {
         renderPath();
-        // calcElevationArray(pathPoints);
-        // if (elevationArray && elevationArray.length > 1) calcElevation(elevationArray);
     } 
 
   }, [coords])
 
   useEffect(() => {
     calcElevationArray(pathPoints);
-    // console.log('updating elev data with', pathPoints )
   }, [pathPoints])
 
   useEffect(() => {
-    console.log("array before calc",elevationArray)
     calcElevation(elevationArray);
   }, [elevationArray])
 
   useEffect(() => {
     passUpMapData(distance, duration, polyline, elevationArray, elevation);
-    console.log('elev', elevation)
   }, [distance, duration, polyline, elevationArray, elevation])
 
 
@@ -169,7 +162,7 @@ export const RideMap = ({passUpMapData}) => {
 const RideMapWrapper = ({passUpMapData}) => {
 
   return (
-    <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+    <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={["geometry"]}>
       <RideMap passUpMapData={passUpMapData}/>
     </Wrapper>
   )

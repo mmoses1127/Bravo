@@ -40,7 +40,7 @@ class Api::RidesController < ApplicationController
   def destroy
     @ride = Ride.find_by(id: params[:id])
     if @ride.destroy!
-      render 'api/rides/index'
+      render :show
     else
       render json: { errors: ['Cannot delete ride'] }, status: :unprocessable_entity
     end

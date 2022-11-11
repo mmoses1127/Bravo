@@ -5,7 +5,6 @@ import ridesReducer from './rides';
 import usersReducer from './users';
 import kudosReducer from './kudos';
 import commentsReducer from './comments';
-import mapDataReducer from './mapData';
 
 const rootReducer = combineReducers ({
   session: sessionReducer,
@@ -13,7 +12,6 @@ const rootReducer = combineReducers ({
   users: usersReducer,
   kudos: kudosReducer,
   comments: commentsReducer,
-  mapData: mapDataReducer
 });
 
 let enhancer;

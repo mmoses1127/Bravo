@@ -1,26 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams, useHistory, Redirect } from 'react-router-dom';
 import { updateRide, getRide, fetchRide } from '../../store/rides';
+import { getCurrentUser } from '../../store/session';
 import '../RideForm/RideForm.css';
 
 const RideEdit = () => {
   const history = useHistory();
+  const currentUser = useSelector(getCurrentUser)
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const {rideId} = useParams();
   const ride = useSelector(getRide(rideId));
-  const [distance, setDistance] = useState(ride.distance);
-  const [duration, setDuration] = useState(ride.duration);
-  const [elevation, setElevation] = useState(ride.elevation);
-  const [title, setTitle] = useState(ride.title);
-  const [description, setDescription] = useState(ride.description);
-  const [date, setDate] = useState(ride.dateTime.slice(0,10));
-  const [time, setTime] = useState(ride.dateTime.slice(11,16));
+  const [distance, setDistance] = useState(ride?.distance);
+  const [duration, setDuration] = useState(ride?.duration);
+  const [elevation, setElevation] = useState(ride?.elevation);
+  const [title, setTitle] = useState(ride?.title);
+  const [description, setDescription] = useState(ride?.description);
+  const [date, setDate] = useState(ride?.dateTime.slice(0,10));
+  const [time, setTime] = useState(ride?.dateTime.slice(11,16));
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
   }, []);
+
+  if (currentUser === null) return <Redirect to={`/`} />;
 
   const handleClick = async (e) => {
     await handleSubmit(e);

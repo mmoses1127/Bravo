@@ -1,0 +1,22 @@
+.update-user-pic {
+	width: 300px;
+	height: auto;
+  margin-top: 15px;
+}
+
+.update-user-input {
+  min-width: 200px;
+}
+
+.update-user-pic-button {
+  width: 200px;
+}
+
+.update-user-form {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.update-user-form > * {
+  margin: 10px;
+}

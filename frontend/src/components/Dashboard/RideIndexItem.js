@@ -1,14 +1,11 @@
-import smallLogo from '../../assets/small_logo.svg';
 import { Link } from 'react-router-dom';
-import Map from '../Map/Map';
 import { createKudo, deleteKudo, getKudos } from '../../store/kudos';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../store/session';
 import RideComments from '../RideComments';
 import { useState } from 'react';
 import CommentForm from '../RideComments/CommentForm';
-import { getRideComments, fetchComments } from '../../store/comments';
-import { useEffect } from 'react';
+import { getRideComments } from '../../store/comments';
 import PhotoModal from '../PhotoModal';
 
 
@@ -75,7 +72,9 @@ const RideIndexItem = ({ride}) => {
 
   return (
     <div className="feed-card">
-      {/* <PhotoModal ride={ride} closeModal={closeModal}/> */}
+      {openModal &&
+        <PhotoModal ride={ride} closeModal={closeModal}/>
+      }
       <div className="card-header">
         <div className='avatar-container'>
           <img className="avatar-image-medium" src={ride.profilePicUrl} alt="Avatar" />
@@ -97,10 +96,12 @@ const RideIndexItem = ({ride}) => {
                 <p>Distance</p>
                 <h4>{ride.distance}</h4>
               </li>
-              <li>
-                <p>Elev Gain</p>
-                <h4>{ride.elevation}</h4>
-              </li>
+              {ride.elevation > 0 && 
+                <li>
+                  <p>Elev Gain</p>
+                  <h4>{Math.round(ride.elevation * 10) / 10}</h4>
+                </li>
+              }
               <li>
                 <p>Duration</p>
                 <h4>{parsedDuration}</h4>
@@ -120,7 +121,7 @@ const RideIndexItem = ({ride}) => {
           <div className="photos-container">
             {ride.photoUrls.slice(0, 2).map((photoUrl, i) => (
               <div className='thumb-container' key={i}>
-                <img className='photo-thumb' src={photoUrl}/>
+                <img onClick={showPhotoModal} className='photo-thumb' src={photoUrl}/>
               </div>
             ))}
           </div>
