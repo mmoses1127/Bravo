@@ -1,6 +1,5 @@
-/* body, #root {
-background-color:
-} */
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.cdnfonts.com/css/maison-neue');
 
 .page-container-dash {
   padding: 10px;
@@ -57,11 +56,6 @@ background-color:
   flex-direction: column;
 }
 
-/* .announcements-column {
-  width: 2%;
-  display: flex;
-} */
-
 .feed-card {
 	background-color: #fff;
 	border-radius: 4px;
@@ -74,11 +68,6 @@ background-color:
   flex-direction: column;
   align-items: flex-start;
 }
-
-/* .feed-card * {
-  margin: 0;
-  padding: 0;
-} */
 
 .dashboard-top-header {
   background-color: #fff;
@@ -236,6 +225,7 @@ background-color:
 
 .profile-top h1 {
   text-align: center;
+  font-family: 'Maison Neue', 'Lato', sans-serif;
 }
 
 .profile-stats-container {
