@@ -23,13 +23,11 @@ class Ride < ApplicationRecord
 
   has_many :kudos,
     foreign_key: :ride_id,
-    class_name: :Kudo,
-    dependent: :destroy
+    class_name: :Kudo
 
   has_many :comments,
     foreign_key: :ride_id,
-    class_name: :Comment,
-    dependent: :destroy
+    class_name: :Comment
 
   has_many_attached :photos
   has_one_attached :line_string
