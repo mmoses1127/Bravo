@@ -64,8 +64,8 @@ const RideShow = () => {
 
   // const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
   if (ride) {
-    const hours = Math.floor(ride.duration / 3600);
-    let mins = Math.floor((ride.duration % 3600) / 60);
+    const hours = Math.floor(ride.duration / 60);
+    let mins = Math.floor((ride.duration % 60));
     if (mins < 10) mins = '0' + mins;
     parsedDuration = `${hours}:${mins}`;
   }

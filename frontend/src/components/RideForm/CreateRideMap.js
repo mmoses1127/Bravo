@@ -20,8 +20,8 @@ const CreateRideMap = () => {
   const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
   let today = new Date().toISOString().slice(0, 10);
-  let now = (new Date()).toLocaleTimeString().slice(0,4);
-  if (now.length < 5) now = '0' + now
+  let now = (new Date()).toLocaleTimeString().slice(0,5);
+  if (now[1] === ':') now = '0' + now.slice(0,4);
   const [date, setDate] = useState(today);
   const [time, setTime] = useState(now);
   const [elevation, setElevation] = useState(0);

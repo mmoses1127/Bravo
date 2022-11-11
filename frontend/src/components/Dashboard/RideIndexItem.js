@@ -11,7 +11,7 @@ import PhotoModal from '../PhotoModal';
 
 const RideIndexItem = ({ride}) => {
   const dispatch = useDispatch();
-  const parsedDuration = `${Math.floor(ride.duration / 3600)} hr ${Math.floor((ride.duration % 3600) / 60)} min`;
+  const parsedDuration = `${Math.floor(ride.duration / 60)} hr ${Math.floor((ride.duration % 60))} min`;
   const currentUser = useSelector(getCurrentUser);
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
