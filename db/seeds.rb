@@ -45,7 +45,7 @@ puts "Creating more users..."
 i = 0
 while i < 10
   user = User.create!({
-    email: `tester#{i}@demo.com`,
+    email: i.to_s + 'tester@demo.com',
     name: Faker::Name.unique.name,
     password: 'password'
   }) 
