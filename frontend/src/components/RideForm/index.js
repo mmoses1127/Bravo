@@ -15,19 +15,25 @@ const RideForm = () => {
   const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
   let today = new Date().toISOString().slice(0, 10);
-  let now = (new Date()).toLocaleTimeString().slice(0,4);
-  if (now.length < 5) now = '0' + now
+  let now = (new Date()).toLocaleTimeString().slice(0,5);
+  if (now[1] === ':') now = '0' + now.slice(0,4);
   const [date, setDate] = useState(today);
   const [time, setTime] = useState(now);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
+  const [showSubmitMessage, setShowSubmitMessage] = useState(false);
 
   if (currentUser === null) return <Redirect to={`/`} />;
 
+  const rideSubmitButton = document.getElementById('ride-submit-button')
+
   const handleClick = async (e) => {
+    rideSubmitButton.classList.add('clicked-button');
+    rideSubmitButton.disabled = true;
+    setShowSubmitMessage(true);
     let ride = await handleSubmit(e);
     history.push(`/rides/${ride.id}`);
-  }
+  };
 
 
   const handleSubmit = async (e) => {
@@ -156,7 +162,10 @@ const RideForm = () => {
           </div>
 
           <div className='form-submit-area'>
-            <button>Create</button>
+            {showSubmitMessage ? 
+            <button>Creating...</button> : 
+            <button id='ride-submit-button'>Create</button>
+            }
             <Link to={`/dashboard`}>Cancel</Link>
           </div>
         </form>

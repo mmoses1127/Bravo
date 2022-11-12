@@ -23,14 +23,15 @@ export const RideMap = ({passUpMapData}) => {
 
 
   const calcElevationArray = async (points) => {
-    
-    let elev = await (elevator.getElevationAlongPath({
-      path: points,
-      samples: 40,
-    }));
-    await setElevationArray(elev[`results`].map(result => {
-      return result[`elevation`];
-    }));
+    if (points.length > 1) {
+      let elev = await (elevator.getElevationAlongPath({
+        path: points,
+        samples: 40,
+      }));
+      await setElevationArray(elev[`results`].map(result => {
+        return result[`elevation`];
+      }));
+    };
     
   };
 

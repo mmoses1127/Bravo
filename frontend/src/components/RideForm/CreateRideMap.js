@@ -27,22 +27,20 @@ const CreateRideMap = () => {
   const [elevation, setElevation] = useState(0);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
+  const [showSubmitMessage, setShowSubmitMessage] = useState(false);
   let returnedRide;
 
   if (currentUser === null) return <Redirect to={`/`} />;
 
+  const rideSubmitButton = document.getElementById('ride-submit-button')
+
   const handleClick = async (e) => {
+    rideSubmitButton.classList.add('clicked-button');
+    rideSubmitButton.disabled = true;
+    setShowSubmitMessage(true);
     let ride = await handleSubmit(e);
     history.push(`/rides/${ride.id}`);
-  }
-
-  // const passUpDistance = (currentDistance) => {
-  //   setDistance(Math.round(currentDistance * 10) / 10);
-  // };
-
-  // const passUpDuration = (currentDuration) => {
-  //   setDuration(Math.round(currentDuration * 10) / 10);
-  // };
+  };
 
   const passUpMapData = (distance = 0, duration = 0, polyline = {}, elevationArray = [], elevation = 0) => {
     setDistance(distance);
@@ -187,7 +185,10 @@ const CreateRideMap = () => {
         </div>
 
         <div className='form-submit-area'>
-          <button>Create</button>
+          {showSubmitMessage ? 
+          <button>Creating...</button> : 
+          <button id='ride-submit-button'>Create</button>
+          }
           <Link to={`/dashboard`}>Cancel</Link>
         </div>
 

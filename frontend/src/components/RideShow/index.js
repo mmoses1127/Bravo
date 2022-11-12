@@ -72,7 +72,7 @@ const RideShow = () => {
 
   let elevationData;
   if (ride.gpsPoints) {
-    elevationData = ride.gpsPoints.map((elevation, i) => {
+    elevationData = ride.gpsPoints.slice(1).map((elevation, i) => {
       return {elevation: Math.round(elevation * 10) / 10, index: i}
     })
   }
@@ -133,24 +133,24 @@ const RideShow = () => {
           </ul>
         </div>
       </div>
+      {ride.gpsPoints?.length > 0 &&
+      <>
       <div className="ride-show-map">
-        {ride.gpsPoints &&
-          <RideShowMapWrapper ride={ride} coords={ride.pathPoints}/>
-        }
+          <RideShowMapWrapper ride={ride}/>
       </div>
-      {elevationData?.length > 0 && 
-        <div className="ride-show-elevation">
-          <ResponsiveContainer width="100%" >
-            <AreaChart data={elevationData} margin={{top: 10, right: 30}}>
-                <CartesianGrid />
-                <XAxis tick={false}/>
-                <YAxis padding={{ top: 50 }}/>
-                <Tooltip />
-                <Area type="monotone" dataKey="elevation" fill="gray" stroke="gray"
-                    activeDot={{ r: 8 }} />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
+      <div className="ride-show-elevation">
+        <ResponsiveContainer width="100%" >
+          <AreaChart data={elevationData} margin={{top: 10, right: 30}}>
+              <CartesianGrid />
+              <XAxis tick={false}/>
+              <YAxis padding={{ top: 50 }}/>
+              <Tooltip />
+              <Area type="monotone" dataKey="elevation" fill="gray" stroke="gray"
+                  activeDot={{ r: 8 }} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+      </>
       }
     </div>
   )

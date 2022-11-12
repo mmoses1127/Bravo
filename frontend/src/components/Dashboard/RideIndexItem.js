@@ -111,13 +111,13 @@ const RideIndexItem = ({ride}) => {
         </div>
       </div>
       <div className="card-media">
+        {ride.polyline?.length > 0 && 
         <div className="map-container">
-          {
-            ride.polyline && <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?scale=2&size=500x250&path=color:0xf55142FF|enc:${ride.polyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
-          }
-        </div>
-        {ride.photoUrls && 
+            <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?scale=2&size=600x250&path=color:0xf55142FF|enc:${ride.polyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
           
+        </div>
+        }
+        {ride.photoUrls && 
           <div className="photos-container">
             {ride.photoUrls.slice(0, 2).map((photoUrl, i) => (
               <div className='thumb-container' key={i}>
