@@ -94,12 +94,12 @@ const RideIndexItem = ({ride}) => {
             <ul className="stats">
               <li>
                 <p>Distance</p>
-                <h4>{ride.distance}</h4>
+                <h4>{ride.distance} km</h4>
               </li>
               {ride.elevation > 0 && 
                 <li>
                   <p>Elev Gain</p>
-                  <h4>{Math.round(ride.elevation * 10) / 10}</h4>
+                  <h4>{Math.round(ride.elevation * 10) / 10} m</h4>
                 </li>
               }
               <li>

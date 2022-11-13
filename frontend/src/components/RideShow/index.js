@@ -124,9 +124,9 @@ const RideShow = () => {
               <h3>{parsedDuration}</h3>
               <p>Moving Time</p>
             </li>
-            {ride.elevation && 
+            {ride.elevation > 0 && 
             <li className="show-stat">
-              <h3>{Math.round(ride.elevation * 10) / 10}</h3>
+              <h3>{Math.round(ride.elevation * 10) / 10} m</h3>
               <p>Elevation</p>
               </li>
             }

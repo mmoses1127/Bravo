@@ -229,7 +229,7 @@ textarea {
 	min-width: 160px;
   top: 54px;
 	left: unset !important;
-	right: 0 !important;
+	right: -1px !important;
 	background-color: #fff;
 	position: absolute;
 	max-height: 445px;
@@ -278,7 +278,7 @@ textarea {
 	color: black;
 	/* border-radius: 4px; */
 	background-color: #fff;
-	border: 1px solid #dfdfe8;
+	/* border: 1px solid #dfdfe8; */
 	border-top: none;
 	height: 50px;
 	width: 120px;

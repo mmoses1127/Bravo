@@ -71,15 +71,6 @@ const UserShow = () => {
         </div>
       </fieldset>
 
-      {/* <fieldset>
-        <legend>Edit Password</legend>
-        <div className='inline-inputs'>
-          <label>
-            <input className='update-user-input' type='password' onChange={e => setPassword(e.target.value)} value={password} />
-          </label>
-        </div>
-      </fieldset> */}
-
       <fieldset>
         <legend>Edit Profile Pic</legend>
         <img className="update-user-pic" src={user?.profilePicUrl} alt='Profile Pic' />

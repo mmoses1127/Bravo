@@ -5,14 +5,17 @@ import "./HomePage.css";
 import { useDispatch } from "react-redux";
 import { getCurrentUser, login } from "../../store/session";
 import { useHistory } from "react-router-dom";
-
+import { useState } from "react";
 
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
 
   const demoLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     await dispatch(login({email: 'demo@user.io', password: 'password'}));
   };
@@ -33,7 +36,9 @@ const HomePage = () => {
               <img src={phonesImage} alt="Devices"/>
             </div>
             <div className="landing-col">
-              <button onClick={demoLogin} className="landing-button">Demo User Login</button>
+              <button onClick={demoLogin} className="landing-button">Demo User Login
+                {loading && <div className="spin"></div>}
+              </button>
               <button onClick={() => history.push(`/signup`)} className="landing-button">Sign Up</button>
               <button onClick={() => history.push(`/login`)} className="landing-button">Log In</button>
               <div id="landing-disclaimer">

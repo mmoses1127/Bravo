@@ -322,7 +322,7 @@
   min-width: 160px;
   top: 54px;
   left: unset !important;
-  right: 0 !important;
+  right: 1px !important;
   background-color: #fff;
   /* position: absolute; */
   max-height: 445px;

@@ -13,8 +13,12 @@ const LoginFormPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleLogin = async (e) => {
+    setLoading(true);
+
     e.preventDefault();
     setErrors([]);
     await dispatch(sessionActions.login({email, password}))
@@ -33,6 +37,7 @@ const LoginFormPage = () => {
   };
 
   const demoLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     await dispatch(sessionActions.login({email: 'demo@user.io', password: 'password'}));
   };
@@ -50,8 +55,12 @@ const LoginFormPage = () => {
           <form onSubmit={handleLogin}>
             <input placeholder="Email:" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password:" value={password} onChange={e => setPassword(e.target.value)} />
-            <button>Log In</button>
-            <button onClick={demoLogin}>Demo Login</button>
+            <button>Log In
+              {loading && <div className="spin"></div>}
+            </button>
+            <button onClick={demoLogin}>Demo Login
+              {loading && <div className="spin"></div>}
+            </button>
           </form>
         </div>
       </div>
