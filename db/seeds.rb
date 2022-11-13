@@ -818,7 +818,7 @@ Comment.create!({
 })
 
 Comment.create!({
-  commenter_id: User.all[5].id,
+  commenter_id: demo_user.id,
   ride_id: ride_8.id,
   body: 'Can you bring me next time?'
 })
