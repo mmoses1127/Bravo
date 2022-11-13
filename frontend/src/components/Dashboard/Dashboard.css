@@ -459,8 +459,6 @@
 .my-links-container {
   background-color: #fff;
 	border-radius: 4px;
-	-webkit-box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
-	box-shadow: 0 8px 24px rgb(13 13 18 / 4%);
 	margin: 12px 0px;
 	padding: 20px;
   display: flex;

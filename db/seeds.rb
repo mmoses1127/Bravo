@@ -59,72 +59,6 @@ end
 # # rides
 puts "Creating rides..."
 
-ride_1 = Ride.create!({
-  date_time: DateTime.now,
-  title: "East Bay rip",
-  description: "",
-  athlete_id: User.all[1].id,
-  distance: 30.1,
-  elevation: 184.6,
-  duration: 102,
-  gps_points:
-   ["34.300048828125",
-    "125.6980209350586",
-    "123.1660842895508",
-    "121.9192276000977",
-    "104.6449432373047",
-    "97.37663269042969",
-    "97.01118469238281",
-    "103.5167007446289",
-    "100.4323959350586",
-    "115.0639953613281",
-    "84.72535705566406",
-    "62.17524719238281",
-    "50.25984954833984",
-    "51.46689224243164",
-    "52.07720947265625",
-    "48.3326301574707",
-    "38.69163131713867",
-    "32.44166946411133",
-    "32.63211822509766",
-    "32.31182098388672",
-    "16.89996337890625",
-    "15.3891773223877",
-    "15.70347023010254",
-    "18.33942222595215",
-    "17.18544387817383",
-    "22.34053611755371",
-    "26.86161804199219",
-    "32.99846649169922",
-    "32.66130828857422",
-    "38.2540283203125",
-    "48.82435607910156",
-    "90.74333953857422",
-    "131.7082977294922",
-    "123.4383926391602",
-    "99.06208801269531",
-    "104.9474411010742",
-    "97.07195281982422",
-    "112.1211853027344",
-    "124.1594161987305"],
-  polyline:
-      "y{ofFtaegVqAEAfEOtBw@|D_A~BuAxBg@h@o@l@cBbAyAj@cCj@yBd@_ALyB@eD@wAAiC^mAZm@\\eA
-    p@_C`@UBDb@b@lFLhCExBSdB{AdIaAfFg@pBuAzDi@fAoFvMcCjGeA|BgBfCcBvCaGrMuMrY}CnGcBxEg@z
-    At@bAlAdBlDhGlElGdMfQnCbE~@rB~@zDZ~D?pDIvAmBjMoF|\\iBhOc@fESjEA~BRxFx@hPf@vKxAxXZbC
-    PdA_@VONKJ{@hA{AzCaArBeBpEw@bBuAlBaA`AyBxAiClByAvAkA~@sElDu@`@oBhCcFxF[\\mAoBmAeBqC
-    qD{@mAMRuFtHiCcDa@Ws@BSGw@q@aAwASTi@dA]dC_@nAm@z@_BwB}BaBcHaD}@zCsD_BmDoBmAi@uCkAUM
-    cAmA_L}NcBiBmEqFcBwBiAdBiIxLtE`GtBlCJNBnG@zD?lCNbQ?jGP|\\BrGjAAJD@DDzAj@?WtAI`@XT^V
-    ]fBWpAa@zBSfAKHUfA]dBUjAuAlHy@jExD~A|\\lLjGxBh@`@NTp@rBLhA{@~BUt@BjABfAETmBlD_AnAIh
-    @Fh@tAhBZPh@D~BJdCbAf@C~CqAfCcAdASt@v@xDvEhBzBp@x@iGlCaAb@}EtB_HtAZ~AF`AD~Ab@`EbAtC
-    J~AXtAhD|GtCgCzDcDjCuBxEsEfKcK~@eA`AeAjCkBdB}@dGoB~C_AfEoAd@OrAiA\\[]ZsAhAe@NeAZNfC
-    VbEl@fBp@r@hBz@bD|AZNtBxDtAlC`ApBdAzBpF}E~K}JdKeJbKeJdKcJ\\ITStCgCpBiBn@s@BMfB}ArJ{
-    IhGuF`FqEfAaAoA}CiDwH_C`BsAdBC@C@i@m@Qc@Pb@h@l@BABArAeB~BaBhDvHnA|CxBoBzHaHt@c@bHmG
-    xDmD`@_@[{@e@aBi@iDiGcc@oAwGy@_Di@uA{AuBaB}A{AcAiDcBiC_BcCqBiCiCgBwBsCgE_A{AoBqCiAk
-    AsA_AmBaAyBk@wBQcA?}BJeDRcCFsCYaASoEgB_EkB_BmAcCkCgBuCs@yAkAsDa@{A[uCa@uGiAeUkB{`@A
-    mDJaCVaC^aC|@yHn@cFhBmLdFs[JiA@SRB?UBu@?w@EaABOt@]lAq@tAqAd@m@p@cB`ByETm@HA|Ax@JCnA
-    gBNGrBiBt@oA`@OTE?g@@_@A}JBqXDqU?iCBmD~AA|EBTBNJVn@t@zEb@b@VFnA@@uBWiB"
-})
-
 ride_2 = Ride.create!({
   date_time: DateTime.now,
   title: "Over the Aps",
@@ -722,62 +656,6 @@ BrPxGtZvL`g@xR`_BtM|q@bUhn@vWjaAv@rQnEnXzEOjFyAjAlHlEfVxQ`p@x@vg@lL`c@vFnKzAbFyE
 FfCwBpCCrYnE|UlAhJnAdGbDbEpF~F|DbJdGzQ^zG"
 })
 
-# ride_1 = Ride.create!({
-#   date_time: "2022-02-02 017:02:36 UTC",
-#   title: "Big loop in Annadel Park",
-#   description: "Legs were a bit tired, so took it easy. Autumn colors starting to come out.",
-#   athlete_id: User.all[1].id,
-#   distance: 25.4,
-#   duration: 6231,
-#   elevation: 587,
-#   # GPXFile: "./assets/gpx/annadel24334.gpx"
-# })
-# ride_1.photos.attach([
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210525_190321.jpg'), filename: 'ride_pic'},
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1623156396310.jpg'), filename: 'ride_pic'},
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/1627389574997-29.jpg'), filename: 'ride_pic'}
-# ])
-
-# ride_2 = Ride.create!({
-#   date_time: "2022-03-13 015:12:36 UTC",
-#   title: "Recovery ride with Justin",
-#   description: "Easy spin after a tough race weekend.",
-#   athlete_id: User.all[2].id,
-#   distance: 13.6,
-#   duration: 2956,
-#   elevation: 287,
-#   # GPXFile: "./assets/gpx/recovery42343.gpx"
-# })
-# ride_2.photos.attach([
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210716_175550.jpg'), filename: 'ride_pic'},
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210717_201312.jpg'), filename: 'ride_pic'}
-# ])
-
-# ride_3 = Ride.create!({
-#   date_time: "2022-05-21 012:48:01 UTC",
-#   title: "To the peak of Jack London",
-#   description: "Big climb and epic descent.",
-#   athlete_id: User.all[0].id,
-#   distance: 39.0,
-#   duration: 4000,
-#   elevation: 1201,
-#   # GPXFile: "./assets/gpx/jlondon42334.gpx"
-# })
-
-# ride_4 = Ride.create!({
-#   date_time: "2022-11-5 012:19:01 UTC",
-#   title: "Cruising through the hills",
-#   description: "Toughest ride I've done in a while. I didn't bring enough food, so i Bonked super hard. I'll prepare better next time.",
-#   athlete_id: User.all[4].id,
-#   distance: 99.6,
-#   duration: 3500,
-#   elevation: 1946,
-#   # GPXFile: "./assets/gpx/jlondon42334.gpx"
-# })
-# ride_4.photos.attach([
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_191312598.jpg'), filename: 'ride_pic'},
-#   {io: URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_184256270.jpg'), filename: 'ride_pic'}
-# ])
 
 # Create kudos
 puts "Creating kudos..."
