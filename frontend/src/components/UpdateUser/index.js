@@ -12,27 +12,30 @@ const UserShow = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
-  const [profilePic, setProfilePic] = useState(user?.profilePic);
+  const [profilePic, setProfilePic] = useState('');
   const [name, setName] = useState(user?.name);
-  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUser(user?.id));
   }, [user]);
 
   const handleFile = (e) => {
-    const picture = e.currentTarget.file;
+    const picture = e.currentTarget.files[0];
     setProfilePic(picture);
   };
 
+  const formSubmitButton = document.getElementById('form-submit-button')
+
   const handleSubmit = async (e) => {
+    setLoading(true);
+    formSubmitButton.setAttribute(`id`, `clicked-button`);
+    formSubmitButton.disabled = true;
     e.preventDefault();
     setErrors([]);
 
     const updatedUser = new FormData();
-    updatedUser.append('user[email]', user.email);
-    updatedUser.append('user[password]', password);
     updatedUser.append('user[name]', name);
     if (profilePic) {
       updatedUser.append('user[profile_pic]', profilePic);
@@ -68,14 +71,14 @@ const UserShow = () => {
         </div>
       </fieldset>
 
-      <fieldset>
+      {/* <fieldset>
         <legend>Edit Password</legend>
         <div className='inline-inputs'>
           <label>
             <input className='update-user-input' type='password' onChange={e => setPassword(e.target.value)} value={password} />
           </label>
         </div>
-      </fieldset>
+      </fieldset> */}
 
       <fieldset>
         <legend>Edit Profile Pic</legend>
@@ -88,7 +91,9 @@ const UserShow = () => {
       </fieldset>
 
       <div className='form-submit-area'>
-        <button>Update User Info</button>
+        <button id='form-submit-button' className="relative-button">Update User Info
+          {loading && <div className="spin"></div>}
+        </button>
         <Link to={`/dashboard`}>Cancel</Link>
       </div>
 

@@ -21,16 +21,16 @@ const RideForm = () => {
   const [time, setTime] = useState(now);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
-  const [showSubmitMessage, setShowSubmitMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (currentUser === null) return <Redirect to={`/`} />;
 
   const rideSubmitButton = document.getElementById('ride-submit-button')
 
   const handleClick = async (e) => {
-    rideSubmitButton.classList.add('clicked-button');
+    setLoading(true);
+    rideSubmitButton.setAttribute(`id`, `clicked-button`);
     rideSubmitButton.disabled = true;
-    setShowSubmitMessage(true);
     let ride = await handleSubmit(e);
     history.push(`/rides/${ride.id}`);
   };
@@ -162,10 +162,9 @@ const RideForm = () => {
           </div>
 
           <div className='form-submit-area'>
-            {showSubmitMessage ? 
-            <button>Creating...</button> : 
-            <button id='ride-submit-button'>Create</button>
-            }
+            <button className='relative-button' id='ride-submit-button'>Create
+              {loading && <div className="spin"></div>}
+            </button>
             <Link to={`/dashboard`}>Cancel</Link>
           </div>
         </form>

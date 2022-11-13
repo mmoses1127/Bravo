@@ -19,13 +19,14 @@ body {
   margin-bottom: 0;
 }
 
-.clicked-button {
+#clicked-button {
   background-color: bisque;
   border: none;
 };
 
-.clicked-button:hover {
+#clicked-button:hover {
   background-color: bisque;
+  background: bisque;
   border: none;
   cursor: none;
 }

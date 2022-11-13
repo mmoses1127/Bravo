@@ -27,7 +27,7 @@ const CreateRideMap = () => {
   const [elevation, setElevation] = useState(0);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
-  const [showSubmitMessage, setShowSubmitMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
   let returnedRide;
 
   if (currentUser === null) return <Redirect to={`/`} />;
@@ -35,9 +35,9 @@ const CreateRideMap = () => {
   const rideSubmitButton = document.getElementById('ride-submit-button')
 
   const handleClick = async (e) => {
-    rideSubmitButton.classList.add('clicked-button');
+    setLoading(true);
+    rideSubmitButton.setAttribute(`id`, `clicked-button`);
     rideSubmitButton.disabled = true;
-    setShowSubmitMessage(true);
     let ride = await handleSubmit(e);
     history.push(`/rides/${ride.id}`);
   };
@@ -185,10 +185,9 @@ const CreateRideMap = () => {
         </div>
 
         <div className='form-submit-area'>
-          {showSubmitMessage ? 
-          <button>Creating...</button> : 
-          <button id='ride-submit-button'>Create</button>
-          }
+          <button className='relative-button' id='ride-submit-button'>Create
+            {loading && <div className="spin"></div>}
+          </button>
           <Link to={`/dashboard`}>Cancel</Link>
         </div>
 
@@ -197,8 +196,6 @@ const CreateRideMap = () => {
 
 
       <div className="outer-map-container">
-        {/* <div ref={mapContainer} className="map-container" /> */}
-        {/* <button className="set-route-button">Set Route</button> */}
         <RideMapWrapper passUpMapData={passUpMapData} />
       </div>
     </div>
