@@ -799,7 +799,7 @@ Kudo.create!({
 
 Kudo.create!({
   giver_id: User.all[2].id,
-  ride_id: ride_9.id
+  ride_id: ride_8.id
 })
 
 # Create comments
