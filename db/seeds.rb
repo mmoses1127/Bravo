@@ -43,7 +43,7 @@ demo_user.profile_pic.attach(io: pic_1, filename: 'profile_pic')
 puts "Creating more users..."
 
 i = 0
-while i < 10
+while i < 4
   user = User.create!({
     email: i.to_s + 'tester@demo.com',
     name: Faker::Name.unique.name,
