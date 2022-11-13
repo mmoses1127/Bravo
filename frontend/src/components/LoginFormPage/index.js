@@ -34,6 +34,7 @@ const LoginFormPage = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
+    setLoading(false);
   };
 
   const demoLogin = async (e) => {

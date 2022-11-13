@@ -18,6 +18,7 @@ const HomePage = () => {
     setLoading(true);
     e.preventDefault();
     await dispatch(login({email: 'demo@user.io', password: 'password'}));
+    setLoading(false);
   };
 
   const currentUser = useSelector(getCurrentUser);
