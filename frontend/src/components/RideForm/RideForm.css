@@ -105,6 +105,7 @@ a:hover {
 }
 
 .stat-entry-bottom {
+  width: 100%;
   display: flex;
   align-items: center;
 }
