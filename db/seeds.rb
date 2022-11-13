@@ -60,7 +60,7 @@ end
 puts "Creating rides..."
 
 ride_1 = Ride.create!({
-  date_time: Sat, 12 Nov 2022 12:43:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "East Bay rip",
   description: "",
   athlete_id: User.all[1].id,
@@ -128,7 +128,7 @@ ride_1 = Ride.create!({
 })
 
 ride_2 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:48:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Over the Aps",
   description: "Great forests up here.",
   athlete_id: User.all[0].id,
@@ -197,7 +197,7 @@ JdGdMxPdNzHnK~MpBd@vAsBzBsFxHsPfHwFhCrA"
 })
 
 ride_3 = Ride.create({
-  date_time: Sat, 12 Nov 2022 11:57:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Tahoe Ride",
   description: "Views up here are so good!",
   athlete_id: User.all[2].id,
@@ -266,7 +266,7 @@ c@y@kCwCi@e@GMF[RQIw@Ba@XVJSEc@Bg@Ko@RgAR]Cg@"
 })
 
 ride_4 = Ride.create!({
-  date_time: Sat, 12 Nov 2022 12:35:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Oakland Hills Ride",
   description: "Great time with friends!",
   athlete_id: User.all[3].id,
@@ -329,7 +329,7 @@ v@BfDA~@xCbBlAl@z@h@h@TnCvAtC`BzAv@hAj@KvGM~HIlHM~ETtF?F?GUuFvCE|AG\\ARDrDp@tGfA
 })
 
 ride_5 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:35:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Ride through the Parks",
   description: "Such a great day today!",
   athlete_id: User.all[0].id,
@@ -398,7 +398,7 @@ CH~@AfC"
 })
 
 ride_6 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:36:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Marin headlands ride",
   description: "Awesome views up there!",
   athlete_id: User.all[2].id,
@@ -467,7 +467,7 @@ Ag@tCGnB]xA"
 })
 
 ride_7 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:46:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Muddy Ride in Santa Cruz",
   description: "Was nice seeing the crew again",
   athlete_id: User.all[4].id,
@@ -536,7 +536,7 @@ qLD}Lb@@@q@@oAHeCDyGBeIOiB"
 })
 
 ride_8 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:47:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Tahoe Epic",
   description: "I need to hit the ice bath after this one.",
   athlete_id: User.all[1].id,
@@ -605,7 +605,7 @@ jAsDC_D|DkCtFpFbH`B|A"
 })
 
 ride_9 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:53:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Crested Butte",
   description: "So gorgeous around here!",
   athlete_id: User.all[3].id,
@@ -674,7 +674,7 @@ mAsJaEsC?{LcBoGcAgEjBaDd@mAgBYV"
 })
 
 ride_10 = Ride.create!({
-  date_time: Sun, 13 Nov 2022 10:59:00.000000000 UTC +00:00,
+  date_time: DateTime.now,
   title: "Big Ride to the Lake",
   description: "Went for a dip!",
   athlete_id: User.all[2].id,
