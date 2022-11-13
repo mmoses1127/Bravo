@@ -66,8 +66,6 @@ ride_1 = Ride.create!({
   athlete_id: User.all[1].id,
   distance: 30.1,
   elevation: 184.6,
-  created_at: Sat, 12 Nov 2022 20:43:50.771454000 UTC +00:00,
-  updated_at: Sat, 12 Nov 2022 20:43:50.771454000 UTC +00:00,
   duration: 102,
   gps_points:
    ["34.300048828125",
@@ -134,8 +132,6 @@ ride_2 = Ride.create!({
   athlete_id: User.all[0].id,
   distance: 52.6,
   elevation: 1147.3,
-  created_at: Sun, 13 Nov 2022 06:49:02.953509000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:49:02.953509000 UTC +00:00,
   duration: 363,
   gps_points:
    ["22.2327880859375",
@@ -203,8 +199,6 @@ ride_3 = Ride.create({
   athlete_id: User.all[2].id,
   distance: 15.3,
   elevation: 740.9,
-  created_at: Sat, 12 Nov 2022 19:59:01.463152000 UTC +00:00,
-  updated_at: Sat, 12 Nov 2022 19:59:01.475978000 UTC +00:00,
   duration: 108,
   gps_points:
    ["028.679443359375",
@@ -272,8 +266,6 @@ ride_4 = Ride.create!({
   athlete_id: User.all[3].id,
   distance: 10.9,
   elevation: 190.6,
-  created_at: Sat, 12 Nov 2022 20:36:23.383155000 UTC +00:00,
-  updated_at: Sat, 12 Nov 2022 20:36:23.398988000 UTC +00:00,
   duration: 50,
   gps_points:
    ["6.47451400756836",
@@ -335,8 +327,6 @@ ride_5 = Ride.create!({
   athlete_id: User.all[0].id,
   distance: 19.9,
   elevation: 189.9,
-  created_at: Sun, 13 Nov 2022 06:36:17.103311000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:36:17.103311000 UTC +00:00,
   duration: 77,
   gps_points:
    ["4.98037719726562",
@@ -404,8 +394,6 @@ ride_6 = Ride.create!({
   athlete_id: User.all[2].id,
   distance: 17.1,
   elevation: 442.8,
-  created_at: Sun, 13 Nov 2022 06:36:43.975360000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:36:43.975360000 UTC +00:00,
   duration: 81,
   gps_points:
    ["4.9392318725586",
@@ -473,8 +461,6 @@ ride_7 = Ride.create!({
   athlete_id: User.all[4].id,
   distance: 18.8,
   elevation: 339.7,
-  created_at: Sun, 13 Nov 2022 06:46:57.231716000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:46:57.231716000 UTC +00:00,
   duration: 90,
   gps_points:
    ["5.5218505859375",
@@ -542,8 +528,6 @@ ride_8 = Ride.create!({
   athlete_id: User.all[1].id,
   distance: 56.4,
   elevation: 1421.3,
-  created_at: Sun, 13 Nov 2022 06:48:01.527334000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:48:01.527334000 UTC +00:00,
   duration: 295,
   gps_points:
    ["018.46923828125",
@@ -611,8 +595,6 @@ ride_9 = Ride.create!({
   athlete_id: User.all[3].id,
   distance: 39.4,
   elevation: 1201.7,
-  created_at: Sun, 13 Nov 2022 06:59:26.160552000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 06:59:26.160552000 UTC +00:00,
   duration: 231,
   gps_points:
    ["828.20556640625",
@@ -680,8 +662,6 @@ ride_10 = Ride.create!({
   athlete_id: User.all[2].id,
   distance: 116.2,
   elevation: 607.1,
-  created_at: Sun, 13 Nov 2022 07:04:48.810236000 UTC +00:00,
-  updated_at: Sun, 13 Nov 2022 07:04:48.810236000 UTC +00:00,
   duration: 615,
   gps_points:
    ["43.7012023925781",
