@@ -788,7 +788,7 @@ Kudo.create!({
 })
 
 Kudo.create!({
-  giver_id: demo_user.id,
+  giver_id: User.all[0],
   ride_id: ride_10.id
 })
 
@@ -818,7 +818,7 @@ Comment.create!({
 })
 
 Comment.create!({
-  commenter_id: demo_user.id,
+  commenter_id: User.all[1].id,
   ride_id: ride_8.id,
   body: 'Can you bring me next time?'
 })
