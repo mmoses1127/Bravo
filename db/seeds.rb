@@ -788,7 +788,7 @@ Kudo.create!({
 })
 
 Kudo.create!({
-  giver_id: User.all[1],
+  giver_id: User.all[1].id,
   ride_id: ride_10.id
 })
 
