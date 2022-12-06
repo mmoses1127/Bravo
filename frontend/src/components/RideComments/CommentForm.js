@@ -1,26 +1,48 @@
-import { createComment } from "../../store/comments";
+import { createComment, updateComment } from "../../store/comments";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUser } from "../../store/session";
 
 
-const CommentForm = ({rideId}) => {
+const CommentForm = ({rideId, comment, setShowCommentForm}) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser)
-  const [body, setBody] = useState('');
+  const [body, setBody] = useState(comment ? comment.body : '');
+
+  const submitButton = document.getElementById('submit-button');
+
+  if (body === '' && submitButton) {
+    console.log(submitButton)
+    submitButton.setAttribute('class', 'post-button-inactive');
+  } else if (submitButton) {
+    submitButton.setAttribute('class', 'post-button');
+  }
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setBody(comment.body);
+    setShowCommentForm(false);
+  }
 
 
   const handleSubmit = (e) => {
+    console.log('submitting')
     e.preventDefault();
-
-    let newComment = {
-      body: body,
-      commenter_id: currentUser.id,
-      ride_id: rideId
+    if (body.length) {
+      let newComment = {
+        body: body,
+        commenter_id: currentUser.id,
+        ride_id: rideId
+      }
+      if (comment) {
+        newComment['id'] = comment.id;
+        dispatch(updateComment(newComment));
+        setShowCommentForm(false);
+      } else {
+        dispatch(createComment(newComment));
+      }
+      setBody('')
     }
-    dispatch(createComment(newComment));
-    // dispatch(fetchComments());
-    setBody('')
   };
 
   if (!currentUser) return null;
@@ -34,7 +56,12 @@ const CommentForm = ({rideId}) => {
         <label className="comment-text-label">
           <textarea autoFocus className="comment-text-area" onChange={e => setBody(e.target.value)} value={body} rows='3' cols='20' placeholder="Add a comment!">Add a comment</textarea>
         </label>
-        <button className="post-button">Post</button>
+        <div className='update-comment-container'>
+        <button id='submit-button' className='post-button-inactive' >Post</button>
+        {comment && 
+        <button onClick={handleCancel} className='post-button' >Cancel</button>
+        }
+        </div>
       </form>
     </div>
   )

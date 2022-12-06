@@ -15,21 +15,31 @@ class Api::CommentsController < ApplicationController
     if @comments
       render :index
     else
-      render json: { errors: ['No rides to show'] }, status: :unprocessable_entity
+      render json: { errors: ['No comments to show'] }, status: :unprocessable_entity
     end
   end
 
   def update
-
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.update(comment_params)
+      render :show
+    else
+      render json: {errors: @comment.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    # @comment = Comment.find_by(id: )
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.destroy
+      render :index
+    else
+      render json: { errors: ['Comment not deleted.'] }, status: :unprocessable_entity
+    end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:commenter_id, :ride_id, :body)
+    params.require(:comment).permit(:commenter_id, :ride_id, :body, :id)
   end
 end

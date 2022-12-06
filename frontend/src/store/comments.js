@@ -56,12 +56,25 @@ export const createComment = (comment) => async dispatch => {
 };
 
 export const deleteComment = (commentId) => async dispatch => {
-  const res = await csrfFetch(`/api/comments`, {
+  const res = await csrfFetch(`/api/comments/${commentId}`, {
     method: 'DELETE'
   });
 
   if (res.ok) {
     dispatch(removeComment(commentId));
+  };
+};
+
+export const updateComment = (comment) => async dispatch => {
+  const res = await csrfFetch(`/api/comments/${comment.id}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(comment)
+  });
+
+  if (res.ok) {
+    const updatedComment = await res.json();
+    dispatch(addComment(updatedComment));
   };
 };
 
