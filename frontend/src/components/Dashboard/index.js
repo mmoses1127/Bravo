@@ -92,7 +92,7 @@ const Dashboard = () => {
             <div className="links-item">
               <PhotoModal />
               <h3>Project Repo</h3>
-              <a href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
+              <a target="_blank" href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
             </div>
             {/* <div className="links-item">
               <h3>Michael's Github</h3>

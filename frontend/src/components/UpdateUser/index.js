@@ -61,34 +61,36 @@ const UserShow = () => {
   };
 
   return (
-    <form className="update-user-form" onSubmit={handleSubmit}>
-      <fieldset>
-        <legend>Edit Full Name</legend>
-        <div className='inline-inputs'>
-          <label>
-            <input className='update-user-input' type='text' onChange={e => setName(e.target.value)} value={name} />
-          </label>
+    <div className='update-user-page-container'>
+      <form className="update-user-form" onSubmit={handleSubmit}>
+        <fieldset>
+          <legend>Edit Full Name</legend>
+          <div className='inline-inputs'>
+            <label>
+              <input className='update-user-input' type='text' onChange={e => setName(e.target.value)} value={name} />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Edit Profile Picture</legend>
+          <img className="update-user-pic" src={user?.profilePicUrl} alt='Profile Pic' />
+          <div className='photo-upload-zone'>
+            <label>
+              <input className='file-input update-user-pic-button' type='file' onChange={handleFile}></input>
+            </label>
+          </div>
+        </fieldset>
+
+        <div className='form-submit-area'>
+          <button id='form-submit-button' className="relative-button">Update User Info
+            {loading && <div className="spin"></div>}
+          </button>
+          <Link to={`/dashboard`}>Cancel</Link>
         </div>
-      </fieldset>
 
-      <fieldset>
-        <legend>Edit Profile Pic</legend>
-        <img className="update-user-pic" src={user?.profilePicUrl} alt='Profile Pic' />
-        <div className='photo-upload-zone'>
-          <label>
-            <input className='file-input update-user-pic-button' type='file' onChange={handleFile}></input>
-          </label>
-        </div>
-      </fieldset>
-
-      <div className='form-submit-area'>
-        <button id='form-submit-button' className="relative-button">Update User Info
-          {loading && <div className="spin"></div>}
-        </button>
-        <Link to={`/dashboard`}>Cancel</Link>
-      </div>
-
-    </form>
+      </form>
+    </div>
   )
 
 
