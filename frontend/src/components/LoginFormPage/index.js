@@ -50,7 +50,7 @@ const LoginFormPage = () => {
       <div className="panel-registration">
         <h1>Login</h1>
         <div className="signup-form">
-          <ul>
+          <ul className='errors'>
             {errors.map(error => <li key={error}>{error}</li>)}
           </ul>
           <form onSubmit={handleLogin}>

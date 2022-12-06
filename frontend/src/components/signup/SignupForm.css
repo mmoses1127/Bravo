@@ -20,6 +20,14 @@ body {
   align-items: center;
 }
 
+.errors {
+  color: #fc5200;
+  margin-top: 10px;
+}
+.errors li {
+  margin-top: 5px;
+}
+
 form {
   display: flex;
   flex-direction: column;

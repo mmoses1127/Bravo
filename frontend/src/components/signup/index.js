@@ -21,6 +21,11 @@ const SignupFormPage = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setErrors(['Passwords must match.'])
+      setLoading(false);
+      return null;
+    } 
     setErrors([]);
     await dispatch(signup({email, password, name}))
     .catch(async (res) => {
@@ -51,7 +56,7 @@ const SignupFormPage = () => {
       <div className="panel-registration">
         <h1>Join Strava today,<br></br> it's Free.</h1>
         <div className="signup-form">
-          {<ul>
+          {<ul className='errors'>
             {errors.map(error => <li key={error}>{error}</li>)}
           </ul>}
           <form onSubmit={handleSubmit}>
