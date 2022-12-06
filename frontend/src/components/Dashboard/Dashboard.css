@@ -50,7 +50,7 @@
 }
 
 #ride-index {
-  min-width: 425px;
+  min-width: 600px;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -272,17 +272,29 @@
   display: flex;
 }
 
-.dashboard-banner-image {
+.banner-image {
   object-fit: cover;
   width: 100%;
 }
 
 .dash-top-left-image {
   width: 40%;
-  background-image: url("https://www.honolulumarathon.org/wp-content/uploads/2019/10/strava-logo-2016-600x351.png");
-  background-size: cover;
+  background-color: #494950;
+  /* background-image: url("https://www.honolulumarathon.org/wp-content/uploads/2019/10/strava-logo-2016-600x351.png"); */
+  /* background-image: url("../../assets/bravo_logo.png");
+  background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
+  padding: 50px;
+  image-rendering: pixelated; */
+}
+
+/* .dash-top-left-image img {
+  object-fit: scale-down;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  
 }
 
 .dash-top-right-image {
@@ -290,10 +302,10 @@
   background-image: url("https://www.rei.com/dam/content_team_080317_61569_mountain_biking_beginners_lg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-}
+} */
 
 .dash-top-section {
-  height: 130px;
+  height: 150px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -311,10 +323,9 @@
 
 .dash-bottom-logo {
   display: flex;
+  width: 20%;
   justify-content: center;
-  width: 30%;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-right: 15px;
 }
 
 .feed-dropdown-list {

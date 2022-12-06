@@ -44,7 +44,7 @@ const HomePage = () => {
               <button onClick={() => history.push(`/login`)} className="landing-button">Log In</button>
               <div id="landing-disclaimer">
                 <p>
-                  By signing up for Strava, you agree to the Terms of Service. View our Privacy Policy.
+                  By signing up for Bravo, you agree to the Terms of Service. View our Privacy Policy.
                 </p>
               </div>
             </div>

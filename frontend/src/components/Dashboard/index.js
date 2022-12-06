@@ -10,6 +10,7 @@ import smallLogo from "../../assets/small_logo.svg";
 import { fetchKudos, getKudos } from "../../store/kudos";
 import { fetchComments, getComments } from "../../store/comments";
 import PhotoModal from "../PhotoModal";
+import banner from '../../assets/index_banner.png';
 
 const Dashboard = () => {
   let {userId} = useParams();
@@ -119,18 +120,20 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-top-header">
           <div className="dash-top-section">
-            <div className="dash-top-left-image">
+            <img className='banner-image' src={banner} />
+            {/* <div className="dash-top-left-image">
+              <img src={bravoLogo} />
             </div>
             <div className="dash-top-right-image">
-            </div>
+            </div> */}
           </div>
           <div className="dash-bottom-section">
             <div className="dash-bottom-logo">
               <img className="small-logo" src={smallLogo} />
             </div>
             <div className="dash-bottom-text">
-              <h3>Strava Welcomes All</h3>
-              <p>Running, biking, and all the rest. Get out there!</p>
+              <h3>Bravo Subscription Offer</h3>
+              <p>Contact Coach Michael for personalized performance tracking. <br/> Here for a limited time only!</p>
             </div>
           </div>
         </div>
