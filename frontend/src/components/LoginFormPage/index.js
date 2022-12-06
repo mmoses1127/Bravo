@@ -43,7 +43,7 @@ const LoginFormPage = () => {
     await dispatch(sessionActions.login({email: 'demo@user.io', password: 'password'}));
   };
 
-  if (currentUser !== null) return <Redirect to={`/users/${currentUser.id}`} />;
+  if (currentUser !== null) return <Redirect to={`/dashboard`} />;
 
   return (
     <div className="splash-background">
