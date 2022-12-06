@@ -104,7 +104,7 @@ const CreateRideMap = () => {
         <h1 className='title-header'>Create Ride - Map Entry</h1>
         <div className='stat-entry-top'>
           <div className='distance-and-elev'>
-          <fieldset>
+            <fieldset>
               <legend>Distance (km)</legend>
               <div className='inline-inputs'>
                 <label>
@@ -123,6 +123,17 @@ const CreateRideMap = () => {
             </fieldset>
 
             <fieldset>
+              <legend>Duration (mins)</legend>
+              <div className='inline-inputs'>
+                <label>
+                  <input disabled type='number' value={duration} />
+                </label>
+              </div>
+            </fieldset>
+        </div>
+
+        <div className='stat-entry-top'>
+            <fieldset>
               <legend>Date</legend>
               <div className='inline-inputs'>
                 <label>
@@ -139,20 +150,10 @@ const CreateRideMap = () => {
                 </label>
               </div>
             </fieldset>            
-
-            <fieldset>
-              <legend>Estimated Duration (mins)</legend>
-              <div className='inline-inputs'>
-                <label>
-                  <input disabled type='number' value={duration} />
-                </label>
-              </div>
-            </fieldset>
-
           </div>
         </div>
-        <div className='stat-entry-bottom'>
 
+        <div className='stat-entry-bottom'>
           <fieldset>
             <legend>Title</legend>
             <div className='inline-inputs'>
