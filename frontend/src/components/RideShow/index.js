@@ -38,7 +38,6 @@ const RideShow = () => {
   if (!ride) return null;
 
   const handleDelete = () => {
-    // alert('Are you sure? Deleting an activity cannot be undone')
     if (window.confirm('Are you sure? Deleting a ride cannot be undone.')) {
       dispatch(deleteRide(rideId));
       history.push(`/dashboard`);

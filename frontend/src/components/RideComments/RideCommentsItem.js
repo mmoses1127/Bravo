@@ -14,9 +14,10 @@ const RideCommentsItem = ({comment}) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
 
   const deleteComment = (e) => {
-    // e.preventDefault();
-    console.log('delete!')
-    dispatch(deleteComment(comment.id));
+    e.preventDefault();
+    if (window.confirm('Are you sure? Deleting a comment is irreversible.')) {
+      dispatch(deleteComment(comment.id));
+    };
   }
 
   const editComment = (e) => {
