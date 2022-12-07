@@ -23,7 +23,6 @@ class Api::RidesController < ApplicationController
     if @ride.save!
       render :show
     else
-      # render json: { errors: ['Your inputs were not valid.']}, status: 422
       render json: { errors: @ride.errors.full_messages }, status: :unprocessable_entity
     end
   end

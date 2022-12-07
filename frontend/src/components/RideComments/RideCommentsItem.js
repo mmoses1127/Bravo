@@ -1,10 +1,10 @@
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from '../../store/session';
-import { deleteComment, updateComment } from '../../store/comments.js';
 import './RideComments.css';
 import CommentForm from './CommentForm';
 import { useState } from 'react';
+import { deleteComment } from '../../store/comments';
 
 
 const RideCommentsItem = ({comment}) => {
@@ -13,7 +13,7 @@ const RideCommentsItem = ({comment}) => {
   const dispatch = useDispatch();
   const [showCommentForm, setShowCommentForm] = useState(false);
 
-  const deleteComment = (e) => {
+  const handleDelete = (e) => {
     e.preventDefault();
     if (window.confirm('Are you sure? Deleting a comment is irreversible.')) {
       dispatch(deleteComment(comment.id));
@@ -43,7 +43,7 @@ const RideCommentsItem = ({comment}) => {
           {currentUser.id === comment.commenterId &&
           <div className='mod-comments-section'>
             <button className='mod-comment-button' onClick={editComment}>Edit</button> 
-            <button className='mod-comment-button' onClick={deleteComment}>Delete</button>
+            <button className='mod-comment-button' onClick={handleDelete}>Delete</button>
           </div>
           }
         </div>

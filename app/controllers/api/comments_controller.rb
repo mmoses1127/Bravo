@@ -30,8 +30,8 @@ class Api::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    if @comment.destroy
-      render :index
+    if @comment.destroy!
+      render :show
     else
       render json: { errors: ['Comment not deleted.'] }, status: :unprocessable_entity
     end
