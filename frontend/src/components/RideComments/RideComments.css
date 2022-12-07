@@ -71,6 +71,12 @@
   width: 100%;
 }
 
+.comment-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .update-comment-container {
   display: flex;
   align-items: center;
