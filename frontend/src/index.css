@@ -241,7 +241,7 @@ textarea {
 	/* white-space: nowrap; */
 	border: 1px solid #dfdfe8;
 	border-top: none;
-	z-index: 30;
+	z-index: 999999;
 	padding: 0;
 	margin: 0;
 	margin-inline-start: 0px;
