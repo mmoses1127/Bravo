@@ -18,21 +18,38 @@ const RideEdit = () => {
   const [title, setTitle] = useState(ride?.title);
   const [description, setDescription] = useState(ride?.description);
   const [date, setDate] = useState(ride?.dateTime.slice(0,10));
-  const [time, setTime] = useState(ride?.dateTime.slice(11,16));
+  const [time, setTime] = useState('');
+  const [changedDate, setChangedDate] = useState(false)
+  
+  useEffect(() => {
+    if (!changedDate && ride) {
+      let dateObject = new Date(ride.dateTime);
+      let convertedDateTime = String(dateObject);
+      const offset = dateObject.getTimezoneOffset()
+      dateObject = new Date(dateObject.getTime() - (offset*60*1000))
+      let convertedDate = dateObject.toISOString().split('T')[0]
+      console.log(convertedDate)
+      setDate(convertedDate)
+      setTime(convertedDateTime.slice(16, 21))
+      setChangedDate(true);
+    }
+  }, [ride?.dateTime])
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
   }, []);
-
-  if (currentUser === null) return <Redirect to={`/`} />;
-
+  
+  if (currentUser === null || !ride) return <Redirect to={`/`} />;
+  
   const handleClick = async (e) => {
     await handleSubmit(e);
     history.push(`/`);
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dateTime = new Date(`${date} 0${time}:00`);
+    const UTCTime = dateTime.toUTCString();
 
     const newRide = {
       id: ride.id,
@@ -42,12 +59,11 @@ const RideEdit = () => {
       duration,
       elevation,
       athlete_id: user.id,
-      date_time: `${date} 0${time}:00 UTC`
+      date_time: UTCTime
     };
 
     dispatch(updateRide(newRide));
   };
-
 
   return (
     <div className='page-container'>

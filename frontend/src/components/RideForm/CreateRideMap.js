@@ -55,6 +55,8 @@ const CreateRideMap = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    const dateTime = new Date(`${date} 0${time}:00`);
+    const UTCTime = dateTime.toUTCString();
 
     const newRide = new FormData();
     newRide.append('ride[title]', title);
@@ -64,7 +66,7 @@ const CreateRideMap = () => {
     newRide.append('ride[gps_points]', elevationArray);
     newRide.append('ride[polyline]', polyline);
     newRide.append('ride[elevation]', elevation);
-    newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
+    newRide.append('ride[date_time]', UTCTime);
     newRide.append('ride[athleteId]', currentUser.id);
     if (photoFiles) {
       photoFiles.forEach(photoFile => {
