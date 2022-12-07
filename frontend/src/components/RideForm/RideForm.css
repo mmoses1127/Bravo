@@ -59,6 +59,10 @@ a {
   color: #007FB6;
 }
 
+.date-time-field {
+  min-width: 110px;
+}
+
 a:hover {
   text-decoration: underline;
 }

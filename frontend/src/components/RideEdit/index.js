@@ -25,10 +25,10 @@ const RideEdit = () => {
     if (!changedDate && ride) {
       let dateObject = new Date(ride.dateTime);
       let convertedDateTime = String(dateObject);
+      console.log(convertedDateTime)
       const offset = dateObject.getTimezoneOffset()
       dateObject = new Date(dateObject.getTime() - (offset*60*1000))
       let convertedDate = dateObject.toISOString().split('T')[0]
-      console.log(convertedDate)
       setDate(convertedDate)
       setTime(convertedDateTime.slice(16, 21))
       setChangedDate(true);

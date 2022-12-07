@@ -14,15 +14,18 @@ const RideForm = () => {
   const [elevation, setElevation] = useState(0);
   const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
-  let today = new Date().toISOString().slice(0, 10);
-  let now = (new Date()).toLocaleTimeString().slice(0,5);
-  if (now[1] === ':') now = '0' + now.slice(0,4);
-  const [date, setDate] = useState(today);
-  const [time, setTime] = useState(now);
+  let now = new Date().toISOString().slice();
+  let dateObject = new Date();
+  const offset = dateObject.getTimezoneOffset()
+  dateObject = new Date(dateObject.getTime() - (offset*60*1000))
+  let convertedDate = dateObject.toISOString().split('T')[0]
+  let convertedTime = dateObject.toISOString().split('T')[1].slice(0, 5)
+  const [date, setDate] = useState(convertedDate);
+  const [time, setTime] = useState(convertedTime);
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
   if (currentUser === null) return <Redirect to={`/`} />;
   
   const rideSubmitButton = document.getElementById('ride-submit-button')
@@ -43,7 +46,6 @@ const RideForm = () => {
     setErrors([]);
     const dateTime = new Date(`${date} 0${time}:00`);
     const UTCTime = dateTime.toUTCString();
-
     const newRide = new FormData();
     newRide.append('ride[title]', title);
     newRide.append('ride[distance]', distance);
