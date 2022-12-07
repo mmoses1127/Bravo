@@ -58,24 +58,27 @@ const RideEdit = () => {
             <fieldset>
               <legend>Distance</legend>
               <div className='inline-inputs'>
-                <label>
+                <label className='stat-label'>
                   <input type='number' onChange={e => setDistance(e.target.value)} value={distance} />
+                  <h4>kilometers</h4>
                 </label>
               </div>
             </fieldset>
             <fieldset>
               <legend>Duration</legend>
               <div className='inline-inputs'>
-                <label>
+                <label className='stat-label'>
                   <input type='number' onChange={e => setDuration(e.target.value)} value={duration} />
+                  <h4>minutes</h4>
                 </label>
               </div>
             </fieldset>
             <fieldset>
               <legend>Elevation</legend>
               <div className='inline-inputs'>
-                <label>
+                <label className='stat-label'>
                   <input type='number' onChange={e => setElevation(e.target.value)} value={elevation} />
+                  <h4>meters</h4>
                 </label>
               </div>
             </fieldset>
