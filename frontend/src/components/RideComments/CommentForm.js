@@ -12,7 +12,6 @@ const CommentForm = ({rideId, comment, setShowCommentForm}) => {
   const submitButton = document.getElementById('submit-button');
 
   if (body === '' && submitButton) {
-    console.log(submitButton)
     submitButton.setAttribute('class', 'post-button-inactive');
   } else if (submitButton) {
     submitButton.setAttribute('class', 'post-button');
@@ -26,7 +25,6 @@ const CommentForm = ({rideId, comment, setShowCommentForm}) => {
 
 
   const handleSubmit = (e) => {
-    console.log('submitting')
     e.preventDefault();
     if (body.length) {
       let newComment = {
