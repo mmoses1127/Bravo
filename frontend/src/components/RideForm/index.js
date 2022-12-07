@@ -22,15 +22,17 @@ const RideForm = () => {
   const [errors, setErrors] = useState([]);
   const [photoFiles, setPhotoFiles] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  
   if (currentUser === null) return <Redirect to={`/`} />;
-
+  
   const rideSubmitButton = document.getElementById('ride-submit-button')
-
+  
   const handleClick = async (e) => {
     setLoading(true);
-    rideSubmitButton.setAttribute(`id`, `clicked-button`);
-    rideSubmitButton.disabled = true;
+    if (photoFiles.length) {
+      rideSubmitButton.setAttribute(`id`, `clicked-button`);
+      rideSubmitButton.disabled = true;
+    }
     let ride = await handleSubmit(e);
     history.push(`/rides/${ride.id}`);
   };
@@ -48,7 +50,7 @@ const RideForm = () => {
     newRide.append('ride[elevation]', elevation);
     newRide.append('ride[date_time]', `${date} 0${time}:00 UTC`);
     newRide.append('ride[athleteId]', currentUser.id);
-    if (photoFiles) {
+    if (photoFiles.length) {
       photoFiles.forEach(photoFile => {
         newRide.append('ride[photos][]', photoFile);
 
@@ -68,7 +70,6 @@ const RideForm = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
-
     return returnedRide;
   };
 
