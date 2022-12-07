@@ -93,9 +93,9 @@ const Dashboard = () => {
               <PhotoModal />
               <h3>Developer Links</h3>
               <div>
-              <a target="_blank" href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
-              <a target="_blank" href="https://www.linkedin.com/in/michael-moses-8786b615/"><i className="fa-brands fa-linkedin footer-icon"/></a>
-              <a target="_blank" href="https://mmoses1127.github.io/portfolio_site/"><i className="fa-solid fa-face-grin-wide footer-icon"/></a>
+                <a target="_blank" href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
+                <a target="_blank" href="https://www.linkedin.com/in/michael-moses-8786b615/"><i className="fa-brands fa-linkedin footer-icon"/></a>
+                <a target="_blank" href="https://mmoses1127.github.io/portfolio_site/"><i className="fa-solid fa-face-grin-wide footer-icon"/></a>
               </div>
             </div>
             {/* <div className="links-item">
