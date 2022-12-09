@@ -6,7 +6,7 @@
 }
 
 #landing-page {
-  height: 70vh;
+  height: calc(100vh - 215px);
   display: flex;
   align-items: center;
 }
@@ -17,7 +17,10 @@ footer {
   background-color: #242428;
   color: white;
   flex: 1 1 auto;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 55px;
 }
 
 .landing-row {

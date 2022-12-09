@@ -10,6 +10,9 @@ import bravoLogo from '../../assets/bravo_logo.png';
 
 const Navigation = () => {
   const currentUser = useSelector(getCurrentUser);
+  const url = document.location.href;
+  let urlFinal = url.split('/')
+  urlFinal = urlFinal[urlFinal.length - 1];
 
   if (!currentUser) {
     return (
@@ -19,7 +22,7 @@ const Navigation = () => {
           <NavLink exact to="/"><img className='top-logo' src={bravoLogo} alt="Strava Logo" /></NavLink>
           </div>
           <div className='nav-item'>
-          <NavLink exact to="/signup"><button>Sign Up</button></NavLink>
+          <NavLink exact to={urlFinal === 'signup' ? `/Login` : `/signup`}><button>{urlFinal === 'signup' ? `Login` : `Signup`}</button></NavLink>
           </div>
         </div>
       </div>

@@ -132,11 +132,13 @@ button {
 
 .splash-background {
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - 110px);
+  min-height: 690px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/man-and-young-woman-training-sprinting-on-coast-royalty-free-image-665480985-1543434199.jpg);
+	background-size: cover;
 }
 
 h1 {

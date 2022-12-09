@@ -80,7 +80,7 @@ const RideIndexItem = ({ride}) => {
           <img className="avatar-image-medium" src={ride.profilePicUrl} alt="Avatar" />
         </div>
         <div className="card-header-text">
-          <h4><Link className='blue-link' to={`/users/${ride.athleteId}`}>{ride.username}</Link></h4>
+          <h4><Link onClick={() => window.scroll({top: 0, left: 0})} className='blue-link' to={`/users/${ride.athleteId}`}>{ride.username}</Link></h4>
           <p>{longDate}</p>
         </div>
       </div>

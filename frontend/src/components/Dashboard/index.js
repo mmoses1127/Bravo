@@ -29,6 +29,8 @@ const Dashboard = () => {
   const userKudos = useSelector(getKudos).filter(kudo => kudo?.giverId === profileUser?.id);
   const userComments = useSelector(getComments).filter(comment => comment.commenterId === profileUser?.id)
   const [showMenu, setShowMenu] = useState(false);
+  const [refreshed, setRefreshed] = useState(false);
+
   const openMenu = () => {
     setShowMenu(true);
   };
@@ -36,6 +38,10 @@ const Dashboard = () => {
   const closeMenu = () => {
     setShowMenu(false)
   };
+
+  useEffect(() => {
+    window.scroll({top: 0, left: 0});
+  }, []);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -54,6 +60,11 @@ const Dashboard = () => {
   const handleRedirect = () => {
     userId ? history.push(`/dashboard`) : history.push(`/users/${currentUser.id}`);
   };
+
+  if (!refreshed) {
+    setRefreshed(true);
+    return null;
+  } 
 
   return (
     <>
@@ -98,10 +109,6 @@ const Dashboard = () => {
                 <a target="_blank" href="https://mmoses1127.github.io/portfolio_site/"><i className="fa-solid fa-face-grin-wide footer-icon"/></a>
               </div>
             </div>
-            {/* <div className="links-item">
-              <h3>Michael's Github</h3>
-              <a href="https://github.com/mmoses1127"><i className="fa-brands fa-github footer-icon"/></a>
-            </div> */}
           </div>
         </div>
         </div>
@@ -125,11 +132,6 @@ const Dashboard = () => {
         <div className="dashboard-top-header">
           <div className="dash-top-section">
             <img className='banner-image' src={banner} />
-            {/* <div className="dash-top-left-image">
-              <img src={bravoLogo} />
-            </div>
-            <div className="dash-top-right-image">
-            </div> */}
           </div>
           <div className="dash-bottom-section">
             <div className="dash-bottom-logo">
