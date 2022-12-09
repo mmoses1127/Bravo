@@ -25,7 +25,6 @@ const RideEdit = () => {
     if (!changedDate && ride) {
       let dateObject = new Date(ride.dateTime);
       let convertedDateTime = String(dateObject);
-      console.log(convertedDateTime)
       const offset = dateObject.getTimezoneOffset()
       dateObject = new Date(dateObject.getTime() - (offset*60*1000))
       let convertedDate = dateObject.toISOString().split('T')[0]
@@ -42,8 +41,12 @@ const RideEdit = () => {
   if (currentUser === null || !ride) return <Redirect to={`/`} />;
   
   const handleClick = async (e) => {
-    await handleSubmit(e);
-    history.push(`/`);
+    if (distance <= 0) {
+      alert('Your ride must have a distance greater than 0.')
+    } else {
+      await handleSubmit(e);
+      history.push(`/`);
+    }
   };
   
   const handleSubmit = (e) => {

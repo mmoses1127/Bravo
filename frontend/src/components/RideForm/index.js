@@ -31,13 +31,17 @@ const RideForm = () => {
   const rideSubmitButton = document.getElementById('ride-submit-button')
   
   const handleClick = async (e) => {
-    setLoading(true);
-    if (photoFiles.length) {
-      rideSubmitButton.setAttribute(`id`, `clicked-button`);
-      rideSubmitButton.disabled = true;
+    if (distance <= 0) {
+      alert('Your ride must have a distance greater than 0.')
+    } else {
+      setLoading(true);
+      if (photoFiles.length) {
+        rideSubmitButton.setAttribute(`id`, `clicked-button`);
+        rideSubmitButton.disabled = true;
+      }
+      let ride = await handleSubmit(e);
+      history.push(`/rides/${ride.id}`);
     }
-    let ride = await handleSubmit(e);
-    history.push(`/rides/${ride.id}`);
   };
 
 
