@@ -37,6 +37,7 @@ const CreateRideMap = () => {
   const rideSubmitButton = document.getElementById('ride-submit-button')
 
   const handleClick = async (e) => {
+    e.preventDefault();
     if (distance <= 0 || duration <= 0 || elevation <= 0) {
       alert('Your ride must have distance, duration, and elevation greater than 0.')
     } else {

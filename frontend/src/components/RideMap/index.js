@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import './Map.css'
-import { render } from "react-dom";
 
 export const RideMap = ({passUpMapData}) => {
   const [map, setMap] = useState(null);
@@ -20,7 +19,7 @@ export const RideMap = ({passUpMapData}) => {
       setMap(new window.google.maps.Map(mapRef.current, {streetViewControl: false, zoom: 12, center: {lat: 37.773972, lng: -122.431297}}))
     }
     
-  }, [mapRef, map]);
+  }, [mapRef]);
 
 
   const calcElevationArray = async (points) => {
@@ -135,11 +134,11 @@ export const RideMap = ({passUpMapData}) => {
         renderPath();
     } 
 
-  }, [coords, renderPath])
+  }, [coords])
 
   useEffect(() => {
     calcElevationArray(pathPoints);
-  }, [pathPoints, calcElevationArray])
+  }, [pathPoints])
 
   useEffect(() => {
     calcElevation(elevationArray);
@@ -147,7 +146,7 @@ export const RideMap = ({passUpMapData}) => {
 
   useEffect(() => {
     passUpMapData(distance, duration, polyline, elevationArray, elevation);
-  }, [distance, duration, polyline, elevationArray, elevation, passUpMapData])
+  }, [distance, duration, polyline, elevationArray, elevation])
 
 
   return (

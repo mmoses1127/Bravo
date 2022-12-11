@@ -54,8 +54,8 @@ const HomePage = () => {
                 {loading && <div className="spin"></div>}
               </button>
               {<ul className='errors'>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>}
+              {errors.map(error => <li key={error}>{error.message}</li>)}
+              </ul>}
               <button onClick={() => history.push(`/signup`)} className="landing-button">Sign Up</button>
               <button onClick={() => history.push(`/login`)} className="landing-button">Log In</button>
               <div id="landing-disclaimer">

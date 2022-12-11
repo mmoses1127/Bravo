@@ -48,7 +48,7 @@ const Dashboard = () => {
     if (rides.length < 2) {dispatch(fetchRides())};
     if (kudos?.length < 1) dispatch(fetchKudos());
     if (comments?.length < 1) dispatch(fetchComments());
-  }, [userId, kudos, rides, comments, dispatch]);
+  }, [userId, dispatch]);
 
   
   if (currentUser === null) {

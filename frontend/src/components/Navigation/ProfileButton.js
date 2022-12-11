@@ -1,15 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { logout} from "../../store/session";
 import { useHistory } from "react-router-dom";
-import { getCurrentUser } from "../../store/session";
 
 const ProfileButton = ({user}) => {
 
   const history = useHistory();  
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const currentUser = useSelector(getCurrentUser)
 
   const openMenu = () => {
     setShowMenu(true);
@@ -29,7 +27,7 @@ const ProfileButton = ({user}) => {
   return (
     <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down, nav-dropdown">
       <div className='nav-bar-component'>
-        <img className="avatar-image" src={currentUser.profilePicUrl} alt="Avatar"/>
+        <img className="avatar-image" src={user.profilePicUrl} alt="Avatar"/>
         <i className="fa-solid fa-angle-down"></i>
       </div>
       {showMenu && (<ul className='dropdown-list'>
