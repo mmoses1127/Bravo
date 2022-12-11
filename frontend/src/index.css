@@ -132,8 +132,7 @@ button {
 
 .splash-background {
 	width: 100%;
-	height: calc(100vh - 110px);
-  min-height: 690px;
+	min-height: calc(100vh - 110px);
 	display: flex;
 	justify-content: center;
 	align-items: center;

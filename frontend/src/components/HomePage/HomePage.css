@@ -6,7 +6,7 @@
 }
 
 #landing-page {
-  height: calc(100vh - 215px);
+  min-height: calc(100vh - 215px);
   display: flex;
   align-items: center;
 }

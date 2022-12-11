@@ -1,6 +1,5 @@
 .update-user-page-container {
-  height: calc(100vh - 110px);
-  min-height: 690px;
+  min-height: calc(100vh - 110px);
   display: flex;
   align-items: center;
 }
