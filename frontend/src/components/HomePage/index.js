@@ -12,12 +12,25 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState([]);
 
 
   const demoLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
-    await dispatch(login({email: 'demo@user.io', password: 'password'}));
+    await dispatch(login({email: 'demo@user.io', password: 'password'}))
+    .catch(async (res) => {
+      let data;
+      try {
+        // .clone() essentially allows you to read the response body twice
+        data = await res.clone().json();
+      } catch {
+        data = await res.text(); // Will hit this case if the server is down
+      }
+      if (data?.errors) setErrors(data.errors);
+      else if (data) setErrors([data]);
+      else setErrors([res.statusText]);
+    });
     setLoading(false);
   };
 
@@ -40,6 +53,9 @@ const HomePage = () => {
               <button onClick={demoLogin} className="landing-button">Demo User Login
                 {loading && <div className="spin"></div>}
               </button>
+              {<ul className='errors'>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>}
               <button onClick={() => history.push(`/signup`)} className="landing-button">Sign Up</button>
               <button onClick={() => history.push(`/login`)} className="landing-button">Log In</button>
               <div id="landing-disclaimer">

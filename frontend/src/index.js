@@ -9,6 +9,7 @@ import configureStore from './store';
 import csrfFetch from './store/csrf';
 import * as sessionActions from './store/session';
 import { ModalProvider } from "./context/Modal";
+import {createRoot} from 'react-dom/client';
 
 const store = configureStore();
 
@@ -18,24 +19,19 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-function Root() {
-  return (
-    <ModalProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </ModalProvider>
-  );
-}
+const root = createRoot(document.getElementById("root"));
 
 const renderApplicaton = () => {
-  return ReactDOM.render(
+  return root.render(
     <React.StrictMode>
-      <Root />
-    </React.StrictMode>,
-    document.getElementById('root')
+      <ModalProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </ModalProvider>
+    </React.StrictMode>
   );
 }
 

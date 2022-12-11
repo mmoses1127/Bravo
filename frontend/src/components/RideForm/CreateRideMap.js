@@ -38,8 +38,8 @@ const CreateRideMap = () => {
   const rideSubmitButton = document.getElementById('ride-submit-button')
 
   const handleClick = async (e) => {
-    if (distance <= 0) {
-      alert('Your ride must have a distance greater than 0.')
+    if (distance <= 0 || duration <= 0 || elevation <= 0) {
+      alert('Your ride must have distance, duration, and elevation greater than 0.')
     } else {
       setLoading(true);
       rideSubmitButton.setAttribute(`id`, `clicked-button`);
@@ -200,6 +200,10 @@ const CreateRideMap = () => {
           </button>
           <Link to={`/dashboard`}>Cancel</Link>
         </div>
+
+        {<ul className='errors'>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>}
 
       </form>
 

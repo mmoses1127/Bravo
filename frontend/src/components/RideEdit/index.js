@@ -19,7 +19,9 @@ const RideEdit = () => {
   const [description, setDescription] = useState(ride?.description);
   const [date, setDate] = useState(ride?.dateTime.slice(0,10));
   const [time, setTime] = useState('');
-  const [changedDate, setChangedDate] = useState(false)
+  const [changedDate, setChangedDate] = useState(false);
+  const [errors, setErrors] = useState([]);
+
   
   useEffect(() => {
     if (!changedDate && ride) {
@@ -41,8 +43,8 @@ const RideEdit = () => {
   if (currentUser === null || !ride) return <Redirect to={`/`} />;
   
   const handleClick = async (e) => {
-    if (distance <= 0) {
-      alert('Your ride must have a distance greater than 0.')
+    if (distance <= 0 || duration <= 0 || elevation <= 0) {
+      alert('Your ride must have distance, duration, and elevation greater than 0.')
     } else {
       await handleSubmit(e);
       history.push(`/`);
@@ -65,7 +67,19 @@ const RideEdit = () => {
       date_time: UTCTime
     };
 
-    dispatch(updateRide(newRide));
+    dispatch(updateRide(newRide))
+    .catch(async (res) => {
+      let data;
+      try {
+        // .clone() essentially allows you to read the response body twice
+        data = await res.clone().json();
+      } catch {
+        data = await res.text(); // Will hit this case if the server is down
+      }
+      if (data?.errors) setErrors(data.errors);
+      else if (data) setErrors([data]);
+      else setErrors([res.statusText]);
+    });
   };
 
   return (
@@ -144,8 +158,12 @@ const RideEdit = () => {
           <div className='form-submit-area'>
             <button>Update</button>
             <Link to={`/dashboard`}>Cancel</Link>
-
           </div>
+
+          {<ul className='errors'>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>}
+          
         </form>
       </div>
     </div>

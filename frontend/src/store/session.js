@@ -82,10 +82,14 @@ export const login = (user) => async (dispatch) => {
       password
     })
   });
-  let data = await res.json();
-  storeCurrentUser(data)
-  dispatch(addCurrentUser(data));
-  return res;
+  if (res.ok) {
+    let data = await res.json();
+    storeCurrentUser(data)
+    dispatch(addCurrentUser(data));
+    return res;
+  } else {
+    return ({error: 'We are unable to log you in. Please try again. If the problem persists, contact an administrator.'})
+  }
 }
 
 let user = JSON.parse(sessionStorage.getItem("currentUser"));
