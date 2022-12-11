@@ -7,12 +7,10 @@ import { getCurrentUser } from "../../store/session";
 import PhotoModal from "../PhotoModal";
 import RideShowMapWrapper from "./RideShowMap";
 import {
-  LineChart,
   AreaChart,
   Area,
   ResponsiveContainer,
-  Legend, Tooltip,
-  Line,
+  Tooltip,
   XAxis,
   YAxis,
   CartesianGrid
@@ -31,7 +29,7 @@ const RideShow = () => {
   
   useEffect(() => {
     dispatch(fetchRide(rideId));
-  }, [rideId]);
+  }, [rideId, dispatch]);
   
   if (currentUser === null) return <Redirect to={`/`} />;
   
@@ -95,7 +93,7 @@ const RideShow = () => {
       <div className="ride-show-main">
         <div className="show-main-box">
           <div className="profile-show-image-container">
-            <img className="profile-show-image" src={ride.profilePicUrl} alt='Profile Image'></img>
+            <img className="profile-show-image" src={ride.profilePicUrl} alt='Profile'></img>
           </div>
           <div className="show-main-text-img">
             <div className="show-main-text">
@@ -106,7 +104,7 @@ const RideShow = () => {
             <div className="show-main-img">
               {ride.photoUrls?.slice(0, 5).map((photoUrl, i) => (
                 <div key={i} className='small-square-thumb-box'>
-                  <img onClick={showPhotoModal} className='photo-thumb' alt='RIde Photo' src={photoUrl}/>
+                  <img onClick={showPhotoModal} className='photo-thumb' alt='Ride' src={photoUrl}/>
                 </div>
               ))}
             </div>

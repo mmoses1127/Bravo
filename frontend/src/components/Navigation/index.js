@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import { NavLink } from "react-router-dom";
-import stravaLogo from "../../assets/strava_logo.svg";
 import './Navigation.css';
 import AddRideButton from "./AddRideButton";
 import { getCurrentUser } from "../../store/session";

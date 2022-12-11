@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signup, login, getCurrentUser } from "../../store/session";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import './SignupForm.css';
@@ -8,7 +8,6 @@ import './SignupForm.css';
 
 const SignupFormPage = () => {
   
-  const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');

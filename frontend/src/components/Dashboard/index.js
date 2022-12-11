@@ -17,7 +17,7 @@ const Dashboard = () => {
   userId = parseInt(userId)
   const history = useHistory();
   const dispatch = useDispatch();
-  let rides = useSelector(getRides);
+  const rides = useSelector(getRides);
   let userRides = useSelector(getUserRides(userId));
   const kudos = useSelector(getKudos);
   const comments = useSelector(getComments);
@@ -48,7 +48,7 @@ const Dashboard = () => {
     if (rides.length < 2) {dispatch(fetchRides())};
     if (kudos?.length < 1) dispatch(fetchKudos());
     if (comments?.length < 1) dispatch(fetchComments());
-  }, [userId]);
+  }, [userId, kudos, rides, comments, dispatch]);
 
   
   if (currentUser === null) {
@@ -73,7 +73,7 @@ const Dashboard = () => {
         <div className="profile-container">
           <div className="profile-top">
             <div className="profile-image-container">
-              <img className="profile-image" src={user ? user.profilePicUrl : profileUser.profilePicUrl}/>
+              <img alt='Thumbnail' className="profile-image" src={user ? user.profilePicUrl : profileUser.profilePicUrl}/>
             </div>
             <h1>{user ? user.name : profileUser.name}</h1>
             <ul className="profile-stats-container">
@@ -104,9 +104,9 @@ const Dashboard = () => {
               <PhotoModal />
               <h3>Developer Links</h3>
               <div>
-                <a target="_blank" href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
-                <a target="_blank" href="https://www.linkedin.com/in/michael-moses-8786b615/"><i className="fa-brands fa-linkedin footer-icon"/></a>
-                <a target="_blank" href="https://mmoses1127.github.io/portfolio_site/"><i className="fa-solid fa-face-grin-wide footer-icon"/></a>
+                <a target="_blank" rel="noreferrer" href="https://github.com/mmoses1127/Bravo"><i className="fa-brands fa-github footer-icon"/></a>
+                <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/michael-moses-8786b615/"><i className="fa-brands fa-linkedin footer-icon"/></a>
+                <a target="_blank" rel="noreferrer" href="https://mmoses1127.github.io/portfolio_site/"><i className="fa-solid fa-face-grin-wide footer-icon"/></a>
               </div>
             </div>
           </div>
@@ -131,11 +131,11 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-top-header">
           <div className="dash-top-section">
-            <img className='banner-image' src={banner} />
+            <img alt='Banner' className='banner-image' src={banner} />
           </div>
           <div className="dash-bottom-section">
             <div className="dash-bottom-logo">
-              <img className="small-logo" src={smallLogo} />
+              <img alt='Logo' className="small-logo" src={smallLogo} />
             </div>
             <div className="dash-bottom-text">
               <h3>Bravo Subscription Offer</h3>

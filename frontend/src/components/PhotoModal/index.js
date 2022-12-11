@@ -23,7 +23,7 @@ function PhotoModal({ride, closeModal}) {
         <Modal onClose={(e) => closeModal(e)}>
           <div className='photo-modal-box'>
             <button onClick={() => switchPreviousPhoto()} className='next-button left-button'><i className="fa-solid fa-chevron-left"/></button>
-            <img className='photo-in-modal' src={ride.photoUrls[photoIndex]} alt='Ride Image' />
+            <img className='photo-in-modal' src={ride.photoUrls[photoIndex]} alt='Ride' />
             <button onClick={() => switchNextPhoto()} className='next-button'><i className="fa-solid fa-chevron-right"/></button>
           </div>
         </Modal>

@@ -34,11 +34,11 @@ const RideEdit = () => {
       setTime(convertedDateTime.slice(16, 21))
       setChangedDate(true);
     }
-  }, [ride?.dateTime])
+  }, [changedDate, ride])
 
   useEffect(() => {
     dispatch(fetchRide(rideId));
-  }, []);
+  }, [dispatch, rideId]);
   
   if (currentUser === null || !ride) return <Redirect to={`/`} />;
   

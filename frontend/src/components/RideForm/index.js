@@ -14,7 +14,6 @@ const RideForm = () => {
   const [elevation, setElevation] = useState(0);
   const [title, setTitle] = useState('My Bike Ride');
   const [description, setDescription] = useState('');
-  let now = new Date().toISOString().slice();
   let dateObject = new Date();
   const offset = dateObject.getTimezoneOffset()
   dateObject = new Date(dateObject.getTime() - (offset*60*1000))

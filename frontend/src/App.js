@@ -1,4 +1,4 @@
-import {Switch, Route, useParams, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import React from 'react';
 import SignupFormPage from './components/signup';
@@ -10,14 +10,10 @@ import RideShow from './components/RideShow';
 import RideEdit from './components/RideEdit';
 import UserShow from './components/UpdateUser';
 import Footer from './components/Footer';
-import { useSelector } from 'react-redux';
-import { getCurrentUser } from './store/session';
 import CreateRideMap from './components/RideForm/CreateRideMap';
 
 
 function App() {
-  const currentUser = useSelector(getCurrentUser);
-  const {userId} = useParams();
 
   return (
     <>

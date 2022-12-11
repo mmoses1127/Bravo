@@ -19,7 +19,7 @@ const UserShow = () => {
 
   useEffect(() => {
     dispatch(fetchUser(user?.id));
-  }, [user]);
+  }, [user, dispatch]);
 
   const handleFile = (e) => {
     const picture = e.currentTarget.files[0];
@@ -57,7 +57,8 @@ const UserShow = () => {
 
     await dispatch(addCurrentUser(returnedUser));
     await storeCurrentUser(returnedUser);
-    history.push(`/`)
+    setLoading(false);
+    history.push(`/`);
   };
 
   return (
@@ -88,6 +89,10 @@ const UserShow = () => {
           </button>
           <Link to={`/dashboard`}>Cancel</Link>
         </div>
+
+        {<ul className='errors'>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>}
 
       </form>
     </div>

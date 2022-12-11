@@ -31,7 +31,7 @@ export const RideShowMap = ({ride}) => {
         ))
     }
     
-  }, [mapRef]);
+  }, [mapRef, coords, map]);
   
   
   

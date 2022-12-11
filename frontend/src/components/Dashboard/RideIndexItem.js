@@ -121,7 +121,7 @@ const RideIndexItem = ({ride}) => {
           <div className="photos-container">
             {ride.photoUrls.slice(0, 2).map((photoUrl, i) => (
               <div className='thumb-container' key={i}>
-                <img onClick={showPhotoModal} className='photo-thumb' src={photoUrl}/>
+                <img alt='Thumbnail' onClick={showPhotoModal} className='photo-thumb' src={photoUrl}/>
               </div>
             ))}
           </div>
@@ -134,7 +134,7 @@ const RideIndexItem = ({ride}) => {
             {rideKudos.length > 0 && 
               rideKudos.map(kudo => { return (
                 <div key={kudo.id} className='tiny-kudo-wrapper'>
-                  <img className='tiny-kudo-giver' src={kudo.profilePicUrl}/>
+                  <img alt='Thumbnail' className='tiny-kudo-giver' src={kudo.profilePicUrl}/>
                 </div>
               )
               })

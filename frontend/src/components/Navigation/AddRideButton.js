@@ -1,11 +1,9 @@
-import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const AddRideButton = () => {
 
   const history = useHistory();
-  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {

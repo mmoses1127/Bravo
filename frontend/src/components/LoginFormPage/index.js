@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
 
 
 const LoginFormPage = () => {
 
-  const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(sessionActions.getCurrentUser);
   const [email, setEmail] = useState('');
