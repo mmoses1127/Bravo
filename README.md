@@ -108,8 +108,7 @@ import { Wrapper } from "@googlemaps/react-wrapper";
 
 export const RideMap = ({passUpMapData}) => {
 
-```
-```javascript
+...
 
 const RideMapWrapper = ({passUpMapData}) => {
 
