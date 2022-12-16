@@ -19,7 +19,7 @@ Bravo is a full stack clone of the popular social network for athletes called St
 
 Ride creation is powered by an intermediary click handler which takes care of data validation on the front end, utilizes a loading spinner, disables the button while loading, saves the return value of the dispatched ride to a variable, then uses that variable to access the new ride's ID and redirect to the ride show page.
 
-### createRideMap.js
+### CreateRideMap.js
 ```javascript
 
 const handleClick = async (e) => {
@@ -38,6 +38,8 @@ const handleClick = async (e) => {
 ```
 
 The fun doesn't end there. The next function in the chain utilizes FormData to allow for the attaching of multiple photos via AWS and Rails Active Storage blobs. Error handling is performed again via a .catch, which sends backend error messages to the front to be rendered.
+
+### CreateRideMap.js
 
 ```javascript
 
@@ -87,8 +89,9 @@ The fun doesn't end there. The next function in the chain utilizes FormData to a
 
 ```
 
-The file attachment input is handled by a file-input html element with the propery 'multiple'
+The file attachment input is handled by a file-input html element with the propery 'multiple'.
 
+### CreateRideMap.js
 ```jsx
 
 <input className='file-input' type='file' onChange={handleFile} multiple></input>
@@ -97,7 +100,7 @@ The file attachment input is handled by a file-input html element with the prope
 
 The map interface for creating rides is the feature of Bravo I am most proud of. First of all, to utilize Google Maps in React, I wrapped the map component in the Google Maps React Wrapper, which enables all the standard features. However, I needed a non-standard library, geometry, in order to fetch elevation data. Much searching and trial and error yielded the solution: it could be passed in as the value of a 'libraries' prop passed to the map wrapper.
 
-## 
+### RideMap index.js
 
 ```javascript
 
@@ -122,9 +125,12 @@ export default RideMapWrapper;
 
 ```
 
-This elevation data was used to 
+This elevation data was acquired using the Google Elevation Service API. An array of elevations for the path of the user's bike route was generated. Also, the net positive elevation was calculated to determine the climbing difficulty of the ride.
 
+### RideMap index.js
 ```javascript
+
+  const elevator = new window.google.maps.ElevationService();
 
   const calcElevationArray = async (points) => {
     if (points.length > 1) {
@@ -153,6 +159,7 @@ This elevation data was used to
 
 The create ride component renders the map data, including distance, estimated duration, and elevation, to the form as the user clicks on the map and creates a route. However, the data was lagging behind 1 - 2 clicks. I soon realized that state setters were asynchronous and solved my problem by creating a chain of useEffects that listened to changes in data and triggered the functions which generate other dependent data.
 
+### RideMap index.js
 ```javascript
 
   useEffect(() => {
@@ -175,7 +182,7 @@ The create ride component renders the map data, including distance, estimated du
 
 All this data needed to be passed up from the map component to the component which contained the form for creating rides. This was facilitated by passing a function down as a prop to the map wrapper. This function passed up all the relevant map data and was itself triggered by a useEffect that listened for changes in any of the data to be passed. This function, in turn, needed to be passed further down from the map wrapper to the map itself. What a journey!
 
-### createRideMap.js
+### CreateRideMap.js
 
 ```javascript
 
@@ -193,7 +200,7 @@ All this data needed to be passed up from the map component to the component whi
   <RideMapWrapper passUpMapData={passUpMapData} />
   
 ```
-### rideMap index.js
+### RideMap index.js
 
 ```javascript
   
@@ -219,6 +226,7 @@ All this data needed to be passed up from the map component to the component whi
 
 I learned to be comfortable with the infamous useRef through this project. Keeping track of the most current state of elements and variables is essential with the several re-renders going on on each page. This was especially important when giving the map a reference to an HTML element to live inside.
 
+### RideMap index.js
 ```javascript
 
   import { useEffect, useState, useRef } from "react";
@@ -247,59 +255,132 @@ I learned to be comfortable with the infamous useRef through this project. Keepi
 
 Rendering paths between points as the user creates a route is a key function of this app. I utilized calls to the Google Directions Service and Directions Renderer APIs. I pushed in previously clicked points as 'midpoints' so that the route would be forced to travel through all diresed points on the map.
 
+### RideMap index.js
+```javascript
+
+const directionsRenderer = new window.google.maps.DirectionsRenderer({suppressMarkers: true});
+directionsRenderer.setMap(map);
+const directionsService = new window.google.maps.DirectionsService();
+
+const renderPath = () => {
+
+  let midpoints = []
+  for(let i = 1; i < coords.length - 1; i++) {
+    let point = coords[i];
+    let wayPoint = {};
+      wayPoint['location'] = new window.google.maps.LatLng(point);
+      midpoints.push(wayPoint);
+      wayPoint = {}
+  }
+
+  const request = {
+      origin: coords[0],
+      destination: coords[coords.length - 1],
+      travelMode: 'BICYCLING',
+      unitSystem: window.google.maps.UnitSystem.METRIC,
+      waypoints: midpoints
+  }
+      
+directionsService.route(request, (response, status) => {
+  if (status === 'OK') {
+      const poly = response.routes[0].overview_polyline
+
+      const distanceArray = response.routes[0].legs;
+      let totalDistance = 0;
+      distanceArray.forEach(dis => {
+          let value = dis.distance.value / 1000;
+          totalDistance += value;
+      })
+
+      const durationArray = response.routes[0].legs;
+      let totalDuration = 0;
+      durationArray.forEach(dur => {
+          let value = dur.duration.value;
+          totalDuration += value;
+
+
+        })
+
+      const pathPointSet = response.routes[0].overview_path;
+
+      setDistance(Math.round(totalDistance * 10) / 10);
+      setPolyline(poly);
+      setDuration(Math.round(totalDuration / 60 * 10) / 10);
+      setPathPoints(pathPointSet);
+
+      directionsRenderer.setDirections(response);
+  }
+}); 
+
+```
+      
+## Ride Show
+
+All this data, but what to do with it? Render it handsomely, of course! The ride show page displays (if input by the user) a beautiful and interactive map with a polyline representing the route, an elevation profile area chart allowing inspection of points anywhere along the route, relevant ride data such as duration and distance, and a selection of user-uploaded photos that can be clicked to access a dynamic modal.
+
+Here is the code for the elevation chart, powered by Recharts.js.
+
+### RideShow index.js
+```javascript
+
+import {
+  AreaChart,
+  Area,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+  CartesianGrid
+} from 'recharts';
+
+<div className="ride-show-elevation">
+    <ResponsiveContainer width="100%" >
+      <AreaChart data={elevationData} margin={{top: 10, right: 30}}>
+          <CartesianGrid />
+          <XAxis tick={false}/>
+          <YAxis padding={{ top: 50 }}/>
+          <Tooltip />
+          <Area type="monotone" dataKey="elevation" fill="gray" stroke="gray"
+              activeDot={{ r: 8 }} />
+      </AreaChart>
+    </ResponsiveContainer>
+  </div>
+      
+```
+
+The custom modal allows infinite rolodexing through a modulo that wraps the current photo index.
+
+### RideShow index.js
 
 ```javascript
 
-  const directionsRenderer = new window.google.maps.DirectionsRenderer({suppressMarkers: true});
-  directionsRenderer.setMap(map);
-  const directionsService = new window.google.maps.DirectionsService();
+  const showPhotoModal = (e) => {
+    e.preventDefault();
+    setOpenModal(true);
+  };
+
+  const closeModal = (e) => {
+    e.preventDefault();
+    setOpenModal(false)
+  }
   
-  const renderPath = () => {
-
-      let midpoints = []
-      for(let i = 1; i < coords.length - 1; i++) {
-        let point = coords[i];
-        let wayPoint = {};
-          wayPoint['location'] = new window.google.maps.LatLng(point);
-          midpoints.push(wayPoint);
-          wayPoint = {}
-      }
-
-      const request = {
-          origin: coords[0],
-          destination: coords[coords.length - 1],
-          travelMode: 'BICYCLING',
-          unitSystem: window.google.maps.UnitSystem.METRIC,
-          waypoints: midpoints
-      }
+  ...
+  
+  return (
+    <div className="page-container-show">
+      {openModal && < PhotoModal ride={ride} closeModal={closeModal}/>}
+      <div className="ride-show-header">
       
-      directionsService.route(request, (response, status) => {
-          if (status === 'OK') {
-              const poly = response.routes[0].overview_polyline
-              
-              const distanceArray = response.routes[0].legs;
-              let totalDistance = 0;
-              distanceArray.forEach(dis => {
-                  let value = dis.distance.value / 1000;
-                  totalDistance += value;
-              })
-
-              const durationArray = response.routes[0].legs;
-              let totalDuration = 0;
-              durationArray.forEach(dur => {
-                  let value = dur.duration.value;
-                  totalDuration += value;
-
-                  
-                })
-
-              const pathPointSet = response.routes[0].overview_path;
-              
-              setDistance(Math.round(totalDistance * 10) / 10);
-              setPolyline(poly);
-              setDuration(Math.round(totalDuration / 60 * 10) / 10);
-              setPathPoints(pathPointSet);
-
-              directionsRenderer.setDirections(response);
-          }
-      }); 
+  ...
+  
+  <div className="show-main-img">
+    {ride.photoUrls?.slice(0, 5).map((photoUrl, i) => (
+      <div key={i} className='small-square-thumb-box'>
+        <img onClick={showPhotoModal} className='photo-thumb' alt='Ride' src={photoUrl}/>
+      </div>
+    ))}
+  </div>
+  
+  ```
+  
+  
