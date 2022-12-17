@@ -98,7 +98,7 @@ The file attachment input is handled by a file-input html element with the prope
 
 ```
 
-The map interface for creating rides is the feature of Bravo I am most proud of. First of all, to utilize Google Maps in React, I wrapped the map component in the Google Maps React Wrapper, which enables all the standard features. However, I needed a non-standard library, geometry, in order to fetch elevation data. Much searching and trial and error yielded the solution: it could be passed in as the value of a 'libraries' prop passed to the map wrapper.
+The map interface for creating rides is the feature of Bravo I am most proud of. First of all, to utilize Google Maps in React, I wrapped the map component in the Google Maps React Wrapper, which enables all the standard features. However, I needed a non-standard library, geometry, in order to fetch decode Google's polyline data. Much searching and trial and error yielded the solution: it could be passed in as the value of a 'libraries' prop passed to the map wrapper.
 
 ### RideMap index.js
 
