@@ -28,3 +28,9 @@
 
 # Ignore public files
 /public
+
+# Ignore node_modules
+/node_modules
+
+# Ignore the node modules folder inside the frontend folder
+/frontend/node_modules
