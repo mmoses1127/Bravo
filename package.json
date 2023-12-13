@@ -8,11 +8,9 @@
   "scripts": {
     "build": "npm install --prefix frontend && npm run build --prefix frontend"
   },
-  
   "engines": {
     "node": "16.16.0"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mmoses1127/Bravo.git"
@@ -23,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/mmoses1127/Bravo/issues"
   },
-  "homepage": "https://github.com/mmoses1127/Bravo#readme"
+  "homepage": "https://github.com/mmoses1127/Bravo#readme",
+  "devDependencies": {
+    "node": "^16.16.0"
+  }
 }
