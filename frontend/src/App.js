@@ -11,13 +11,14 @@ import RideEdit from './components/RideEdit';
 import UserShow from './components/UpdateUser';
 import Footer from './components/Footer';
 import CreateRideMap from './components/RideForm/CreateRideMap';
+import ContactAdd from './components_unetwrk/ContactAdd';
 
 
 function App() {
 
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <Switch>
         <Route exact path="/">
           <HomePage />
@@ -49,11 +50,17 @@ function App() {
         <Route path="/profile">
           <UserShow/>
         </Route>
+
+
+        <Route path="/add-contact">
+          <ContactAdd/>
+        </Route>
+
         <Route path="">
           <Redirect to="/"/>
         </Route>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
