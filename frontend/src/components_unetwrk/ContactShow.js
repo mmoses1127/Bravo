@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { createContact } from '../store/contacts';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentUser } from '../store/session';
 
 const ContactShow = ({ contact }) => {
 
@@ -11,10 +14,13 @@ const ContactShow = ({ contact }) => {
       connectionDescription: "",
       dateConnected: "",
       email: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      userId: ""
     }
   }
 
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUser);
   const [firstName, setFirstName] = useState(contact.firstName);
   const [lastName, setLastName] = useState(contact.lastName);
   const [company, setCompany] = useState(contact.company);
@@ -24,19 +30,35 @@ const ContactShow = ({ contact }) => {
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
 
+  const validatePayload = (payload) => {
+    let errors = [];
+    if (payload.first_name.length < 1) errors.push("First name cannot be empty.");
+    if (payload.last_name.length < 1) errors.push("Last name cannot be empty.");
+    if (payload.company.length < 1) errors.push("Company cannot be empty.");
+    return errors;
+  }
+
   const handleAddContact = (e) => {
     e.preventDefault();
     const payload = {
-      firstName,
-      lastName,
+      first_name: firstName,
+      last_name: lastName,
       company,
       title,
-      connectionDescription,
-      dateConnected,
+      connection_description: connectionDescription,
+      date_connected: dateConnected,
       email,
-      phoneNumber
+      phone_number: phoneNumber,
+      user_id: currentUser.id,
     }
-    console.log(payload);
+    
+    const errors = validatePayload(payload);
+    if (errors.length > 0) {
+      alert(errors.join("\n"));
+      return;
+    } else {
+      dispatch(createContact(payload));
+    }
   }
 
   return (
