@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_10_035136) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_21_174019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_035136) do
     t.index ["ride_id"], name: "index_comments_on_ride_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.datetime "date_connected"
+    t.string "company", null: false
+    t.string "title"
+    t.string "connection_description"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "phone_number"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "status_id", null: false
+    t.index ["status_id"], name: "index_contacts_on_status_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
+  create_table "interactions", force: :cascade do |t|
+    t.datetime "date_contacted", null: false
+    t.string "contact_method"
+    t.datetime "next_contact_date"
+    t.string "notes"
+    t.bigint "contact_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_interactions_on_contact_id"
+    t.index ["user_id"], name: "index_interactions_on_user_id"
+  end
+
   create_table "kudos", force: :cascade do |t|
     t.bigint "giver_id", null: false
     t.bigint "ride_id", null: false
@@ -77,6 +107,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_035136) do
     t.index ["athlete_id"], name: "index_rides_on_athlete_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "title", default: "Contact Status", null: false
+    t.bigint "user_id"
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_statuses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -93,7 +132,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_035136) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "rides"
   add_foreign_key "comments", "users", column: "commenter_id"
+  add_foreign_key "contacts", "users"
+  add_foreign_key "interactions", "contacts"
+  add_foreign_key "interactions", "users"
   add_foreign_key "kudos", "rides"
   add_foreign_key "kudos", "users", column: "giver_id"
   add_foreign_key "rides", "users", column: "athlete_id"
+  add_foreign_key "statuses", "users"
 end

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :rides, only: [:index, :show, :create, :update, :destroy]
     resources :kudos, only: [:create, :destroy, :index]
     resources :comments, only: [:create, :update, :destroy, :index]
+    resources :contacts, only: [:create, :update, :destroy, :index, :show]
+    resources :statuses, only: [:create, :update, :index]
+    resources :interactions, only: [:create, :update, :destroy, :index, :show]
   end
 
   get '*path', to: "static_pages#frontend_index"

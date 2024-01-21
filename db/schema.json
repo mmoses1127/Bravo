@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "First Name": "John", 
+  "Last Name": "Doe",
+  "Connection Description": "Met at CES conference",
+  "Company": "Acme",
+  "Title": "CEO",
+  "Email Address": "john@ces.com",
+  "Phone Number": "555-555-5555",
+  "Date Connected": "2015-01-01",
+
+}
+
+Belongs to: user
+Belongs to: status
+Has many: interactions,            
