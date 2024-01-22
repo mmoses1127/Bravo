@@ -11,7 +11,7 @@ import RideEdit from './components/RideEdit';
 import UserShow from './components/UpdateUser';
 import Footer from './components/Footer';
 import CreateRideMap from './components/RideForm/CreateRideMap';
-import ContactAdd from './components_unetwrk/ContactAdd';
+import ContactAdd from './components_unetwrk/ContactShow';
 import Dashboard2 from './components_unetwrk/Dashboard2';
 
 

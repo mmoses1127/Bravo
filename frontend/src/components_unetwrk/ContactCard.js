@@ -1,5 +1,5 @@
 import ContactShow from "./ContactShow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../context/Modal";
 
 const ContactCard = ({contact}) => {
@@ -17,6 +17,10 @@ const ContactCard = ({contact}) => {
     setShowModal(false);
   }
 
+  useEffect(() => {
+    console.log('showModal', showModal)
+  }, [showModal])
+
   return (
 
     <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={handleContactShow}>
@@ -27,9 +31,9 @@ const ContactCard = ({contact}) => {
       <p>{contact.firstName} {contact.lastName}</p>
       <p>{contact.title}</p>
       <p>{contact.company}</p>
-      {showModal && (
-        <Modal children={<ContactShow onClose={handleCloseModal} contact={contact}/>}/>
-      )}
+      {showModal && 
+        <Modal onClose={handleCloseModal} children={<ContactShow contact={contact}/>}/>
+      }
     </div>
 
   )
