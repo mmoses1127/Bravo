@@ -39,6 +39,16 @@ class User < ApplicationRecord
   class_name: :Kudo,
   dependent: :destroy
 
+  has_many :contacts,
+  foreign_key: :user_id,
+  class_name: :Contact,
+  dependent: :destroy
+
+  has_many :tiers,
+  foreign_key: :user_id,
+  class_name: :Tier,
+  dependent: :destroy
+
   has_one_attached :profile_pic
 
 

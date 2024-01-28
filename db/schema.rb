@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_21_212907) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_28_170338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,13 +106,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_21_212907) do
     t.index ["athlete_id"], name: "index_rides_on_athlete_id"
   end
 
-  create_table "statuses", force: :cascade do |t|
-    t.string "title", default: "Contact Status", null: false
-    t.bigint "user_id"
+  create_table "tiers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", default: "New Tier", null: false
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_statuses_on_user_id"
+    t.index ["user_id"], name: "index_tiers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,5 +137,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_21_212907) do
   add_foreign_key "kudos", "rides"
   add_foreign_key "kudos", "users", column: "giver_id"
   add_foreign_key "rides", "users", column: "athlete_id"
-  add_foreign_key "statuses", "users"
+  add_foreign_key "tiers", "users"
 end

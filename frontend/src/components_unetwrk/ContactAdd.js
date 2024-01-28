@@ -62,24 +62,34 @@ const ContactAdd = ({ contact }) => {
   }
 
   return (
-    <form onSubmit={handleAddContact}>
-      <label htmlFor="firstName">First Name</label>
-      <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-      <label htmlFor="lastName">Last Name</label>
-      <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-      <label htmlFor="company">Company</label>
-      <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
-      <label htmlFor="title">Title</label>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <label htmlFor="connectionDescription">Connection Description</label>
-      <input type="text" value={connectionDescription} onChange={(e) => setConnectionDescription(e.target.value)} />
-      <label htmlFor="dateConnected">Date Connected</label>
-      <input type="date" value={dateConnected} onChange={(e) => setDateConnected(e.target.value)} />
-      <label htmlFor="email">Email</label>
-      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <label htmlFor="phoneNumber">Phone Number</label>
-      <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+    <form onSubmit={handleAddContact} className='flex flex-row justify-between w-full p-5'>
+      <div className='flex flex-col w-1/3'>
+        <label htmlFor="firstName">First Name</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+        <label htmlFor="lastName">Last Name</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        <label htmlFor="company">Company</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
+        <label htmlFor="title">Title</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+      </div>
+      <div className='flex flex-col  w-1/3'>
+        <label htmlFor="connectionDescription">Connection Description</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" value={connectionDescription} onChange={(e) => setConnectionDescription(e.target.value)} />
+        <label htmlFor="dateConnected">Date Connected</label>
+        <input className='drop-shadow bg-white border-none h-8' type="date" value={dateConnected} onChange={(e) => setDateConnected(e.target.value)} />
+        <label htmlFor="email">Email</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label htmlFor="phoneNumber">Phone Number</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+      </div>
+      <div className='flex flex-col'>
+        <div className='border-b-5 border-red-400'>
+          <h3 className='border-b-5 border-red-400'>Timeline</h3>
+          <p>Timeline goes here</p>
+        </div>
       <button>Add Contact</button>
+      </div>
     </form>
   );
 

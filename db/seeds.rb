@@ -57,29 +57,34 @@ puts "Completed a user"
 end
 
 
-# Create Status for Demo User
-puts "Creating default statuses for all users..."
+# Create Tier for Demo User
+puts "Creating default Tier for all users..."
 
 for user in User.all
-  Status.create!({
+  Tier.create!({
     user_id: user.id,
-    title: "New Contacts",
+    name: "New Contacts",
     position: 0,
   })
-  Status.create!({
+  Tier.create!({
     user_id: user.id,
-    title: "1 Interaction",
+    name: "1st Interaction",
     position: 1,
   })
-  Status.create!({
+  Tier.create!({
     user_id: user.id,
-    title: "Multiple Interactions",
+    name: "2nd Interaction",
     position: 2,
   })
-  Status.create!({
+  Tier.create!({
     user_id: user.id,
-    title: "Opportunity Given",
+    name: "Gave Referral",
     position: 3,
+  })
+  Tier.create!({
+    user_id: user.id,
+    name: "Cold",
+    position: 4,
   })
 end
 

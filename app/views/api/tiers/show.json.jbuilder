@@ -1,0 +1,1 @@
+json.extract! @tier, :id, :name, :user_id, :position

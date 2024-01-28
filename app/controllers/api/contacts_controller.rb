@@ -27,7 +27,7 @@ class Api::ContactsController < ApplicationController
 
   def index
     @contacts = Contact.all
-    .where(user_id: current_user.id)
+    # .where(user_id: current_user.id)
     if @contacts
       render :index
     else

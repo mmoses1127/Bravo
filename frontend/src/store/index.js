@@ -6,6 +6,7 @@ import usersReducer from './users';
 import kudosReducer from './kudos';
 import commentsReducer from './comments';
 import contactsReducer from './contacts';
+import tiersReducer from './tiers';
 
 const rootReducer = combineReducers ({
   session: sessionReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers ({
   users: usersReducer,
   kudos: kudosReducer,
   comments: commentsReducer,
-  contacts: contactsReducer
+  contacts: contactsReducer,
+  tiers: tiersReducer
 });
 
 let enhancer;

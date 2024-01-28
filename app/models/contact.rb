@@ -10,5 +10,7 @@ class Contact < ApplicationRecord
     class_name: :Interaction,
     dependent: :destroy
 
+  belongs_to :tier,
+    class_name: :Tier
 
 end
