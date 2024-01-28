@@ -34,7 +34,7 @@ const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
 
 
   return (
-    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="profile-drop-down, nav-dropdown">
+    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="drop-shadow-lg bg-white border-none h-10 p-3">
       <div className='flex flex-row w-full justify-between'>
         <h4>{targetTier.name ? targetTier.name : `Select Column`}</h4>
         <i className="fa-solid fa-angle-down"></i>
