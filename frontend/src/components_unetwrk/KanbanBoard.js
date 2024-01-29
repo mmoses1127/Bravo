@@ -4,18 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "../store/session";
 import { Redirect } from "react-router-dom";
-import { fetchTiers, getUserTiers } from "../store/tiers";
+import { fetchUserTiers, getTiers } from "../store/tiers";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const KanbanBoard = () => {
 
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const currentUser = useSelector(getCurrentUser);
-  const tiers = useSelector(getUserTiers(currentUser.id));
+  const tiers = useSelector(getTiers);
+
+  const onDragEnd = (result) => {
+    console.log(result);
+  }
 
   useEffect(() => {
     if (!contacts.length) dispatch(fetchContacts());
-    if (!tiers.length) dispatch(fetchTiers());
+    if (!tiers.length) dispatch(fetchUserTiers(currentUser.id));
   }, [dispatch]);
 
   if (!currentUser) {
@@ -25,11 +30,13 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div className="flex flex-row w-full justify-between">
-      {tiers.map((tier) => (
-        <ContactColumn key={tier.id} tier={tier} contacts={contacts}/>
-      ))}
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="flex flex-row w-full justify-between">
+        {tiers.map((tier, index) => (
+          <ContactColumn key={tier.id} tier={tier} contacts={contacts}/>
+        ))}
+      </div>
+    </DragDropContext>
   )
 
 }

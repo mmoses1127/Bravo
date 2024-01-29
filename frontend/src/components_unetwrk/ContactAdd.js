@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createContact } from '../store/contacts';
+import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
@@ -40,6 +40,7 @@ const ContactAdd = ({ contact }) => {
 
   const handleAddContact = (e) => {
     e.preventDefault();
+    console.log('submitted!')
     const payload = {
       first_name: firstName,
       last_name: lastName,
@@ -57,12 +58,12 @@ const ContactAdd = ({ contact }) => {
       alert(errors.join("\n"));
       return;
     } else {
-      dispatch(createContact(payload));
+      contact.id ? dispatch(updateContact({...payload, id: contact.id})) : dispatch(createContact(payload));
     }
   }
 
   return (
-    <form onSubmit={handleAddContact} className='flex flex-row justify-between w-full p-5'>
+    <form className='flex flex-row justify-between w-full p-5'>
       <div className='flex flex-col w-1/3'>
         <label htmlFor="firstName">First Name</label>
         <input className='drop-shadow bg-white border-none h-8' type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -88,7 +89,7 @@ const ContactAdd = ({ contact }) => {
           <h3 className='border-b-5 border-red-400'>Timeline</h3>
           <p>Timeline goes here</p>
         </div>
-      <button>Add Contact</button>
+      <button onClick={handleAddContact}>{contact.id ? `Update Contact` : `Add Contact`}</button>
       </div>
     </form>
   );

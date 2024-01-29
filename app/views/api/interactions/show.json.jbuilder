@@ -1,0 +1,1 @@
+json.extract! @interaction, :id, :date_contacted, :contact_method, :next_contact_date, :notes, :contact_id, :user_id

@@ -6,38 +6,39 @@ import Dropdown from "./Dropdown";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTiers, getUserTiers } from "../store/tiers";
 import { getCurrentUser } from "../store/session";
+import { fetchInteractions, getContactInteractions } from "../store/interactions";
 
 const CONTACT_INFO_TEXT = "Contact Information";
 const INTERACTION_NOTES_TEXT = "Interaction Notes";
 const UNDERLINE_STYLE = "cursor-pointer border-solid border-b-4 border-green-900 m-5";
 const NON_UNDERLINE_STYLE = "cursor-pointer m-5";
 
-const ContactShow = (contact = {}) => {
+const ContactShow = ({contact = {}}) => {
 
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
-  const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
   const tiers = useSelector(getUserTiers(user.id));
+  const interactions = useSelector(getContactInteractions(contact.id));
   const [columnOrder, setColumnOrder] = useState(0);
+  const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
 
   useEffect(() => {
     dispatch(fetchTiers());
+    dispatch(fetchInteractions());
   }, [dispatch])
 
   const chooseContent = (e) => {
     setContentChoice(e.target.innerText);
-    console.log('contentChoice', e.target.innerText);
-
   }
 
   return (
 
-    <div className="flex flex-col items-center align-center w-full bg-slate-200 p-5">
+    <div className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full">
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-row w-2/3">
           <img className="w-12 h-12" src={logo} />
           <div className="flex flex-col">
-            <h2>{contact.name ? contact.name : `Name`}</h2>
+            <h2>{contact.firstName ? contact.firstName + ' ' + contact.lastName : `Name`}</h2>
             <h3>{contact.title ? contact.title : `Title`}</h3>
             <h3>{contact.company ? contact.company : `Company`}</h3>
           </div>
@@ -58,7 +59,7 @@ const ContactShow = (contact = {}) => {
           <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
         </div>
       </div>
-      {contentChoice === CONTACT_INFO_TEXT ? <ContactAdd contact={contact}/> : <InteractionIndex contact={contact}/>}
+      {contentChoice === CONTACT_INFO_TEXT ? <ContactAdd contact={contact}/> : <InteractionIndex interactions={interactions}/>}
       
     </div>
   )

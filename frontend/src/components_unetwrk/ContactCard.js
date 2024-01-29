@@ -17,6 +17,11 @@ const ContactCard = ({contact}) => {
     setShowModal(false);
   }
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    console.log('delete');
+  }
+
   useEffect(() => {
     console.log('showModal', showModal)
   }, [showModal])
@@ -29,8 +34,11 @@ const ContactCard = ({contact}) => {
       <i className="fa-solid fa-link text-xl"></i>
       </div>
       <p>{contact.firstName} {contact.lastName}</p>
-      <p>{contact.title}</p>
       <p>{contact.company}</p>
+      <div className="flex flex-row justify-between">
+        <p>{contact.title}</p>
+        <i className="fa-solid fa-trash-can text-xl" onClick={handleDelete}></i>
+      </div>
       {showModal && 
         <Modal onClose={handleCloseModal} children={<ContactShow contact={contact}/>}/>
       }

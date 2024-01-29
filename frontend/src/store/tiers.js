@@ -42,6 +42,22 @@ export const fetchTiers = () => async dispatch => {
   };
 };
 
+export const fetchUserTiers = (userId) => async dispatch => {
+  const res = await fetch(`/api/tiers`);
+
+  if (res.ok) {
+    const tiers = await res.json();
+    console.log(tiers)
+    const tiersArray = Object.values(tiers)
+    const userTiers = tiersArray.filter(tier => tier.userId === userId);
+    let reducedTiers = {};
+    userTiers.forEach(tier => {
+      reducedTiers[tier.id] = tier;
+    });
+    dispatch(addAllTiers(reducedTiers));
+  };
+};
+
 export const createTier = (tier) => async dispatch => {
   console.log(tier);
   const res = await csrfFetch(`/api/tiers`, {
