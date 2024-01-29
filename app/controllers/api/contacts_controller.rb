@@ -46,7 +46,7 @@ class Api::ContactsController < ApplicationController
   private
 
   def contact_params
-    params.require(:contact).permit(:date_connected, :id, :company, :title, :connection_description, :first_name, :last_name, :email, :phone_number, :user_id, :status_id)
+    params.require(:contact).permit(:date_connected, :id, :company, :title, :connection_description, :first_name, :last_name, :email, :phone_number, :user_id, :column_order)
   end
 
 end

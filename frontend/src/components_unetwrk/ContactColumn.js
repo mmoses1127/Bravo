@@ -39,14 +39,15 @@ const ContactColumn = ({tier, contacts}) => {
       </div>
       <button className="bg-emerald-500 mt-5 mb-5 b-0" onClick={e => setShowAddContact(true)}>+ Add contact</button>
 
-      <Droppable droppableId={tier.name} key={tier.id}>
+      <Droppable droppableId={tier.id.toString()} key={tier.id}>
             {(provided) => (
               <div 
+                className="flex flex-col h-full"
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
               >
                 {tierContacts.map((contact, index) => (
-                  <Draggable key={contact.id} draggableId={contact.lastName} index={index}>
+                  <Draggable key={contact.id} draggableId={contact.id.toString()} index={index}>
                     {(provided) => (
                       <div 
                       ref={provided.innerRef} 

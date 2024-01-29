@@ -75,6 +75,7 @@ export const updateContact = (contact) => async dispatch => {
 
   if (res.ok) {
     const updatedContact = await res.json();
+    console.log('updatedContact', updatedContact)
     dispatch(addContact(updatedContact));
   };
 };
