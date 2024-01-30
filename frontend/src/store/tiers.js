@@ -47,7 +47,6 @@ export const fetchUserTiers = (userId) => async dispatch => {
 
   if (res.ok) {
     const tiers = await res.json();
-    console.log(tiers)
     const tiersArray = Object.values(tiers)
     const userTiers = tiersArray.filter(tier => tier.userId === userId);
     let reducedTiers = {};

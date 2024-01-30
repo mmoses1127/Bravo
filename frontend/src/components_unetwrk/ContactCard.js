@@ -4,31 +4,30 @@ import { Modal } from "../context/Modal";
 
 const ContactCard = ({contact}) => {
 
-  const [showModal, setShowModal] = useState(false);
+  const [showAddContact, setShowAddContact] = useState(false);
 
   const handleContactShow = (e) => {
     e.preventDefault();
-    setShowModal(true);
+    setShowAddContact(true);
   }
 
   const handleCloseModal = (e) => {
-    e.preventDefault();
-    console.log('yeeeee');
-    setShowModal(false);
+    console.log('close modal')
+    // e.preventDefault();
+    setShowAddContact(false);
   }
 
   const handleDelete = (e) => {
     e.preventDefault();
+    if(e && e.stopPropagation) e.stopPropagation();
     console.log('delete');
   }
 
-  useEffect(() => {
-    console.log('showModal', showModal)
-  }, [showModal])
+  // console.log('showmodal', showModal)
 
   return (
 
-    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={handleContactShow}>
+    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={e => setShowAddContact(true)}>
       <div className="flex flex-row justify-between">
       <i className="fa-regular fa-user text-xl"></i>
       <i className="fa-solid fa-link text-xl"></i>
@@ -39,9 +38,7 @@ const ContactCard = ({contact}) => {
         <p>{contact.title}</p>
         <i className="fa-solid fa-trash-can text-xl" onClick={handleDelete}></i>
       </div>
-      {showModal && 
-        <Modal onClose={handleCloseModal} children={<ContactShow contact={contact}/>}/>
-      }
+      {showAddContact && <Modal children={<ContactShow setShowAddContact={setShowAddContact} contact={contact}/>}/>}
     </div>
 
   )

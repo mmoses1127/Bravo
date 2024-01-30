@@ -19,7 +19,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
   const user = useSelector(getCurrentUser);
   const tiers = useSelector(getUserTiers(user.id));
   const interactions = useSelector(getContactInteractions(contact.id));
-  const [columnOrder, setColumnOrder] = useState(order);
+  const [columnOrder, setColumnOrder] = useState(contact.columnOrder ? contact.columnOrder : order);
   const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
 
   useEffect(() => {

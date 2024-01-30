@@ -3,33 +3,32 @@ import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
-const ContactAdd = ({ contact, setShowAddContact, columnOrder = 0}) => {
+const ContactAdd = ({ contact ={}, setShowAddContact, columnOrder = 0}) => {
 
-  if (!contact) {
-    contact = {
-      first_name: "",
-      last_name: "",
-      company: "",
-      title: "",
-      connection_description: "",
-      date_connected: "",
-      email: "",
-      phone_number: "",
-      user_id: "",
-      column_order: columnOrder,
-    }
+  const revisedContact = {
+    firstName: contact.firstName ? contact.firstName : "",
+    lastName: contact.lastName ? contact.lastName : "",
+    company: contact.company ? contact.company : "",
+    title: contact.title ? contact.title : "",
+    connectionDescription: contact.connectionDescription ? contact.connectionDescription : "",
+    dateConnected: contact.dateConnected ? contact.dateConnected.slice(0, 10) : "",
+    email: contact.email ? contact.email : "",
+    phoneNumber: contact.phoneNumber ? contact.phoneNumber : "",
+    userId: contact.userId ? contact.userId : "",
+    columnOrder: columnOrder,
   }
+
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
-  const [firstName, setFirstName] = useState(contact.first_name);
-  const [lastName, setLastName] = useState(contact.last_name);
-  const [company, setCompany] = useState(contact.company);
-  const [title, setTitle] = useState(contact.title);
-  const [connectionDescription, setConnectionDescription] = useState(contact.connection_description);
-  const [dateConnected, setDateConnected] = useState(contact.date_connected);
-  const [email, setEmail] = useState(contact.email);
-  const [phoneNumber, setPhoneNumber] = useState(contact.phone_number);
+  const [firstName, setFirstName] = useState(revisedContact.firstName);
+  const [lastName, setLastName] = useState(revisedContact.lastName);
+  const [company, setCompany] = useState(revisedContact.company);
+  const [title, setTitle] = useState(revisedContact.title);
+  const [connectionDescription, setConnectionDescription] = useState(revisedContact.connectionDescription);
+  const [dateConnected, setDateConnected] = useState(revisedContact.dateConnected);
+  const [email, setEmail] = useState(revisedContact.email);
+  const [phoneNumber, setPhoneNumber] = useState(revisedContact.phoneNumber);
 
   const validatePayload = (payload) => {
     let errors = [];

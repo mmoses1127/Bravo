@@ -63,9 +63,6 @@ const ContactColumn = ({tier, contacts}) => {
               </div>
             )}
       </Droppable>
-
-
-
       {showAddContact && <Modal children={<ContactShow setShowAddContact={setShowAddContact} order={tier.position}/>}/>}
     </div>
 

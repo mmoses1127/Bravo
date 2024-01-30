@@ -7,17 +7,13 @@ const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
   const matchTier = (columnOrder) => {
     if (columnOrder != undefined) {
       const targetTier = tiers.filter(tier => tier.position === columnOrder);
-      
       return targetTier[0];
     }
   };
   
   const [showMenu, setShowMenu] = useState(false);
-  const [targetTier, setTargetTier] = useState(columnOrder ? matchTier(columnOrder) : []);
-  
-  console.log('targetTier', targetTier);
-  console.log('columnOrder', columnOrder);
-  
+  const [targetTier, setTargetTier] = useState(columnOrder != undefined ? matchTier(columnOrder) : []);
+    
   const openMenu = () => {
     setShowMenu(true);
   };
