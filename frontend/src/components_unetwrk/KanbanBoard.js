@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "../store/session";
 import { Redirect } from "react-router-dom";
-import { fetchUserTiers, getTiers } from "../store/tiers";
+import { fetchUserTiers, getUserTiers } from "../store/tiers";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const KanbanBoard = () => {
@@ -12,7 +12,7 @@ const KanbanBoard = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const currentUser = useSelector(getCurrentUser);
-  const tiers = useSelector(getTiers);
+  const tiers = useSelector(getUserTiers(currentUser.id));
 
   const onDragEnd = (result) => {
     

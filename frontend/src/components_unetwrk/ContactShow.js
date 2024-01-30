@@ -13,13 +13,13 @@ const INTERACTION_NOTES_TEXT = "Interaction Notes";
 const UNDERLINE_STYLE = "cursor-pointer border-solid border-b-4 border-green-900 m-5";
 const NON_UNDERLINE_STYLE = "cursor-pointer m-5";
 
-const ContactShow = ({contact = {}}) => {
+const ContactShow = ({contact = {}, setShowAddContact, order}) => {
 
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
   const tiers = useSelector(getUserTiers(user.id));
   const interactions = useSelector(getContactInteractions(contact.id));
-  const [columnOrder, setColumnOrder] = useState(0);
+  const [columnOrder, setColumnOrder] = useState(order);
   const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ContactShow = ({contact = {}}) => {
           <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
         </div>
         <div className="flex flex-col jusitfy-center items-center">
-          <button className="m-5">Close</button>
+          <button onClick={e => setShowAddContact(false)} className="m-5">Close</button>
         </div>
       </div>
       <div className="flex flex-row justify-start w-full">
@@ -59,7 +59,7 @@ const ContactShow = ({contact = {}}) => {
           <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
         </div>
       </div>
-      {contentChoice === CONTACT_INFO_TEXT ? <ContactAdd contact={contact}/> : <InteractionIndex interactions={interactions}/>}
+      {contentChoice === CONTACT_INFO_TEXT ? <ContactAdd contact={contact} setShowAddContact={setShowAddContact} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowAddContact} />}
       
     </div>
   )

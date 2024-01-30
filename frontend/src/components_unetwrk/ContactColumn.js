@@ -66,7 +66,7 @@ const ContactColumn = ({tier, contacts}) => {
 
 
 
-      {showAddContact && <Modal children={<ContactShow/>}/>}
+      {showAddContact && <Modal children={<ContactShow setShowAddContact={setShowAddContact} order={tier.position}/>}/>}
     </div>
 
   )

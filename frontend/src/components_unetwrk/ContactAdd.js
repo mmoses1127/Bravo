@@ -3,32 +3,33 @@ import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
-const ContactAdd = ({ contact }) => {
+const ContactAdd = ({ contact, setShowAddContact, columnOrder = 0}) => {
 
   if (!contact) {
     contact = {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       company: "",
       title: "",
-      connectionDescription: "",
-      dateConnected: "",
+      connection_description: "",
+      date_connected: "",
       email: "",
-      phoneNumber: "",
-      userId: ""
+      phone_number: "",
+      user_id: "",
+      column_order: columnOrder,
     }
   }
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
-  const [firstName, setFirstName] = useState(contact.firstName);
-  const [lastName, setLastName] = useState(contact.lastName);
+  const [firstName, setFirstName] = useState(contact.first_name);
+  const [lastName, setLastName] = useState(contact.last_name);
   const [company, setCompany] = useState(contact.company);
   const [title, setTitle] = useState(contact.title);
-  const [connectionDescription, setConnectionDescription] = useState(contact.connectionDescription);
-  const [dateConnected, setDateConnected] = useState(contact.dateConnected);
+  const [connectionDescription, setConnectionDescription] = useState(contact.connection_description);
+  const [dateConnected, setDateConnected] = useState(contact.date_connected);
   const [email, setEmail] = useState(contact.email);
-  const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
+  const [phoneNumber, setPhoneNumber] = useState(contact.phone_number);
 
   const validatePayload = (payload) => {
     let errors = [];
@@ -51,6 +52,7 @@ const ContactAdd = ({ contact }) => {
       email,
       phone_number: phoneNumber,
       user_id: currentUser.id,
+      column_order: columnOrder
     }
     
     const errors = validatePayload(payload);
@@ -59,6 +61,7 @@ const ContactAdd = ({ contact }) => {
       return;
     } else {
       contact.id ? dispatch(updateContact({...payload, id: contact.id})) : dispatch(createContact(payload));
+      setShowAddContact(false);
     }
   }
 
