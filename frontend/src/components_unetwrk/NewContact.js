@@ -54,7 +54,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
 
   return (
 
-    <div className="flex flex-col justify-even w-full bg-slate-200 p-5 h-full">
+    <div className="flex flex-col justify-even w-full bg-slate-200 p-5 h-full min-w-[700px]">
       <h1>Add Contact</h1>
       <form className="flex flex-row items-center align-center w-full bg-slate-200 p-5 h-full">
         <div className="flex flex-col w-1/2 p-5">

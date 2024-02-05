@@ -13,13 +13,12 @@ const INTERACTION_NOTES_TEXT = "Interaction Notes";
 const UNDERLINE_STYLE = "cursor-pointer border-solid border-b-4 border-green-900 m-5";
 const NON_UNDERLINE_STYLE = "cursor-pointer m-5";
 
-const ContactShow = ({contact = {}, setShowAddContact, order}) => {
+const ContactShow = ({contact = {}, setShowContactShow, order}) => {
 
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
   const tiers = useSelector(getUserTiers(user.id));
   const interactions = useSelector(getContactInteractions(contact.id));
-  console.log('contact', contact);
   const [columnOrder, setColumnOrder] = useState(contact.columnOrder ? contact.columnOrder : order);
   const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
 
@@ -34,7 +33,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
 
   return (
 
-    <div className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full">
+    <div className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full min-w-[800px]">
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-row w-2/3">
           <img className="w-12 h-12" src={logo} />
@@ -49,7 +48,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
           <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
         </div>
         <div className="flex flex-col jusitfy-center items-center">
-          <button onClick={e => setShowAddContact(false)} className="m-5">Close</button>
+          <button onClick={setShowContactShow} className="m-5">Close</button>
         </div>
       </div>
       <div className="flex flex-row justify-start w-full">
@@ -60,7 +59,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
           <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
         </div>
       </div>
-      {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowAddContact} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowAddContact} />}
+      {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowContactShow} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowContactShow} />}
       
     </div>
   )
