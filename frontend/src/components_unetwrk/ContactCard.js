@@ -4,17 +4,17 @@ import { Modal } from "../context/Modal";
 
 const ContactCard = ({contact}) => {
 
-  const [showAddContact, setShowAddContact] = useState(false);
+  const [showUpdateContact, setShowUpdateContact] = useState(false);
 
   const handleContactShow = (e) => {
     e.preventDefault();
-    setShowAddContact(true);
+    setShowUpdateContact(true);
   }
 
   const handleCloseModal = (e) => {
     console.log('close modal')
     // e.preventDefault();
-    setShowAddContact(false);
+    setShowUpdateContact(false);
   }
 
   const handleDelete = (e) => {
@@ -27,7 +27,7 @@ const ContactCard = ({contact}) => {
 
   return (
 
-    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={e => setShowAddContact(true)}>
+    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={e => setShowUpdateContact(true)}>
       <div className="flex flex-row justify-between">
       <i className="fa-regular fa-user text-xl"></i>
       <i className="fa-solid fa-link text-xl"></i>
@@ -38,7 +38,7 @@ const ContactCard = ({contact}) => {
         <p>{contact.title}</p>
         <i className="fa-solid fa-trash-can text-xl" onClick={handleDelete}></i>
       </div>
-      {showAddContact && <Modal children={<ContactShow setShowAddContact={setShowAddContact} contact={contact}/>}/>}
+      {showUpdateContact && <Modal children={<ContactShow setShowUpdateContact={setShowUpdateContact} contact={contact}/>}/>}
     </div>
 
   )

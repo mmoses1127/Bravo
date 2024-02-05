@@ -3,7 +3,7 @@ import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
-const ContactAdd = ({ contact ={}, setShowAddContact, columnOrder = 0}) => {
+const ContactUpdate = ({ contact ={}, setShowContactShow, columnOrder = 0}) => {
 
   const revisedContact = {
     firstName: contact.firstName ? contact.firstName : "",
@@ -60,7 +60,7 @@ const ContactAdd = ({ contact ={}, setShowAddContact, columnOrder = 0}) => {
       return;
     } else {
       contact.id ? dispatch(updateContact({...payload, id: contact.id})) : dispatch(createContact(payload));
-      setShowAddContact(false);
+      setShowContactShow(false);
     }
   }
 
@@ -98,4 +98,4 @@ const ContactAdd = ({ contact ={}, setShowAddContact, columnOrder = 0}) => {
 
 }
 
-export default ContactAdd;
+export default ContactUpdate;

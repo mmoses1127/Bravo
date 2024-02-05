@@ -6,6 +6,7 @@ import { updateTier } from "../store/tiers";
 import ContactShow from "./ContactShow";
 import { Modal } from "../context/Modal";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import NewContact from "./NewContact";
 
 const ContactColumn = ({tier, contacts}) => {
 
@@ -16,6 +17,8 @@ const ContactColumn = ({tier, contacts}) => {
   const [showEditTier, setShowEditTier] = useState(false);
   const [showAddContact, setShowAddContact] = useState(false);
   const [tierName, setTierName] = useState(tier.name);
+  const [ShowContactShow, setShowContactShow] = useState(false);
+  const [contact, setContact] = useState({});
 
   const handleUpdateTierName = (e) => {
     e.preventDefault();
@@ -63,7 +66,10 @@ const ContactColumn = ({tier, contacts}) => {
               </div>
             )}
       </Droppable>
-      {showAddContact && <Modal children={<ContactShow setShowAddContact={setShowAddContact} order={tier.position}/>}/>}
+
+      {showAddContact && <Modal children={<NewContact setShowAddContact={setShowAddContact} column={tier.position} setContact={setContact} setShowContactShow={setShowContactShow}/>}/>}
+
+      {ShowContactShow && <Modal children={<ContactShow setShowContactShow={setShowContactShow} contact={contact}/>}/>}
     </div>
 
   )

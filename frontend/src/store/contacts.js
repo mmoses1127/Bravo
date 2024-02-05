@@ -43,7 +43,6 @@ export const fetchContacts = () => async dispatch => {
 };
 
 export const createContact = (contact) => async dispatch => {
-  console.log(contact);
   const res = await csrfFetch(`/api/contacts`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -53,6 +52,7 @@ export const createContact = (contact) => async dispatch => {
   if (res.ok) {
     const newContact = await res.json();
     dispatch(addContact(newContact));
+    return newContact;
   };
 };
 

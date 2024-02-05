@@ -1,5 +1,5 @@
 import logo from "../assets/small_logo.svg";
-import ContactAdd from "./ContactAdd";
+import ContactUpdate from "./ContactUpdate";
 import { useEffect, useState } from "react";
 import InteractionIndex from "./InteractionIndex";
 import Dropdown from "./Dropdown";
@@ -19,6 +19,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
   const user = useSelector(getCurrentUser);
   const tiers = useSelector(getUserTiers(user.id));
   const interactions = useSelector(getContactInteractions(contact.id));
+  console.log('contact', contact);
   const [columnOrder, setColumnOrder] = useState(contact.columnOrder ? contact.columnOrder : order);
   const [contentChoice, setContentChoice] = useState(CONTACT_INFO_TEXT);
 
@@ -59,7 +60,7 @@ const ContactShow = ({contact = {}, setShowAddContact, order}) => {
           <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
         </div>
       </div>
-      {contentChoice === CONTACT_INFO_TEXT ? <ContactAdd contact={contact} setShowAddContact={setShowAddContact} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowAddContact} />}
+      {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowAddContact} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowAddContact} />}
       
     </div>
   )
