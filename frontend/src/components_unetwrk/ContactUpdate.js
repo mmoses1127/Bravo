@@ -87,10 +87,6 @@ const ContactUpdate = ({ contact ={}, setShowContactShow, columnOrder = 0}) => {
         <input className='drop-shadow bg-white border-none h-8' type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
       </div>
       <div className='flex flex-col'>
-        <div className='border-b-5 border-red-400'>
-          <h3 className='border-b-5 border-red-400'>Timeline</h3>
-          <p>Timeline goes here</p>
-        </div>
       <button onClick={handleAddContact}>{contact.id ? `Update Contact` : `Add Contact`}</button>
       </div>
     </form>
