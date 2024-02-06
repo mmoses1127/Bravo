@@ -7,8 +7,6 @@ const Timeline = ({contact}) => {
   const dispatch = useDispatch();
   const interactions = useSelector(getContactInteractions(contact.id));
 
-  console.log('contact', contact)
-
   const connectionEventInfo = {
     title: `First connected with ${contact.firstName}`,
     date: contact.dateConnected

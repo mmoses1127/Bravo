@@ -34,7 +34,7 @@ const ContactShow = ({contact = {}, setShowContactShow, order}) => {
 
   return (
 
-    <div className="flex flex-row items-center align-center w-full bg-slate-200 p-5 h-full min-w-[1000px]">     
+    <div className="flex flex-row items-start justify-center w-full bg-slate-200 p-5 h-full min-w-[1000px] min-h-[500px]">     
       <div className="flex flex-col items-center align-center bg-slate-200 p-5 h-full w-3/4">
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-row w-2/3">
@@ -61,7 +61,7 @@ const ContactShow = ({contact = {}, setShowContactShow, order}) => {
             <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
           </div>
         </div>
-        {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowContactShow} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowContactShow} />}
+        {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowContactShow} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowContactShow} contact={contact} />}
       </div>
       <Timeline contact={contact}/>
     </div>
