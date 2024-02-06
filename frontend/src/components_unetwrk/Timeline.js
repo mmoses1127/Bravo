@@ -19,7 +19,7 @@ return (
     </div>
     <div className='overflow-auto'>
       <TimelineUnit eventInfo={connectionEventInfo}/>
-      {interactions.map(interaction => <TimelineUnit eventInfo={interaction}/>)}
+      {interactions.map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
     </div>
   </div>
   

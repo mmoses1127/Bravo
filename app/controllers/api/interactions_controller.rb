@@ -22,7 +22,7 @@ class Api::InteractionsController < ApplicationController
   def destroy
     @interaction = Interaction.find_by(id: params[:id])
     @interaction.destroy!
-    @interactions = interaction.all
+    @interactions = Interaction.all
     render :index
   end
 
