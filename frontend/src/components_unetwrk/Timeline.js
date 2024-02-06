@@ -16,7 +16,7 @@ const Timeline = ({contact}) => {
 
 return (
   <div>
-    <div className="border-solid border-green-900 border-b-2 mb-5">
+    <div className="border-solid border-green-900 border-b-2 mb-6">
       <p className='text-lg'>Timeline</p>
     </div>
     <div className='overflow-auto'>
