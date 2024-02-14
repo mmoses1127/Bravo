@@ -27,7 +27,7 @@ time, mark, audio, video {
 	box-sizing: border-box;
 }
 
-::selection {
+/* ::selection {
 	background-color: #fc5200;
 }
 
@@ -219,7 +219,7 @@ h2, h3 {
 
 textarea {
 	width: 250px;
-}
+} */
 
 /* .profile-drop-down ul {
 	border: 1px solid #dfdfe8;
@@ -229,7 +229,7 @@ textarea {
 	right: 0px
 } */
 
-.dropdown-list {
+/* .dropdown-list {
 	display: block;
 	min-width: 160px;
   top: 54px;
@@ -272,4 +272,4 @@ textarea {
 
 .dropdown-item:hover {
 	background-color: #dfdfe8; 
-}
+} */

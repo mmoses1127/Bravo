@@ -13,6 +13,8 @@ import Footer from './components/Footer';
 import CreateRideMap from './components/RideForm/CreateRideMap';
 import ContactAdd from './components_unetwrk/ContactShow';
 import Dashboard2 from './components_unetwrk/Dashboard2';
+import Signup from './components_unetwrk/Signup';
+import Login from './components_unetwrk/Login';
 
 
 function App() {
@@ -58,6 +60,12 @@ function App() {
         </Route>
         <Route path="/add-contact">
           <ContactAdd/>
+        </Route>
+        <Route path="/signup2">
+          <Signup/>
+        </Route>
+        <Route path="/login2">
+          <Login/>
         </Route>
 
         <Route path="">
