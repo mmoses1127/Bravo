@@ -70,7 +70,7 @@ const Signup = () => {
   return (
     <div className="flex flex-col w-full h-screen">
       <SignupHeader />
-      <div className="flex flex-row border-solid border-green-200 h-full">
+      <div className="flex flex-row h-full">
         <WelcomePane />
         <div className="flex flex-col items-center justify-center w-1/2">
           <div className="flex flex-col items-center justify-center w-1/2">

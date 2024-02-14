@@ -15,6 +15,7 @@ import ContactAdd from './components_unetwrk/ContactShow';
 import Dashboard2 from './components_unetwrk/Dashboard2';
 import Signup from './components_unetwrk/Signup';
 import Login from './components_unetwrk/Login';
+import EmailConfirmation from './components_unetwrk/EmailConfirmation';
 
 
 function App() {
@@ -66,6 +67,9 @@ function App() {
         </Route>
         <Route path="/login2">
           <Login/>
+        </Route>
+        <Route path="/email-confirmation">
+          <EmailConfirmation/>
         </Route>
 
         <Route path="">
