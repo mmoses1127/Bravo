@@ -16,6 +16,7 @@ import Dashboard2 from './components_unetwrk/Dashboard2';
 import Signup from './components_unetwrk/Signup';
 import Login from './components_unetwrk/Login';
 import EmailConfirmation from './components_unetwrk/EmailConfirmation';
+import ChoosePlan from './components_unetwrk/ChoosePlan';
 
 
 function App() {
@@ -70,6 +71,9 @@ function App() {
         </Route>
         <Route path="/email-confirmation">
           <EmailConfirmation/>
+        </Route>
+        <Route path="/choose-plan">
+          <ChoosePlan/>
         </Route>
 
         <Route path="">

@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     colors: {
       'brand-primary': '#004D40',
+      'pale-green': '#e0f2f1',
       'text-primary': '#263238',
       'text-secondary': '#455a64',
       'background-secondary': '#cfd8dc',
@@ -11,6 +12,7 @@ module.exports = {
       'error-red': '#DB2C2C',
       'success-green': '#00B325',
       'warning-yellow': '#FFD800',
+      'white': '#FFFFFF'
     },
     extend: {},
   },
