@@ -17,7 +17,7 @@ const ContactColumn = ({tier, contacts}) => {
   const [showEditTier, setShowEditTier] = useState(false);
   const [showAddContact, setShowAddContact] = useState(false);
   const [tierName, setTierName] = useState(tier.name);
-  const [ShowContactShow, setShowContactShow] = useState(false);
+  const [showContactShow, setShowContactShow] = useState(false);
   const [contact, setContact] = useState({});
 
   const handleUpdateTierName = (e) => {
@@ -28,8 +28,8 @@ const ContactColumn = ({tier, contacts}) => {
 
   return (
 
-    <div className="flex flex-col w-full bg-emerald-100 p-5">
-      <div className="flex flex-col bg-emerald-800 p-5 rounded">
+    <div className="flex flex-col w-full bg-pale-green p-5 m-5 rounded">
+      <div className="flex flex-col bg-brand-primary p-5 rounded text-white">
         <div className="flex flex-row justify-between">
           {showEditTier ? 
           <input type="text" value={tierName} onChange={e => setTierName(e.target.value)} onBlur={handleUpdateTierName} />  
@@ -40,7 +40,7 @@ const ContactColumn = ({tier, contacts}) => {
         </div>
         <p>{tierContacts.length} contacts</p>
       </div>
-      <button className="bg-emerald-500 mt-5 mb-5 b-0" onClick={e => setShowAddContact(true)}>+ Add contact</button>
+      <button className="bg-brand-primary mt-5 mb-5 p-3 rounded text-white" onClick={e => setShowAddContact(true)}>+ Add contact</button>
 
       <Droppable droppableId={tier.id.toString()} key={tier.id}>
             {(provided) => (
@@ -69,7 +69,7 @@ const ContactColumn = ({tier, contacts}) => {
 
       {showAddContact && <Modal children={<NewContact setShowAddContact={setShowAddContact} column={tier.position} setContact={setContact} setShowContactShow={setShowContactShow}/>}/>}
 
-      {ShowContactShow && <Modal children={<ContactShow setShowContactShow={setShowContactShow} contact={contact}/>}/>}
+      {showContactShow && <Modal children={<ContactShow setShowContactShow={setShowContactShow} contact={contact}/>}/>}
     </div>
 
   )
