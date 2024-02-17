@@ -21,6 +21,10 @@ const Signup = () => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const validInputs = () => {
+
+  }
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -44,6 +48,7 @@ const Signup = () => {
       else setErrors([res.statusText]);
     });
     setLoading(false);
+    if (!errors.length) history.push('/email-confirmation');
   };
 
   const demoLogin = async (e) => {
