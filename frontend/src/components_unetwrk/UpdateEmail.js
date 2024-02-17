@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+
 const UpdateEmail = ({email, setShowUpdateEmail}) => {
 
   const [newEmail, setNewEmail] = useState(email);

@@ -1,6 +1,10 @@
 import SignupHeader from "./SignupHeader";
 import emblem from '../assets/linkedin_logo.png';
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "../store/session";
+import { useState } from "react";
+import UpdateEmail from "./UpdateEmail";
 
 const EmailConfirmation = () => {
 

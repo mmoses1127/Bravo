@@ -1,4 +1,5 @@
 import csrfFetch from './csrf.js';
+import { createTier } from './tiers.js';
 
 const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
@@ -24,6 +25,18 @@ export const signup = inputs => async dispatch => {
   let data = await res.json();
   storeCurrentUser(data);
   dispatch(addCurrentUser(data));
+  const tierNames = [
+    '1st Contact', '2nd Contact', '3rd Contact', 'Cold Lead'
+  ];
+  tierNames.forEach(async (tierName, index) => {
+    let tier = {
+      name: tierName,
+      position: index,
+      user_id: data.id
+    };
+    console.log('tier', tier);
+    await dispatch(createTier(tier));
+  });
 };
 
 export const logout = () => async dispatch => {

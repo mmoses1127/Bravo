@@ -28,9 +28,6 @@ const KanbanBoard = () => {
       console.log("draggedContact", draggedContact)
       dispatch(updateContact(draggedContact));
     }
-    
-    console.log(result);
-    console.log(draggedContact);
   }
 
   useEffect(() => {
@@ -46,7 +43,7 @@ const KanbanBoard = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="flex flex-row w-full justify-between">
+      <div className="flex flex-row w-full justify-between border-solid border-4 border-brand-primary min-h-screen">
         {tiers.map((tier, index) => (
           <ContactColumn key={tier.id} tier={tier} contacts={contacts}/>
         ))}

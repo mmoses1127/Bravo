@@ -17,12 +17,12 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  before_validation :ensure_session_token, :generate_default_pic
+  before_validation :ensure_session_token
   
   validates :email, :session_token, presence: true, uniqueness: true
   validates :name, presence: true, length: { in: 3..255 }
   validates :email, length: { in: 3..255 }, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { in: 6..255 }, allow_nil: true
+  validates :password, length: { in: 8..255 }, allow_nil: true
 
   has_many :rides,
     foreign_key: :athlete_id,
@@ -67,13 +67,6 @@ class User < ApplicationRecord
     self.session_token = generate_unique_session_token
     self.save!
     self.session_token
-  end
-
-  def generate_default_pic
-    unless self.profile_pic.attached?
-      file = URI.open("https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/wheelie.jpg")
-      self.profile_pic.attach(io: file, filename: "default")
-    end
   end
 
   private

@@ -1,4 +1,20 @@
+import { getCurrentUser } from "../store/session";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { updateUser } from "../store/users";
+
+
 const PlanColumn = ({ plan }) => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const currentUser = useSelector(getCurrentUser);
+
+  const handleChoosePlan = () => {
+    console.log('Chose plan:', plan.name);
+    dispatch(updateUser({...currentUser, plan: plan.name}));
+    history.push('/dashboard');
+  }
 
   return (
 
@@ -11,7 +27,7 @@ const PlanColumn = ({ plan }) => {
         <p>{plan.cards} contact cards</p>
         <p>Chrome extension</p>
       </div>
-      <button className="bg-brand-primary rounded p-2 text-white w-full">Choose {plan.name} plan</button>
+      <button onClick={handleChoosePlan} className="bg-brand-primary rounded p-2 text-white w-full">Choose {plan.name} plan</button>
     </div>
 
   )

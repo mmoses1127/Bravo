@@ -15,7 +15,7 @@ class Api::TiersController < ApplicationController
   def create
     @tier = Tier.new(tier_params)
     if @tier.save!
-      render :index
+      render :show
     else
       render json: { errors: @tier.errors.full_messages }, status: :unprocessable_entity
     end
