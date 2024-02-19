@@ -125,7 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_17_211528) do
     t.string "name", null: false
     t.string "plan", default: "free", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["session_token"], name: "index_users_on_session_token", unique: true
+            t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
