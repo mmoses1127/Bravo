@@ -9,16 +9,14 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [title, setTitle] = useState("");
   const [linkedInUrl, setLinkedInUrl] = useState("");
 
   const validatePayload = (payload) => {
     let errors = [];
-    if (payload.first_name.length < 1) errors.push("First name cannot be empty.");
-    if (payload.last_name.length < 1) errors.push("Last name cannot be empty.");
+    if (payload.name.length < 1) errors.push("Name cannot be empty.");
     if (payload.company.length < 1) errors.push("Company cannot be empty.");
     return errors;
   }
@@ -35,8 +33,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
     e.preventDefault();
     const payload = {
       user_id: currentUser.id,
-      first_name: firstName,
-      last_name: lastName,
+      name,
       company,
       title,
       column_order: column
@@ -58,10 +55,8 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       <h1>Add Contact</h1>
       <form className="flex flex-row items-center align-center w-full bg-slate-200 p-5 h-full">
         <div className="flex flex-col w-1/2 p-5">
-          <label htmlFor="firstName">First Name</label>
-          <input onChange={e => setFirstName(e.target.value)} id="firstName" className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={firstName}/>
-          <label>Last Name</label>
-          <input onChange={e => setLastName(e.target.value)} className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={lastName}/>
+          <label htmlFor="name">Name</label>
+          <input onChange={e => setName(e.target.value)} id="name" className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={name}/>
           <label>Company</label>
           <input onChange={e => setCompany(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" value={company}/>
         </div>
