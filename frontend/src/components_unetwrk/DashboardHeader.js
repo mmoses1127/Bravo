@@ -10,6 +10,9 @@ return (
       <button className="bg-brand-primary rounded-3xl"><i className="fa-solid fa-bell text-2xl text-white p-3"></i></button>
     </div>
     <div className="flex flex-row w-1/4">
+      <button className="rounded border-2 border-brand-primary p-2 text-brand-primary">Get Chrome Extension</button>
+    </div>
+    <div className="flex flex-row w-1/4">
       <button>My Account</button>
     </div>
   </div>

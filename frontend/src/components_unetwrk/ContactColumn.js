@@ -40,7 +40,7 @@ const ContactColumn = ({tier, contacts}) => {
         </div>
         <p>{tierContacts.length} contacts</p>
       </div>
-      <button className="bg-brand-primary mt-5 mb-5 p-3 rounded text-white" onClick={e => setShowAddContact(true)}>+ Add contact</button>
+      <button className="bg-bp5 mt-5 mb-5 p-3 rounded text-white" onClick={e => setShowAddContact(true)}>+ Add contact</button>
 
       <Droppable droppableId={tier.id.toString()} key={tier.id}>
             {(provided) => (

@@ -12,7 +12,8 @@ module.exports = {
       'error-red': '#DB2C2C',
       'success-green': '#00B325',
       'warning-yellow': '#FFD800',
-      'white': '#FFFFFF'
+      'white': '#FFFFFF',
+      'bp5': '#009688'
     },
     extend: {},
   },
