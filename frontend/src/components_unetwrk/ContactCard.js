@@ -35,7 +35,7 @@ const ContactCard = ({contact}) => {
       <i className="fa-regular fa-user text-xl"></i>
       <i className="fa-solid fa-link text-xl"></i>
       </div>
-      <p>{contact.firstName} {contact.lastName}</p>
+      <p>{contact.name}</p>
       <p>{contact.company}</p>
       <div className="flex flex-row justify-between">
         <p>{contact.title}</p>

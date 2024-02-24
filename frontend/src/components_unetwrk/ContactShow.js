@@ -61,7 +61,7 @@ const ContactShow = ({contact = {}, setShowContactShow, order}) => {
             <h4 onClick={chooseContent} className={contentChoice === INTERACTION_NOTES_TEXT ? UNDERLINE_STYLE : NON_UNDERLINE_STYLE}>Interaction Notes</h4>
           </div>
         </div>
-        {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowAddContact={setShowContactShow} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowContactShow} contact={contact} />}
+        {contentChoice === CONTACT_INFO_TEXT ? <ContactUpdate contact={contact} setShowContactShow={setShowContactShow} columnOrder={columnOrder}/> : <InteractionIndex interactions={interactions} setShowAddContact={setShowContactShow} contact={contact} />}
       </div>
       <Timeline contact={contact}/>
     </div>

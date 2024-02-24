@@ -8,6 +8,9 @@ import checkErrors from "./ErrorsUtil";
 
 const NewContact = ({setShowAddContact, column, setContact, setShowContactShow}) => {
 
+  console.log('setshowcontactshow  : ', setShowContactShow )
+
+
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [name, setName] = useState("");
@@ -67,7 +70,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       <form className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full">
         <div className="flex flex-row w-full p-5 justify-evenly">
           <div className="flex flex-col">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">*Name</label>
             <input onChange={e => setName(e.target.value)} id="name" className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={name}/>
           </div>
           <div className="flex flex-col">

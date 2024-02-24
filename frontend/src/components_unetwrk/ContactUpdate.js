@@ -3,39 +3,33 @@ import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
-const ContactUpdate = ({ contact = {}, setShowContactShow, columnOrder = 0}) => {
+const blankContact = {
+  name:  "",
+  company: "",
+  title: "",
+  connectionDescription: "",
+  dateConnected: "",
+  email: "",
+  phoneNumber: "",
+  userId: "",
+  columnOrder: 0
+}
 
-  const revisedContact = {
-    firstName: contact.firstName ? contact.firstName : "",
-    lastName: contact.lastName ? contact.lastName : "",
-    company: contact.company ? contact.company : "",
-    title: contact.title ? contact.title : "",
-    connectionDescription: contact.connectionDescription ? contact.connectionDescription : "",
-    dateConnected: contact.dateConnected ? contact.dateConnected.slice(0, 10) : "",
-    email: contact.email ? contact.email : "",
-    phoneNumber: contact.phoneNumber ? contact.phoneNumber : "",
-    userId: contact.userId ? contact.userId : "",
-    columnOrder: columnOrder,
-  }
-
-  console.log(contact)
+const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder = 0}) => {
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
-  const [firstName, setFirstName] = useState(revisedContact.firstName);
-  const [lastName, setLastName] = useState(revisedContact.lastName);
-  const [company, setCompany] = useState(revisedContact.company);
-  const [title, setTitle] = useState(revisedContact.title);
-  const [connectionDescription, setConnectionDescription] = useState(revisedContact.connectionDescription);
-  const [dateConnected, setDateConnected] = useState(revisedContact.dateConnected);
-  const [email, setEmail] = useState(revisedContact.email);
-  const [phoneNumber, setPhoneNumber] = useState(revisedContact.phoneNumber);
+  const [name, setName] = useState(contact.name);
+  const [company, setCompany] = useState(contact.company);
+  const [title, setTitle] = useState(contact.title);
+  const [connectionDescription, setConnectionDescription] = useState(contact.connectionDescription);
+  const [dateConnected, setDateConnected] = useState(contact.dateConnected);
+  const [email, setEmail] = useState(contact.email);
+  const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
 
   const validatePayload = (payload) => {
     let errors = [];
-    if (payload.first_name.length < 1) errors.push("First name cannot be empty.");
-    if (payload.last_name.length < 1) errors.push("Last name cannot be empty.");
-    if (payload.company.length < 1) errors.push("Company cannot be empty.");
+    if (payload.name.length < 1) errors.push("Name cannot be empty.");
     return errors;
   }
 
@@ -43,8 +37,7 @@ const ContactUpdate = ({ contact = {}, setShowContactShow, columnOrder = 0}) => 
     e.preventDefault();
     console.log('submitted!')
     const payload = {
-      first_name: firstName,
-      last_name: lastName,
+      name: name,
       company,
       title,
       connection_description: connectionDescription,
@@ -68,10 +61,8 @@ const ContactUpdate = ({ contact = {}, setShowContactShow, columnOrder = 0}) => 
   return (
     <form className='flex flex-row justify-between w-full p-5'>
       <div className='flex flex-col w-1/3'>
-        <label htmlFor="firstName">First Name</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <label htmlFor="lastName">Last Name</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        <label htmlFor="name">Name</label>
+        <input className='drop-shadow bg-white border-none h-8' type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
         <label htmlFor="company">Company</label>
         <input className='drop-shadow bg-white border-none h-8' type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
         <label htmlFor="title">Title</label>
