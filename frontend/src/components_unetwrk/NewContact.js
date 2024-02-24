@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createContact } from "../store/contacts";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../store/session";
+import checkErrors from "./ErrorsUtil"; 
 
 
 const NewContact = ({setShowAddContact, column, setContact, setShowContactShow}) => {
@@ -13,20 +14,22 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
   const [company, setCompany] = useState("");
   const [title, setTitle] = useState("");
   const [linkedInUrl, setLinkedInUrl] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const validatePayload = (payload) => {
-    let errors = [];
+    setErrors([]);
     if (payload.name.length < 1) errors.push("Name cannot be empty.");
-    if (payload.company.length < 1) errors.push("Company cannot be empty.");
     return errors;
   }
 
   const handleClick = async e => {
     e.preventDefault();
     const newContact = await handleAddContact(e);
-    setContact(newContact);
-    setShowAddContact(false);
-    setShowContactShow(true);
+    if (newContact && !errors.length) {
+      setContact(newContact);
+      setShowAddContact(false);
+      setShowContactShow(true);
+    }
   }
 
   const handleAddContact = async e => {
@@ -36,6 +39,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       name,
       company,
       title,
+      linked_in: linkedInUrl,
       column_order: column
     }
     
@@ -44,7 +48,19 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       alert(errors.join("\n"));
       return;
     } else {
-      const newContact = dispatch(createContact(payload));
+      const newContact = await dispatch(createContact(payload))
+      .catch(async (res) => {
+        let data;
+        try {
+          // .clone() essentially allows you to read the response body twice
+          data = await res.clone().json();
+        } catch {
+          data = await res.text(); // Will hit this case if the server is down
+        }
+        if (data?.errors) setErrors(data.errors);
+        else if (data) setErrors([data]);
+        else setErrors([res.statusText]);
+      });
       return newContact;
     }
   }
@@ -52,23 +68,35 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
   return (
 
     <div className="flex flex-col justify-even w-full bg-slate-200 p-5 h-full min-w-[700px]">
-      <h1>Add Contact</h1>
-      <form className="flex flex-row items-center align-center w-full bg-slate-200 p-5 h-full">
-        <div className="flex flex-col w-1/2 p-5">
-          <label htmlFor="name">Name</label>
-          <input onChange={e => setName(e.target.value)} id="name" className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={name}/>
-          <label>Company</label>
-          <input onChange={e => setCompany(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" value={company}/>
-        </div>
-        <div className="flex flex-col w-1/2 p-5">
-          <label>Title</label>
-          <input onChange={e => setTitle(e.target.value)} className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={title}/>
-          <label>LinkedIn Profile URL</label>
-          <input onChange={e => setLinkedInUrl(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" calue={linkedInUrl}/>
-          <div className="flex flex-row justify-evenly m-5">
-            <button onClick={e => setShowAddContact(false)}>Cancel</button>
-            <button onClick={handleClick}>Save Contact</button>
+      <h1 className="text-xl font-semibold">Add Contact</h1>
+      <p className="text-xs italic">*required</p>
+      {<ul className='mb-3'>
+        {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
+      </ul>}
+      <form className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full">
+        <div className="flex flex-row w-full p-5 justify-evenly">
+          <div className="flex flex-col">
+            <label htmlFor="name">Name</label>
+            <input onChange={e => setName(e.target.value)} id="name" className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={name}/>
           </div>
+          <div className="flex flex-col">
+            <label>Title</label>
+            <input onChange={e => setTitle(e.target.value)} className="drop-shadow bg-white border-none h-8 mb-5" type="text" value={title}/>
+          </div>
+        </div>
+        <div className="flex flex-row w-full p-5 justify-evenly">
+          <div className="flex flex-col">
+            <label>Company</label>
+            <input onChange={e => setCompany(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" value={company}/>
+          </div>  
+          <div className="flex flex-col">        
+            <label>LinkedIn Profile URL</label>
+            <input onChange={e => setLinkedInUrl(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" calue={linkedInUrl}/>
+          </div>
+        </div>
+        <div className="flex flex-row justify-end w-full m-5">
+          <button className="rounded border-brand-primary border-2 text-brand-primary p-2 mr-3" onClick={e => setShowAddContact(false)}>Cancel</button>
+          <button className=" p-2 rounded text-white bg-brand-primary p-2 disabled:bg-pale-green disabled:cursor-none" disabled={!name.length} onClick={handleClick}>Save Contact</button>
         </div>
       </form>
     </div>

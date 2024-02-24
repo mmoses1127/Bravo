@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
 
-  validates :first_name, :last_name, :company, presence: true
+  validates :name, presence: true
 
   belongs_to :user,
     class_name: :User
