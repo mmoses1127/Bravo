@@ -3,7 +3,7 @@ import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
 
-const ContactUpdate = ({ contact ={}, setShowContactShow, columnOrder = 0}) => {
+const ContactUpdate = ({ contact = {}, setShowContactShow, columnOrder = 0}) => {
 
   const revisedContact = {
     firstName: contact.firstName ? contact.firstName : "",
@@ -18,6 +18,7 @@ const ContactUpdate = ({ contact ={}, setShowContactShow, columnOrder = 0}) => {
     columnOrder: columnOrder,
   }
 
+  console.log(contact)
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);

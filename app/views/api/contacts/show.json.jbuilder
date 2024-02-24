@@ -1,1 +1,1 @@
-json.extract! @contact, :id, :company, :title, :connection_description, :first_name, :last_name, :email, :phone_number, :user_id, :column_order
+json.extract! @contact, :id, :company, :title, :connection_description, :linked_in, :name, :email, :phone_number, :user_id, :column_order

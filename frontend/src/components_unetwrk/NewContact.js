@@ -42,6 +42,8 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       linked_in: linkedInUrl,
       column_order: column
     }
+
+    console.log(payload)
     
     const errors = validatePayload(payload);
     if (errors.length > 0) {
@@ -49,18 +51,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       return;
     } else {
       const newContact = await dispatch(createContact(payload))
-      .catch(async (res) => {
-        let data;
-        try {
-          // .clone() essentially allows you to read the response body twice
-          data = await res.clone().json();
-        } catch {
-          data = await res.text(); // Will hit this case if the server is down
-        }
-        if (data?.errors) setErrors(data.errors);
-        else if (data) setErrors([data]);
-        else setErrors([res.statusText]);
-      });
+      .catch(async (res) => checkErrors(res, setErrors));
       return newContact;
     }
   }
@@ -71,7 +62,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       <h1 className="text-xl font-semibold">Add Contact</h1>
       <p className="text-xs italic">*required</p>
       {<ul className='mb-3'>
-        {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
+        {errors.map(error => <li className="text-error-red font-bold" key={error.message}>{error.message}</li>)}
       </ul>}
       <form className="flex flex-col items-center align-center w-full bg-slate-200 p-5 h-full">
         <div className="flex flex-row w-full p-5 justify-evenly">
