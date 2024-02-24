@@ -77,6 +77,9 @@ const Login = () => {
               <input className="drop-shadow bg-white border-none h-8 w-full mb-4" type="password" value={password} onChange={e => setPassword(e.target.value)} />
               <label>Confirm Password</label>
               <p className='text-blue-700 decoration-solid'>Forgot Your Password?</p>
+              {<ul className='mb-3'>
+              {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
+              </ul>}
               <button className="w-full mb-4 text-white bg-[#455A64]">Log in
                 {loading && <div className="spin"></div>}
               </button>
@@ -85,7 +88,7 @@ const Login = () => {
               </button>
             </form>
             <p>
-              Don't have an account? <Link to={`/signup2`}>Sign up</Link> 
+              Don't have an account? <Link to={`/signup`}>Sign up</Link> 
             </p>
           </div>
         </div>
