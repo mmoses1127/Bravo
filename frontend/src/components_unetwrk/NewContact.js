@@ -6,9 +6,7 @@ import { getCurrentUser } from "../store/session";
 import checkErrors from "./ErrorsUtil"; 
 
 
-const NewContact = ({setShowAddContact, column, setContact, setShowContactShow}) => {
-
-  console.log('setshowcontactshow  : ', setShowContactShow )
+const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, setShowDeleteModal}) => {
 
 
   const dispatch = useDispatch();
@@ -46,7 +44,6 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       column_order: column
     }
 
-    console.log(payload)
     
     const errors = validatePayload(payload);
     if (errors.length > 0) {
@@ -57,6 +54,11 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
       .catch(async (res) => checkErrors(res, setErrors));
       return newContact;
     }
+  }
+
+  const handleCancel = e => {
+    e.preventDefault();
+    setShowDeleteModal(true);
   }
 
   return (
@@ -89,7 +91,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow})
           </div>
         </div>
         <div className="flex flex-row justify-end w-full m-5">
-          <button className="rounded border-brand-primary border-2 text-brand-primary p-2 mr-3" onClick={e => setShowAddContact(false)}>Cancel</button>
+          <button className="rounded border-brand-primary border-2 text-brand-primary p-2 mr-3" onClick={handleCancel}>Cancel</button>
           <button className=" p-2 rounded text-white bg-brand-primary p-2 disabled:bg-pale-green disabled:cursor-none" disabled={!name.length} onClick={handleClick}>Save Contact</button>
         </div>
       </form>

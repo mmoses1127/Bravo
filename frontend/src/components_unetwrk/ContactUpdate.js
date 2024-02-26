@@ -26,6 +26,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   const [dateConnected, setDateConnected] = useState(contact.dateConnected);
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
+  const [linkedInUrl, setLinkedInUrl] = useState(contact.linkedIn);
 
   const validatePayload = (payload) => {
     let errors = [];
@@ -59,27 +60,31 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   }
 
   return (
-    <form className='flex flex-row justify-between w-full p-5'>
-      <div className='flex flex-col w-1/3'>
-        <label htmlFor="name">Name</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-        <label htmlFor="company">Company</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
-        <label htmlFor="title">Title</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
-      <div className='flex flex-col  w-1/3'>
-        <label htmlFor="connectionDescription">Connection Description</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" value={connectionDescription} onChange={(e) => setConnectionDescription(e.target.value)} />
-        <label htmlFor="dateConnected">Date Connected</label>
-        <input className='drop-shadow bg-white border-none h-8' type="date" value={dateConnected} onChange={(e) => setDateConnected(e.target.value)} />
-        <label htmlFor="email">Email</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <label htmlFor="phoneNumber">Phone Number</label>
-        <input className='drop-shadow bg-white border-none h-8' type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+    <form className='flex flex-col justify-between w-full p-5 items-end'>
+      <div className='flex flex-row justify-between w-full p-5'>
+        <div className='flex flex-col w-1/2 p-3'>
+          <label htmlFor="name">Name</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <label htmlFor="company">Company</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
+          <label htmlFor="phoneNumber">Phone Number</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+          <label htmlFor="connectionDescription">Connection Description</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={connectionDescription} onChange={(e) => setConnectionDescription(e.target.value)} />
+        </div>
+        <div className='flex flex-col  w-1/2 p-3'>
+          <label htmlFor="title">Title</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <label htmlFor="email">LinkedIn Profile URL</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={linkedInUrl} onChange={(e) => setLinkedInUrl(e.target.value)} />
+          <label htmlFor="email">Email</label>
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label htmlFor="dateConnected">Date Connected</label>
+          <input className='drop-shadow bg-white border-none h-8' type="date" value={dateConnected} onChange={(e) => setDateConnected(e.target.value)} />
+        </div>
       </div>
       <div className='flex flex-col'>
-      <button onClick={handleAddContact}>{contact.id ? `Update Contact` : `Add Contact`}</button>
+      <button className='rounded bg-brand-primary text-white p-2 w-full' onClick={handleAddContact}>Save Contact Information</button>
       </div>
     </form>
   );

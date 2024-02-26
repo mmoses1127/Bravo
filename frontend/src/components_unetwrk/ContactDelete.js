@@ -2,24 +2,30 @@ import { useDispatch } from "react-redux";
 import { deleteContact } from "../store/contacts";
 
 
-const ContactDelete = ({contactId, setShowDeleteModal}) => {
+const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact}) => {
 
   const dispatch = useDispatch();
 
   const handleDeleteContact = e => {
     e.preventDefault();  
-    dispatch(deleteContact(contactId));
+    if (contactId) dispatch(deleteContact(contactId));
+    setShowDeleteModal(false);
+    setShowAddContact(false);
+  }
+
+  const handleCancel = e => {
+    e.preventDefault();
     setShowDeleteModal(false);
   }
 
   return (
 
-    <div className="flex flex-col justify-start bg-slate-200 p-5 h-full min-w-[500px]">
-      <p className="text-3xl pr-20">Delete Contact?</p>
+    <div className="flex flex-col justify-start bg-slate-200 p-5 h-full min-w-[500px] rounded border-2 border-brand-primary">
+      <p className="text-3xl pr-20">Discard Contact?</p>
       <p>All contact information will be lost.</p>
       <div className="flex flex-row justify-end">
-        <button className="m-3" onClick={e => setShowDeleteModal(false)}>Cancel</button>
-        <button className="m-3" onClick={handleDeleteContact}>Delete Contact</button>
+        <button className="rounded border-brand-primary border-2 p-2 m-3" onClick={handleCancel}>Cancel</button>
+        <button className="rounded bg-brand-primary text-white p-2 m-3" onClick={handleDeleteContact}>Discard Contact</button>
       </div>
     </div>
 

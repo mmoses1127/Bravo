@@ -8,6 +8,7 @@ module.exports = {
       'text-primary': '#263238',
       'text-secondary': '#455a64',
       'background-secondary': '#cfd8dc',
+      'background-disabled': '#eceff1',
       'link-blue': '#0156D1',
       'error-red': '#DB2C2C',
       'success-green': '#00B325',

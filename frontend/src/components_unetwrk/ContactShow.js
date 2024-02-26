@@ -1,4 +1,5 @@
-import logo from "../assets/small_logo.svg";
+import emptyPic from "../assets/profile_pic_empty.svg";
+import uploadIcon from "../assets/upload_icon.svg";
 import ContactUpdate from "./ContactUpdate";
 import { useEffect, useState } from "react";
 import InteractionIndex from "./InteractionIndex";
@@ -32,25 +33,30 @@ const ContactShow = ({contact = {}, setShowContactShow, order}) => {
     setContentChoice(e.target.innerText);
   }
 
+  const handleUploadImage = (e) => {
+    e.preventDefault();
+    console.log('uploading image');
+  }
+
   return (
 
-    <div className="flex flex-row items-start justify-center w-full bg-slate-200 p-5 h-full min-w-[1000px] min-h-[500px]">     
-      <div className="flex flex-col items-center align-center bg-slate-200 p-5 h-full w-3/4">
+    <div className="flex flex-row items-start justify-center w-full bg-background-disabled p-5 h-full min-w-[1000px] min-h-[500px]">     
+      <div className="flex flex-col items-center align-center bg-slate-200 p-5 h-full w-3/4 b-r-1 border-solid border-brand-primary">
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-row w-2/3">
-            <img className="w-12 h-12" src={logo} />
-            <div className="flex flex-col">
+            <div className="flex flex-row items-center jusitfy-center relative">
+              <img onClick={handleUploadImage} className="w-14 h-14 m-5 cursor-pointer" src={emptyPic} />
+              <img className="w-6 h-6 m-5 absolute right-0 bottom-0" src={uploadIcon} />
+            </div>
+            <div className="flex flex-col justify-evenly">
               <h2>{contact.firstName ? contact.firstName + ' ' + contact.lastName : `Name`}</h2>
               <h3>{contact.title ? contact.title : `Title`}</h3>
               <h3>{contact.company ? contact.company : `Company`}</h3>
             </div>
           </div>
-          <div className="flex flex-col w-1/5">
-            <h4>Move to</h4>
+          <div className="flex flex-col">
+            <button className="border-brand-primary text-brand-primary rounded border-2 p-2 mb-3" onClick={setShowContactShow}>Close</button>
             <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
-          </div>
-          <div className="flex flex-col jusitfy-center items-center">
-            <button onClick={setShowContactShow} className="m-5">Close</button>
           </div>
         </div>
         <div className="flex flex-row justify-start w-full">
