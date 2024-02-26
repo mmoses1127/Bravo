@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Modal } from "../context/Modal";
 import ContactDelete from "./ContactDelete";
 
-const ContactCard = ({contact}) => {
+const ContactCard = ({contact, setShowContactShow, showContactShow, setContact}) => {
 
-  const [showContactShow, setShowContactShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [stopPropagation, setStopPropagation] = useState(false);
 
   // const handleContactShow = (e) => {
   //   e.preventDefault();
@@ -21,16 +21,28 @@ const ContactCard = ({contact}) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    if(e && e.stopPropagation) e.stopPropagation();
+    if(e && e.stopPropagation) {
+      e.stopPropagation();
+      console.log('stop propagation');
+    }
+    console.log('delete');
     setShowDeleteModal(true);
-    console.log('delete')
+    setStopPropagation(true);
   }
 
-  // console.log('showmodal', showModal)
+  const handleShowContact = (e) => {
+    if (!stopPropagation) {
+    e.preventDefault();
+    console.log('show contact');
+    setContact(contact);
+    setShowContactShow(true);
+    }
+  }
+
 
   return (
 
-    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={e => setShowContactShow(true)}>
+    <div className="flex flex-col rounded-lg w-full bg-white p-3 mb-5 cursor-pointer" onClick={handleShowContact}>
       <div className="flex flex-row justify-between">
       <i className="fa-regular fa-user text-xl"></i>
       <i className="fa-solid fa-link text-xl"></i>
@@ -41,8 +53,8 @@ const ContactCard = ({contact}) => {
         <p>{contact.title}</p>
         <i className="fa-solid fa-trash-can text-xl" onClick={handleDelete}></i>
       </div>
-      {showContactShow && <Modal onClose={handleCloseModal} children={<ContactShow setShowContactShow={handleCloseModal} contact={contact}/>}/>}
-      {showDeleteModal && <Modal children={<ContactDelete setShowDeleteModal={setShowDeleteModal} contactId={contact.id}/>}/>}
+      {/* {showContactShow && <Modal children={<ContactShow setShowContactShow={setShowContactShow} contact={contact}/>}/>} */}
+      {showDeleteModal && <Modal children={<ContactDelete setShowContactShow={setShowContactShow} setShowDeleteModal={setShowDeleteModal} contactId={contact.id}/>}/>}
     </div>
 
   )

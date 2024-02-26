@@ -15,7 +15,7 @@ const INTERACTION_NOTES_TEXT = "Interaction Notes";
 const UNDERLINE_STYLE = "cursor-pointer border-solid border-b-4 border-green-900 m-5";
 const NON_UNDERLINE_STYLE = "cursor-pointer m-5";
 
-const ContactShow = ({contact = {}, setShowContactShow, order}) => {
+const ContactShow = ({contact, setShowContactShow, order}) => {
 
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
@@ -55,7 +55,7 @@ const ContactShow = ({contact = {}, setShowContactShow, order}) => {
             </div>
           </div>
           <div className="flex flex-col">
-            <button className="border-brand-primary text-brand-primary rounded border-2 p-2 mb-3" onClick={setShowContactShow}>Close</button>
+            <button className="border-brand-primary text-brand-primary rounded border-2 p-2 mb-3" onClick={e => setShowContactShow(false)}>Close</button>
             <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
           </div>
         </div>

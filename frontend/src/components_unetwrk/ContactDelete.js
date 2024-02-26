@@ -10,7 +10,7 @@ const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact}) => {
     e.preventDefault();  
     if (contactId) dispatch(deleteContact(contactId));
     setShowDeleteModal(false);
-    setShowAddContact(false);
+    if (setShowAddContact) setShowAddContact(false);
   }
 
   const handleCancel = e => {

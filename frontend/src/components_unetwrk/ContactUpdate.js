@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
+import checkErrors from './ErrorsUtil';
 
 const blankContact = {
   name:  "",
@@ -17,6 +18,8 @@ const blankContact = {
 
 const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder = 0}) => {
 
+  console.log('contact', contact);
+
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [name, setName] = useState(contact.name);
@@ -27,6 +30,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
   const [linkedInUrl, setLinkedInUrl] = useState(contact.linkedIn);
+  const [errors, setErrors] = useState([]);
 
   const validatePayload = (payload) => {
     let errors = [];
@@ -54,7 +58,8 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
       alert(errors.join("\n"));
       return;
     } else {
-      contact.id ? dispatch(updateContact({...payload, id: contact.id})) : dispatch(createContact(payload));
+      contact.id ? dispatch(updateContact({...payload, id: contact.id})).catch(async (res) => checkErrors(res, setErrors)) : 
+      dispatch(createContact(payload)).catch(async (res) => checkErrors(res, setErrors));
       setShowContactShow(false);
     }
   }

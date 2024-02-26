@@ -58,7 +58,7 @@ const ContactColumn = ({tier, contacts}) => {
                       ref={provided.innerRef} 
                       {...provided.draggableProps} 
                       {...provided.dragHandleProps}>
-                        <ContactCard contact={contact}/>
+                        <ContactCard contact={contact} setShowContactShow={setShowContactShow} showContactShow={showContactShow} setContact={setContact}/>
                       </div>
                     )}
                   </Draggable>
