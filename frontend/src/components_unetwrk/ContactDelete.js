@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteContact } from "../store/contacts";
 
 
-const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact}) => {
+const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact, setStopPropagation}) => {
 
   const dispatch = useDispatch();
 
@@ -11,11 +11,13 @@ const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact}) => {
     if (contactId) dispatch(deleteContact(contactId));
     setShowDeleteModal(false);
     if (setShowAddContact) setShowAddContact(false);
+    setStopPropagation(false);
   }
 
   const handleCancel = e => {
     e.preventDefault();
     setShowDeleteModal(false);
+    setStopPropagation(false);
   }
 
   return (

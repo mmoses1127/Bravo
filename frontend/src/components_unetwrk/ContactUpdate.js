@@ -50,6 +50,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
       email,
       phone_number: phoneNumber,
       user_id: currentUser.id,
+      linked_in: linkedInUrl,
       column_order: columnOrder
     }
     
@@ -90,6 +91,9 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
       </div>
       <div className='flex flex-col'>
       <button className='rounded bg-brand-primary text-white p-2 w-full' onClick={handleAddContact}>Save Contact Information</button>
+      {<ul className='mb-3'>
+        {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
+      </ul>}
       </div>
     </form>
   );
