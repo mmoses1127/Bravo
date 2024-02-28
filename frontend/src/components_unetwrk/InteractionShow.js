@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../store/session";
-import { createInteraction, deleteInteraction } from "../store/interactions";
+import { createInteraction, deleteInteraction, updateInteraction } from "../store/interactions";
 import { useDispatch } from "react-redux";
 import Collapsible from 'react-collapsible';
 import { Modal } from "../context/Modal";
@@ -32,11 +32,11 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
   const validatePayload = (payload) => {
     let errors = [];
     if (payload.date_contacted.length < 1) errors.push("Date contacted cannot be empty.");
+    if (payload.contact_method.length < 1) errors.push("Contact method cannot be empty.");
     return errors;
   }
 
   const handleCreateInteraction = () => {
-    console.log('create interaction');
 
     const newInteraction = {
       date_contacted: dateContacted,
@@ -52,15 +52,10 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
       alert('Please fill out all required fields.');
       return;
     } else {
-      dispatch(createInteraction(newInteraction));
+      interaction.id ? dispatch(updateInteraction({...newInteraction, id: interaction.id})) : dispatch(createInteraction(newInteraction));
       setShowNewInteraction(false);
     }
   }
-
-  // const handleDelete = () => {
-  //   console.log('delete interaction');
-  //   dispatch(deleteInteraction(interaction.id));
-  // }
 
 
     const triggerText = "CLICK TO COLLAPSE"
@@ -93,16 +88,17 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
           <p className="text-right w-full">{notes.length} / 500</p>
         </div>
         <div className="flex flex-row justify-between w-full items-end">
-          <button onClick={e => setShowInteractionDelete(true)} className="flex flex-row justify-between h-8">
+          <button onClick={e => setShowInteractionDelete(true)} className="flex flex-row justify-between h-8 bg-white border-brand-primary border-2 rounded p-3 h-12">
             <i className="fa-solid fa-trash-can text-md mr-2"></i>
             Delete Interaction
           </button>
+          <button onClick={handleCreateInteraction} className="h-12 bg-brand-primary rounded p-2 text-white px-5">Save Notes</button>
         </div>
         <div className="flex flex-row w-full">
         {/* <i onClick={handleCreateInteraction} className="fas fa-caret-up"></i> */}
         </div>
       </div>
-      {showInteractionDelete && <Modal children={<InteractionDelete interaction={interaction} setShowInteractionDelete={setShowInteractionDelete} />} />}
+      {showInteractionDelete && <Modal children={<InteractionDelete interaction={interaction} setShowNewInteraction={setShowNewInteraction} setShowInteractionDelete={setShowInteractionDelete} />} />}
     </Collapsible>
 
   )

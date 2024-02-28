@@ -5,6 +5,9 @@ puts "Destroying tables..."
 Kudo.destroy_all
 Comment.destroy_all
 Ride.destroy_all
+Interaction.destroy_all
+Contact.destroy_all
+Tier.destroy_all
 User.destroy_all
 
 puts "Resetting primary keys..."

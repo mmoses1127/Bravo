@@ -22,44 +22,28 @@ const Signup = () => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const validInputs = (password, confirmPassword) => {
+  const validInputs = (password, confirmPassword, name) => {
     let errors = [];
     if (!passReqs.hasUpperCase(password)) errors.push('Password must contain at least one uppercase letter.');
     if (!passReqs.hasLowerCase(password)) errors.push('Password must contain at least one lowercase letter.');
     if (!passReqs.hasNumber(password)) errors.push('Password must contain at least one number.');
     if (!passReqs.hasEightChars(password)) errors.push('Password must be at least 8 characters long.');
     if (password !== confirmPassword) errors.push('Passwords must match.');
+    if (!name.length) errors.push('Name cannot be empty.');
     return errors;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let currentErrors = validInputs(password, confirmPassword);
-    setErrors(validInputs(password, confirmPassword));
-    // setLoading(true);
-    // if (password !== confirmPassword) {
-    //   setErrors(['Passwords must match.'])
-    //   setLoading(false);
-    //   return null;
-    // } 
+    let currentErrors = validInputs(password, confirmPassword, name);
+    setErrors(validInputs(password, confirmPassword, name));
 
     if (currentErrors.length) {
       setLoading(false);
       return null;
     } else {
       await dispatch(signup({email, password, name, plan: 'free'}))
-      .catch(async (res) => {
-        let data;
-        try {
-          // .clone() essentially allows you to read the response body twice
-          data = await res.clone().json();
-        } catch {
-          data = await res.text(); // Will hit this case if the server is down
-        }
-        if (data?.errors) setErrors(...errors, data.errors);
-        else if (data) setErrors([...errors, ...data]);
-        else setErrors([...errors, res.statusText]);
-      });
+      .catch(async (res) => checkErrors(res, setErrors));
       setLoading(false);
       if (!errors.length && validInputs(password)) {
         history.push('/email-confirmation');
@@ -76,7 +60,7 @@ const Signup = () => {
     setLoading(false);
   };
 
-  if (currentUser !== null) return <Redirect to={`/kanban`} />;
+  // if (currentUser !== null) return <Redirect to={`/kanban`} />;
 
   return (
     <div className="flex flex-col w-full h-screen">

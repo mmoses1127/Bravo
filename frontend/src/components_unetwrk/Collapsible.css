@@ -2,6 +2,7 @@
   background-color: #cfd8dc;
   padding: 5px;
   margin-bottom: 15px;
+  border-radius: 5px;
 }
 .Collapsible > span {
   text-align: center;

@@ -10,14 +10,14 @@ const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact, setSto
     e.preventDefault();  
     if (contactId) dispatch(deleteContact(contactId));
     setShowDeleteModal(false);
-    if (setShowAddContact) setShowAddContact(false);
-    setStopPropagation(false);
+    setShowAddContact(false);
+    if (setStopPropagation) setStopPropagation(false);
   }
 
   const handleCancel = e => {
     e.preventDefault();
     setShowDeleteModal(false);
-    setStopPropagation(false);
+    if (setStopPropagation) setStopPropagation(false);
   }
 
   return (

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteInteraction } from "../store/interactions";
 
 
-const InteractionDelete = ({interaction, setShowInteractionDelete}) => {
+const InteractionDelete = ({interaction, setShowInteractionDelete, setShowNewInteraction}) => {
 
   const dispatch = useDispatch();
 
@@ -10,6 +10,7 @@ const InteractionDelete = ({interaction, setShowInteractionDelete}) => {
     e.preventDefault();  
     if (interaction.id) dispatch(deleteInteraction(interaction.id));
     setShowInteractionDelete(false);
+    setShowNewInteraction(false);
   }
 
   const handleCancel = e => {

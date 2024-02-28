@@ -4,7 +4,7 @@ import { getContactInteractions } from "../store/interactions";
 import InteractionShow from "./InteractionShow";
 
 
-const InteractionIndex = ({contact, interactions, setShowAddContact}) => {
+const InteractionIndex = ({contact, interactions}) => {
 
   const dispatch = useDispatch();
   // const interactions = useSelector(getContactInteractions(contact.id));

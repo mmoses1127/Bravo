@@ -8,11 +8,15 @@ const Timeline = ({contact}) => {
   const interactions = useSelector(getContactInteractions(contact.id));
 
   const firstConnectionEventInfo = {
-    title: `First connected with ${contact.name}`,
-    date: contact.dateConnected? contact.dateConnected : contact.createdAt
+    contactMethod: `First connected with ${contact.name}`,
+    dateContacted: contact.dateConnected? contact.dateConnected : contact.createdAt
   }
 
-  console.log('date connected', contact.dateConnected)
+  const sortEvents = (events) => {
+    return events.sort((a, b) => {
+      return new Date(a.dateContacted) - new Date(b.dateContacted);
+    })
+  }
 
   return (
     <div className='bg-pale-green p-2 rounded'>
@@ -22,7 +26,7 @@ const Timeline = ({contact}) => {
         </div>
         <div className='overflow-auto'>
           <TimelineUnit eventInfo={firstConnectionEventInfo}/>
-          {interactions.map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
+          {sortEvents(interactions).map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
         </div>
       </div>
     </div>

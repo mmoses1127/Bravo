@@ -24,7 +24,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   const [company, setCompany] = useState(contact.company);
   const [title, setTitle] = useState(contact.title);
   const [connectionDescription, setConnectionDescription] = useState(contact.connectionDescription);
-  const [dateConnected, setDateConnected] = useState(contact.dateConnected);
+  const [dateConnected, setDateConnected] = useState(contact.dateConnected.slice(0, 10));
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
   const [linkedInUrl, setLinkedInUrl] = useState(contact.linkedIn);
@@ -36,7 +36,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
     return errors;
   }
 
-  const handleAddContact = (e) => {
+  const handleSubmitContact = (e) => {
     e.preventDefault();
     console.log('submitted!')
     const payload = {
@@ -88,7 +88,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
         </div>
       </div>
       <div className='flex flex-col'>
-      <button className='rounded bg-brand-primary text-white p-2 w-full' onClick={handleAddContact}>Save Contact Information</button>
+      <button className='rounded bg-brand-primary text-white p-2 w-full' onClick={handleSubmitContact}>Save Contact Information</button>
       {<ul className='mb-3'>
         {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
       </ul>}
