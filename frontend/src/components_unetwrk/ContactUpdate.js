@@ -18,8 +18,6 @@ const blankContact = {
 
 const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder = 0}) => {
 
-  console.log('contact', contact);
-
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [name, setName] = useState(contact.name);

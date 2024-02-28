@@ -6,8 +6,8 @@ const TimelineUnit = ({eventInfo}) => {
   }
 
   return (
-    <div className="relative border-solid border-green-900 border-l-2 ml-1 pb-3">
-      <div className="absolute top-[-4px] left-[-5px] rounded-3xl w-[8px] h-[8px] bg-green-900"/>
+    <div className="relative border-solid border-brand-primary border-l-2 ml-1 pb-3 m-1">
+      <div className="absolute top-[-4px] left-[-4px] rounded-3xl w-[8px] h-[8px] bg-brand-primary z-50"/>
       <div className="pl-2">
         <p>{eventInfo.title}</p>
         <p>{prettyDate(eventInfo.date)}</p>

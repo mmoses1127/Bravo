@@ -4,6 +4,10 @@ import { getCurrentUser } from "../store/session";
 import { createInteraction, deleteInteraction } from "../store/interactions";
 import { useDispatch } from "react-redux";
 import Collapsible from 'react-collapsible';
+import { Modal } from "../context/Modal";
+import InteractionDelete from "./InteractionDelete";
+import './Collapsible.css';
+
 
 const emptyInteraction = {
   dateContacted: new Date(),
@@ -12,7 +16,7 @@ const emptyInteraction = {
   nextContactDate: new Date()
 }
 
-const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction, contact, startOpen = "false"}) => {
+const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction, contact, startOpen = false}) => {
 
   console.log('startOpen', startOpen);
 
@@ -23,6 +27,7 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
   const [notes, setNotes] = useState(interaction.notes);
   const [contactDate, setContactDate] = useState(interaction.contactDate);
   const [nextContactDate, setNextContactDate] = useState(interaction.nextContactDate.toString().slice(0, 10));
+  const [showInteractionDelete, setShowInteractionDelete] = useState(false);
 
   const validatePayload = (payload) => {
     let errors = [];
@@ -52,29 +57,23 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
     }
   }
 
-  const handleDelete = () => {
-    console.log('delete interaction');
-    dispatch(deleteInteraction(interaction.id));
-  }
+  // const handleDelete = () => {
+  //   console.log('delete interaction');
+  //   dispatch(deleteInteraction(interaction.id));
+  // }
 
 
-    const triggerText = interaction.id ? `Interaction #${interaction.id}` : "New Interaction"
+    const triggerText = "CLICK TO COLLAPSE"
   
 
   return (
 
     <Collapsible trigger={triggerText} open={startOpen}>
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start bg-background-secondary p-2 mb-5">
         <div className="flex flex-row mb-3 justify-between w-full">
           <div className="flex flex-col w-1/4">
-            <label >Interaction #
-              <select className="w-full drop-shadow bg-white border-none h-8">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+            <label className="" htmlFor="nextContactDate">Contact Date
+              <input className='drop-shadow bg-white border-none h-8 w-full' type="date" id="nextContactDate" value={dateContacted} onChange={(e) => setDateContacted(e.target.value)} />
             </label>
           </div>
           <div className="flex flex-col w-1/4">
@@ -82,10 +81,9 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
               <input className='drop-shadow bg-white border-none h-8 w-full' type="text" id="contactMethod" value={contactMethod} onChange={(e) => setContactMethod(e.target.value)} />
             </label>
           </div>
-          <div className="flex flex-col w-1/4">
-            <label className="" htmlFor="nextContactDate">Contact Date
-              <input className='drop-shadow bg-white border-none h-8 w-full' type="date" id="nextContactDate" value={dateContacted} onChange={(e) => setDateContacted(e.target.value)} />
-            </label>
+          <div className="flex flex-col w-1/3">
+            <label htmlFor="nextContactDate">Next Contact Date </label>
+            <input className='drop-shadow bg-white border-none h-8' type="date" id="nextContactDate" value={nextContactDate} onChange={(e) => setNextContactDate(e.target.value)} />
           </div>
         </div>
         <div className="flex flex-col w-full mb-3">
@@ -95,19 +93,16 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
           <p className="text-right w-full">{notes.length} / 500</p>
         </div>
         <div className="flex flex-row justify-between w-full items-end">
-          <div className="flex flex-col w-1/3">
-            <label htmlFor="nextContactDate">Next Contact Date </label>
-            <input className='drop-shadow bg-white border-none h-8' type="date" id="nextContactDate" value={nextContactDate} onChange={(e) => setNextContactDate(e.target.value)} />
-          </div>
-          <button onClick={handleDelete} className="flex flex-row justify-between h-8">
+          <button onClick={e => setShowInteractionDelete(true)} className="flex flex-row justify-between h-8">
             <i className="fa-solid fa-trash-can text-md mr-2"></i>
             Delete Interaction
           </button>
         </div>
         <div className="flex flex-row w-full">
-        <i onClick={handleCreateInteraction} className="fas fa-caret-up"></i>
+        {/* <i onClick={handleCreateInteraction} className="fas fa-caret-up"></i> */}
         </div>
       </div>
+      {showInteractionDelete && <Modal children={<InteractionDelete interaction={interaction} setShowInteractionDelete={setShowInteractionDelete} />} />}
     </Collapsible>
 
   )

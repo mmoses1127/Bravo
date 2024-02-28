@@ -7,23 +7,27 @@ const Timeline = ({contact}) => {
   const dispatch = useDispatch();
   const interactions = useSelector(getContactInteractions(contact.id));
 
-  const connectionEventInfo = {
-    title: `First connected with ${contact.firstName}`,
-    date: contact.dateConnected
+  const firstConnectionEventInfo = {
+    title: `First connected with ${contact.name}`,
+    date: contact.dateConnected? contact.dateConnected : contact.createdAt
   }
 
-return (
-  <div className=''>
-    <div className="border-solid border-green-900 border-b-2 mb-6">
-      <p className='text-lg'>Timeline</p>
+  console.log('date connected', contact.dateConnected)
+
+  return (
+    <div className='bg-pale-green p-2 rounded'>
+      <div className='bg-white rounded dropshadow p-2'>
+        <div className="border-solid border-green-900 border-b-2 mb-6">
+          <p className='text-lg'>Timeline</p>
+        </div>
+        <div className='overflow-auto'>
+          <TimelineUnit eventInfo={firstConnectionEventInfo}/>
+          {interactions.map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
+        </div>
+      </div>
     </div>
-    <div className='overflow-auto'>
-      <TimelineUnit eventInfo={connectionEventInfo}/>
-      {interactions.map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
-    </div>
-  </div>
-  
-)
+    
+  )
 
 }
 
