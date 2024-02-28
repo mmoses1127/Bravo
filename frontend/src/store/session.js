@@ -26,7 +26,7 @@ export const signup = inputs => async dispatch => {
   storeCurrentUser(data);
   dispatch(addCurrentUser(data));
   const tierNames = [
-    '1st Contact', '2nd Contact', '3rd Contact', 'Cold Lead'
+    'New', 'Colleagues', 'Friends', 'Potential Referrals', 'References'
   ];
   tierNames.forEach(async (tierName, index) => {
     let tier = {

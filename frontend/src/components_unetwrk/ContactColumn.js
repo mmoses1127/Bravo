@@ -40,7 +40,7 @@ const ContactColumn = ({tier, contacts}) => {
           }
           <i className="fa-solid fa-pencil cursor-pointer" onClick={e => setShowEditTier(true)}></i>
         </div>
-        <p>{tierContacts.length} contacts</p>
+        <p>{tierContacts.length} {tierContacts.length == 1 ? 'contact' : 'contacts'}</p>
       </div>
       <button className="bg-bp5 mt-5 mb-5 p-3 rounded text-white" onClick={e => setShowAddContact(true)}>+ Add contact</button>
 

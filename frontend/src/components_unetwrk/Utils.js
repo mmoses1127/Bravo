@@ -1,4 +1,4 @@
-const checkErrors = async (res, setter) => {
+export const checkErrors = async (res, setter) => {
   let data;
   try {
     // .clone() essentially allows you to read the response body twice
@@ -11,4 +11,9 @@ const checkErrors = async (res, setter) => {
   else setter([res.statusText]);
 };
 
-export default checkErrors;
+export const openInNewTab = (e, url) => {
+  e.stopPropagation();
+  const fullUrl = url.includes('https://') ? url : 'https://' + url;
+  const newWindow = window.open(fullUrl, '_blank', 'noopener,noreferrer')
+  if (newWindow) newWindow.opener = null;
+}

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { createContact } from "../store/contacts";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../store/session";
-import checkErrors from "./ErrorsUtil"; 
+import {checkErrors} from "./Utils"; 
 
 
 const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, setShowDeleteModal}) => {
@@ -92,7 +92,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, 
         </div>
         <div className="flex flex-row justify-end w-full m-5">
           <button className="rounded border-brand-primary border-2 text-brand-primary p-2 mr-3" onClick={handleCancel}>Cancel</button>
-          <button className=" p-2 rounded text-white bg-brand-primary p-2 disabled:bg-pale-green disabled:cursor-none" disabled={!name.length} onClick={handleClick}>Save Contact</button>
+          <button className=" p-2 rounded text-white bg-brand-primary p-2 disabled:bg-pale-green disabled:cursor-not-allowed" disabled={!name.length} onClick={handleClick}>Save Contact</button>
         </div>
       </form>
     </div>

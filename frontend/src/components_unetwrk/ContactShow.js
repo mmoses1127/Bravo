@@ -10,6 +10,7 @@ import { getCurrentUser } from "../store/session";
 import { fetchInteractions, getContactInteractions } from "../store/interactions";
 import Timeline from "./Timeline";
 
+
 const CONTACT_INFO_TEXT = "Contact Information";
 const INTERACTION_NOTES_TEXT = "Interaction Notes";
 const UNDERLINE_STYLE = "cursor-pointer border-solid border-b-4 border-green-900 m-5";
@@ -54,8 +55,8 @@ const ContactShow = ({contact, setShowContactShow, order}) => {
               <h3>{contact.company ? contact.company : `Company`}</h3>
             </div>
           </div>
-          <div className="flex flex-col">
-            <button className="border-brand-primary text-brand-primary rounded border-2 p-2 mb-3" onClick={e => setShowContactShow(false)}>Close</button>
+          <div className="flex flex-col w-1/3 items-end">
+            <button className="border-brand-primary bg-white text-brand-primary rounded border-2 p-2 mb-3 w-1/2" onClick={e => setShowContactShow(false)}>Close</button>
             <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
           </div>
         </div>

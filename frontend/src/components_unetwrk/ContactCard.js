@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "../context/Modal";
 import ContactDelete from "./ContactDelete";
 import { Link } from "react-router-dom";
+import {openInNewTab} from "./Utils";
 
 const ContactCard = ({contact, setShowContactShow, showContactShow, setContact}) => {
 
@@ -38,13 +39,6 @@ const ContactCard = ({contact, setShowContactShow, showContactShow, setContact})
     setContact(contact);
     setShowContactShow(true);
     }
-  }
-
-  const openInNewTab = (e, url) => {
-    e.stopPropagation();
-    const fullUrl = url.includes('https://') ? url : 'https://' + url;
-    const newWindow = window.open(fullUrl, '_blank', 'noopener,noreferrer')
-    if (newWindow) newWindow.opener = null;
   }
 
 

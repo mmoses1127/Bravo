@@ -8,7 +8,7 @@ import PasswordRequirements from "./PasswordRequirements";
 import WelcomePane from "./WelcomePane";
 import { useHistory } from "react-router-dom";
 import * as passReqs from "./PasswordRequirements";
-import checkErrors from "./ErrorsUtil";
+import {checkErrors} from "./Utils";
 
 const Signup = () => {
   

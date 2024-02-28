@@ -13,20 +13,20 @@ ApplicationRecord.connection.reset_pk_sequence!('users')
 
 puts "Creating users..."
 # Create profile pics for seeding users
-pic_1 = URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/profile_1.jpg')
+# pic_1 = URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/profile_1.jpg')
 
-profile_pics = [
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210530_160249.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190238(2).jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210605_130446.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210701_190934.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_191312598.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210711_195635.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190328.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210513_180408.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210716_175550.jpg'), 
-  URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190714.jpg')
-]
+# profile_pics = [
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210530_160249.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190238(2).jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210605_130446.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210701_190934.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/PXL_20220924_191312598.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210711_195635.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190328.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210513_180408.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210716_175550.jpg'), 
+#   URI.open('https://bravostravaclone-seeds.s3.us-west-1.amazonaws.com/seed_photos/20210727_190714.jpg')
+# ]
 
 
 # Create one user with an easy to remember username, email, and password:
@@ -37,7 +37,7 @@ demo_user = User.create!(
   password: 'password'
 )
 puts "Attaching photo for demo user..."
-demo_user.profile_pic.attach(io: pic_1, filename: 'profile_pic')
+# demo_user.profile_pic.attach(io: pic_1, filename: 'profile_pic')
 
 # More users
 puts "Creating more users..."
@@ -49,8 +49,8 @@ while i < 4
     name: Faker::Name.unique.name,
     password: 'password'
   }) 
-  puts "Attaching photo..."
-  user.profile_pic.attach(io: profile_pics[i], filename: 'profile_pic')
+  # puts "Attaching photo..."
+  # user.profile_pic.attach(io: profile_pics[i], filename: 'profile_pic')
   i += 1
 puts "Completed a user"
 
@@ -63,27 +63,27 @@ puts "Creating default Tier for all users..."
 for user in User.all
   Tier.create!({
     user_id: user.id,
-    name: "New Contacts",
+    name: "New",
     position: 0,
   })
   Tier.create!({
     user_id: user.id,
-    name: "1st Interaction",
+    name: "Colleagues",
     position: 1,
   })
   Tier.create!({
     user_id: user.id,
-    name: "2nd Interaction",
+    name: "Friends",
     position: 2,
   })
   Tier.create!({
     user_id: user.id,
-    name: "Gave Referral",
+    name: "Potential Referrals",
     position: 3,
   })
   Tier.create!({
     user_id: user.id,
-    name: "Cold",
+    name: "References",
     position: 4,
   })
 end

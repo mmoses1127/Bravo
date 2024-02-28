@@ -32,14 +32,14 @@ const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
 
 
   return (
-    <div onMouseEnter={openMenu} onMouseLeave={closeMenu} className="drop-shadow-lg bg-white border-none h-10 p-3">
-      <div className='flex flex-row w-full justify-between'>
+    <div onClick={e => setShowMenu(!showMenu)} className="drop-shadow-lg bg-white border-none h-10 w-full cursor-pointer z-50">
+      <div className='flex flex-row w-full justify-between p-3'>
         <h4>{targetTier.name ? targetTier.name : `Select Column`}</h4>
         <i className="fa-solid fa-angle-down"></i>
       </div>
-      <ul className='dropdown-list z-50'>
+      <ul className='dropdown-list z-50 w-full'>
       {showMenu && tiers.map(tier => (
-          <li key={tier.id} position={tier.position} className="dropdown-item z-50 position-absolute" onClick={handleChooseTier}>{tier.name}</li>
+          <li key={tier.id} position={tier.position} className="dropdown-item z-50 position-absolute h-10 p-3 bg-white w-full hover:bg-background-secondary hover: border-brand-primary hover:border-2" onClick={handleChooseTier}>{tier.name}</li>
       ))}
       </ul>      
     </div>

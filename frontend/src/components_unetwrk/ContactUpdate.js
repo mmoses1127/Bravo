@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createContact, updateContact } from '../store/contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../store/session';
-import checkErrors from './ErrorsUtil';
+import {checkErrors} from './Utils';
 
 const blankContact = {
   name:  "",
