@@ -39,6 +39,8 @@ const ContactShow = ({contact, setShowContactShow, order}) => {
     console.log('uploading image');
   }
 
+  // TODO: make column selections update contact permanently
+
   return (
 
     <div className="flex flex-row items-start justify-center w-full bg-background-disabled p-5 h-full min-w-[1000px] min-h-[500px]">     

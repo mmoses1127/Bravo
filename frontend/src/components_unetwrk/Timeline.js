@@ -18,6 +18,8 @@ const Timeline = ({contact}) => {
     })
   }
 
+  // TODO: make scrollable
+
   return (
     <div className='bg-pale-green p-2 rounded'>
       <div className='bg-white rounded dropshadow p-2'>

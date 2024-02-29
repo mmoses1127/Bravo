@@ -24,7 +24,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   const [company, setCompany] = useState(contact.company);
   const [title, setTitle] = useState(contact.title);
   const [connectionDescription, setConnectionDescription] = useState(contact.connectionDescription);
-  const [dateConnected, setDateConnected] = useState(contact.dateConnected.slice(0, 10));
+  const [dateConnected, setDateConnected] = useState(contact.dateConnected ? contact.dateConnected.slice(0, 10) : '');
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
   const [linkedInUrl, setLinkedInUrl] = useState(contact.linkedIn);
