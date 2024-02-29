@@ -1,4 +1,4 @@
-import { fetchContacts, getContacts, updateContact } from "../store/contacts";
+import { addContact, fetchContacts, getContacts, updateContact } from "../store/contacts";
 import ContactColumn from "./ContactColumn";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -33,8 +33,9 @@ const KanbanBoard = ({filterText}) => {
     const newColumnOrder = newTier.position;
     
     if (draggedContact.columnOrder !== newColumnOrder) {
-      draggedContact.column_order = newColumnOrder;
-      console.log("draggedContact", draggedContact)
+      draggedContact.column_order = draggedContact.columnOrder = newColumnOrder;
+      
+      dispatch(addContact(draggedContact));
       dispatch(updateContact(draggedContact));
     }
   }

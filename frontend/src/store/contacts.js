@@ -10,7 +10,7 @@ const addAllContacts = (contacts) => ({
   contacts
 });
 
-const addContact = (contact) => ({
+export const addContact = (contact) => ({
   type: ADD_CONTACT,
   contact
 });
@@ -25,13 +25,6 @@ export const getContacts = (state = {}) => {
   if (!state.contacts) return [];
   return Object.values(state.contacts);
 };
-
-// export const getUserContacts = (userId) => (state = {}) => {
-//   if (!state.contacts) return [];
-//   return Object.values(state.contacts).filter(contact => {
-//     return contact.userId === userId;
-//   });
-// };
 
 export const fetchContacts = () => async dispatch => {
   const res = await fetch(`/api/contacts`);
@@ -75,7 +68,6 @@ export const updateContact = (contact) => async dispatch => {
 
   if (res.ok) {
     const updatedContact = await res.json();
-    console.log('updatedContact', updatedContact)
     dispatch(addContact(updatedContact));
   };
 };

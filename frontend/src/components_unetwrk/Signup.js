@@ -21,13 +21,14 @@ const Signup = () => {
   const currentUser = useSelector(getCurrentUser);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const validInputs = (password, confirmPassword, name) => {
     let errors = [];
-    if (!passReqs.hasUpperCase(password)) errors.push('Password must contain at least one uppercase letter.');
-    if (!passReqs.hasLowerCase(password)) errors.push('Password must contain at least one lowercase letter.');
-    if (!passReqs.hasNumber(password)) errors.push('Password must contain at least one number.');
-    if (!passReqs.hasEightChars(password)) errors.push('Password must be at least 8 characters long.');
+    if (!passReqs.hasUpperCase(password)) errors.push('');
+    if (!passReqs.hasLowerCase(password)) errors.push('');
+    if (!passReqs.hasNumber(password)) errors.push('');
+    if (!passReqs.hasEightChars(password)) errors.push('');
     if (password !== confirmPassword) errors.push('Passwords must match.');
     if (!name.length) errors.push('Name cannot be empty.');
     return errors;
@@ -35,6 +36,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
     let currentErrors = validInputs(password, confirmPassword, name);
     setErrors(validInputs(password, confirmPassword, name));
 
@@ -60,7 +62,6 @@ const Signup = () => {
     setLoading(false);
   };
 
-  // if (currentUser !== null) return <Redirect to={`/kanban`} />;
 
   return (
     <div className="flex flex-col w-full h-screen">
@@ -77,11 +78,15 @@ const Signup = () => {
               <input className="drop-shadow bg-white border-none h-8 w-full mb-4" type="email" placeholder="email@email.com" value={email} onChange={e => setEmail(e.target.value)} />
               <label>Password</label>
               <input className="drop-shadow bg-white border-none h-8 w-full mb-1" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-              <PasswordRequirements password={password} />
+              <PasswordRequirements password={password} submitted={submitted}/>
               <label>Confirm Password</label>
               <input className="drop-shadow bg-white border-none h-8 w-full mb-4" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-            {<ul className='mb-3'>
-              {errors.map(error => <li className="text-error-red font-bold" key={error}>{error}</li>)}
+            {<ul className='mb-3 min-h-[70px]'>
+              {errors.map(error => {
+                if (error != '') {
+                  return <li className="text-error-red font-bold" key={error}>{error}</li>
+                }
+              })}
             </ul>}
               <button className="w-full mb-4 text-white bg-[#455A64]">Sign Up
                 {loading && <div className="spin"></div>}
