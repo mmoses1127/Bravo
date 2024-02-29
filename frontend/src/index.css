@@ -4,6 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+	.button {
+		background-color: #004D40;
+		border-radius: 5px;
+		color: white;
+		padding: 10px 20px;
+	}
+	.button-white {
+		background-color: white;
+		border-radius: 5px;
+		color: #004D40;
+		padding: 10px 15px;
+		font-weight: 500;
+		border: 2px solid #004D40;
+	}
+	.text-input {
+		background-color: white;
+		border: none;
+		margin-bottom: 10px;
+		height: 8rem;
+		filter: drop-shadow(0px 10px 3px black);
+	}
+}
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
