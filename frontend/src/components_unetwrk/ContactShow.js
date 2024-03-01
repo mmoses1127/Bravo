@@ -41,7 +41,7 @@ const ContactShow = ({contact, setShowContactShow, order}) => {
 
   return (
 
-    <div className="flex flex-row items-start justify-center w-full bg-background-disabled p-5 h-full min-w-[1000px] min-h-[500px]">     
+    <div className="flex flex-row items-start justify-center w-full bg-background-disabled p-5 h-full w-[80vw] h-[80vh]">     
       <div className="flex flex-col items-center align-center bg-slate-200 p-5 h-full w-3/4 b-r-1 border-solid border-brand-primary">
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-row w-2/3">

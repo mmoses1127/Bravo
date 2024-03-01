@@ -16,10 +16,10 @@ const InteractionIndex = ({contact, interactions}) => {
 
   return (
 
-    <div className="w-full p-3">
+    <div className="w-[95%] p-3 overflow-auto h-full">
       <button className="w-full bg-bp5 text-white mb-5 h-10 rounded" onClick={e => setShowNewInteraction(true)}>+ Add Interaction</button>
       {(interactions.length || showNewInteraction) && 
-      <div className="flex flex-col items-start w-full bg-green-100 overflow-auto">
+      <div className="flex flex-col items-start w-full bg-green-100 max-h-full">
         {showNewInteraction && <InteractionShow setShowNewInteraction={setShowNewInteraction} contact={contact} startOpen={true}/>}
         {interactions.map((interaction) => (
           <InteractionShow key={interaction.id} interaction={interaction} contact={contact} setShowNewInteraction={setShowNewInteraction} startOpen={false}/>

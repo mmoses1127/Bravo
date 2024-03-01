@@ -3,6 +3,7 @@
   padding: 5px;
   margin-bottom: 15px;
   border-radius: 5px;
+  width: 100%;
 }
 .Collapsible > span {
   text-align: center;

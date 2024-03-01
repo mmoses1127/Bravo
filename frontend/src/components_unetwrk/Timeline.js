@@ -18,17 +18,24 @@ const Timeline = ({contact}) => {
     })
   }
 
+  const filterAndSortInteractions = (interactions) => {
+    return sortEvents(interactions.filter(interaction => {
+      return interaction.contactMethod && interaction.dateContacted
+    
+    }))
+  }
+
   // TODO: make scrollable
 
   return (
-    <div className='bg-pale-green p-2 rounded'>
-      <div className='bg-white rounded dropshadow p-2'>
+    <div className='bg-pale-green p-2 rounded h-full'>
+      <div className='bg-white rounded dropshadow p-2 h-full'>
         <div className="border-solid border-green-900 border-b-2 mb-6">
           <p className='text-lg'>Timeline</p>
         </div>
-        <div className='overflow-auto'>
+        <div className='overflow-auto max-h-[90%]'>
           <TimelineUnit eventInfo={firstConnectionEventInfo}/>
-          {sortEvents(interactions).map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
+          {filterAndSortInteractions(interactions).map(interaction => <TimelineUnit key={interaction.id} eventInfo={interaction}/>)}
         </div>
       </div>
     </div>
