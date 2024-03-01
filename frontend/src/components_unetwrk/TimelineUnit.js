@@ -5,8 +5,6 @@ const TimelineUnit = ({eventInfo}) => {
     return dateObj.toDateString();
   }
 
-// todo: only show intereactions that have method and date
-
   return (
     <div className="relative border-solid border-brand-primary border-l-2 ml-1 pb-3 m-1">
       <div className="absolute top-[-4px] left-[-4px] rounded-3xl w-[8px] h-[8px] bg-brand-primary z-50"/>

@@ -24,21 +24,6 @@ class User < ApplicationRecord
   validates :email, length: { in: 3..255 }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { in: 8..255 }, allow_nil: true
 
-  has_many :rides,
-    foreign_key: :athlete_id,
-    class_name: :Ride,
-    dependent: :destroy
-
-  has_many :comments,
-  foreign_key: :commenter_id,
-  class_name: :Comment,
-  dependent: :destroy
-
-  has_many :kudos,
-  foreign_key: :giver_id,
-  class_name: :Kudo,
-  dependent: :destroy
-
   has_many :contacts,
   foreign_key: :user_id,
   class_name: :Contact,
@@ -48,8 +33,6 @@ class User < ApplicationRecord
   foreign_key: :user_id,
   class_name: :Tier,
   dependent: :destroy
-
-  has_one_attached :profile_pic
 
 
   def self.find_by_credentials(email, password)
