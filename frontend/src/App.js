@@ -9,6 +9,7 @@ import Login from './components_unetwrk/Login';
 import EmailConfirmation from './components_unetwrk/EmailConfirmation';
 import ChoosePlan from './components_unetwrk/ChoosePlan';
 import LimitReached from './components_unetwrk/LimitReached';
+import Settings from './components_unetwrk/Settings';
 
 
 function App() {
@@ -39,7 +40,10 @@ function App() {
         </Route>  
         <Route path="/limit-reached">
           <LimitReached/>
-        </Route>        
+        </Route>     
+        <Route path="/settings">
+          <Settings/>
+        </Route>     
         <Route path="">
           <Redirect to="/kanban"/>
         </Route>

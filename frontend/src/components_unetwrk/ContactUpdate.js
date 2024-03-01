@@ -13,10 +13,13 @@ const blankContact = {
   email: "",
   phoneNumber: "",
   userId: "",
+  linkedIn: "",
   columnOrder: 0
 }
 
 const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder = 0}) => {
+
+  console.log('contact', contact)
 
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
@@ -27,7 +30,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
   const [dateConnected, setDateConnected] = useState(contact.dateConnected ? contact.dateConnected.slice(0, 10) : '');
   const [email, setEmail] = useState(contact.email);
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber);
-  const [linkedInUrl, setLinkedInUrl] = useState(contact.linkedIn);
+  const [linkedIn, setLinkedIn] = useState(contact.linkedIn);
   const [errors, setErrors] = useState([]);
 
   const validatePayload = (payload) => {
@@ -38,9 +41,8 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
 
   const handleSubmitContact = (e) => {
     e.preventDefault();
-    console.log('submitted!')
     const payload = {
-      name: name,
+      name,
       company,
       title,
       connection_description: connectionDescription,
@@ -48,7 +50,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
       email,
       phone_number: phoneNumber,
       user_id: currentUser.id,
-      linked_in: linkedInUrl,
+      linked_in: linkedIn,
       column_order: columnOrder
     }
     
@@ -80,7 +82,7 @@ const ContactUpdate = ({ contact = blankContact, setShowContactShow, columnOrder
           <label htmlFor="title">Title</label>
           <input className='drop-shadow bg-white border-none h-8' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           <label htmlFor="email">LinkedIn Profile URL</label>
-          <input className='drop-shadow bg-white border-none h-8' type="text" value={linkedInUrl} onChange={(e) => setLinkedInUrl(e.target.value)} />
+          <input className='drop-shadow bg-white border-none h-8' type="text" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} />
           <label htmlFor="email">Email</label>
           <input className='drop-shadow bg-white border-none h-8' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
           <label htmlFor="dateConnected">Date Connected</label>

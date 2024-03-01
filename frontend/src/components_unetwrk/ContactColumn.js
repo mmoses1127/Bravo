@@ -33,7 +33,7 @@ const ContactColumn = ({tier, contacts}) => {
 
   const handleAddContact = (e) => {
     e.preventDefault();
-    if (currentUser.plan === 'free' && contacts.length >= 4) {
+    if (currentUser.plan === 'free' && contacts.length >= 10) {
       setShowLimitModal(true);
     } else {
       setShowAddContact(true);

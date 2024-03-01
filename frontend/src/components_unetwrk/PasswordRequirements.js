@@ -1,24 +1,9 @@
-export const hasUpperCase = (str) => {
-  return (/[A-Z]/.test(str));
-}
-
-export const hasLowerCase = (str) => {
-  return (/[a-z]/.test(str));
-}
-
-export const hasNumber = (str) => {
-  return (/[0-9]/.test(str));
-}
-
-export const hasEightChars = (str) => {
-  return (str.length >= 8);
-}
+import { hasEightChars, hasLowerCase, hasNumber, hasUpperCase } from "./Utils";
 
 
 const PasswordRequirements = ({password, submitted}) => {
 
   const alertTextColor = (submitted, checker, password) => {
-    console.log('submitted', submitted, 'checker', checker(password), 'password', password)
     if (checker(password)) {
       return 'text-success-green';
     } else {
@@ -26,7 +11,6 @@ const PasswordRequirements = ({password, submitted}) => {
         if (submitted) {
           return 'text-error-red';
         } else {
-          console.log('reddddd')
           return 'text-primary';
         }
       }

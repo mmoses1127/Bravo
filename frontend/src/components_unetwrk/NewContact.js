@@ -14,7 +14,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, 
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [title, setTitle] = useState("");
-  const [linkedInUrl, setLinkedInUrl] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
   const [errors, setErrors] = useState([]);
 
   const validatePayload = (payload) => {
@@ -40,8 +40,12 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, 
       name,
       company,
       title,
-      linked_in: linkedInUrl,
-      column_order: column
+      linked_in: linkedIn,
+      column_order: column,
+      connection_description: '',
+      date_connected: '',
+      email: '',
+      phone_number: '',
     }
 
     
@@ -87,7 +91,7 @@ const NewContact = ({setShowAddContact, column, setContact, setShowContactShow, 
           </div>  
           <div className="flex flex-col">        
             <label>LinkedIn Profile URL</label>
-            <input onChange={e => setLinkedInUrl(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" calue={linkedInUrl}/>
+            <input onChange={e => setLinkedIn(e.target.value)} className="drop-shadow bg-white border-none h-8" type="text" calue={linkedIn}/>
           </div>
         </div>
         <div className="flex flex-row justify-end w-full m-5">

@@ -10,24 +10,11 @@ const ContactCard = ({contact, setShowContactShow, showContactShow, setContact})
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [stopPropagation, setStopPropagation] = useState(false);
 
-  // const handleContactShow = (e) => {
-  //   e.preventDefault();
-  //   setShowContactShow(true);
-  // }
-
-  const handleCloseModal = (e) => {
-    e.preventDefault();
-    console.log('close modal')
-    setShowContactShow(false);
-  }
-
   const handleDelete = (e) => {
     e.preventDefault();
     if(e && e.stopPropagation) {
       e.stopPropagation();
-      console.log('stop propagation');
     }
-    console.log('delete');
     setShowDeleteModal(true);
     setStopPropagation(true);
   }
@@ -35,12 +22,10 @@ const ContactCard = ({contact, setShowContactShow, showContactShow, setContact})
   const handleShowContact = (e) => {
     if (!stopPropagation) {
     e.preventDefault();
-    console.log('show contact');
     setContact(contact);
     setShowContactShow(true);
     }
   }
-
 
   return (
 

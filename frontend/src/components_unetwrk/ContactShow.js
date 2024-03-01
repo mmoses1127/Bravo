@@ -39,8 +39,6 @@ const ContactShow = ({contact, setShowContactShow, order}) => {
     console.log('uploading image');
   }
 
-  // TODO: make column selections update contact permanently
-
   return (
 
     <div className="flex flex-row items-start justify-center w-full bg-background-disabled p-5 h-full min-w-[1000px] min-h-[500px]">     
@@ -59,7 +57,7 @@ const ContactShow = ({contact, setShowContactShow, order}) => {
           </div>
           <div className="flex flex-col w-1/3 items-end">
             <button className="border-brand-primary bg-white text-brand-primary rounded border-2 p-2 mb-3 w-1/2" onClick={e => setShowContactShow(false)}>Close</button>
-            <Dropdown tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
+            <Dropdown contact={contact} tiers={tiers} columnOrder={columnOrder} setColumnOrder={setColumnOrder}/>
           </div>
         </div>
         <div className="flex flex-row justify-start w-full">

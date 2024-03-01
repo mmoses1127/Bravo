@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateContact } from "../store/contacts";
+import { checkErrors } from "./Utils";
 
 
-const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
+const Dropdown = ({tiers = [], columnOrder, setColumnOrder, contact}) => {
 
+  const dispatch = useDispatch();
   
   const matchTier = (columnOrder) => {
     if (columnOrder != undefined) {
@@ -11,6 +15,7 @@ const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
     }
   };
   
+  const [errors, setErrors] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
   const [targetTier, setTargetTier] = useState(columnOrder != undefined ? matchTier(columnOrder) : []);
     
@@ -22,19 +27,26 @@ const Dropdown = ({tiers = [], columnOrder, setColumnOrder}) => {
     setShowMenu(false)
   };
 
-  const handleChooseTier = (e) => {
+  const handleChooseTier = async e => {
     e.preventDefault();
     let targetPosition = parseInt(e.target.getAttribute('position'));
-    setColumnOrder(targetPosition);
-    setTargetTier(matchTier(targetPosition));
-    closeMenu();
+    
+    await dispatch(updateContact({...contact, column_order: targetPosition}))
+    .catch(async (res) => checkErrors(res, setErrors));
+    if (!errors.length) {
+      setColumnOrder(targetPosition);
+      setTargetTier(matchTier(targetPosition));
+      closeMenu();
+    } else {
+      alert([errors[0].message]);
+    }
   }
 
 
   return (
     <div onClick={e => setShowMenu(!showMenu)} className="drop-shadow-lg bg-white border-none h-10 w-full cursor-pointer z-50">
       <div className='flex flex-row w-full justify-between p-3'>
-        <h4>{targetTier.name ? targetTier.name : `Select Column`}</h4>
+        <h4>{targetTier.name}</h4>
         <i className="fa-solid fa-angle-down"></i>
       </div>
       <ul className='dropdown-list z-50 w-full'>

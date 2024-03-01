@@ -10,7 +10,7 @@ const ContactDelete = ({contactId, setShowDeleteModal, setShowAddContact, setSto
     e.preventDefault();  
     if (contactId) dispatch(deleteContact(contactId));
     setShowDeleteModal(false);
-    setShowAddContact(false);
+    if (setShowAddContact) setShowAddContact(false);
     if (setStopPropagation) setStopPropagation(false);
   }
 

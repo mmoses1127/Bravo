@@ -1,9 +1,11 @@
+import { useHistory } from "react-router-dom";
 import { openInNewTab } from "./Utils";
 import { useState } from "react";
 
 
 const DashboardHeader = ({filterText, setFilterText}) => {
 
+  const history = useHistory();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
 
 
@@ -31,7 +33,7 @@ const DashboardHeader = ({filterText, setFilterText}) => {
           </div>
           { showAccountMenu && 
           <ul className='dropdown-list z-50 w-full rounded'>
-          <li className="dropdown-item z-50 position-absolute h-10 p-3 bg-white w-full hover:bg-background-secondary hover: border-brand-primary hover:border-2">Settings</li>
+          <li onClick={e => history.push('/settings')} className="dropdown-item z-50 position-absolute h-10 p-3 bg-white w-full hover:bg-background-secondary hover: border-brand-primary hover:border-2">Settings</li>
           <li className="dropdown-item z-50 position-absolute h-10 p-3 bg-white w-full hover:bg-background-secondary hover: border-brand-primary hover:border-2">Account</li>
           <li className="dropdown-item z-50 position-absolute h-10 p-3 bg-white w-full hover:bg-background-secondary hover: border-brand-primary hover:border-2">Log Out</li>
           </ul> }     

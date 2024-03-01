@@ -18,8 +18,6 @@ const emptyInteraction = {
 
 const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction, contact, startOpen = false}) => {
 
-  console.log('startOpen', startOpen);
-
   const currentUser = useSelector(getCurrentUser);
   const dispatch = useDispatch();
   const [dateContacted, setDateContacted] = useState(interaction.dateContacted.toString().slice(0, 10));
@@ -28,11 +26,18 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
   const [contactDate, setContactDate] = useState(interaction.contactDate);
   const [nextContactDate, setNextContactDate] = useState(interaction.nextContactDate.toString().slice(0, 10));
   const [showInteractionDelete, setShowInteractionDelete] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const validatePayload = (payload) => {
     let errors = [];
-    if (payload.date_contacted.length < 1) errors.push("Date contacted cannot be empty.");
-    if (payload.contact_method.length < 1) errors.push("Contact method cannot be empty.");
+    if (
+      (payload.date_contacted.length < 1) 
+      (payload.contact_method.length < 1) 
+      (payload.notes.length < 1) 
+      (payload.next_contact_date.length < 1) 
+      ) {
+        errors.push("Interaction cannot be compeltely empty.");
+    }
     return errors;
   }
 
@@ -42,14 +47,14 @@ const InteractionShow = ({interaction = emptyInteraction, setShowNewInteraction,
       date_contacted: dateContacted,
       contact_method: contactMethod,
       notes,
-      contact_date: contactDate,
       next_contact_date: nextContactDate,
       contact_id: contact.id,
       user_id: currentUser.id
     }
 
-    if (validatePayload(newInteraction).length > 0) {
-      alert('Please fill out all required fields.');
+    setErrors(validatePayload(newInteraction));
+    if (errors.length) {
+      alert(errors[0]);
       return;
     } else {
       interaction.id ? dispatch(updateInteraction({...newInteraction, id: interaction.id})) : dispatch(createInteraction(newInteraction));
