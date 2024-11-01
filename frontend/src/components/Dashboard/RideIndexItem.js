@@ -15,6 +15,7 @@ const RideIndexItem = ({ride}) => {
   const currentUser = useSelector(getCurrentUser);
   const parsedDateTime = new Date(ride.dateTime);
   const kudos = useSelector(getKudos);
+  const encodedPolyline = encodeURIComponent(ride.polyline);
   const rideKudos = kudos.filter(kudo => kudo['rideId'] === ride.id);
   const rideComments = useSelector(getRideComments(ride.id));
   let myKudo = rideKudos.filter(kudo => kudo['giverId'] === currentUser.id);
@@ -70,6 +71,8 @@ const RideIndexItem = ({ride}) => {
     };
   };
 
+  console.log(`encoded polyline for ${ride.title} is ${encodedPolyline}`)
+
   return (
     <div className="feed-card">
       {openModal &&
@@ -113,7 +116,7 @@ const RideIndexItem = ({ride}) => {
       <div className="card-media">
         {ride.polyline?.length > 0 && 
         <div className="map-container">
-            <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?scale=2&size=600x250&path=color:0xf55142FF|enc:${ride.polyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
+            <Link to={`rides/${ride.id}`}><img className='ride-static-map' src={`https://maps.googleapis.com/maps/api/staticmap?scale=2&size=600x250&path=color:0xf55142FF|enc:${encodedPolyline}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`} alt="Ride Map" /></Link>
           
         </div>
         }
