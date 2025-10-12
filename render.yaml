@@ -1,9 +1,3 @@
-databases:
-  - name: bravo
-    user: bravo
-    plan: free
-    region: oregon
-
 services:
   - type: web
     name: bravo
@@ -15,9 +9,7 @@ services:
     startCommand: "rails s"
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: bravo
-          property: connectionString
+        sync: false
       - key: RAILS_MASTER_KEY
         sync: false
       - key: MAPBOX_API_KEY
